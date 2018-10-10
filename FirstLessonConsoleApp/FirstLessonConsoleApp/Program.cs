@@ -7,7 +7,7 @@ namespace FirstLessonConsoleApp
 {
     class Program
     {
-        protected List<string> ListCoordinates = new List<string>();
+        List<string> listCoordinates = new List<string>();
 
         static void Main(string[] args)
         {
@@ -17,17 +17,18 @@ namespace FirstLessonConsoleApp
 
         static void FormattedСoordinateOutput(List<string> fields) //форматированный вывод   
         {
-            String[] Сoordinates = new string[2];
-            Double СoordinateX, СoordinateY;
+            var coordinates = new string[2];
+            double coordinateX, coordinateY;
 
             Console.WriteLine("Форматированный вывод координат");
-            foreach (string field in fields)
-            {
-                Сoordinates = field.Split(',');
-                СoordinateX = Convert.ToDouble(Сoordinates[0].Replace('.', ','));
-                СoordinateY = Convert.ToDouble(Сoordinates[1].Replace('.', ','));
 
-                Console.WriteLine("X: {0:#.####} Y: {1:#.####}", СoordinateX, СoordinateY);
+            foreach (var field in fields)
+            {
+                coordinates = field.Split(',');
+                coordinateX = Convert.ToDouble(coordinates[0].Replace('.', ','));
+                coordinateY = Convert.ToDouble(coordinates[1].Replace('.', ','));
+
+                Console.WriteLine("X: {0:#.####} Y: {1:#.####}", coordinateX, coordinateY);
             }
 
             ChooseMenu();
@@ -35,15 +36,17 @@ namespace FirstLessonConsoleApp
 
         static void ChooseMenu()//подобие меню
         {
-            int MenuItem;
+            int menuItem;
+
             Console.WriteLine("Выберите пункт меню:");
             Console.WriteLine("1 - ввод координат с клавиатуры");
             Console.WriteLine("2 - ввод координат из файла");
             Console.WriteLine("3 - очистить окно");
             Console.WriteLine("4 - выход");
 
-            MenuItem = Convert.ToInt32(Console.ReadLine());
-            switch (MenuItem)
+            menuItem = Convert.ToInt32(Console.ReadLine());
+
+            switch (menuItem)
             {
                 case 1:
                     InputСoordinatesConsole();
@@ -52,11 +55,9 @@ namespace FirstLessonConsoleApp
                     InputСoordinatesFile();
                     break;
                 case 3:
-                    {
-                        Console.Clear();
-                        ChooseMenu();
-                        break;
-                    }
+                    Console.Clear();
+                    ChooseMenu();
+                    break;
                 case 4:
                     Environment.Exit(0);
                     break;
@@ -65,18 +66,20 @@ namespace FirstLessonConsoleApp
 
         static void InputСoordinatesConsole()//ввод координат через консоль
         {
-            string CoordinatePair;
+            string coordinatePair;
+
             Console.WriteLine("Вводите:");
-            Program InstanceProgram = new Program();
+
+            var instanceProgram = new Program();
 
             do
             {
-                CoordinatePair = Console.ReadLine();
-                if (CoordinatePair != String.Empty) InstanceProgram.ListCoordinates.Add(CoordinatePair);
+                coordinatePair = Console.ReadLine();
+                if (coordinatePair != String.Empty) instanceProgram.listCoordinates.Add(coordinatePair);
             }
-            while (CoordinatePair != String.Empty);
+            while (coordinatePair != String.Empty);
             
-            FormattedСoordinateOutput(InstanceProgram.ListCoordinates);
+            FormattedСoordinateOutput(instanceProgram.listCoordinates);
         }
 
         static void InputСoordinatesFile()//ввод координат из файла
@@ -86,14 +89,14 @@ namespace FirstLessonConsoleApp
             //построчное считывание  
             using (StreamReader InstanceStreamReader = new StreamReader(Path, Encoding.Default))
             {
-                Program InstanceProgram = new Program();
-                string CoordinatePair;
-                while((CoordinatePair = InstanceStreamReader.ReadLine())!= null)
+                var instanceProgram = new Program();
+                string coordinatePair;
+                while((coordinatePair = InstanceStreamReader.ReadLine())!= null)
                 {
-                    InstanceProgram.ListCoordinates.Add(CoordinatePair);
+                    instanceProgram.listCoordinates.Add(coordinatePair);
                 }
 
-                FormattedСoordinateOutput(InstanceProgram.ListCoordinates);
+                FormattedСoordinateOutput(instanceProgram.listCoordinates);
             }
         }
 
