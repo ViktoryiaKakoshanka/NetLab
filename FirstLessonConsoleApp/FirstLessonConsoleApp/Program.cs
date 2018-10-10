@@ -36,30 +36,35 @@ namespace FirstLessonConsoleApp
 
         static void ChooseMenu()//подобие меню
         {
-            int menuItem;
+            string menuItem;
 
-            Console.WriteLine("Выберите пункт меню:");
+            Console.WriteLine("\nВыберите пункт меню:");
             Console.WriteLine("1 - ввод координат с клавиатуры");
             Console.WriteLine("2 - ввод координат из файла");
             Console.WriteLine("3 - очистить окно");
             Console.WriteLine("4 - выход");
 
-            menuItem = Convert.ToInt32(Console.ReadLine());
+            menuItem = Console.ReadLine();
 
             switch (menuItem)
             {
-                case 1:
+                case "1":
                     InputСoordinatesConsole();
                     break;
-                case 2:
+                case "2":
                     InputСoordinatesFile();
                     break;
-                case 3:
+                case "3":
                     Console.Clear();
                     ChooseMenu();
                     break;
-                case 4:
+                case "4":
                     Environment.Exit(0);
+                    break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Выберите пункт меню от 1 до 4");
+                    ChooseMenu();
                     break;
             }
         }
