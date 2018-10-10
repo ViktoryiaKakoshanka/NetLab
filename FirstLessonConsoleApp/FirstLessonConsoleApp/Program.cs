@@ -12,8 +12,6 @@ namespace FirstLessonConsoleApp
         static void Main(string[] args)
         {
             ChooseMenu();
-
-            Console.ReadKey();
         }
 
 
@@ -37,15 +35,15 @@ namespace FirstLessonConsoleApp
 
         static void ChooseMenu()//подобие меню
         {
-            int numMenu = 3;
+            int MenuItem;
             Console.WriteLine("Выберите пункт меню:");
             Console.WriteLine("1 - ввод координат с клавиатуры");
             Console.WriteLine("2 - ввод координат из файла");
             Console.WriteLine("3 - очистить окно");
             Console.WriteLine("4 - выход");
 
-            numMenu = Convert.ToInt32(Console.ReadLine());
-            switch (numMenu)
+            MenuItem = Convert.ToInt32(Console.ReadLine());
+            switch (MenuItem)
             {
                 case 1:
                     InputСoordinatesConsole();
