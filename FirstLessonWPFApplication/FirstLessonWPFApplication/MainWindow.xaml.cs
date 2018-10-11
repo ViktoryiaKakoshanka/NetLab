@@ -1,17 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FirstLessonWPFApplication
 {
@@ -20,18 +13,84 @@ namespace FirstLessonWPFApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<string> listCoordinates = new List<string>();
+        string[] coordinates = new string[2];
+        double coordinateX, coordinateY;
+        string resultFormating;
+        readonly OpenFileDialog openFile = new OpenFileDialog();
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+            openFile.FileOk += OnOpenFileDialogOK;
         }
 
-        private void FormatedCoordinates_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Выбрать файл
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormatedCoordinatesFile_Click(object sender, RoutedEventArgs e)
         {
-            string text = InputText.Text;
-            if(text != "")
+            openFile.ShowDialog();
+        }
+
+        /// <summary>
+        /// считывание строк из файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnOpenFileDialogOK(object sender, CancelEventArgs e)
+        {
+            string pathFile = openFile.FileName;
+
+            using (StreamReader instanceStreamReader = new StreamReader(pathFile, Encoding.Default))
             {
-                MessageBox.Show(text);
+                string coordinatePair;
+                while ((coordinatePair = instanceStreamReader.ReadLine()) != null)
+                {
+                    listCoordinates.Add(coordinatePair);
+                }
+
+                FormattedСoordinateOutput(listCoordinates);
             }
+        }
+
+        /// <summary>
+        /// Форматированный вывод координат в listbox
+        /// </summary>
+        /// <param name="fields">строки из файла</param>
+        void FormattedСoordinateOutput(List<string> fields)
+        {
+            foreach (var field in fields)
+            {
+                coordinates = field.Split(',');
+                coordinateX = Convert.ToDouble(coordinates[0].Replace('.', ','));
+                coordinateY = Convert.ToDouble(coordinates[1].Replace('.', ','));
+
+                resultFormating = "X: " + String.Format("{0:#.####}", coordinateX) + " Y: " + String.Format("{0:#.####}", coordinateY);
+                listbxOutputCoordinates.Items.Add(resultFormating);
+            }
+        }
+
+        /// <summary>
+        /// Форматированный вывод координат в listbox, данные из textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormatedCoordinatesOutput_Click(object sender, RoutedEventArgs e)
+        {
+            string coordinatePair = tbInputCoordinates.Text;
+                        
+            coordinates = coordinatePair.Split(',');
+            coordinateX = Convert.ToDouble(coordinates[0].Replace('.', ','));
+            coordinateY = Convert.ToDouble(coordinates[1].Replace('.', ','));
+
+            resultFormating = "X: "+ String.Format("{0:#.####}", coordinateX) + " Y: " + String.Format("{0:#.####}", coordinateY);
+            listbxOutputCoordinates.Items.Add(resultFormating);
         }
     }
 }

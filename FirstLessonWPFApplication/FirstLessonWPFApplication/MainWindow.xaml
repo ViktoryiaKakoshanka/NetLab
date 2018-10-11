@@ -5,9 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FirstLessonWPFApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="500">
+        Title="Форматированный вывод координат" Height="300" Width="400">
     <Grid x:Name="MainGrid">
-        <TextBox x:Name="InputText" Width="100" Height="30" VerticalAlignment="Top" Margin="20"></TextBox>
-        <Button x:Name="FormatedCoordinates" Width="100" Height="20" Content="Start" Click="FormatedCoordinates_Click"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Name="lbInput" Margin="10 1 10 20" Height="30" Grid.Column="0" Grid.Row="0">Ввод координат:</Label>
+        <TextBox x:Name="tbInputCoordinates" Height="30" Margin="10 30 10 0" Grid.Column="0" Grid.Row="0"></TextBox>
+
+        <Button x:Name="btnFormatedCoordinatesOutput" Grid.Column="1" Grid.Row="0" Height="25" Margin="5 30 5 0" Content="Форматировать вывод" Click="FormatedCoordinatesOutput_Click"></Button>
+        <Button x:Name="btnFormatedCoordinatesFile" Grid.Column="1" Grid.Row="0" Height="25" Margin="5 5 5 40" Content="Открыть файл" Click="FormatedCoordinatesFile_Click"></Button>
+
+        <Label Name="lbOutput" VerticalAlignment="Top" Margin="5 0 5 0" Height="30"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">Форматированный вывод координат:</Label>
+        <ListBox x:Name="listbxOutputCoordinates" VerticalAlignment="Stretch" Margin="5 25 5 5" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"></ListBox>
+
     </Grid>
 </Window>
