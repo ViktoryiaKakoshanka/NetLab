@@ -10,13 +10,6 @@
             {
                 return null;
             }
-            else
-            {
-                for(int i=0; i<parts.Length; i++)
-                {
-                    parts[i] = parts[i].Replace(".",",");
-                }
-            }
 
             var x = 0.0;
             var y = 0.0;
