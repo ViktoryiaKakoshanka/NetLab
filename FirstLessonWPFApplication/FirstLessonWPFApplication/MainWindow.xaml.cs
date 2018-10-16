@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using FirstLessonConsoleApp.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +14,11 @@ namespace FirstLessonWPFApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<string> listCoordinates = new List<string>();
-        string[] coordinates = new string[2];
-        double coordinateX, coordinateY;
-        string resultFormating;
-        readonly OpenFileDialog openFile = new OpenFileDialog();
+        private List<string> listCoordinates = new List<string>();
+        private readonly OpenFileDialog openFile = new OpenFileDialog();
         
         /// <summary>
-        /// 
+        /// Точка входа
         /// </summary>
         public MainWindow()
         {
@@ -39,7 +37,7 @@ namespace FirstLessonWPFApplication
         }
 
         /// <summary>
-        /// считывание строк из файла
+        /// Считывание строк из файла в listCoordinates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -55,42 +53,50 @@ namespace FirstLessonWPFApplication
                     listCoordinates.Add(coordinatePair);
                 }
 
-                FormattedСoordinateOutput(listCoordinates);
+                FormattedOutputListСoordinates(listCoordinates);
             }
         }
-
+        
         /// <summary>
-        /// Форматированный вывод координат в listbox
-        /// </summary>
-        /// <param name="fields">строки из файла</param>
-        void FormattedСoordinateOutput(List<string> fields)
-        {
-            foreach (var field in fields)
-            {
-                coordinates = field.Split(',');
-                coordinateX = Convert.ToDouble(coordinates[0].Replace('.', ','));
-                coordinateY = Convert.ToDouble(coordinates[1].Replace('.', ','));
-
-                resultFormating = "X: " + String.Format("{0:#.####}", coordinateX) + " Y: " + String.Format("{0:#.####}", coordinateY);
-                listbxOutputCoordinates.Items.Add(resultFormating);
-            }
-        }
-
-        /// <summary>
-        /// Форматированный вывод координат в listbox, данные из textbox
+        /// Вызов форматирования на строку координат считанных из textbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FormatedCoordinatesOutput_Click(object sender, RoutedEventArgs e)
         {
-            string coordinatePair = tbInputCoordinates.Text;
-                        
-            coordinates = coordinatePair.Split(',');
-            coordinateX = Convert.ToDouble(coordinates[0].Replace('.', ','));
-            coordinateY = Convert.ToDouble(coordinates[1].Replace('.', ','));
+            var userInput = tbInputCoordinates.Text;
+            FormattedСoordinateOutput(userInput);
+        }
 
-            resultFormating = "X: "+ String.Format("{0:#.####}", coordinateX) + " Y: " + String.Format("{0:#.####}", coordinateY);
-            listbxOutputCoordinates.Items.Add(resultFormating);
+        /// <summary>
+        /// Вызов форматирования на каждую строку координат считанных из файла
+        /// </summary>
+        /// <param name="fields">список координат считанных из файла</param>
+        public void FormattedOutputListСoordinates(List<string> fields)
+        {
+            foreach(var field in fields)
+            {
+                FormattedСoordinateOutput(field);
+            }
+        }
+
+
+        /// <summary>
+        /// Форматированный вывод координат в listbox
+        /// </summary>
+        /// <param name="userInput">строка координат для обработки</param>
+        public void FormattedСoordinateOutput(string userInput)
+        {
+            var coordinate = new Coordinate();
+
+            if (coordinate != null)
+            {
+                coordinate = CoordinatesHelper.ParseUserInputToCoordinate(userInput);
+                if (coordinate != null)
+                {
+                    listbxOutputCoordinates.Items.Add(coordinate.ToString());
+                }
+            }
         }
     }
 }

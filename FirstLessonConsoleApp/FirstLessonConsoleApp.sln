@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstLessonConsoleApp", "FirstLessonConsoleApp\FirstLessonConsoleApp.csproj", "{46CDE6B2-4B70-41F2-A8A4-BB5918E2D7CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstLessonWPFApplication", "..\FirstLessonWPFApplication\FirstLessonWPFApplication\FirstLessonWPFApplication.csproj", "{4E0E8276-CD40-4755-93B1-B001FAD90565}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{46CDE6B2-4B70-41F2-A8A4-BB5918E2D7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46CDE6B2-4B70-41F2-A8A4-BB5918E2D7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46CDE6B2-4B70-41F2-A8A4-BB5918E2D7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E0E8276-CD40-4755-93B1-B001FAD90565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0E8276-CD40-4755-93B1-B001FAD90565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0E8276-CD40-4755-93B1-B001FAD90565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0E8276-CD40-4755-93B1-B001FAD90565}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

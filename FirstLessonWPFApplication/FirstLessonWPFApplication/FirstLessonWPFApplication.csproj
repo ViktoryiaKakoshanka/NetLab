@@ -94,5 +94,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FirstLessonConsoleApp\FirstLessonConsoleApp\FirstLessonConsoleApp.csproj">
+      <Project>{46cde6b2-4b70-41f2-a8a4-bb5918e2d7cc}</Project>
+      <Name>FirstLessonConsoleApp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
