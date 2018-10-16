@@ -1,4 +1,6 @@
-﻿namespace FirstLessonConsoleApp.Model
+﻿using System.Globalization;
+
+namespace FirstLessonConsoleApp.Model
 {
     public class CoordinatesHelper
     {
@@ -10,18 +12,11 @@
             {
                 return null;
             }
-            else
-            {
-                for (int i = 0; i < parts.Length; i++)
-                {
-                    parts[i] = parts[i].Replace(".", ",");
-                }
-            }
 
             var x = 0.0;
             var y = 0.0;
 
-            if(!double.TryParse(parts[0], out x) || !double.TryParse(parts[1], out y))
+            if(!double.TryParse(parts[0], NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out x) || !double.TryParse(parts[1], NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out y))
             {
                 return null;
             }
