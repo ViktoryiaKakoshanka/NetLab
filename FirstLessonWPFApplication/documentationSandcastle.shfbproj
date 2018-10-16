@@ -19,7 +19,8 @@
     <Language>en-US</Language>
     <DocumentationSources>
       <DocumentationSource sourceFile="FirstLessonWPFApplication\bin\Debug\FirstLessonWPFApplication.xml" />
-<DocumentationSource sourceFile="FirstLessonWPFApplication\bin\Debug\FirstLessonWPFApplication.exe" /></DocumentationSources>
+      <DocumentationSource sourceFile="FirstLessonWPFApplication\bin\Debug\FirstLessonWPFApplication.exe" />
+    </DocumentationSources>
     <HelpFileFormat>HtmlHelp1</HelpFileFormat>
     <SyntaxFilters>C#</SyntaxFilters>
     <PresentationStyle>VS2013</PresentationStyle>
