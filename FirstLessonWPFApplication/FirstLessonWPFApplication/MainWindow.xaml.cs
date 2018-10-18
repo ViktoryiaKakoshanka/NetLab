@@ -15,16 +15,14 @@ namespace FirstLessonWPFApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        
-        
+        private CoordinatesFromFile file = new CoordinatesFromFile();
+
         /// <summary>
         /// Точка входа
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
         /// <summary>
@@ -34,14 +32,16 @@ namespace FirstLessonWPFApplication
         /// <param name="e"></param>
         private void FormatedCoordinatesFile_Click(object sender, RoutedEventArgs e)
         {
-            var file = new CoordinatesFromFile();
-            file.OpenFile();
-            foreach (var field in file.GetListCoordinatesFromFile())
+            OpenFileDialog openFile = new OpenFileDialog();
+            
+            if (openFile.ShowDialog() == true)
             {
-                listbxOutputCoordinates.Items.Add(new FormattedСoordinate().FormatedFirstMethod(field));
+                file.ReadFileInListbox(openFile.FileName);
             }
+            FormatedCoordinatesOutputFromFile();
         }
-                      
+
+        
         /// <summary>
         /// Вызов форматирования на строку координат считанных из textbox
         /// </summary>
@@ -50,8 +50,25 @@ namespace FirstLessonWPFApplication
         private void FormatedCoordinatesOutput_Click(object sender, RoutedEventArgs e)
         {
             var userInput = tbInputCoordinates.Text;
-            listbxOutputCoordinates.Items.Add(new FormattedСoordinate().FormatedFirstMethod(userInput));
+            if(userInput != string.Empty)
+            {
+                listbxOutputCoordinates.Items.Add(new FormattedСoordinate().FormatedMethod(userInput));
+            }
+            else
+            {
+                MessageBox.Show("Введите координаты");
+            }
         }
-                
+
+        /// <summary>
+        /// Вызов форматирования на строку координат считанных из файла
+        /// </summary>
+        public void FormatedCoordinatesOutputFromFile()
+        {
+            foreach (var field in file.GetListCoordinatesFromFile())
+            {
+                listbxOutputCoordinates.Items.Add(new FormattedСoordinate().FormatedMethod(field));
+            }
+        }
     }
 }
