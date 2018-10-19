@@ -4,7 +4,7 @@ using System;
 
 namespace NewtonsMethod.View
 {
-    class ConsoleView
+    public class ConsoleView
     {
         RadicalSign radicalSign;
 

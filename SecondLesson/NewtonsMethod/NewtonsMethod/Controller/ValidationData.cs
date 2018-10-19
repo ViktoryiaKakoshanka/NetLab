@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NewtonsMethod.Controller
 {
-    class ValidationData
+    public class ValidationData
     {
         public bool InputUserPower(string power)
         {

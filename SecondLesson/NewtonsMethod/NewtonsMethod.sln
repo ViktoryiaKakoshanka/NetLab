@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonsMethod", "NewtonsMet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryConverting", "BinaryConverting\BinaryConverting.csproj", "{ECB87152-D588-4AF3-8921-E7B0C8B12FBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonsMethodTests", "NewtonsMethodTests\NewtonsMethodTests.csproj", "{E7FE3AAF-92E3-4996-910C-90FF2E837C57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{ECB87152-D588-4AF3-8921-E7B0C8B12FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECB87152-D588-4AF3-8921-E7B0C8B12FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECB87152-D588-4AF3-8921-E7B0C8B12FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7FE3AAF-92E3-4996-910C-90FF2E837C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7FE3AAF-92E3-4996-910C-90FF2E837C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7FE3AAF-92E3-4996-910C-90FF2E837C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7FE3AAF-92E3-4996-910C-90FF2E837C57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

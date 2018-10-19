@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NewtonsMethod.Controller
 {
-    class ParseData
+    public class ParseData
     {
         public double StringConvertingToDouble(string value)
         {

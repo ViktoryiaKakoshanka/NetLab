@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NewtonsMethod.Model
 {
-    class RadicalSign
+    public class RadicalSign
     {
         private readonly int _power;
         private readonly double _numericalRoot, _accuracy;
