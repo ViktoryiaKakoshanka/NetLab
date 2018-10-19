@@ -7,7 +7,7 @@ using NewtonsMethod.Model;
 
 namespace NewtonsMethod.Controller
 {
-    class Calculation
+    public class Calculation
     {
         /// <summary>
         /// Вычисление корня n-ой степени из числа методом Ньютона с заданной точностью
@@ -19,6 +19,7 @@ namespace NewtonsMethod.Controller
             var xPrev = 1.0;
             var xNext = 1.0;
             var step = 1;
+            double delta;
 
             do
             {
@@ -31,7 +32,9 @@ namespace NewtonsMethod.Controller
 
                 step = 2;
 
-            } while ((xPrev-xNext)<=radicalSign.GetAccuracy());
+                delta = Math.Abs(xPrev-xNext);
+
+            } while (delta>radicalSign.GetAccuracy());
 
             radicalSign.SetResult(xNext);
 
