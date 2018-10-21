@@ -42,13 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ICalculation.cs" />
     <Compile Include="Controller\ParseData.cs" />
-    <Compile Include="Controller\ValidationData.cs" />
+    <Compile Include="Controller\ValidationInput.cs" />
     <Compile Include="Controller\Calculation.cs" />
+    <Compile Include="Model\IRadicalSign.cs" />
     <Compile Include="Model\RadicalSign.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\ConsoleView.cs" />
+    <Compile Include="View\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,14 +7,14 @@ using NewtonsMethod.Model;
 
 namespace NewtonsMethod.Controller
 {
-    public class Calculation
+    public class Calculation: ICalculation
     {
         /// <summary>
         /// Вычисление корня n-ой степени из числа методом Ньютона с заданной точностью
         /// </summary>
         /// <param name="radicalSign"></param>
         /// <returns></returns>
-        public double ComputationRootByMethodNewton(RadicalSign radicalSign)
+        public double RadicalSignByMethodNewton(IRadicalSign radicalSign)
         {
             var xPrev = 1.0;
             var xNext = 1.0;
@@ -47,9 +47,9 @@ namespace NewtonsMethod.Controller
         /// <param name="value">число</param>
         /// <param name="power">стерень</param>
         /// <returns>число {value} в степени {power}</returns>
-        public double Exponentiation(double value, int power)
+        private double Exponentiation(double value, int power)
         {
-            double valueConst = value;
+            var valueConst = value;
             for (var i = 2; i<=power; i++)
             {
                 value *= valueConst;
@@ -57,10 +57,9 @@ namespace NewtonsMethod.Controller
             return value;
         }
 
-        public double MathPow(RadicalSign radicalSign)
+        public double MathPow(IRadicalSign radicalSign)
         {
-            double result;
-            result = Math.Pow(radicalSign.GetResult(), radicalSign.GetPower());
+            var result = Math.Pow(radicalSign.GetResult(), radicalSign.GetPower());
 
             return result;
         }

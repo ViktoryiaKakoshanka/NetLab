@@ -13,13 +13,13 @@ namespace NewtonsMethodTests
         {
             double numericalRoot = 27.0;
             int power = 3;
-            double accuracy = 0.0001;
-            double exected = Math.Pow(numericalRoot, (1.0/power));
+            double accuracy = 0.000001;
+            double exected = 3;
 
             RadicalSign radicalSign = new RadicalSign(numericalRoot, power, accuracy);
             
             Calculation calc = new Calculation();
-            calc.ComputationRootByMethodNewton(radicalSign);
+            calc.RadicalSignByMethodNewton(radicalSign);
 
             double actual = Math.Round(radicalSign.GetResult(), 5);
 

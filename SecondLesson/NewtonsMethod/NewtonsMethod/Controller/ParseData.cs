@@ -11,7 +11,7 @@ namespace NewtonsMethod.Controller
     {
         public double StringConvertingToDouble(string value)
         {
-            NumberFormatInfo provider = new NumberFormatInfo();
+            var provider = new NumberFormatInfo();
             provider.CurrencyDecimalSeparator = ".";
             return Convert.ToDouble(value, provider);
         }

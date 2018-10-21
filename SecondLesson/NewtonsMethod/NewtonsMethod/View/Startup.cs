@@ -4,18 +4,18 @@ using System;
 
 namespace NewtonsMethod.View
 {
-    public class ConsoleView
+    public class Startup
     {
-        RadicalSign radicalSign;
+        IRadicalSign radicalSign;
 
         public void UserInput()
         {
             string numericalRoot, power, accurancy;
-            var correct = true;
+            var correctInput = true;
 
             do
             {
-                if (!correct)
+                if (!correctInput)
                 {
                     Console.Clear();
                     MessageExceptionUserInput();
@@ -23,14 +23,14 @@ namespace NewtonsMethod.View
 
                 Console.WriteLine("Введите стеепнь корня");
                 power = Console.ReadLine();
-                correct = false;
-            } while (!new ValidationData().InputUserPower(power));
+                correctInput = false;
+            } while (!ValidationInput.InputUserPower(power));
 
-            correct = true;
+            correctInput = true;
 
             do
             {
-                if (!correct)
+                if (!correctInput)
                 {
                     Console.Clear();
                     MessageExceptionUserInput();
@@ -38,14 +38,14 @@ namespace NewtonsMethod.View
 
                 Console.WriteLine("Введите стеепнь число под корнем");
                 numericalRoot = Console.ReadLine();
-                correct = false;
-            } while (!new ValidationData().InputUserNumericalRoot(numericalRoot));
+                correctInput = false;
+            } while (!ValidationInput.InputUserNumericalRoot(numericalRoot));
 
-            correct = true;
+            correctInput = true;
 
             do
             {
-                if (!correct)
+                if (!correctInput)
                 {
                     Console.Clear();
                     MessageExceptionUserInput();
@@ -53,8 +53,8 @@ namespace NewtonsMethod.View
 
                 Console.WriteLine("Введите точность вычисления от 0 до 1");
                 accurancy = Console.ReadLine();
-                correct = false;
-            } while (!new ValidationData().InputUserАccurancy(accurancy));
+                correctInput = false;
+            } while (!ValidationInput.InputUserАccurancy(accurancy));
 
             var convert = new ParseData();
             radicalSign = new RadicalSign(convert.StringConvertingToDouble(numericalRoot), convert.StringConvertingToInt(power), convert.StringConvertingToDouble(accurancy));
@@ -68,7 +68,7 @@ namespace NewtonsMethod.View
         public void MethodComparisonNewtonAndPow()
         {
             var calc = new Calculation();
-            double resultMethodNewton = calc.ComputationRootByMethodNewton(radicalSign);
+            double resultMethodNewton = calc.RadicalSignByMethodNewton(radicalSign);
             double resultMathPow = calc.MathPow(radicalSign);
 
             radicalSign.PrintData();

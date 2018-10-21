@@ -13,7 +13,7 @@ namespace NewtonsMethod
     {
         static void Main(string[] args)
         {
-            var view = new ConsoleView();
+            var view = new Startup();
             view.UserInput();
             view.MethodComparisonNewtonAndPow();
         }
