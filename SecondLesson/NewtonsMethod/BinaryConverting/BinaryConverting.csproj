@@ -43,10 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ConversionNumeric.cs" />
+    <Compile Include="Controller\IConversionNumeric.cs" />
+    <Compile Include="Controller\ValidationUserInput.cs" />
+    <Compile Include="Model\INumbers.cs" />
     <Compile Include="Model\Numbers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\ConsoleView.cs" />
+    <Compile Include="View\FundamentalView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

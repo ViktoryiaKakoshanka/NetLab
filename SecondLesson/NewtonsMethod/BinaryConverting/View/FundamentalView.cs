@@ -1,25 +1,23 @@
 ﻿using System;
 using BinaryConverting.Model;
 using BinaryConverting.Controller;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinaryConverting.View
 {
-    class ConsoleView
+    class FundamentalView
     {
-        private Numbers number = new Numbers();
+        INumbers number = new Numbers();
 
         public void UserInput()
         {
-            byte decNumeric;
+            int decNumeric;
+            var correctUserInput = new ValidationUserInput();
             Console.WriteLine("Введите неотрицательное десятичное значение целого числа");
 
-            if(byte.TryParse(Console.ReadLine(), out decNumeric))
+
+            if ((decNumeric = correctUserInput.ValidationUserInputTryInt(Console.ReadLine())) > 0)
             {
-                number.DecimalNumber(decNumeric);
+                number.DecimalNumber = decNumeric;
             }
             else
             {
@@ -33,8 +31,8 @@ namespace BinaryConverting.View
         public void PrintResultByConversion()
         {
             var conversionNumeric = new ConversionNumeric();
-            conversionNumeric.DecimalToBinary(number);
-            Console.WriteLine(number.BinaryNumber());
+            conversionNumeric.NumberDecimalToBinary(number);
+            Console.WriteLine(number.BinaryNumber);
             Console.ReadKey(true);
         }
     }

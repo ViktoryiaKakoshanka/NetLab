@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BinaryConverting.View;
+﻿using BinaryConverting.View;
 
 namespace BinaryConverting
 {
@@ -11,9 +6,9 @@ namespace BinaryConverting
     {
         static void Main(string[] args)
         {
-            var consoleView = new ConsoleView();
-            consoleView.UserInput();
-            consoleView.PrintResultByConversion();
+            var fundamentaView = new FundamentalView();
+            fundamentaView.UserInput();
+            fundamentaView.PrintResultByConversion();
         }
     }
 }
