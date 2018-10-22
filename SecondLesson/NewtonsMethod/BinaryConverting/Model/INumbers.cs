@@ -5,5 +5,6 @@ namespace BinaryConverting.Model
     {
         int DecimalNumber { get; set; }
         string BinaryNumber { get; set; }
+        void DecimalNumberOfUserInput(string userInput);
     }
 }

@@ -6,9 +6,8 @@ namespace BinaryConverting
     {
         static void Main(string[] args)
         {
-            var fundamentaView = new FundamentalView();
-            fundamentaView.UserInput();
-            fundamentaView.PrintResultByConversion();
+            var mainLaunchProgram = new MainLaunchProgram();
+            mainLaunchProgram.RunProgram();
         }
     }
 }

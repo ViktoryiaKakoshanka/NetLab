@@ -13,10 +13,18 @@ namespace BinaryConvertingTests
     public class ValidationUserInputHelperTests
     {
         [TestMethod]
-        [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
-        public void ValidationUserInputTryIntTest()
+        [ExpectedException(typeof(FormatException), AllowDerivedTypes = true)]
+        public void ValidationUserInputStringTryIntTest()
         {
-            ValidationUserInputHelper.ValidationUserInputTryInt("kih");
+            ValidateUserInputHelper.ValidationUserInputTryInt("kih");
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException), AllowDerivedTypes = true)]
+        public void ValidationUserInputNullTryIntTest()
+        {
+            ValidateUserInputHelper.ValidationUserInputTryInt(null);
         }
     }
 }
