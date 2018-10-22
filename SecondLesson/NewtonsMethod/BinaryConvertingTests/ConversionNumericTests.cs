@@ -23,7 +23,7 @@ namespace BinaryConvertingTests
         [TestMethod]
         public void NumberDecimalToBinaryTest_rand_10_30()
         {
-                var conversionNumeric = new ConversionNumeric();
+            var conversionNumeric = new ConversionNumeric();
 
             for (int i = 10; i < 30; i++)
             {

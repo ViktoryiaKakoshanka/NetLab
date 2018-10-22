@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BinaryConverting.Controller
 {
-    class ValidationUserInput
+    public class ValidationUserInputHelper
     {
-        public int ValidationUserInputTryInt(string UserInput)
+        public static int ValidationUserInputTryInt(string userInput)
         {
             int resultValidation = 0;
-            int.TryParse(UserInput, out resultValidation);
+            resultValidation = int.Parse(userInput);
             return resultValidation;
         }
     }

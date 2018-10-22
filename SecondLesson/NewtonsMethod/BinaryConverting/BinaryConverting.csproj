@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Controller\ConversionNumeric.cs" />
     <Compile Include="Controller\IConversionNumeric.cs" />
-    <Compile Include="Controller\ValidationUserInput.cs" />
+    <Compile Include="Controller\ValidationUserInputHelper.cs" />
     <Compile Include="Model\INumbers.cs" />
     <Compile Include="Model\Numbers.cs" />
     <Compile Include="Program.cs" />
