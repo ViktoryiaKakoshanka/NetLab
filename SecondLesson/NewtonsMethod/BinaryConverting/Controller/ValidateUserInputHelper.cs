@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BinaryConverting.Controller
 {
-    public class ValidationUserInputHelper
+    public class ValidateUserInputHelper
     {
         public static int ValidationUserInputTryInt(string userInput)
         {

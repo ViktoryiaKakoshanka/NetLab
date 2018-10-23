@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BinaryConverting.Controller;
 
@@ -13,10 +11,18 @@ namespace BinaryConvertingTests
     public class ValidationUserInputHelperTests
     {
         [TestMethod]
-        [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
-        public void ValidationUserInputTryIntTest()
+        [ExpectedException(typeof(FormatException), AllowDerivedTypes = true)]
+        public void ValidationUserInput_FormatExceptionTest()
         {
-            ValidationUserInputHelper.ValidationUserInputTryInt("kih");
+            ValidateUserInputHelper.ValidationUserInputTryInt("kih");
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException), AllowDerivedTypes = true)]
+        public void ValidationUserInput_ArgumentNullExceptionTest()
+        {
+            ValidateUserInputHelper.ValidationUserInputTryInt(null);
         }
     }
 }
