@@ -4,7 +4,7 @@ using BinaryConverting.Controller;
 
 namespace BinaryConverting.View
 {
-    class ConsoleView
+    class ConsoleView: IConsoleView
     {
         public void PrintResultByConversion(INumbers number)
         {
@@ -15,12 +15,10 @@ namespace BinaryConverting.View
             Console.ReadKey(true);
         }
 
-        public static void WarningMessage(string messEx = null)
+        public void WarningMessage(string messEx = null)
         {
             Console.Clear();
             Console.WriteLine($"{messEx} Необходимо повторить ввод значения. ");
-            var mainLaunchProgram = new MainLaunchProgram();
-            mainLaunchProgram.UserInput();
         }
     }
 }

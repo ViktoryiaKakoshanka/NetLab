@@ -9,39 +9,48 @@ namespace BinaryConverting
     {
         INumbers number = new Numbers();
 
-        public void RunProgram()
+        public void RunProgram(IConsoleView consoleView)
         {
             var conversionNumeric = new ConversionNumeric();
-            var consoleView = new ConsoleView();
 
-            try
+            while(true)
             {
-                UserInput();
-            }
-            catch (FormatException)
-            {
-                number.DecimalNumber = 0;
-                ConsoleView.WarningMessage("Введен не верный формат");
-            }
-            catch(ArgumentNullException)
-            {
-                number.DecimalNumber = 0;
-                ConsoleView.WarningMessage("Введенное значение пустое");
+                try
+                {
+                    Console.WriteLine("Введите неотрицательное десятичное значение целого числа");
+                    ProcessUserInput();
+
+                    if (number.DecimalNumber <= 0)
+                    {
+                        consoleView.WarningMessage();
+                        continue;
+                    }
+                }
+                catch (FormatException)
+                {
+                    number.DecimalNumber = 0;
+                    consoleView.WarningMessage("Введен не верный формат");
+                    continue;
+                }
+                catch (ArgumentNullException)
+                {
+                    number.DecimalNumber = 0;
+                    consoleView.WarningMessage("Введенное значение пустое");
+                    continue;
+                }
+
+                break;
             }
 
-            if (number.DecimalNumber <= 0)
-            {
-                ConsoleView.WarningMessage();
-            }
+            
             conversionNumeric.NumberDecimalToBinary(number);
 
             consoleView.PrintResultByConversion(number);
         }
         
-        public void UserInput()
+        public void ProcessUserInput()
         {
-            Console.WriteLine("Введите неотрицательное десятичное значение целого числа");
-            number.DecimalNumberOfUserInput(Console.ReadLine());
+            number.DecimalNumber = ValidateUserInputHelper.ValidationUserInputTryInt(Console.ReadLine());
         }
 
     }
