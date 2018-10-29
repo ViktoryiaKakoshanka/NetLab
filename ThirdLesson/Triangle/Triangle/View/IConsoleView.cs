@@ -13,5 +13,9 @@ namespace TriangleLib.View
         void PrintAreaTriangle(double square);
         void PrintDetailsTriangle(Triangle triangle);
         void WarningMessageTriangleNotExist();
+        void WriteLine(string text);
+        string ReadLine();
+        void Clear();
+        ConsoleKeyInfo ReadKey();
     }
 }

@@ -8,29 +8,49 @@ namespace TriangleLib.View
     {
         public void WarningMessage()
         {
-            Console.WriteLine("Вы ввели некорректное значение стороны треугольника.\nЗначение должно быть больше 0. ");
+            WriteLine("Вы ввели некорректное значение стороны треугольника.\nЗначение должно быть больше 0. ");
         }
 
         public void PrintPerimetrTriangle(double perimetr)
         {
-            Console.WriteLine($"Периметр треугольника:{perimetr}");
+            WriteLine($"Периметр треугольника:{perimetr}");
         }
 
         public void PrintAreaTriangle(double square)
         {
-            Console.WriteLine($"Площадь треугольника:{square}");
+            WriteLine($"Площадь треугольника:{square}");
         }
 
         public void PrintDetailsTriangle(Triangle triangle)
         {
-            Console.WriteLine($"Стороны треугольника: {triangle.ToString()}");
-            Console.WriteLine($"Периметр треугольника: {TriangleCalculations.CalculateThePerimeter(triangle).ToString()}");
-            Console.WriteLine($"Площадь треугольника: {TriangleCalculations.CalculateTheArea(triangle).ToString()}");
+            WriteLine($"Стороны треугольника: {triangle.ToString()}");
+            WriteLine($"Периметр треугольника: {TriangleCalculations.CalculateThePerimeter(triangle).ToString()}");
+            WriteLine($"Площадь треугольника: {TriangleCalculations.CalculateTheArea(triangle).ToString()}");
         }
 
         public void WarningMessageTriangleNotExist()
         {
-            Console.WriteLine($"Такого треугольника не существует");
+            WriteLine($"Такого треугольника не существует");
+        }
+
+        public void WriteLine(string text)
+        {
+            Console.WriteLine($"{text}");
+        }
+
+        public string ReadLine()
+        {
+            return Console.ReadLine();
+        }
+
+        public void Clear()
+        {
+            Console.Clear();
+        }
+
+        public ConsoleKeyInfo ReadKey()
+        {
+            return Console.ReadKey();
         }
     }
 }
