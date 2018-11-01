@@ -46,6 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\GreatestCommonDivisor.cs" />
+    <Compile Include="GCDAlgorithm\EuclideanGcdAlgorithm.cs" />
+    <Compile Include="GCDAlgorithm\GcdAlgorithmFactory.cs" />
+    <Compile Include="GCDAlgorithm\GcdAlgorithmType.cs" />
+    <Compile Include="GCDAlgorithm\IAlgorithmGcd.cs" />
+    <Compile Include="GCDAlgorithm\StainGcdAlgorithm.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,9 +58,11 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\BarChart.cs" />
+    <Compile Include="Model\BarChartType.cs" />
+    <Compile Include="Model\GcdResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\UserInputOfNumbers.cs" />
+    <Compile Include="Controller\GcdCalculationDriver.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

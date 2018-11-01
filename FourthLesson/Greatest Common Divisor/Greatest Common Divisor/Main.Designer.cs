@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.groupOfNumbers = new System.Windows.Forms.GroupBox();
             this.numbersForGCD = new System.Windows.Forms.TextBox();
+            this.GCDStain = new System.Windows.Forms.Button();
             this.GCDEuclide = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupResults = new System.Windows.Forms.GroupBox();
             this.lblresult = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.GCDStain = new System.Windows.Forms.Button();
             this.groupOfNumbers.SuspendLayout();
             this.groupResults.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +59,17 @@
             this.numbersForGCD.Name = "numbersForGCD";
             this.numbersForGCD.Size = new System.Drawing.Size(298, 20);
             this.numbersForGCD.TabIndex = 3;
+            // 
+            // GCDStain
+            // 
+            this.GCDStain.Location = new System.Drawing.Point(6, 98);
+            this.GCDStain.Name = "GCDStain";
+            this.GCDStain.Size = new System.Drawing.Size(301, 23);
+            this.GCDStain.TabIndex = 2;
+            this.GCDStain.Text = "Расчитать НОД методом Стейна";
+            this.toolTip1.SetToolTip(this.GCDStain, "Метод расчитывает НОД только для первых двух чисел");
+            this.GCDStain.UseVisualStyleBackColor = true;
+            this.GCDStain.Click += new System.EventHandler(this.GCDStain_Click);
             // 
             // GCDEuclide
             // 
@@ -95,25 +106,13 @@
             this.lblresult.AutoSize = true;
             this.lblresult.Location = new System.Drawing.Point(7, 23);
             this.lblresult.Name = "lblresult";
-            this.lblresult.Size = new System.Drawing.Size(35, 13);
+            this.lblresult.Size = new System.Drawing.Size(0, 13);
             this.lblresult.TabIndex = 0;
-            this.lblresult.Text = "label2";
             // 
             // toolTip1
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Подсказка";
-            // 
-            // GCDStain
-            // 
-            this.GCDStain.Location = new System.Drawing.Point(6, 98);
-            this.GCDStain.Name = "GCDStain";
-            this.GCDStain.Size = new System.Drawing.Size(301, 23);
-            this.GCDStain.TabIndex = 2;
-            this.GCDStain.Text = "Расчитать НОД методом Стейна";
-            this.toolTip1.SetToolTip(this.GCDStain, "Метод расчитывает НОД только для первых двух чисел");
-            this.GCDStain.UseVisualStyleBackColor = true;
-            this.GCDStain.Click += new System.EventHandler(this.GCDEuclide_Click);
             // 
             // Form1
             // 

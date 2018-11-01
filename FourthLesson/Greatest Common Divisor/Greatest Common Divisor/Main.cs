@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using Greatest_Common_Divisor.GCDAlgorithm;
 using GreatestCommonDivisorProgram.View;
 
 namespace GreatestCommonDivisorProgram
 {
     public partial class Form1 : Form
     {
-        UserInputOfNumbers viewInputNumbers = new UserInputOfNumbers();
-        
+        GcdCalculationDriver viewInputNumbers = new GcdCalculationDriver();
 
         public Form1()
         {
@@ -17,14 +17,38 @@ namespace GreatestCommonDivisorProgram
 
         private void GCDEuclide_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            viewInputNumbers.ReadUserInputAndWriteResult(numbersForGCD.Text, button.Name);
-            lblresult.Text += viewInputNumbers.PrintResult();
+            viewInputNumbers.CalculateGcd(numbersForGCD.Text, GcdAlgorithmType.Euclidian);
+
+            if(viewInputNumbers.Result == null)
+            {
+                ShowWarningMessage();
+                return;
+            }
+
+            lblresult.Text += viewInputNumbers.GetFormatedResult();
+        }
+
+        private void GCDStain_Click(object sender, EventArgs e)
+        {
+            viewInputNumbers.CalculateGcd(numbersForGCD.Text, GcdAlgorithmType.Stain);
+
+            if (viewInputNumbers.Result == null)
+            {
+                ShowWarningMessage();
+                return;
+            }
+
+            lblresult.Text += viewInputNumbers.GetFormatedResult();
         }
 
         private void groupResults_Click(object sender, EventArgs e)
         {
-            lblresult.Text = "";
+            lblresult.Text = string.Empty;
+        }
+
+        private void ShowWarningMessage()
+        {
+            MessageBox.Show("Числа должны быть целыми и отделяться пробелами. Введите числа заново.");
         }
     }
 }

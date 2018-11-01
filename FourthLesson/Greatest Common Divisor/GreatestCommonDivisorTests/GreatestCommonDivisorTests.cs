@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GreatestCommonDivisorProgram.Controller;
 
 namespace GreatestCommonDivisorTests
@@ -10,7 +9,16 @@ namespace GreatestCommonDivisorTests
         [TestMethod]
         public void GCDEuclideanAlgorithmTest_30_18_returned_6()
         {
-            var a = GreatestCommonDivisor.GCDEuclideanAlgorithm(30, 18);
+            var pass = 0;
+            var a = GreatestCommonDivisor.GCDEuclideanAlgorithm(30, 18, out pass);
+            Assert.AreEqual(6, a);
+        }
+
+        [TestMethod]
+        public void GCDEuclideanAlgorithmTest_18_30_returned_6()
+        {
+            var pass = 0;
+            var a = GreatestCommonDivisor.GCDEuclideanAlgorithm(18, 30, out pass);
             Assert.AreEqual(6, a);
         }
 
