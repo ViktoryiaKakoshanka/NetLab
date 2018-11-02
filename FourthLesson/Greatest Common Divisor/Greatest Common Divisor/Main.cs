@@ -33,11 +33,12 @@ namespace GreatestCommonDivisorProgram
 
         private void groupResults_Click(object sender, EventArgs e)
         {
-            lblresult.Text = "";
+            lblresult.Text = String.Empty;
         }
 
         private void createBarChar_Click(object sender, EventArgs e)
         {
+
             chart.Initialize(chart1, comboPalette.Text, comboTypeChart.Text);
         }
         

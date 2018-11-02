@@ -9,25 +9,25 @@ namespace GreatestCommonDivisorProgram.View
     {
         public void Initialize(Chart chart, string palette, string typeChart)
         {
-            var barChart = new BarChart();
-            var dataForChart = GreatestCommonDivisor.KeyValuePairs();
+            var colorPalette = (ChartColorPalette)Enum.Parse(typeof(ChartColorPalette), palette);
+            var barChart = new BarChart(colorPalette);
+            var dataForChart = new GreatestCommonDivisor().KeyValuePairs();
             
             chart.Series.Clear();
 
-            chart.Palette = (ChartColorPalette)Enum.Parse(typeof(ChartColorPalette), palette);
+            chart.Palette = barChart.Color;
 
             chart.Series.Add("Число А");
             chart.Series.Add("Число В");
             
             chart.Series["Число А"].ChartType = (SeriesChartType)Enum.Parse(typeof(SeriesChartType), typeChart);
             chart.Series["Число В"].ChartType = (SeriesChartType)Enum.Parse(typeof(SeriesChartType), typeChart);
-
+            
             foreach(var item in dataForChart)
             {
                 chart.Series["Число А"].Points.AddY(item.Value[0]);
                 chart.Series["Число В"].Points.AddY(item.Value[1]);
             }
-
         }
 
 

@@ -20,8 +20,7 @@ namespace GreatestCommonDivisorProgram.View
         {
             if (TryUserInt(userInput))
             {
-                GreatestCommonDivisor.ResetCount();
-                GreatestCommonDivisor.ClearIntermediateData();
+                new GreatestCommonDivisor().ClearIntermediateData();
                 var arrNumbers = ParseUserInput(userInput);
                 var result = (nameButton == "GCDEuclide") ? RunGCDEuclidean(arrNumbers) : RunGCDStain(arrNumbers);
                 FormatedResult(arrNumbers, result);
@@ -48,25 +47,26 @@ namespace GreatestCommonDivisorProgram.View
         private int[] RunGCDEuclidean(int[] userNumbers)
         {
             var resArr = new int[2];
+            int pass;
             
             if (userNumbers.Length == 5)
             {
-                resArr[0] = GreatestCommonDivisor.GCDEuclideanAlgorithm(userNumbers[0], userNumbers[1], userNumbers[2], userNumbers[3], userNumbers[4], out int pass);
+                resArr[0] = new GreatestCommonDivisor().GCDEuclideanAlgorithm(userNumbers[0], userNumbers[1], userNumbers[2], userNumbers[3], userNumbers[4], out pass);
                 resArr[1] = pass;
             }
             if (userNumbers.Length == 4)
             {
-                resArr[0] = GreatestCommonDivisor.GCDEuclideanAlgorithm(userNumbers[0], userNumbers[1], userNumbers[2], userNumbers[3], out int pass);
+                resArr[0] = new GreatestCommonDivisor().GCDEuclideanAlgorithm(userNumbers[0], userNumbers[1], userNumbers[2], userNumbers[3], out pass);
                 resArr[1] = pass;
             }
             if (userNumbers.Length == 3)
             {
-                resArr[0] = GreatestCommonDivisor.GCDEuclideanAlgorithm(userNumbers[0], userNumbers[1], userNumbers[2], out int pass);
+                resArr[0] = new GreatestCommonDivisor().GCDEuclideanAlgorithm(userNumbers[0], userNumbers[1], userNumbers[2], out pass);
                 resArr[1] = pass;
             }
             if (userNumbers.Length == 2)
             {
-                resArr[0] = GreatestCommonDivisor.GCDEuclideanAlgorithm(userNumbers[0], userNumbers[1], out int pass);
+                resArr[0] = new GreatestCommonDivisor().GCDEuclideanAlgorithm(userNumbers[0], userNumbers[1], out pass);
                 resArr[1] = pass;
             }
             return resArr;
@@ -75,7 +75,7 @@ namespace GreatestCommonDivisorProgram.View
         private int[] RunGCDStain(int[] userNumbers)
         {
             var resArr = new int[2];
-            resArr[0] = GreatestCommonDivisor.GCDStainAlgorithm(userNumbers[0], userNumbers[1], out int pass);
+            resArr[0] = new GreatestCommonDivisor().GCDStainAlgorithm(userNumbers[0], userNumbers[1], out int pass);
             resArr[1] = pass;
             return resArr;
         }
