@@ -7,6 +7,7 @@ namespace Greatest_Common_Divisor.GCDAlgorithm
     {
         public GcdResult Calculate(int[] numbers)
         {
+            var iterationsCount = 0;
             var gcdResult = new GcdResult();
 
             if (numbers.Length == 5)
@@ -23,7 +24,7 @@ namespace Greatest_Common_Divisor.GCDAlgorithm
             }
             if (numbers.Length == 2)
             {
-                gcdResult.Gcd = GreatestCommonDivisor.GCDEuclideanAlgorithm(numbers[0], numbers[1], out int iterationsCount);
+                gcdResult.Gcd = GreatestCommonDivisor.GCDEuclideanAlgorithm(numbers[0], numbers[1], out iterationsCount);
                 gcdResult.IterationsCount = iterationsCount;
             }
             return gcdResult;

@@ -22,22 +22,25 @@
 
         public static int GCDEuclideanAlgorithm(int a, int b, int c)
         {
-            int topTwo = GCDEuclideanAlgorithm(a, b, out int step);
-            var resultGcd = GCDEuclideanAlgorithm(topTwo, c, out int step1);
+            var step = 0;
+            int topTwo = GCDEuclideanAlgorithm(a, b, out step);
+            var resultGcd = GCDEuclideanAlgorithm(topTwo, c, out step);
             return resultGcd;
         }
         
         public static int GCDEuclideanAlgorithm(int a, int b, int c, int d)
         {
+            var step = 0;
             var topThree = GCDEuclideanAlgorithm(a, b, c);
-            var resultGcd = GCDEuclideanAlgorithm(topThree, d, out int step);
+            var resultGcd = GCDEuclideanAlgorithm(topThree, d, out step);
             return resultGcd;
         }
 
         public static int GCDEuclideanAlgorithm(int a, int b, int c, int d, int e)
         {
+            var step = 0;
             var topFour = GCDEuclideanAlgorithm(a, b, c, d);
-            var resultGcd = GCDEuclideanAlgorithm(topFour, e, out int step);
+            var resultGcd = GCDEuclideanAlgorithm(topFour, e, out step);
             return resultGcd;
         }
 

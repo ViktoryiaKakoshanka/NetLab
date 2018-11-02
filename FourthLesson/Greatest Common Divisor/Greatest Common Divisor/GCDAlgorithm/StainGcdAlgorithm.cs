@@ -7,9 +7,10 @@ namespace Greatest_Common_Divisor.GCDAlgorithm
     {
         public GcdResult Calculate(int[] numbers)
         {
+            var iterationsCount = 0;
             var gcdResult = new GcdResult
             {
-                Gcd = GreatestCommonDivisor.GCDStainAlgorithm(numbers[0], numbers[1], out int iterationsCount),
+                Gcd = GreatestCommonDivisor.GCDStainAlgorithm(numbers[0], numbers[1], out iterationsCount),
                 IterationsCount = iterationsCount
             };
 
