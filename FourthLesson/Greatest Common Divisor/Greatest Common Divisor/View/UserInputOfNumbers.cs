@@ -1,10 +1,7 @@
 ﻿using GreatestCommonDivisorProgram.Controller;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GreatestCommonDivisorProgram.View
@@ -15,7 +12,7 @@ namespace GreatestCommonDivisorProgram.View
         private string _result = "";
         private static bool TryUserInt(string userInput)
         {
-            var regex = new Regex(@"^[0-9]{1,3} [0-9]{1,3}( [0-9]{1,3})?( [0-9]{1,3})?( [0-9]{1,3})?$");
+            var regex = new Regex(@"^[-+]?[0-9]{1,3} [-+]?[0-9]{1,3}( [-+]?[0-9]{1,3})?( [-+]?[0-9]{1,3})?( [-+]?[0-9]{1,3})?$");
             return (regex.IsMatch(userInput));
         }
 
@@ -23,8 +20,8 @@ namespace GreatestCommonDivisorProgram.View
         {
             if (TryUserInt(userInput))
             {
-                int step = 0;
                 GreatestCommonDivisor.ResetCount();
+                GreatestCommonDivisor.ClearIntermediateData();
                 var arrNumbers = ParseUserInput(userInput);
                 var result = (nameButton == "GCDEuclide") ? RunGCDEuclidean(arrNumbers) : RunGCDStain(arrNumbers);
                 FormatedResult(arrNumbers, result);

@@ -8,17 +8,50 @@ namespace GreatestCommonDivisorTests
     public class GreatestCommonDivisorTests
     {
         [TestMethod]
-        public void GCDEuclideanAlgorithmTest_30_18_returned_6()
+        public void GCDEuclideanAlgorithmTest_returned_GCD()
         {
-            var a = GreatestCommonDivisor.GCDEuclideanAlgorithm(30, 18);
-            Assert.AreEqual(6, a);
+            int actual;
+            int count = 0;
+            var arr = new int[4][];
+            arr[0] = new[] {30, 18 };
+            arr[1] = new[] {0, 18 };
+            arr[2] = new[] {0, 0 };
+            arr[3] = new[] {-5, 45 };
+
+            var expected = new int[] { 6, 1, 1, 5};
+            foreach (var item in arr)
+            {
+                actual = GreatestCommonDivisor.GCDEuclideanAlgorithm(item[0], item[1], out int pass);
+                Assert.AreEqual(expected[count], actual);
+                count++;
+            }
         }
 
         [TestMethod]
         public void GCDEuclideanAlgorithmTest_30_18_42_returned_6()
         {
-            var a = GreatestCommonDivisor.GCDEuclideanAlgorithm(30, 18, 42);
+            var a = GreatestCommonDivisor.GCDEuclideanAlgorithm(30, 18, 42, out int pass);
             Assert.AreEqual(6, a);
+        }
+
+        [TestMethod]
+        public void GCDStainAlgorithmTest_returned_GCD()
+        {
+            int actual;
+            int count = 0;
+            var arr = new int[4][];
+            arr[0] = new[] { 30, 18 };
+            arr[1] = new[] { 0, 18 };
+            arr[2] = new[] { 0, 0 };
+            arr[3] = new[] { -5, 45 };
+
+            var expected = new int[] { 6, 1, 1, 5 };
+            foreach (var item in arr)
+            {
+                actual = GreatestCommonDivisor.GCDEuclideanAlgorithm(item[0], item[1], out int pass);
+                Assert.AreEqual(expected[count], actual);
+                count++;
+            }
         }
     }
 }

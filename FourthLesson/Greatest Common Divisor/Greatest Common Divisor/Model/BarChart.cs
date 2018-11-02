@@ -1,36 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
-namespace Greatest_Common_Divisor.Model
+namespace GreatestCommonDivisorProgram.Model
 {
-    class BarChart
+    public class BarChart
     {
-        enum BarChartAlign
+        public enum BarChartAlign
         {
             Vertical,
             Horizontal
         };
 
-        private Color Color { get; set; }
-        private int _iterations;
-        private BarChartAlign Align { get; set; }
-
-        private Dictionary<int, int[]> intermediateData = new Dictionary<int, int[]>();
-
-        public void Add(int step, int a, int b)
+        public BarChart()
         {
-            intermediateData.Add(step, new[] { a, b });
+            Color = Color.Red;
+            Align = BarChartAlign.Vertical;
         }
 
-        BarChart(int steps, Color color, BarChartAlign align = BarChartAlign.Vertical)
-        {
-            _iterations = steps;
-            Color = color;
-            Align = align;
-        }
+        public Color Color { get; set; }
+        public int Iterations { get; set; }
+        public BarChartAlign Align { get; set; }
+
     }
 }
