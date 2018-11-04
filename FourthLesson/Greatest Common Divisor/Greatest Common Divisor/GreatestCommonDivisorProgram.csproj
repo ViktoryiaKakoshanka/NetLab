@@ -21,8 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>
-    </LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,11 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\GreatestCommonDivisor.cs" />
-    <Compile Include="GCDAlgorithm\EuclideanGcdAlgorithm.cs" />
-    <Compile Include="GCDAlgorithm\GcdAlgorithmFactory.cs" />
-    <Compile Include="GCDAlgorithm\GcdAlgorithmType.cs" />
-    <Compile Include="GCDAlgorithm\IAlgorithmGcd.cs" />
-    <Compile Include="GCDAlgorithm\StainGcdAlgorithm.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,11 +54,10 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\BarChart.cs" />
-    <Compile Include="Model\BarChartType.cs" />
-    <Compile Include="Model\GcdResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controller\GcdCalculationDriver.cs" />
+    <Compile Include="View\BarChartView.cs" />
+    <Compile Include="View\UserInputOfNumbers.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
