@@ -10,7 +10,9 @@ namespace GreatestCommonDivisorProgram.Model
         public SeriesChartType ChartType { get; set; }
         public IDictionary<int, int[]> CalculationHistory { get; set; }
 
-    public BarChart(IDictionary<int, int[]> calculationHistory, ChartColorPalette chartColorPalette = ChartColorPalette.SeaGreen, SeriesChartType chartType = SeriesChartType.Bar)
+        public BarChart(IDictionary<int, int[]> calculationHistory,
+            ChartColorPalette chartColorPalette = ChartColorPalette.SeaGreen,
+            SeriesChartType chartType = SeriesChartType.Bar)
         {
             CalculationHistory = calculationHistory;
             Color = chartColorPalette;

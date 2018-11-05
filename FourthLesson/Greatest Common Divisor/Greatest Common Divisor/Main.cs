@@ -49,20 +49,24 @@ namespace GreatestCommonDivisorProgram
                 var arrNumbers = ParseUserInput(userInput);
 
                 EnableCreatingChart(arrNumbers.Length);
-
-                if (algorithmType == GcdAlgorithmType.Euclidian)
-                {
-                    RunGCDEuclidean(arrNumbers);
-                }
-                else
-                {
-                    RunGCDStain(arrNumbers);
-                }
-                FormatedResult(arrNumbers);
+                RunAlgoritmGcd(algorithmType, arrNumbers);
+                GetFormatedResult(arrNumbers);
             }
             else
             {
                 ShowWarningMessage();
+            }
+        }
+
+        private void RunAlgoritmGcd(GcdAlgorithmType algorithmType, int[] arrNumbers)
+        {
+            if (algorithmType == GcdAlgorithmType.Euclidian)
+            {
+                RunGCDEuclidean(arrNumbers);
+            }
+            else
+            {
+                RunGCDStain(arrNumbers);
             }
         }
 
@@ -99,7 +103,7 @@ namespace GreatestCommonDivisorProgram
             return arrResult;
         }
 
-        private void FormatedResult(int[] numbers)
+        private void GetFormatedResult(int[] numbers)
         {
             var s = new StringBuilder();
             s.AppendFormat("{0}", "НОД( ");
@@ -136,14 +140,7 @@ namespace GreatestCommonDivisorProgram
 
         private void EnableCreatingChart(int countNumbers)
         {
-            if (countNumbers == 2)
-            {
-                createBarChar.Enabled = true;
-            }
-            else
-            {
-                createBarChar.Enabled = false;
-            }
+            createBarChar.Enabled = (countNumbers == 2) ? true : false;
         }
     }
 }
