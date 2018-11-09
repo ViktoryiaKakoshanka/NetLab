@@ -62,7 +62,7 @@ namespace TriangleLib
 
         private void VerifySideUser(ref double side, char sideNumber)
         {
-            _view.WriteLine($"Введите значение {sideNumber} строны");
+            _view.WriteLine($"Enter the value of {sideNumber} side");
             side = ValidateTriangleHelper.TryParseInputtingSide(_view.ReadLine());
             if (side == 0.0) _view.WarningMessage();
         }
@@ -71,7 +71,7 @@ namespace TriangleLib
 
         private void FinishedRun()
         {
-            _view.WriteLine("Желаете начать заново? (да — нажмите Enter, нет — любую клавишу клавиатуры)");
+            _view.WriteLine("Would you like to start over? (yes - press Enter, no - any keyboard key)");
 
             var keyInfo = _view.ReadKey();
             if(keyInfo.Key == ConsoleKey.Enter)

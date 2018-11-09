@@ -8,13 +8,13 @@ namespace TriangleLib.Controller
 
         public static double CalculateThePerimeter(Triangle triangle)
         {
-            return triangle.A + triangle.B + triangle.C;
+            return triangle.FirstSide + triangle.SecondSide + triangle.ThirdSide;
         }
 
         public static double CalculateTheArea(Triangle triangle)
         {
-            double p = CalculateThePerimeter(triangle) / 2;
-            double area = Math.Sqrt(p * (p - triangle.A) * (p - triangle.B) * (p - triangle.C));
+            double semiperimeter = CalculateThePerimeter(triangle) / 2;
+            double area = Math.Sqrt(semiperimeter * (semiperimeter - triangle.FirstSide) * (semiperimeter - triangle.SecondSide) * (semiperimeter - triangle.ThirdSide));
             return Math.Round(area, 6);
         }
     }

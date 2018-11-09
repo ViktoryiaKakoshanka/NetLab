@@ -1,31 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TriangleLib.Model
+﻿namespace TriangleLib.Model
 {
     public class Triangle
     {
-        public double A { get; private set; }
-        public double B { get; private set; }
-        public double C { get; private set; }
-
+        public double FirstSide { get; private set; }
+        public double SecondSide { get; private set; }
+        public double ThirdSide { get; private set; }
         
-
-        public Triangle(double a, double b, double c)
+        public Triangle(double firstSide, double secondSide, double thirdSide)
         {
-            A = a;
-            B = b;
-            C = c;
+            FirstSide = firstSide;
+            SecondSide = secondSide;
+            ThirdSide = thirdSide;
         }
-
-        
         
         public override string ToString()
         {
-            return A.ToString() + ", " + B.ToString() + ", " + C.ToString();
+            return FirstSide.ToString() + ", " + SecondSide.ToString() + ", " + ThirdSide.ToString();
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
 namespace TriangleLib.Controller
 {
@@ -16,9 +11,9 @@ namespace TriangleLib.Controller
             return side;
         }
 
-        public static bool ValidateTriangle(double a, double b, double c)
+        public static bool ValidateTriangle(double firstSide, double secondSide, double thirdSide)
         {
-            return ((a <= b + c) && (b <= a + c) && (c <= a + b));
+            return ((firstSide <= secondSide + thirdSide) && (secondSide <= firstSide + thirdSide) && (thirdSide <= firstSide + secondSide));
         }
     }
 }

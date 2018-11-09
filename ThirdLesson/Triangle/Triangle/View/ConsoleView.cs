@@ -8,29 +8,29 @@ namespace TriangleLib.View
     {
         public void WarningMessage()
         {
-            WriteLine("Вы ввели некорректное значение стороны треугольника.\nЗначение должно быть больше 0. ");
+            WriteLine("You entered an incorrect value for the side of the triangle.\nThe value must be greater than 0. ");
         }
 
         public void PrintPerimetrTriangle(double perimetr)
         {
-            WriteLine($"Периметр треугольника:{perimetr}");
+            WriteLine($"Perimeter of a triangle:{perimetr}");
         }
 
         public void PrintAreaTriangle(double square)
         {
-            WriteLine($"Площадь треугольника:{square}");
+            WriteLine($"Area of ​​a triangle:{square}");
         }
 
         public void PrintDetailsTriangle(Triangle triangle)
         {
-            WriteLine($"Стороны треугольника: {triangle.ToString()}");
-            WriteLine($"Периметр треугольника: {TriangleCalculations.CalculateThePerimeter(triangle).ToString()}");
-            WriteLine($"Площадь треугольника: {TriangleCalculations.CalculateTheArea(triangle).ToString()}");
+            WriteLine($"Sides of a triangle: {triangle.ToString()}");
+            WriteLine($"Perimeter of a triangle: {TriangleCalculations.CalculateThePerimeter(triangle).ToString()}");
+            WriteLine($"Area of ​​a triangle: {TriangleCalculations.CalculateTheArea(triangle).ToString()}");
         }
 
         public void WarningMessageTriangleNotExist()
         {
-            WriteLine($"Такого треугольника не существует");
+            WriteLine($"There is no such triangle.");
         }
 
         public void WriteLine(string text)
