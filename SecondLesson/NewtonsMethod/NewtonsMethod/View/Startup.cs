@@ -56,7 +56,7 @@ namespace NewtonsMethod.View
                 correctInput = false;
             } while (!ValidationInput.InputUserАccurancy(accurancy));
 
-            var convert = new ParseData();
+            var convert = new DataParser();
             radicalSign = new RadicalSign(convert.StringConvertingToDouble(numericalRoot), convert.StringConvertingToInt(power), convert.StringConvertingToDouble(accurancy));
         }
 
@@ -67,8 +67,8 @@ namespace NewtonsMethod.View
 
         public void MethodComparisonNewtonAndPow()
         {
-            var calc = new Calculation();
-            double resultMethodNewton = calc.RadicalSignByMethodNewton(radicalSign);
+            var calc = new Calculator();
+            double resultMethodNewton = calc.CalculateRadicalSignByMethodNewton(radicalSign);
             double resultMathPow = calc.MathPow(radicalSign);
 
             radicalSign.PrintData();
