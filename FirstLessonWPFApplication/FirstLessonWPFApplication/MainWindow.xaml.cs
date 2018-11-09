@@ -11,14 +11,14 @@ using System.Windows;
 namespace FirstLessonWPFApplication
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Interaction Logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         private CoordinatesFromFile file = new CoordinatesFromFile();
 
         /// <summary>
-        /// Точка входа
+        /// Point of entry
         /// </summary>
         public MainWindow()
         {
@@ -26,7 +26,7 @@ namespace FirstLessonWPFApplication
         }
 
         /// <summary>
-        /// Выбрать файл
+        /// Select a file
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -41,9 +41,9 @@ namespace FirstLessonWPFApplication
             FormatedCoordinatesOutputFromFile();
         }
 
-        
+
         /// <summary>
-        /// Вызов форматирования на строку координат считанных из textbox
+        /// Call formatting on the coordinate line read from the textbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -56,12 +56,12 @@ namespace FirstLessonWPFApplication
             }
             else
             {
-                MessageBox.Show("Введите координаты");
+                MessageBox.Show("Enter the coordinates");
             }
         }
 
         /// <summary>
-        /// Вызов форматирования на строку координат считанных из файла
+        /// Call formatting on the coordinate line read from the file
         /// </summary>
         public void FormatedCoordinatesOutputFromFile()
         {
