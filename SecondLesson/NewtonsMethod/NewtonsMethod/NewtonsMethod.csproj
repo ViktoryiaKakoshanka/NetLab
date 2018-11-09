@@ -48,6 +48,7 @@
     <Compile Include="Controller\Calculation.cs" />
     <Compile Include="Model\IRadicalSign.cs" />
     <Compile Include="Model\RadicalSign.cs" />
+    <Compile Include="Model\ValidationInputMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Startup.cs" />

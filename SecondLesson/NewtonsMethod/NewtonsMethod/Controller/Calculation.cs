@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NewtonsMethod.Model;
 
 namespace NewtonsMethod.Controller
@@ -10,7 +6,7 @@ namespace NewtonsMethod.Controller
     public class Calculation: ICalculation
     {
         /// <summary>
-        /// Вычисление корня n-ой степени из числа методом Ньютона с заданной точностью
+        /// Calculation of the nth root of a number by the Newton method with a given accuracy
         /// </summary>
         /// <param name="radicalSign"></param>
         /// <returns></returns>
@@ -29,9 +25,7 @@ namespace NewtonsMethod.Controller
                 }
 
                 xNext = (1.0 / radicalSign.GetPower()) * ((radicalSign.GetPower()-1.0) * xPrev + radicalSign.GetNumericalRoot() / Exponentiation(xPrev, (radicalSign.GetPower() - 1)));
-
                 step = 2;
-
                 delta = Math.Abs(xPrev-xNext);
 
             } while (delta>radicalSign.GetAccuracy());
@@ -42,11 +36,11 @@ namespace NewtonsMethod.Controller
         }
 
         /// <summary>
-        /// Возведение числа в степень
+        /// Raising a number to a power
         /// </summary>
-        /// <param name="value">число</param>
-        /// <param name="power">стерень</param>
-        /// <returns>число {value} в степени {power}</returns>
+        /// <param name="value">number</param>
+        /// <param name="power">power</param>
+        /// <returns>number {value} in degree {power}</returns>
         private double Exponentiation(double value, int power)
         {
             var valueConst = value;

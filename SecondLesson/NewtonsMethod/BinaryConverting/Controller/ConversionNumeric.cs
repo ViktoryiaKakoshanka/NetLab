@@ -1,5 +1,4 @@
-﻿using System;
-using BinaryConverting.Model;
+﻿using BinaryConverting.Model;
 
 namespace BinaryConverting.Controller
 {

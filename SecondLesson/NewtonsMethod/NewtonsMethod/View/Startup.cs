@@ -11,71 +11,52 @@ namespace NewtonsMethod.View
         public void UserInput()
         {
             string numericalRoot, power, accurancy;
-            var correctInput = true;
-
-            do
-            {
-                if (!correctInput)
-                {
-                    Console.Clear();
-                    MessageExceptionUserInput();
-                }
-
-                Console.WriteLine("Введите стеепнь корня");
-                power = Console.ReadLine();
-                correctInput = false;
-            } while (!ValidationInput.InputUserPower(power));
-
-            correctInput = true;
-
-            do
-            {
-                if (!correctInput)
-                {
-                    Console.Clear();
-                    MessageExceptionUserInput();
-                }
-
-                Console.WriteLine("Введите стеепнь число под корнем");
-                numericalRoot = Console.ReadLine();
-                correctInput = false;
-            } while (!ValidationInput.InputUserNumericalRoot(numericalRoot));
-
-            correctInput = true;
-
-            do
-            {
-                if (!correctInput)
-                {
-                    Console.Clear();
-                    MessageExceptionUserInput();
-                }
-
-                Console.WriteLine("Введите точность вычисления от 0 до 1");
-                accurancy = Console.ReadLine();
-                correctInput = false;
-            } while (!ValidationInput.InputUserАccurancy(accurancy));
-
+            var correctInput = false;
+            power = CallUserInput(correctInput, ValidationInputMethods.Power, "Введите стеепнь корня");
+            numericalRoot = CallUserInput(correctInput, ValidationInputMethods.Numerical, "Введите число под корнем");
+            accurancy = CallUserInput(correctInput, ValidationInputMethods.Аccurancy, "Введите точность вычисления от 0 до 1");
+            
             var convert = new ParseData();
             radicalSign = new RadicalSign(convert.StringConvertingToDouble(numericalRoot), convert.StringConvertingToInt(power), convert.StringConvertingToDouble(accurancy));
         }
-
-        public void MessageExceptionUserInput()
-        {
-            Console.WriteLine("Вы ввели некорректные данные");
-        }
-
+        
         public void MethodComparisonNewtonAndPow()
         {
             var calc = new Calculation();
             double resultMethodNewton = calc.RadicalSignByMethodNewton(radicalSign);
-            double resultMathPow = calc.MathPow(radicalSign);
+            double resultMathPow = Math.Round(calc.MathPow(radicalSign), 5);
 
             radicalSign.PrintData();
-            Console.WriteLine($"Методом Ньютона равен {resultMethodNewton}");
-            Console.WriteLine("Проверка");
-            Console.WriteLine($"{radicalSign.GetResult()} в степени {radicalSign.GetPower()} равно {resultMathPow}");
+            Console.WriteLine($"Newton's method is {resultMethodNewton}");
+            Console.WriteLine("Check");
+            Console.WriteLine($"{radicalSign.GetResult()} to degree {radicalSign.GetPower()} equally {resultMathPow}");
             Console.ReadKey(true);
         }
+        
+        private string CallUserInput(bool correctInput, ValidationInputMethods method, string helpMessage)
+        {
+            var userInput = string.Empty;
+            while(!correctInput)
+            {
+                VerifyUserInput(method, helpMessage, ref correctInput, out userInput);
+            }
+            return userInput;
+        }
+
+        private void VerifyUserInput(ValidationInputMethods method, string helpMessage, ref bool correctInput, out string userInput)
+        {
+            Console.WriteLine(helpMessage);
+            userInput = Console.ReadLine();
+            if (method == ValidationInputMethods.Power)  correctInput = ValidationInput.InputUserPower(userInput);
+            if (method == ValidationInputMethods.Numerical)  correctInput = ValidationInput.InputUserNumericalRoot(userInput);
+            if (method == ValidationInputMethods.Аccurancy) correctInput = ValidationInput.InputUserАccurancy(userInput);
+            if (!correctInput) MessageExceptionUserInput();
+        }
+
+        private void MessageExceptionUserInput()
+        {
+            Console.WriteLine("You entered incorrect data");
+        }
+
     }
 }

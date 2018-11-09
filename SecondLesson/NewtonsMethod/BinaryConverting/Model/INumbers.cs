@@ -1,5 +1,4 @@
-﻿
-namespace BinaryConverting.Model
+﻿namespace BinaryConverting.Model
 {
     public interface INumbers
     {

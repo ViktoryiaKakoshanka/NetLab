@@ -1,6 +1,5 @@
 ﻿using System;
 using BinaryConverting.Model;
-using BinaryConverting.Controller;
 
 namespace BinaryConverting.View
 {
@@ -8,9 +7,9 @@ namespace BinaryConverting.View
     {
         public void PrintResultByConversion(INumbers number)
         {
-            Console.WriteLine("Результат:");
-            Console.WriteLine($"Десятичное число:{number.DecimalNumber}");
-            Console.WriteLine($"Двоичное число:{number.BinaryNumber}");
+            Console.WriteLine("Result:");
+            Console.WriteLine($"Decimal number:{number.DecimalNumber}");
+            Console.WriteLine($"Binary number:{number.BinaryNumber}");
 
             Console.ReadKey(true);
         }
@@ -18,7 +17,7 @@ namespace BinaryConverting.View
         public void WarningMessage(string messEx = null)
         {
             Console.Clear();
-            Console.WriteLine($"{messEx} Необходимо повторить ввод значения. ");
+            Console.WriteLine($"{messEx} You must repeat the value entry. ");
         }
     }
 }

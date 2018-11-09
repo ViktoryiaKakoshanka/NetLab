@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewtonsMethod.Model
 {
@@ -15,11 +11,11 @@ namespace NewtonsMethod.Model
         public RadicalSign() : this(5.0, 2, 0.0004) { }
 
         /// <summary>
-        /// Конструктор числа под степенным корнем
+        /// Number constructor under the power root
         /// </summary>
-        /// <param name="numericalRoot">Число под корнем</param>
-        /// <param name="power">Степень корня</param>
-        /// <param name="accuracy">Точность расчета</param>
+        /// <param name="numericalRoot">Number under the root</param>
+        /// <param name="power">Root degree</param>
+        /// <param name="accuracy">Calculation accuracy</param>
         public RadicalSign(double numericalRoot, int power, double accuracy)
         {
             _numericalRoot = numericalRoot;
@@ -31,14 +27,12 @@ namespace NewtonsMethod.Model
         {
             _result = result;
         }
-
-
+        
         public int GetPower()
         {
             return _power;
         }
-
-
+        
         public double GetNumericalRoot()
         {
             return _numericalRoot;
@@ -46,7 +40,7 @@ namespace NewtonsMethod.Model
 
         public double GetResult()
         {
-            return _result;
+            return Math.Round(_result, 5);
         }
 
         public double GetAccuracy()

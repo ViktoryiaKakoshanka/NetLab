@@ -17,7 +17,7 @@ namespace BinaryConverting
             {
                 try
                 {
-                    Console.WriteLine("Введите неотрицательное десятичное значение целого числа");
+                    Console.WriteLine("Enter a non-negative decimal integer.");
                     ProcessUserInput();
 
                     if (number.DecimalNumber <= 0)
@@ -29,13 +29,13 @@ namespace BinaryConverting
                 catch (FormatException)
                 {
                     number.DecimalNumber = 0;
-                    consoleView.WarningMessage("Введен не верный формат");
+                    consoleView.WarningMessage("Invalid format entered");
                     continue;
                 }
                 catch (ArgumentNullException)
                 {
                     number.DecimalNumber = 0;
-                    consoleView.WarningMessage("Введенное значение пустое");
+                    consoleView.WarningMessage("The value entered is empty");
                     continue;
                 }
 
@@ -44,7 +44,6 @@ namespace BinaryConverting
 
             
             conversionNumeric.NumberDecimalToBinary(number);
-
             consoleView.PrintResultByConversion(number);
         }
         
