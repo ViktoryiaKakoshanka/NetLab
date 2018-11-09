@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupOfNumbers = new System.Windows.Forms.GroupBox();
             this.numbersForGCD = new System.Windows.Forms.TextBox();
             this.GCDStain = new System.Windows.Forms.Button();
@@ -77,8 +77,8 @@
             this.GCDStain.Name = "GCDStain";
             this.GCDStain.Size = new System.Drawing.Size(301, 23);
             this.GCDStain.TabIndex = 2;
-            this.GCDStain.Text = "Расчитать НОД методом Стейна";
-            this.toolTip1.SetToolTip(this.GCDStain, "Метод расчитывает НОД только для первых двух чисел");
+            this.GCDStain.Text = "Calculate the gcd using the stein method";
+            this.toolTip1.SetToolTip(this.GCDStain, "The method calculates the gcd for the first two numbers only.");
             this.GCDStain.UseVisualStyleBackColor = true;
             this.GCDStain.Click += new System.EventHandler(this.GCDStain_Click);
             // 
@@ -88,17 +88,17 @@
             this.GCDEuclide.Name = "GCDEuclide";
             this.GCDEuclide.Size = new System.Drawing.Size(301, 23);
             this.GCDEuclide.TabIndex = 2;
-            this.GCDEuclide.Text = "Расчитать НОД методом Евклида";
+            this.GCDEuclide.Text = "Calculate the GCD by the Euclidean method";
             this.GCDEuclide.UseVisualStyleBackColor = true;
-            this.GCDEuclide.Click += new System.EventHandler(this.GCDEuclide_Click);
+            this.GCDEuclide.Click += new System.EventHandler(this.GCDEuclideOnClick);
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(6, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(301, 23);
+            this.label1.Size = new System.Drawing.Size(307, 23);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Введите числа для вычисления НОД отделяя пробелом";
+            this.label1.Text = "Enter the numbers to calculate the gcd separating with a space";
             // 
             // groupResults
             // 
@@ -109,8 +109,8 @@
             this.groupResults.Size = new System.Drawing.Size(319, 186);
             this.groupResults.TabIndex = 2;
             this.groupResults.TabStop = false;
-            this.groupResults.Text = "Результат вычисления";
-            this.toolTip1.SetToolTip(this.groupResults, "Очистить окно результатов");
+            this.groupResults.Text = "The result of the calculation";
+            this.toolTip1.SetToolTip(this.groupResults, "Clear result window");
             // 
             // lblresult
             // 
@@ -127,20 +127,20 @@
             // 
             // chart1
             // 
-            chartArea2.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(352, 55);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(425, 274);
             this.chart1.TabIndex = 3;
-            this.chart1.Text = "chart1";
+            this.chart1.Text = "chart";
             // 
             // createBarChar
             // 
@@ -149,9 +149,9 @@
             this.createBarChar.Name = "createBarChar";
             this.createBarChar.Size = new System.Drawing.Size(148, 23);
             this.createBarChar.TabIndex = 2;
-            this.createBarChar.Text = "Построить Гистограмму";
+            this.createBarChar.Text = "Build Bar Graph";
             this.createBarChar.UseVisualStyleBackColor = true;
-            this.createBarChar.Click += new System.EventHandler(this.createBarChar_Click);
+            this.createBarChar.Click += new System.EventHandler(this.CreateBarCharOnClick);
             // 
             // comboPalette
             // 
@@ -176,18 +176,18 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(349, 4);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 13);
+            this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Цветовая палитра";
+            this.label2.Text = "Color palette";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(483, 4);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 13);
+            this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Тип диаграммы";
+            this.label3.Text = "Chart type";
             // 
             // Form1
             // 
