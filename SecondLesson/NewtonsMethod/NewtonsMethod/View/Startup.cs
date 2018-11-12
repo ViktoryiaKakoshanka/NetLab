@@ -12,7 +12,7 @@ namespace NewtonsMethod.View
         {
             string numericalRoot, power, accurancy;
             var correctInput = true;
-
+            //jhjh
             do
             {
                 if (!correctInput)
