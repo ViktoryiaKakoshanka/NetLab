@@ -6,54 +6,60 @@ namespace NewtonsMethod.View
 {
     public class Startup
     {
-        IRadicalSign radicalSign;
 
-        public void UserInput()
+        public void InitializeDataByUser(IRadicalSign radicalSign)
         {
             string numericalRoot, power, accurancy;
             var correctInput = false;
-            power = CallUserInput(correctInput, ValidationInputMethods.Power, "Введите стеепнь корня");
-            numericalRoot = CallUserInput(correctInput, ValidationInputMethods.Numerical, "Введите число под корнем");
-            accurancy = CallUserInput(correctInput, ValidationInputMethods.Аccurancy, "Введите точность вычисления от 0 до 1");
+
+            power = EnterUserData(correctInput, InputedParams.Power, "Enter the root stem");
+            numericalRoot = EnterUserData(correctInput, InputedParams.Numerical, "Enter the number under the root");
+            accurancy = EnterUserData(correctInput, InputedParams.Аccurancy, "Enter a calculation accuracy from 0 to 1");
             
-            var convert = new ParseData();
-            radicalSign = new RadicalSign(convert.StringConvertingToDouble(numericalRoot), convert.StringConvertingToInt(power), convert.StringConvertingToDouble(accurancy));
+            var convert = new DataParser();
+            radicalSign = new RadicalSign(convert.TransformStringToDouble(numericalRoot), 
+                convert.TransformStringToInt(power), 
+                convert.TransformStringToDouble(accurancy));
         }
         
-        public void MethodComparisonNewtonAndPow()
+        public void CompareMethodsNewtonAndPow(IRadicalSign radicalSign)
         {
-            var calc = new Calculation();
-            double resultMethodNewton = calc.RadicalSignByMethodNewton(radicalSign);
-            double resultMathPow = Math.Round(calc.MathPow(radicalSign), 5);
+            var calc = new Calculator();
+            double radicalSignMethodNewton = Math.Round(calc.CalculateRadicalSign(radicalSign), 5);
+            double radicalSignMathPow = Math.Round(calc.CalculateMathPow(radicalSign), 5);
+            PrintCompareResult(radicalSign, radicalSignMethodNewton, radicalSignMathPow);
+        }
 
-            radicalSign.PrintData();
-            Console.WriteLine($"Newton's method is {resultMethodNewton}");
+        private static void PrintCompareResult(IRadicalSign radicalSign, double radicalSignMethodNewton, double radicalSignMathPow)
+        {
+            Console.WriteLine(radicalSign.ToString());
+            Console.WriteLine($"Newton's method is {radicalSignMethodNewton}");
             Console.WriteLine("Check");
-            Console.WriteLine($"{radicalSign.GetResult()} to degree {radicalSign.GetPower()} equally {resultMathPow}");
+            Console.WriteLine($"{radicalSign.Result} to degree {radicalSign.Power} equally {radicalSignMathPow}");
             Console.ReadKey(true);
         }
-        
-        private string CallUserInput(bool correctInput, ValidationInputMethods method, string helpMessage)
+
+        private string EnterUserData(bool correctInput, InputedParams method, string helpMessage)
         {
-            var userInput = string.Empty;
-            while(!correctInput)
+            Console.WriteLine(helpMessage);
+            var userInput = Console.ReadLine();
+
+            while (!correctInput)
             {
-                VerifyUserInput(method, helpMessage, ref correctInput, out userInput);
+                VerifyUserInput(method, helpMessage, ref correctInput, userInput);
             }
             return userInput;
         }
 
-        private void VerifyUserInput(ValidationInputMethods method, string helpMessage, ref bool correctInput, out string userInput)
+        private void VerifyUserInput(InputedParams method, string helpMessage, ref bool correctInput, string userInput)
         {
-            Console.WriteLine(helpMessage);
-            userInput = Console.ReadLine();
-            if (method == ValidationInputMethods.Power)  correctInput = ValidationInput.InputUserPower(userInput);
-            if (method == ValidationInputMethods.Numerical)  correctInput = ValidationInput.InputUserNumericalRoot(userInput);
-            if (method == ValidationInputMethods.Аccurancy) correctInput = ValidationInput.InputUserАccurancy(userInput);
-            if (!correctInput) MessageExceptionUserInput();
+            if (method == InputedParams.Power)  correctInput = InputValidation.ValidateUserInputPower(userInput);
+            if (method == InputedParams.Numerical)  correctInput = InputValidation.ValidateUserInputNumericalRoot(userInput);
+            if (method == InputedParams.Аccurancy) correctInput = InputValidation.ValidateUserInputАccurancy(userInput);
+            if (!correctInput) ShowErrorMessageUserInput();
         }
 
-        private void MessageExceptionUserInput()
+        private void ShowErrorMessageUserInput()
         {
             Console.WriteLine("You entered incorrect data");
         }

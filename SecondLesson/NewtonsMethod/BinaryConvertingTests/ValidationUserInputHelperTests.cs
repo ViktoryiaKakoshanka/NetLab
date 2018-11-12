@@ -14,7 +14,7 @@ namespace BinaryConvertingTests
         [ExpectedException(typeof(FormatException), AllowDerivedTypes = true)]
         public void ValidationUserInput_FormatExceptionTest()
         {
-            ValidateUserInputHelper.ValidationUserInputTryInt("kih");
+            ValidatingInputDataHelper.ValidateDataInputTryInt("kih");
         }
 
 
@@ -22,7 +22,7 @@ namespace BinaryConvertingTests
         [ExpectedException(typeof(ArgumentNullException), AllowDerivedTypes = true)]
         public void ValidationUserInput_ArgumentNullExceptionTest()
         {
-            ValidateUserInputHelper.ValidationUserInputTryInt(null);
+            ValidatingInputDataHelper.ValidateDataInputTryInt(null);
         }
     }
 }

@@ -2,11 +2,9 @@
 {
     public interface IRadicalSign
     {
-        void SetResult(double result);
-        int GetPower();
-        double GetNumericalRoot();
-        double GetResult();
-        double GetAccuracy();
-        void PrintData();
+        int Power { get; }
+        double NumericalRoot { get; }
+        double Accuracy { get; }
+        double Result { get; set;  }
     }
 }

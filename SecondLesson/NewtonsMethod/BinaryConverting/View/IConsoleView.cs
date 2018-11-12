@@ -9,7 +9,7 @@ namespace BinaryConverting.View
 {
     interface IConsoleView
     {
-        void PrintResultByConversion(INumbers number);
-        void WarningMessage(string messEx = null);
+        void ShowResultByConversion(INumbers number);
+        void ShowWarningMessage(string messEx = null);
     }
 }

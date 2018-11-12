@@ -15,7 +15,7 @@ namespace BinaryConvertingTests
             INumbers numberMock = Mock.Of<INumbers>(x=> x.DecimalNumber==51);
             var externed = "110011";
             var conversionNumeric = new ConversionNumeric();
-            conversionNumeric.NumberDecimalToBinary(numberMock);
+            conversionNumeric.ConvertDecimalToBinary(numberMock);
 
             Assert.AreSame(string.Intern(externed), string.Intern(numberMock.BinaryNumber));
         }
@@ -30,9 +30,9 @@ namespace BinaryConvertingTests
                 INumbers numberMock = Mock.Of<INumbers>(x => x.DecimalNumber == i);
                 var externed = Convert.ToString(i, 2);
                 
-                conversionNumeric.NumberDecimalToBinary(numberMock);
+                conversionNumeric.ConvertDecimalToBinary(numberMock);
                 
-                Assert.AreSame(string.Intern(externed), string.Intern(numberMock.BinaryNumber), "Перевод из десятичного числа {0} в двоичную сиситему счисления {1}", externed, numberMock.BinaryNumber);
+                Assert.AreSame(string.Intern(externed), string.Intern(numberMock.BinaryNumber), "Conversion from decimal number {0} to binary number system {1}", externed, numberMock.BinaryNumber);
             }
         }
 

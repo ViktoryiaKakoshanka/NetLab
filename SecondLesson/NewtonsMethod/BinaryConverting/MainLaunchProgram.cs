@@ -18,38 +18,37 @@ namespace BinaryConverting
                 try
                 {
                     Console.WriteLine("Enter a non-negative decimal integer.");
-                    ProcessUserInput();
+                    EnterUserData();
 
                     if (number.DecimalNumber <= 0)
                     {
-                        consoleView.WarningMessage();
+                        consoleView.ShowWarningMessage();
                         continue;
                     }
                 }
                 catch (FormatException)
                 {
                     number.DecimalNumber = 0;
-                    consoleView.WarningMessage("Invalid format entered");
+                    consoleView.ShowWarningMessage("Invalid format entered");
                     continue;
                 }
                 catch (ArgumentNullException)
                 {
                     number.DecimalNumber = 0;
-                    consoleView.WarningMessage("The value entered is empty");
+                    consoleView.ShowWarningMessage("The value entered is empty");
                     continue;
                 }
 
                 break;
             }
-
             
-            conversionNumeric.NumberDecimalToBinary(number);
-            consoleView.PrintResultByConversion(number);
+            conversionNumeric.ConvertDecimalToBinary(number);
+            consoleView.ShowResultByConversion(number);
         }
         
-        public void ProcessUserInput()
+        public void EnterUserData()
         {
-            number.DecimalNumber = ValidateUserInputHelper.ValidationUserInputTryInt(Console.ReadLine());
+            number.DecimalNumber = ValidatingInputDataHelper.ValidateDataInputTryInt(Console.ReadLine());
         }
 
     }
