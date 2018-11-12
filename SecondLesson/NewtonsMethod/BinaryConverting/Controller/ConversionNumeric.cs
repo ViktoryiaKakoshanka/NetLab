@@ -1,23 +1,21 @@
-﻿using System;
-using BinaryConverting.Model;
+﻿using BinaryConverting.Model;
 
 namespace BinaryConverting.Controller
 {
     public class ConversionNumeric: IConversionNumeric
     {
-        public void NumberDecimalToBinary(INumbers number)
+        public void ConvertDecimalToBinary(INumbers number)
         {
             int numberLocal = number.DecimalNumber; 
             int remainder;
-            var result = string.Empty;
+            var binaryNumber = string.Empty;
             while (numberLocal > 0)
             {
                 remainder = numberLocal % 2;
                 numberLocal /= 2;
-                result = remainder.ToString() + result;
+                binaryNumber = remainder.ToString() + binaryNumber;
             }
-            number.BinaryNumber = result;
+            number.BinaryNumber = binaryNumber;
         }
-        
     }
 }

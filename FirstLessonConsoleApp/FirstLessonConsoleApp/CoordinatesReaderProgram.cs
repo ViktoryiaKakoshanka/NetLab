@@ -22,7 +22,7 @@ namespace FirstLessonConsoleApp
                 _view.ClearScreen();
                 _view.PrintMenuItems(_menuItems);
 
-                var userInput = _view.PromptInput("Введите номер элемента меню");
+                var userInput = _view.PromptInput("Enter the menu item number");
                 var menuItem = TryGetMenuItem(userInput);
 
                 ExecuteMenuItem(menuItem);
@@ -33,7 +33,7 @@ namespace FirstLessonConsoleApp
         {
             if (menuItem == null)
             {
-                _view.PrintMessage("Введите правильный номер элемента меню");
+                _view.PrintMessage("Enter the correct menu item number.");
                 return;
             }
 
@@ -44,9 +44,9 @@ namespace FirstLessonConsoleApp
 
         private void InitializeMenuItems(string coordinatesFilePath)
         {
-            _menuItems.Add(new ReadCoordinatesFromConsoleMenuItem(1, "ввод координат с клавиатуры", _view));
-            _menuItems.Add(new ReadCoordinatesFromFileMenuItem(2, "ввод координат из файла", _view, coordinatesFilePath));
-            _menuItems.Add(new ExitMenuItem(3, "выход", _view));
+            _menuItems.Add(new ReadCoordinatesFromConsoleMenuItem(1, "input coordinates from the keyboard", _view));
+            _menuItems.Add(new ReadCoordinatesFromFileMenuItem(2, "input coordinates from file", _view, coordinatesFilePath));
+            _menuItems.Add(new ExitMenuItem(3, "exit", _view));
         }
 
         private MenuItem TryGetMenuItem(string userInput)

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ECB87152-D588-4AF3-8921-E7B0C8B12FBB}</ProjectGuid>
+    <ProjectGuid>{C58AF970-46C7-45EC-BFA9-C2FE2A8BFCA0}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BinaryConverting</RootNamespace>
-    <AssemblyName>BinaryConverting</AssemblyName>
+    <RootNamespace>VectorProgram</RootNamespace>
+    <AssemblyName>VectorProgram</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,16 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\ConversionNumeric.cs" />
-    <Compile Include="Controller\IConversionNumeric.cs" />
-    <Compile Include="Controller\ValidatingInputDataHelper.cs" />
-    <Compile Include="MainLaunchProgram.cs" />
-    <Compile Include="Model\INumbers.cs" />
-    <Compile Include="Model\Numbers.cs" />
+    <Compile Include="Controller\VerificateInputData.cs" />
+    <Compile Include="Model\Vector.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\ConsoleView.cs" />
-    <Compile Include="View\IConsoleView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -9,9 +9,9 @@ namespace Greatest_Common_Divisor.Model
 
         private IDictionary<int, int[]> calculationHistory = new Dictionary<int, int[]>();
 
-        public void AddCalculationHistory(int a, int b, int step)
+        public void AddCalculationHistory(int firstNumber, int secondNumber, int step)
         {
-            calculationHistory.Add(step, new[] { a, b });
+            calculationHistory.Add(step, new[] { firstNumber, secondNumber });
         }
 
         public void ClearCalculationHistory()

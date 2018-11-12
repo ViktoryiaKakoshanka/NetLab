@@ -1,9 +1,4 @@
-﻿
-using BinaryConverting.Controller;
-using BinaryConverting.View;
-using System;
-
-namespace BinaryConverting.Model
+﻿namespace BinaryConverting.Model
 {
     class Numbers: INumbers
     {

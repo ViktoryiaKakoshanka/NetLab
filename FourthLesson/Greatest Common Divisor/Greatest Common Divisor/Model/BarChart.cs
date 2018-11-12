@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GreatestCommonDivisorProgram.Model
@@ -9,7 +8,7 @@ namespace GreatestCommonDivisorProgram.Model
         public ChartColorPalette Color { get; set; }
         public SeriesChartType ChartType { get; set; }
         public IDictionary<int, int[]> CalculationHistory { get; set; }
-
+        
         public BarChart(IDictionary<int, int[]> calculationHistory,
             ChartColorPalette chartColorPalette = ChartColorPalette.SeaGreen,
             SeriesChartType chartType = SeriesChartType.Bar)
@@ -18,7 +17,5 @@ namespace GreatestCommonDivisorProgram.Model
             Color = chartColorPalette;
             ChartType = chartType;
         }
-
-
     }
 }

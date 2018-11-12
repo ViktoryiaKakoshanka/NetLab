@@ -17,40 +17,38 @@ namespace BinaryConverting
             {
                 try
                 {
-                    Console.WriteLine("Введите неотрицательное десятичное значение целого числа");
-                    ProcessUserInput();
+                    Console.WriteLine("Enter a non-negative decimal integer.");
+                    EnterUserData();
 
                     if (number.DecimalNumber <= 0)
                     {
-                        consoleView.WarningMessage();
+                        consoleView.ShowWarningMessage();
                         continue;
                     }
                 }
                 catch (FormatException)
                 {
                     number.DecimalNumber = 0;
-                    consoleView.WarningMessage("Введен не верный формат");
+                    consoleView.ShowWarningMessage("Invalid format entered");
                     continue;
                 }
                 catch (ArgumentNullException)
                 {
                     number.DecimalNumber = 0;
-                    consoleView.WarningMessage("Введенное значение пустое");
+                    consoleView.ShowWarningMessage("The value entered is empty");
                     continue;
                 }
 
                 break;
             }
-
             
-            conversionNumeric.NumberDecimalToBinary(number);
-
-            consoleView.PrintResultByConversion(number);
+            conversionNumeric.ConvertDecimalToBinary(number);
+            consoleView.ShowResultByConversion(number);
         }
         
-        public void ProcessUserInput()
+        public void EnterUserData()
         {
-            number.DecimalNumber = ValidateUserInputHelper.ValidationUserInputTryInt(Console.ReadLine());
+            number.DecimalNumber = ValidatingInputDataHelper.ValidateDataInputTryInt(Console.ReadLine());
         }
 
     }

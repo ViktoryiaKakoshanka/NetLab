@@ -13,9 +13,11 @@ namespace NewtonsMethod
     {
         static void Main(string[] args)
         {
+            IRadicalSign radicalSign = null;
             var view = new Startup();
-            view.UserInput();
-            view.MethodComparisonNewtonAndPow();
+
+            view.InitializeDataByUser(radicalSign);
+            view.CompareMethodsNewtonAndPow(radicalSign);
         }
     }
 }

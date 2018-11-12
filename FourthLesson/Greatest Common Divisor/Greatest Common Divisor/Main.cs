@@ -16,8 +16,7 @@ namespace GreatestCommonDivisorProgram
         BarChartView chart = new BarChartView();
         GcdResult gcdResult = new GcdResult();
         private string _result = "";
-
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -28,7 +27,7 @@ namespace GreatestCommonDivisorProgram
             comboTypeChart.Items.AddRange(chart.GetSeriesChartType());
             comboTypeChart.SelectedIndex = 10;
 
-            this.groupResults.Click += new System.EventHandler(this.groupResults_Click);
+            groupResults.Click += new System.EventHandler(this.groupResults_Click);
         }
 
         public string PrintResult()
@@ -75,7 +74,7 @@ namespace GreatestCommonDivisorProgram
             lblresult.Text = String.Empty;
         }
 
-        private void createBarChar_Click(object sender, EventArgs e)
+        private void CreateBarCharOnClick(object sender, EventArgs e)
         {
             var colorPalette = (ChartColorPalette)Enum.Parse(typeof(ChartColorPalette), comboPalette.Text);
             var typeChart = (SeriesChartType)Enum.Parse(typeof(SeriesChartType), comboTypeChart.Text);
@@ -116,7 +115,7 @@ namespace GreatestCommonDivisorProgram
             _result = s.ToString();
         }
 
-        private void GCDEuclide_Click(object sender, EventArgs e)
+        private void GCDEuclideOnClick(object sender, EventArgs e)
         {
             ReadUserInputAndWriteResult(numbersForGCD.Text, GcdAlgorithmType.Euclidian);
             lblresult.Text += PrintResult();

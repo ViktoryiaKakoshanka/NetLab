@@ -8,51 +8,51 @@ namespace TriangleLib
     class WorkWithATriangle
     {
         private IConsoleView _view;
-        private double a = 0, b = 0, c = 0;
 
         public void RunProgram(IConsoleView view)
         {
-            a = 0;
-            b = 0;
-            c = 0;
+            var firstSide = 0.0;
+            var secondSide = 0.0;
+            var thirdSide = 0.0;
+
             Triangle triangle;
             _view = view;
 
             _view.Clear();
 
-            CallUserInput(ref a, '1');
-            CallUserInput(ref b, '2');
-            CallUserInput(ref c, '3');
+            EnterInputData(ref firstSide, '1');
+            EnterInputData(ref secondSide, '2');
+            EnterInputData(ref thirdSide, '3');
             
 
-            triangle = TryCreateTriangle( a, b, c);
-            PrintDetails(triangle, view);
+            triangle = TryCreateTriangle( firstSide, secondSide, thirdSide);
+            ShowDetails(triangle, view);
             FinishedRun();
         }
 
-        private static Triangle TryCreateTriangle(double a, double b, double c)
+        private static Triangle TryCreateTriangle(double firstSide, double secondSide, double thirdSide)
         {
             Triangle triangle = null;
-            if (ValidateTriangleHelper.ValidateTriangle(a, b, c))
+            if (ValidatingTriangleHelper.ValidateTriangle(firstSide, secondSide, thirdSide))
             {
-                triangle = new Triangle(a, b, c);
+                triangle = new Triangle(firstSide, secondSide, thirdSide);
             }
             return triangle;
         }
 
-        private static void PrintDetails(Triangle triangle, IConsoleView view)
+        private static void ShowDetails(Triangle triangle, IConsoleView view)
         {
-            if(triangle!=null)
+            if(triangle != null)
             {
                 view.PrintDetailsTriangle(triangle);
             }
             else
             {
-                view.WarningMessageTriangleNotExist();
+                view.ShowWarningMessageTriangleNotExist();
             }
         }
 
-        private void CallUserInput(ref double side, char sideNumber)
+        private void EnterInputData(ref double side, char sideNumber)
         {
             while (side <= 0)
             {
@@ -62,8 +62,8 @@ namespace TriangleLib
 
         private void VerifySideUser(ref double side, char sideNumber)
         {
-            _view.WriteLine($"Введите значение {sideNumber} строны");
-            side = ValidateTriangleHelper.TryParseInputtingSide(_view.ReadLine());
+            _view.WriteLine($"Enter the value of {sideNumber} side");
+            side = ValidatingTriangleHelper.TryParseInputtingSide(_view.ReadLine());
             if (side == 0.0) _view.WarningMessage();
         }
 
@@ -71,7 +71,7 @@ namespace TriangleLib
 
         private void FinishedRun()
         {
-            _view.WriteLine("Желаете начать заново? (да — нажмите Enter, нет — любую клавишу клавиатуры)");
+            _view.WriteLine("Would you like to start over? (yes - press Enter, no - any keyboard key)");
 
             var keyInfo = _view.ReadKey();
             if(keyInfo.Key == ConsoleKey.Enter)

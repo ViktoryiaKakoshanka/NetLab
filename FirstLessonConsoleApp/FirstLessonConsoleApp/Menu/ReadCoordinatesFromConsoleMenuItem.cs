@@ -12,7 +12,7 @@ namespace FirstLessonConsoleApp.Menu
         {
             var coordinates = new List<Coordinate>();
 
-            GetView().PrintMessage("Вводите координаты:");
+            GetView().PrintMessage("Enter the coordinates:");
 
             var coordinate = new Coordinate();
 

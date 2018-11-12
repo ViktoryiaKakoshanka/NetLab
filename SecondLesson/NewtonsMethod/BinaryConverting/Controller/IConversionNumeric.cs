@@ -4,6 +4,6 @@ namespace BinaryConverting.Controller
 {
     public interface IConversionNumeric
     {
-        void NumberDecimalToBinary(INumbers number);
+        void ConvertDecimalToBinary(INumbers number);
     }
 }

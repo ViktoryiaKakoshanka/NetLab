@@ -1,24 +1,23 @@
 ﻿using System;
 using BinaryConverting.Model;
-using BinaryConverting.Controller;
 
 namespace BinaryConverting.View
 {
     class ConsoleView: IConsoleView
     {
-        public void PrintResultByConversion(INumbers number)
+        public void ShowResultByConversion(INumbers number)
         {
-            Console.WriteLine("Результат:");
-            Console.WriteLine($"Десятичное число:{number.DecimalNumber}");
-            Console.WriteLine($"Двоичное число:{number.BinaryNumber}");
+            Console.WriteLine("Result:");
+            Console.WriteLine($"Decimal number:{number.DecimalNumber}");
+            Console.WriteLine($"Binary number:{number.BinaryNumber}");
 
             Console.ReadKey(true);
         }
 
-        public void WarningMessage(string messEx = null)
+        public void ShowWarningMessage(string messEx = null)
         {
             Console.Clear();
-            Console.WriteLine($"{messEx} Необходимо повторить ввод значения. ");
+            Console.WriteLine($"{messEx} You must repeat the value entry. ");
         }
     }
 }

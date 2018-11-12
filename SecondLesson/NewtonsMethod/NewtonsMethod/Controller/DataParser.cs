@@ -3,16 +3,16 @@ using System.Globalization;
 
 namespace NewtonsMethod.Controller
 {
-    public class ParseData
+    public class DataParser
     {
-        public double StringConvertingToDouble(string value)
+        public double TransformStringToDouble(string value)
         {
             var provider = new NumberFormatInfo();
             provider.CurrencyDecimalSeparator = ".";
             return Convert.ToDouble(value, provider);
         }
 
-        public int StringConvertingToInt(string value)
+        public int TransformStringToInt(string value)
         {
             return Convert.ToInt32(value);
         }

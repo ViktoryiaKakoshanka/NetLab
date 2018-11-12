@@ -11,7 +11,7 @@ namespace FirstLessonConsoleApp.View
         public void PrintMenuItems(ICollection<MenuItem> menuItems)
         {
             Console.OutputEncoding = Encoding.Unicode;
-            PrintMessage("Меню:");
+            PrintMessage("Menu:");
 
             foreach(var item in menuItems)
             {
@@ -23,7 +23,7 @@ namespace FirstLessonConsoleApp.View
 
         public void PrintCoordinates(ICollection<Coordinate> coordinates)
         {
-            PrintMessage("Форматированный вывод координат");
+            PrintMessage("Formatted coordinate output");
             foreach(var coordinate in coordinates)
             {
                 Console.WriteLine(coordinate);

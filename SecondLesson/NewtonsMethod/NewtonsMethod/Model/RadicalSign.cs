@@ -1,62 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewtonsMethod.Model
 {
     public class RadicalSign: IRadicalSign
     {
-        private readonly int _power;
-        private readonly double _numericalRoot, _accuracy;
-        private double _result;
-
+        public int Power { get; private set; }
+        public double NumericalRoot { get; private set; }
+        public double Accuracy { get; private set; }
+        public double Result { get; set; }
+        
         public RadicalSign() : this(5.0, 2, 0.0004) { }
 
         /// <summary>
-        /// Конструктор числа под степенным корнем
+        /// Number constructor under the power root
         /// </summary>
-        /// <param name="numericalRoot">Число под корнем</param>
-        /// <param name="power">Степень корня</param>
-        /// <param name="accuracy">Точность расчета</param>
+        /// <param name="numericalRoot">Number under the root</param>
+        /// <param name="power">Root degree</param>
+        /// <param name="accuracy">Calculation accuracy</param>
         public RadicalSign(double numericalRoot, int power, double accuracy)
         {
-            _numericalRoot = numericalRoot;
-            _power = power;
-            _accuracy = accuracy;
+            NumericalRoot = numericalRoot;
+            Power = power;
+            Accuracy = accuracy;
         }
         
-        public void SetResult(double result)
+        public override string ToString()
         {
-            _result = result;
-        }
-
-
-        public int GetPower()
-        {
-            return _power;
-        }
-
-
-        public double GetNumericalRoot()
-        {
-            return _numericalRoot;
-        }
-
-        public double GetResult()
-        {
-            return _result;
-        }
-
-        public double GetAccuracy()
-        {
-            return _accuracy;
-        }
-
-        public void PrintData()
-        {
-            Console.WriteLine($"Корень степени {_power} из числа {_numericalRoot} с точностью {_accuracy}");
+            return $"The root of the {Power} degree from {NumericalRoot} with accuracy {Accuracy}";
         }
         
     }
