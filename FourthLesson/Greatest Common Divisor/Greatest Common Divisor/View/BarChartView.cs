@@ -18,7 +18,6 @@ namespace GreatestCommonDivisorProgram.View
             return Enum.GetNames(typeof(ChartColorPalette));
         }
 
-
         public string[] GetSeriesChartType()
         {
             return Enum.GetNames(typeof(SeriesChartType));

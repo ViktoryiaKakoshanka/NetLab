@@ -23,6 +23,5 @@ namespace Greatest_Common_Divisor.Model
         {
             return calculationHistory;
         }        
-
     }
 }

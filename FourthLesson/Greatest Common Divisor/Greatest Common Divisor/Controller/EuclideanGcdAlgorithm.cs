@@ -26,23 +26,23 @@ namespace Greatest_Common_Divisor.Controller
             {
                 gcdResult.Gcd = GCDEuclideanAlgorithm(numbers[0], numbers[1], out iterationsCount);
             }
-            
+
             gcdResult.IterationsCount = iterationsCount;
             return gcdResult;
         }
-        
+
         private int GCDEuclideanAlgorithm(int firstNumber, int secondNumber, out int pass, int count = 0)
         {
             pass = count;
-            if (firstNumber == 0 && secondNumber!=0)
+            if (firstNumber == 0 && secondNumber != 0)
             {
                 return secondNumber;
             }
-            else if (secondNumber == 0 && firstNumber!=0)
+            else if (secondNumber == 0 && firstNumber != 0)
             {
                 return firstNumber;
             }
-            else if(firstNumber==0 && secondNumber==0)
+            else if (firstNumber == 0 && secondNumber == 0)
             {
                 return 1;
             }
@@ -59,7 +59,6 @@ namespace Greatest_Common_Divisor.Controller
 
         private int GCDEuclideanAlgorithm(int firstNumber, int secondNumber, int thirdNumber, out int pass)
         {
-
             var topTwo = GCDEuclideanAlgorithm(firstNumber, secondNumber, out int step);
             var gcd = GCDEuclideanAlgorithm(topTwo, thirdNumber, out int step1, step);
             pass = step1;
