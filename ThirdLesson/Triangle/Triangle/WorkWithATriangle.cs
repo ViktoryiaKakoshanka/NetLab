@@ -64,7 +64,7 @@ namespace TriangleLib
         {
             _view.WriteLine($"Enter the value of {sideNumber} side");
             side = ValidatingTriangleHelper.TryParseInputtingSide(_view.ReadLine());
-            if (side == 0.0) _view.WarningMessage();
+            if (side == 0.0) _view.ShowWarningMessage();
         }
 
 

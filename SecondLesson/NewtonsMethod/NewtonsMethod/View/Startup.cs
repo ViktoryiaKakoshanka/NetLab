@@ -10,16 +10,17 @@ namespace NewtonsMethod.View
         public void InitializeDataByUser(IRadicalSign radicalSign)
         {
             string numericalRoot, power, accurancy;
-            var correctInput = false;
 
-            power = EnterUserData(correctInput, InputedParams.Power, "Enter the root stem");
-            numericalRoot = EnterUserData(correctInput, InputedParams.Numerical, "Enter the number under the root");
-            accurancy = EnterUserData(correctInput, InputedParams.Аccurancy, "Enter a calculation accuracy from 0 to 1");
+            power = RequestUserInput(InputedParams.Power, "Enter the root stem");
+            numericalRoot = RequestUserInput(InputedParams.Numerical, "Enter the number under the root");
+            accurancy = RequestUserInput(InputedParams.Аccurancy, "Enter a calculation accuracy from 0 to 1");
             
-            var convert = new DataParser();
-            radicalSign = new RadicalSign(convert.TransformStringToDouble(numericalRoot), 
-                convert.TransformStringToInt(power), 
-                convert.TransformStringToDouble(accurancy));
+            var dataParser = new DataParser();
+            var parsedNumericalRoot = dataParser.ParseStringToDouble(numericalRoot);
+            var parsedPower = dataParser.ParseStringToInt(power);
+            var parsedAccurancy = dataParser.ParseStringToDouble(accurancy);
+
+            radicalSign = new RadicalSign(parsedNumericalRoot, parsedPower, parsedAccurancy);
         }
         
         public void CompareMethodsNewtonAndPow(IRadicalSign radicalSign)
@@ -39,24 +40,26 @@ namespace NewtonsMethod.View
             Console.ReadKey(true);
         }
 
-        private string EnterUserData(bool correctInput, InputedParams method, string helpMessage)
+        private string RequestUserInput(InputedParams method, string welcomeMessage)
         {
-            Console.WriteLine(helpMessage);
-            var userInput = Console.ReadLine();
+            var correctInput = false;
+            var userInput = string.Empty;
 
             while (!correctInput)
             {
-                VerifyUserInput(method, helpMessage, ref correctInput, userInput);
+                Console.WriteLine(welcomeMessage);
+                userInput = Console.ReadLine();
+                correctInput = ValidateUserInput(method, userInput);
             }
             return userInput;
         }
 
-        private void VerifyUserInput(InputedParams method, string helpMessage, ref bool correctInput, string userInput)
+        private bool ValidateUserInput(InputedParams param, string userInput)
         {
-            if (method == InputedParams.Power)  correctInput = InputValidation.ValidateUserInputPower(userInput);
-            if (method == InputedParams.Numerical)  correctInput = InputValidation.ValidateUserInputNumericalRoot(userInput);
-            if (method == InputedParams.Аccurancy) correctInput = InputValidation.ValidateUserInputАccurancy(userInput);
+            var correctInput = Validator.ValidateInput(userInput, param);
             if (!correctInput) ShowErrorMessageUserInput();
+
+            return correctInput;
         }
 
         private void ShowErrorMessageUserInput()

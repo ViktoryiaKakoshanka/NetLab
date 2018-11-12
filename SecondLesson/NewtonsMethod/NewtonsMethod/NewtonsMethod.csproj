@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Controller\ICalculator.cs" />
     <Compile Include="Controller\DataParser.cs" />
-    <Compile Include="Controller\InputValidation.cs" />
+    <Compile Include="Controller\Validator.cs" />
     <Compile Include="Controller\Calculator.cs" />
     <Compile Include="Model\IRadicalSign.cs" />
     <Compile Include="Model\RadicalSign.cs" />
