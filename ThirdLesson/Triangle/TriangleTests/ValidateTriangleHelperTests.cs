@@ -17,7 +17,7 @@ namespace TriangleTests
 
             for (var i = 0; i < c.Length; i++)
             {
-                actual = ValidateTriangleHelper.ValidateTriangle(a, b, c[i]);
+                actual = ValidatingTriangleHelper.ValidateTriangle(a, b, c[i]);
 
                 Assert.AreEqual(expected[i], actual, $"Validate Triangle: expected={expected[i].ToString()}, actual={actual.ToString()}");
             }
@@ -31,7 +31,7 @@ namespace TriangleTests
 
             for (var i = 0; i<diferentVariants.Length; i++)
             {
-                var actual = ValidateTriangleHelper.TryParseInputtingSide(diferentVariants[i]);
+                var actual = ValidatingTriangleHelper.TryParseInputtingSide(diferentVariants[i]);
                 Assert.AreEqual(expectedVariants[i], actual, $"expected={expectedVariants[i].ToString()}, actual={actual.ToString()}");
             }
         }

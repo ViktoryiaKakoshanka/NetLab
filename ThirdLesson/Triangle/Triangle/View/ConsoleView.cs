@@ -28,7 +28,7 @@ namespace TriangleLib.View
             WriteLine($"Area of ​​a triangle: {TriangleCalculations.CalculateTheArea(triangle).ToString()}");
         }
 
-        public void WarningMessageTriangleNotExist()
+        public void ShowWarningMessageTriangleNotExist()
         {
             WriteLine($"There is no such triangle.");
         }

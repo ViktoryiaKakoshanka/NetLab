@@ -2,7 +2,7 @@
 
 namespace TriangleLib.Controller
 {
-    public class ValidateTriangleHelper
+    public class ValidatingTriangleHelper
     {
         public static double TryParseInputtingSide(string maybeSide)
         {

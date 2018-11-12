@@ -12,7 +12,7 @@ namespace TriangleLib.View
         void PrintPerimetrTriangle(double perimetr);
         void PrintAreaTriangle(double square);
         void PrintDetailsTriangle(Triangle triangle);
-        void WarningMessageTriangleNotExist();
+        void ShowWarningMessageTriangleNotExist();
         void WriteLine(string text);
         string ReadLine();
         void Clear();

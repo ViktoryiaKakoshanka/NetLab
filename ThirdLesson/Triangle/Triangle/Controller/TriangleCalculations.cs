@@ -13,8 +13,8 @@ namespace TriangleLib.Controller
 
         public static double CalculateTheArea(Triangle triangle)
         {
-            double semiperimeter = CalculateThePerimeter(triangle) / 2;
-            double area = Math.Sqrt(semiperimeter * (semiperimeter - triangle.FirstSide) * (semiperimeter - triangle.SecondSide) * (semiperimeter - triangle.ThirdSide));
+            var semiperimeter = CalculateThePerimeter(triangle) / 2;
+            var area = Math.Sqrt(semiperimeter * (semiperimeter - triangle.FirstSide) * (semiperimeter - triangle.SecondSide) * (semiperimeter - triangle.ThirdSide));
             return Math.Round(area, 6);
         }
     }
