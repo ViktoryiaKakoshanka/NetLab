@@ -10,21 +10,21 @@ namespace VectorProgram.Controller
 {
     public static class VerificateInputData
     {
-        public static bool ValidateUserInputCoordsVector(string userInput)
+        public static bool VerifyInputDataCoordsVector(string inputData)
         {
             var regex = new Regex(@"^[0-9]{1,9} [0-9]{1,9} [0-9]{1,9}$");
-            return (regex.IsMatch(userInput));
+            return (regex.IsMatch(inputData));
         }
 
-        public static bool ValidateUserInputDouble(string userInput)
+        public static bool ValidateUserInputDouble(string inputData)
         {
             var regex = new Regex(@"^[0-9]{1,9}$");
-            return (regex.IsMatch(userInput));
+            return (regex.IsMatch(inputData));
         }
 
-        public static double[] ParseUserInput(string userInput)
+        public static double[] ParseUserInput(string inputData)
         {
-            var arr = userInput.Split(' ');
+            var arr = inputData.Split(' ');
             var arrResult = new double[arr.Length];
 
             for (var i = 0; i < arr.Length; i++)

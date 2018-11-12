@@ -13,43 +13,57 @@ namespace VectorProgram
     {
         public void Run()
         {
-            Console.WriteLine("Введите координаты первого трехмерного вектора через пробел.");
+            Vector vectorFirst = EnterUserData("first");
+            Vector vectorSecond = EnterUserData("second");
 
-            var userInput = ReadInputCoordsAndVerificate();
-            var vector1 = ParseUserInputAndCreateVector(userInput);
+            ShowVectorsAndActions(vectorFirst, vectorSecond);
+            ShowMultiplicationAndVectors(vectorFirst, vectorSecond);
+            CompareVectors(vectorFirst, vectorSecond);
 
-            Console.WriteLine("Введите координаты второго трехмерного вектора через пробел.");
-            userInput = ReadInputCoordsAndVerificate();
-            var vector2 = ParseUserInputAndCreateVector(userInput);
-
-            Console.WriteLine("Ваши вектора:");
-            Console.WriteLine($"1 вектор: {vector1.ToString()}");
-            Console.WriteLine($"2 вектор: {vector2.ToString()}");
-
-            Console.WriteLine("Действия с векторами:");
-            Console.WriteLine($"{vector1.ToString()} + {vector2.ToString()} = {(vector1 + vector2).ToString()}");
-            Console.WriteLine($"{vector1.ToString()} - {vector2.ToString()} = {(vector1 - vector2).ToString()}");
-            Console.WriteLine($"{vector1.ToString()} * {vector2.ToString()} = {(vector1 * vector2).ToString()}");
-
-            Console.WriteLine("Введите число для произведения вектора на число:");
-            var numericInput = ReadInputDoubleAndVerificate();
-            Console.WriteLine($"{vector1.ToString()} * {numericInput.ToString()} = {(vector1 * numericInput).ToString()}");
-            Console.WriteLine($"{vector2.ToString()} * {numericInput.ToString()} = {(vector2 * numericInput).ToString()}");
-            
-            Console.WriteLine($"{numericInput.ToString()} * {vector1.ToString()} = {(numericInput * vector1).ToString()}");
-            Console.WriteLine($"{numericInput.ToString()} * {vector2.ToString()} = {(numericInput * vector2).ToString()}");
-
-            Console.WriteLine($"{vector1.ToString()} == {vector2.ToString()} = {(vector1 == vector2).ToString()}");
-            Console.WriteLine($"{vector1.ToString()} != {vector2.ToString()} = {(vector1 != vector2).ToString()}");
-
-            Console.WriteLine($"Угол между {vector1.ToString()} и {vector2.ToString()} = {(vector1.AngleBetweenVectors(vector2)).ToString()}");
+            Console.WriteLine($"The angle between {vectorFirst.ToString()} and {vectorSecond.ToString()} = {(vectorFirst.AngleBetweenVectors(vectorSecond)).ToString()}");
 
             Console.ReadKey();
         }
 
+        private static void CompareVectors(Vector vectorFirst, Vector vectorSecond)
+        {
+            Console.WriteLine($"{vectorFirst.ToString()} == {vectorSecond.ToString()} = {(vectorFirst == vectorSecond).ToString()}");
+            Console.WriteLine($"{vectorFirst.ToString()} != {vectorSecond.ToString()} = {(vectorFirst != vectorSecond).ToString()}");
+        }
+
+        private void ShowMultiplicationAndVectors(Vector vectorFirst, Vector vectorSecond)
+        {
+            Console.WriteLine("Enter a number to produce a vector by a number:");
+            var numericInput = ReadInputDoubleAndVerificate();
+            Console.WriteLine($"{vectorFirst.ToString()} * {numericInput.ToString()} = {(vectorFirst * numericInput).ToString()}");
+            Console.WriteLine($"{vectorSecond.ToString()} * {numericInput.ToString()} = {(vectorSecond * numericInput).ToString()}");
+
+            Console.WriteLine($"{numericInput.ToString()} * {vectorFirst.ToString()} = {(numericInput * vectorFirst).ToString()}");
+            Console.WriteLine($"{numericInput.ToString()} * {vectorSecond.ToString()} = {(numericInput * vectorSecond).ToString()}");
+        }
+
+        private static void ShowVectorsAndActions(Vector vectorFirst, Vector vectorSecond)
+        {
+            Console.WriteLine("Your vectors:");
+            Console.WriteLine($"1 vector: {vectorFirst.ToString()}");
+            Console.WriteLine($"2 vector: {vectorSecond.ToString()}");
+
+            Console.WriteLine("Actions with vectors:");
+            Console.WriteLine($"{vectorFirst.ToString()} + {vectorSecond.ToString()} = {(vectorFirst + vectorSecond).ToString()}");
+            Console.WriteLine($"{vectorFirst.ToString()} - {vectorSecond.ToString()} = {(vectorFirst - vectorSecond).ToString()}");
+            Console.WriteLine($"{vectorFirst.ToString()} * {vectorSecond.ToString()} = {(vectorFirst * vectorSecond).ToString()}");
+        }
+
+        private Vector EnterUserData(string orderByVectors)
+        {
+            Console.WriteLine($"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space.");
+            var userInput = ReadInputCoordsAndVerificate();
+            return ParseUserInputAndCreateVector(userInput);
+        }
+
         private void WriteErrorMessage()
         {
-            Console.WriteLine("Вы ввели некореектные числа.");
+            Console.WriteLine("You entered non-correct numbers.");
         }
         
         private Vector ParseUserInputAndCreateVector(string userInput)
@@ -61,7 +75,7 @@ namespace VectorProgram
         private string ReadInputCoordsAndVerificate()
         {
             var userInput = Console.ReadLine();
-            while(!VerificateInputData.ValidateUserInputCoordsVector(userInput))
+            while(!VerificateInputData.VerifyInputDataCoordsVector(userInput))
             {
                 WriteErrorMessage();
                 ReadInputCoordsAndVerificate(); break;
@@ -73,7 +87,7 @@ namespace VectorProgram
         {
             var userInput = Console.ReadLine();
             double numericInput;
-            while (!VerificateInputData.ValidateUserInputCoordsVector(userInput))
+            while (!VerificateInputData.VerifyInputDataCoordsVector(userInput))
             {
                 WriteErrorMessage();
                 ReadInputDoubleAndVerificate();
