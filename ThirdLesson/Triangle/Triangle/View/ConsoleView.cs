@@ -6,7 +6,7 @@ namespace TriangleLib.View
 {
     class ConsoleView: IConsoleView
     {
-        public void WarningMessage()
+        public void ShowWarningMessage()
         {
             WriteLine("You entered an incorrect value for the side of the triangle.\nThe value must be greater than 0. ");
         }

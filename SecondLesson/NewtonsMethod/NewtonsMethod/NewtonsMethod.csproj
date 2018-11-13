@@ -44,14 +44,16 @@
   <ItemGroup>
     <Compile Include="Controller\ICalculator.cs" />
     <Compile Include="Controller\DataParser.cs" />
-    <Compile Include="Controller\InputValidation.cs" />
+    <Compile Include="Controller\Validator.cs" />
     <Compile Include="Controller\Calculator.cs" />
     <Compile Include="Model\IRadicalSign.cs" />
     <Compile Include="Model\RadicalSign.cs" />
     <Compile Include="Model\InputedParams.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\Startup.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="View\IProgramView.cs" />
+    <Compile Include="View\PorogramView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
