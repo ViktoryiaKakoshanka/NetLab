@@ -12,11 +12,8 @@ namespace NewtonsMethod.Controller
         /// <returns></returns>
         public double CalculateRadicalSign(IRadicalSign radicalSign)
         {
-            var currentRadical = ComputeRadicalWithAccuracy(radicalSign);
-
-            radicalSign.Result = currentRadical;
-
-            return currentRadical;
+            radicalSign.Result = ComputeRadicalWithAccuracy(radicalSign);
+            return radicalSign.Result;
         }
         
         public double CalculateMathPow(IRadicalSign radicalSign)

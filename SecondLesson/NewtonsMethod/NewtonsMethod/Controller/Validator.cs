@@ -6,7 +6,7 @@ namespace NewtonsMethod.Controller
 {
     public static class Validator
     {
-        private static IDictionary<InputedParams, string> validationRules = new Dictionary<InputedParams, string>
+        private static readonly IDictionary<InputedParams, string> validationRules = new Dictionary<InputedParams, string>
         {
             {InputedParams.Numerical, @"\d+\.\d+|\d+" },
             {InputedParams.Power, @"\d+" },
