@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace NewtonsMethod.Controller
 {
-    public class ParseData
+    public class DataParser
     {
         public double StringConvertingToDouble(string value)
         {

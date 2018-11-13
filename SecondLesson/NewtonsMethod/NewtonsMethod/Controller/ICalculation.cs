@@ -2,9 +2,9 @@
 
 namespace NewtonsMethod.Controller
 {
-    public interface ICalculation
+    public interface ICalculator
     {
-        double RadicalSignByMethodNewton(IRadicalSign radicalSign);
+        double CalculateRadicalSignByMethodNewton(IRadicalSign radicalSign);
         double MathPow(IRadicalSign radicalSign);
     }
 }
