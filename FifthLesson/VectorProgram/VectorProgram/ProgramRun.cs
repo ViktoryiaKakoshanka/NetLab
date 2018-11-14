@@ -13,51 +13,69 @@ namespace VectorProgram
             Vector vectorSecond = GetUserVector("second");
 
             ShowVectors(vectorFirst, vectorSecond);
+
             ShowActionsWithVectors(vectorFirst, vectorSecond);
-            
-            var numericInput = GetUserNumericMultiplier();
-            ShowMultiplicationAndVectors(vectorFirst, vectorSecond, numericInput);
+
+            ShowMultiplicationAndVectors(vectorFirst, vectorSecond);
 
             CompareVectors(vectorFirst, vectorSecond);
 
-            Console.WriteLine($"The angle between {vectorFirst.ToString()} and {vectorSecond.ToString()} = {(vectorFirst.AngleBetweenVectors(vectorSecond)).ToString()}");
+            ShowVectorMultiplication(vectorFirst, vectorSecond);
 
-            Console.ReadKey();
+            ShowAngleBetweenVectors(vectorFirst, vectorSecond);
+
+            ReadKey();
         }
 
-        private void CompareVectors(Vector vectorFirst, Vector vectorSecond)
+        private void ShowAngleBetweenVectors(Vector vectorFirst, Vector vectorSecond)
         {
-            Console.WriteLine($"{vectorFirst.ToString()} == {vectorSecond.ToString()} = {(vectorFirst == vectorSecond).ToString()}");
-            Console.WriteLine($"{vectorFirst.ToString()} != {vectorSecond.ToString()} = {(vectorFirst != vectorSecond).ToString()}");
+            var angle = vectorFirst.AngleBetweenVectors(vectorSecond);
+            WriteLine($"The angle between {vectorFirst.ToString()} and {vectorSecond.ToString()} = {angle.ToString()}");
         }
 
-        private void ShowMultiplicationAndVectors(Vector vectorFirst, Vector vectorSecond, double numericMultiplier)
+        private void CompareVectors(Vector first, Vector second)
         {
-            Console.WriteLine($"{vectorFirst.ToString()} * {numericMultiplier.ToString()} = {(vectorFirst * numericMultiplier).ToString()}");
-            Console.WriteLine($"{vectorSecond.ToString()} * {numericMultiplier.ToString()} = {(vectorSecond * numericMultiplier).ToString()}");
-
-            Console.WriteLine($"{numericMultiplier.ToString()} * {vectorFirst.ToString()} = {(numericMultiplier * vectorFirst).ToString()}");
-            Console.WriteLine($"{numericMultiplier.ToString()} * {vectorSecond.ToString()} = {(numericMultiplier * vectorSecond).ToString()}");
+            WriteLine("Compare vectors:");
+            WriteLine($"{first.ToString()} == {second.ToString()} = {(first == second).ToString()}");
+            WriteLine($"{first.ToString()} != {second.ToString()} = {(first != second).ToString()}");
         }
 
-        private void ShowActionsWithVectors(Vector vectorFirst, Vector vectorSecond)
+        private void ShowMultiplicationAndVectors(Vector first, Vector second)
         {
-            Console.WriteLine("Actions with vectors:");
-            Console.WriteLine($"{vectorFirst.ToString()} + {vectorSecond.ToString()} = {(vectorFirst + vectorSecond).ToString()}");
-            Console.WriteLine($"{vectorFirst.ToString()} - {vectorSecond.ToString()} = {(vectorFirst - vectorSecond).ToString()}");
-            Console.WriteLine($"{vectorFirst.ToString()} * {vectorSecond.ToString()} = {(vectorFirst * vectorSecond).ToString()}");
+            var numericMultiplier = GetUserNumericMultiplier();
+            WriteLine("Multiplication of vectors by number:");
+
+            WriteLine($"{first.ToString()} * {numericMultiplier.ToString()} = {(first * numericMultiplier).ToString()}");
+            WriteLine($"{second.ToString()} * {numericMultiplier.ToString()} = {(second * numericMultiplier).ToString()}\n");
+
+            WriteLine($"{numericMultiplier.ToString()} * {first.ToString()} = {(numericMultiplier * first).ToString()}");
+            WriteLine($"{numericMultiplier.ToString()} * {second.ToString()} = {(numericMultiplier * second).ToString()}");
         }
 
-        private void ShowVectors(Vector vectorFirst, Vector vectorSecond)
+        private void ShowActionsWithVectors(Vector first, Vector second)
         {
-            Console.WriteLine("Your vectors:");
-            Console.WriteLine($"1 vector: {vectorFirst.ToString()}");
-            Console.WriteLine($"2 vector: {vectorSecond.ToString()}");
+            WriteLine("Actions with vectors:");
+            WriteLine($"{first.ToString()} + {second.ToString()} = {(first + second).ToString()}");
+            WriteLine($"{first.ToString()} - {second.ToString()} = {(first - second).ToString()}");
+            WriteLine($"{first.ToString()} * {second.ToString()} = {(first * second).ToString()}");
+        }
+
+        private void ShowVectors(Vector first, Vector second)
+        {
+            WriteLine("Your vectors:");
+            WriteLine($"1 vector: {first.ToString()}");
+            WriteLine($"2 vector: {second.ToString()}");
+        }
+
+        private void ShowVectorMultiplication(Vector first, Vector second)
+        {
+            var VectorMultiplication = Vector.VectorMultiplicate(first, second);
+            WriteLine($"VectorMultiplication = {VectorMultiplication}");
         }
 
         private Vector GetUserVector(string orderByVectors)
         {
-            var userInput = RequestUserInput( DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space.");
+            var userInput = RequestUserInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space.");
             return ParseUserInputAndCreateVector(userInput);
         }
 
@@ -72,7 +90,7 @@ namespace VectorProgram
 
         private void WriteErrorMessage()
         {
-            Console.WriteLine("You entered non-correct numbers.");
+            WriteLine("You entered non-correct numbers.");
         }
         
         private Vector ParseUserInputAndCreateVector(string userInput)
@@ -88,8 +106,7 @@ namespace VectorProgram
 
             while (!correctInput)
             {
-                Console.WriteLine(welcomMessage);
-                userInput = Console.ReadLine();
+                userInput = ReadLine(welcomMessage);
                 correctInput = ValidateUserInput(dataType, userInput);
             }
             
@@ -104,5 +121,20 @@ namespace VectorProgram
             return correctInput;
         }
 
+        private void WriteLine(string text)
+        {
+            Console.WriteLine(text);
+        }
+
+        private string ReadLine(string text)
+        {
+            WriteLine(text);
+            return Console.ReadLine();
+        }
+
+        private void ReadKey()
+        {
+            Console.ReadKey(true);
+        }
     }
 }

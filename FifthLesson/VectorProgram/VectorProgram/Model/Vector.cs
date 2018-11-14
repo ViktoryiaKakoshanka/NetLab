@@ -1,21 +1,24 @@
 ﻿using System;
+using VectorProgram.Controller;
 
 namespace VectorProgram.Model
 {
-    public sealed class Vector
+    public class Vector : IEquatable<Vector>
     {
+        #region Properties
         public double FirstCoordinate { get; private set; }
         public double SecondCoordinate { get; private set; }
         public double ThirdCoordinate { get; private set; }
-
         public double Length
         {
             get
             {
-                return Math.Round(Math.Sqrt(FirstCoordinate * FirstCoordinate + SecondCoordinate * SecondCoordinate + ThirdCoordinate * ThirdCoordinate), 3);
+                return Math.Round(Math.Sqrt(Math.Pow(FirstCoordinate, 2) + Math.Pow(SecondCoordinate, 2) + Math.Pow(ThirdCoordinate, 2)), 3);
             }
         }
+        #endregion
 
+        #region Construcrots
         public Vector(double coordinateFirst, double coordinateSecond, double coordinateThird)
         {
             FirstCoordinate = coordinateFirst;
@@ -26,30 +29,45 @@ namespace VectorProgram.Model
         public Vector() : this(0, 0, 0) { }
 
         public Vector(Vector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate) { }
+        #endregion
 
+        #region override ToString() GetHashCode() Equals() 
         public override string ToString()
         {
             return $"({FirstCoordinate}, {SecondCoordinate}, {ThirdCoordinate})";
         }
 
-        public static Vector operator +(Vector vector1, Vector vector2)
-        {
-            var result = new Vector(vector1);
+        public override int GetHashCode() => GetHashCodeHelper(
+               new int[]
+               {
+                   FirstCoordinate.GetHashCode(),
+                   SecondCoordinate.GetHashCode(),
+                   ThirdCoordinate.GetHashCode()
+               }
+            );
 
-            result.FirstCoordinate += vector2.FirstCoordinate;
-            result.SecondCoordinate += vector2.SecondCoordinate;
-            result.ThirdCoordinate += vector2.ThirdCoordinate;
+        public override bool Equals(object obj) => this.Equals((Vector)obj);
+        #endregion
+
+        #region operators + - * == !=
+        public static Vector operator +(Vector first, Vector second)
+        {
+            var result = new Vector(first);
+
+            result.FirstCoordinate += second.FirstCoordinate;
+            result.SecondCoordinate += second.SecondCoordinate;
+            result.ThirdCoordinate += second.ThirdCoordinate;
 
             return result;
         }
 
-        public static Vector operator -(Vector vector1, Vector vector2)
+        public static Vector operator -(Vector first, Vector second)
         {
-            var result = new Vector(vector1);
+            var result = new Vector(first);
 
-            result.FirstCoordinate -= vector2.FirstCoordinate;
-            result.SecondCoordinate -= vector2.SecondCoordinate;
-            result.ThirdCoordinate -= vector2.ThirdCoordinate;
+            result.FirstCoordinate -= second.FirstCoordinate;
+            result.SecondCoordinate -= second.SecondCoordinate;
+            result.ThirdCoordinate -= second.ThirdCoordinate;
 
             return result;
         }
@@ -64,38 +82,56 @@ namespace VectorProgram.Model
             return numeric * vector;
         }
 
-        public static Vector operator *(Vector vector1, Vector vector2)
+        public static Vector operator *(Vector first, Vector second)
         {
-            return new Vector(vector1.FirstCoordinate * vector2.FirstCoordinate, vector1.SecondCoordinate * vector2.SecondCoordinate, vector1.ThirdCoordinate * vector2.ThirdCoordinate);
+            return new Vector(first.FirstCoordinate * second.FirstCoordinate, first.SecondCoordinate * second.SecondCoordinate, first.ThirdCoordinate * second.ThirdCoordinate);
         }
 
-        public static bool operator ==(Vector vector1, Vector vector2)
+        public static bool operator ==(Vector first, Vector second) => Equals(first, second);
+
+        public static bool operator !=(Vector first, Vector second) => !Equals(first, second);
+        #endregion
+
+        public virtual bool Equals(Vector other)
         {
-            var result = (vector1.FirstCoordinate == vector2.FirstCoordinate && vector1.SecondCoordinate == vector2.SecondCoordinate && vector1.ThirdCoordinate == vector2.ThirdCoordinate);
-            return result;
+            if ((object)this == (object)other) return true;
+            if ((object)other == null) return false;
+            if (GetType() != other.GetType()) return false;
+            return EqualsHelper(this, other);
         }
 
-        public static bool operator !=(Vector vector1, Vector vector2)
-        {
-            return !(vector1 == vector2);
-        }
+        public static bool Equals(Vector first, Vector second) => first?.Equals(second) ?? (object)first == (object)second;
 
         public double AngleBetweenVectors(Vector vector)
         {
-            var dividend = FirstCoordinate * vector.FirstCoordinate + SecondCoordinate * vector.SecondCoordinate + ThirdCoordinate + vector.ThirdCoordinate;
-            var divisor1 = Math.Sqrt(FirstCoordinate * FirstCoordinate + SecondCoordinate * SecondCoordinate + ThirdCoordinate * ThirdCoordinate);
-            var divisor2 = Math.Sqrt(vector.FirstCoordinate * vector.FirstCoordinate + vector.SecondCoordinate * vector.SecondCoordinate + vector.ThirdCoordinate * vector.ThirdCoordinate);
-            return Math.Round(dividend / (divisor1 * divisor2), 3);
+            var angle = VectorHelper.AngleBetweenVectors(this, vector);
+            return Math.Round(angle, 3);
         }
 
-        public override bool Equals(object obj)
+        public static string VectorMultiplicate(Vector first, Vector second)
         {
-            return GetType().Equals(obj);
+            return VectorHelper.VectorMultiplicate(first, second);
         }
 
-        public override int GetHashCode()
+        protected static int GetHashCodeHelper(int[] hashCodeProperties)
         {
-            return GetType().GetHashCode();
+            if ((object)hashCodeProperties == null || hashCodeProperties.Length == 0) return 0;
+
+            var result = hashCodeProperties[0];
+
+            for (int i = 1; i < hashCodeProperties.Length; i++)
+            {
+                result = unchecked(result * 397) ^ hashCodeProperties[i];
+            }
+
+            return result;
         }
+
+        protected static bool EqualsHelper(Vector first, Vector second) =>
+            first.FirstCoordinate == second.FirstCoordinate &&
+            first.SecondCoordinate == second.SecondCoordinate &&
+            first.ThirdCoordinate == second.ThirdCoordinate;
+
+
     }
 }
