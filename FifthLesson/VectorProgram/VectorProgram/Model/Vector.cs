@@ -4,51 +4,41 @@ namespace VectorProgram.Model
 {
     public sealed class Vector
     {
-        public double CoordinateFirst { get; private set; }
-        public double CoordinateSecond { get; private set; }
-        public double CoordinateThird { get; private set; }
+        public double FirstCoordinate { get; private set; }
+        public double SecondCoordinate { get; private set; }
+        public double ThirdCoordinate { get; private set; }
 
         public double Length
         {
             get
             {
-                return Math.Round(Math.Sqrt(CoordinateFirst * CoordinateFirst + CoordinateSecond * CoordinateSecond + CoordinateThird * CoordinateThird), 3);
+                return Math.Round(Math.Sqrt(FirstCoordinate * FirstCoordinate + SecondCoordinate * SecondCoordinate + ThirdCoordinate * ThirdCoordinate), 3);
             }
         }
 
-        public Vector()
+        public Vector(double coordinateFirst, double coordinateSecond, double coordinateThird)
         {
-            CoordinateFirst = 0;
-            CoordinateSecond = 0;
-            CoordinateThird = 0;
+            FirstCoordinate = coordinateFirst;
+            SecondCoordinate = coordinateSecond;
+            ThirdCoordinate = coordinateThird;
         }
 
-        public Vector(double coordinateFirst, double coordinateSecond, double coordinateThird) : this()
-        {
-            CoordinateFirst = coordinateFirst;
-            CoordinateSecond = coordinateSecond;
-            CoordinateThird = coordinateThird;
-        }
+        public Vector() : this(0, 0, 0) { }
 
-        public Vector(Vector vector) : this()
-        {
-            CoordinateFirst = vector.CoordinateFirst;
-            CoordinateSecond = vector.CoordinateSecond;
-            CoordinateThird = vector.CoordinateThird;
-        }
+        public Vector(Vector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate) { }
 
         public override string ToString()
         {
-            return $"({CoordinateFirst}, {CoordinateSecond}, {CoordinateThird})";
+            return $"({FirstCoordinate}, {SecondCoordinate}, {ThirdCoordinate})";
         }
 
         public static Vector operator +(Vector vector1, Vector vector2)
         {
             var result = new Vector(vector1);
 
-            result.CoordinateFirst += vector2.CoordinateFirst;
-            result.CoordinateSecond += vector2.CoordinateSecond;
-            result.CoordinateThird += vector2.CoordinateThird;
+            result.FirstCoordinate += vector2.FirstCoordinate;
+            result.SecondCoordinate += vector2.SecondCoordinate;
+            result.ThirdCoordinate += vector2.ThirdCoordinate;
 
             return result;
         }
@@ -57,16 +47,16 @@ namespace VectorProgram.Model
         {
             var result = new Vector(vector1);
 
-            result.CoordinateFirst -= vector2.CoordinateFirst;
-            result.CoordinateSecond -= vector2.CoordinateSecond;
-            result.CoordinateThird -= vector2.CoordinateThird;
+            result.FirstCoordinate -= vector2.FirstCoordinate;
+            result.SecondCoordinate -= vector2.SecondCoordinate;
+            result.ThirdCoordinate -= vector2.ThirdCoordinate;
 
             return result;
         }
 
         public static Vector operator *(double numeric, Vector vector)
         {
-            return new Vector(vector.CoordinateFirst * numeric, vector.CoordinateSecond * numeric, vector.CoordinateThird * numeric);
+            return new Vector(vector.FirstCoordinate * numeric, vector.SecondCoordinate * numeric, vector.ThirdCoordinate * numeric);
         }
 
         public static Vector operator *(Vector vector, double numeric)
@@ -76,12 +66,12 @@ namespace VectorProgram.Model
 
         public static Vector operator *(Vector vector1, Vector vector2)
         {
-            return new Vector(vector1.CoordinateFirst * vector2.CoordinateFirst, vector1.CoordinateSecond * vector2.CoordinateSecond, vector1.CoordinateThird * vector2.CoordinateThird);
+            return new Vector(vector1.FirstCoordinate * vector2.FirstCoordinate, vector1.SecondCoordinate * vector2.SecondCoordinate, vector1.ThirdCoordinate * vector2.ThirdCoordinate);
         }
 
         public static bool operator ==(Vector vector1, Vector vector2)
         {
-            var result = (vector1.CoordinateFirst == vector2.CoordinateFirst && vector1.CoordinateSecond == vector2.CoordinateSecond && vector1.CoordinateThird == vector2.CoordinateThird);
+            var result = (vector1.FirstCoordinate == vector2.FirstCoordinate && vector1.SecondCoordinate == vector2.SecondCoordinate && vector1.ThirdCoordinate == vector2.ThirdCoordinate);
             return result;
         }
 
@@ -92,9 +82,9 @@ namespace VectorProgram.Model
 
         public double AngleBetweenVectors(Vector vector)
         {
-            var dividend = CoordinateFirst * vector.CoordinateFirst + CoordinateSecond * vector.CoordinateSecond + CoordinateThird + vector.CoordinateThird;
-            var divisor1 = Math.Sqrt(CoordinateFirst * CoordinateFirst + CoordinateSecond * CoordinateSecond + CoordinateThird * CoordinateThird);
-            var divisor2 = Math.Sqrt(vector.CoordinateFirst * vector.CoordinateFirst + vector.CoordinateSecond * vector.CoordinateSecond + vector.CoordinateThird * vector.CoordinateThird);
+            var dividend = FirstCoordinate * vector.FirstCoordinate + SecondCoordinate * vector.SecondCoordinate + ThirdCoordinate + vector.ThirdCoordinate;
+            var divisor1 = Math.Sqrt(FirstCoordinate * FirstCoordinate + SecondCoordinate * SecondCoordinate + ThirdCoordinate * ThirdCoordinate);
+            var divisor2 = Math.Sqrt(vector.FirstCoordinate * vector.FirstCoordinate + vector.SecondCoordinate * vector.SecondCoordinate + vector.ThirdCoordinate * vector.ThirdCoordinate);
             return Math.Round(dividend / (divisor1 * divisor2), 3);
         }
 
