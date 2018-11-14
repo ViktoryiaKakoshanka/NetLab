@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VectorProgram.Model
 {
@@ -104,12 +100,12 @@ namespace VectorProgram.Model
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            return GetType().Equals(obj);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return GetType().GetHashCode();
         }
     }
 }

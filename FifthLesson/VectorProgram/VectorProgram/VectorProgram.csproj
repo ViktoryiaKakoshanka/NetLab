@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\VerificateInputData.cs" />
+    <Compile Include="Controller\DataParser.cs" />
+    <Compile Include="Controller\Validator.cs" />
+    <Compile Include="Model\DataType.cs" />
     <Compile Include="Model\Vector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRun.cs" />
