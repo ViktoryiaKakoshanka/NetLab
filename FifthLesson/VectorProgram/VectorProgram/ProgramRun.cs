@@ -60,7 +60,7 @@ namespace VectorProgram
 
         private void ShowVectorMultiplication(Vector first, Vector second)
         {
-            var VectorMultiplication = Vector.CalculateVectorMultiplicate(first, second);
+            var vectorMultiplication = Vector.CalculateVectorMultiplicate(first, second);
             Console.WriteLine($"VectorMultiplication: {first} x {second} = {VectorMultiplication}");
             Console.WriteLine(string.Empty);
         }

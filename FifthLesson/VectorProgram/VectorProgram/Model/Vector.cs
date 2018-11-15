@@ -57,9 +57,8 @@ namespace VectorProgram.Model
   
         public bool Equals(Vector other)
         {
-            if ((object)this == (object)other) return true;
+            if (ReferenceEquals(this, other)) return true;
             if ((object)other == null) return false;
-            if (GetType() != other.GetType()) return false;
             var ValueСomparison = FirstCoordinate == other.FirstCoordinate && SecondCoordinate == other.SecondCoordinate && ThirdCoordinate == other.ThirdCoordinate;
             return ValueСomparison;
         }
