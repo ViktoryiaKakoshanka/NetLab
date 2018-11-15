@@ -8,8 +8,8 @@ namespace VectorProgram.Controller
     {
         private static readonly IDictionary<DataType, string> validationRules = new Dictionary<DataType, string>
         {
-            {DataType.Multiplier, @"\d+\[.|,]\d+|\d+" },
-            {DataType.Vector, @"^[0-9]{1,9} [0-9]{1,9} [0-9]{1,9}$" }
+            {DataType.Multiplier, @"\d+\[.,]\d+|\d+" },
+            {DataType.Vector, @"^\d+\[.,]\d+|\d+ \d+\[.,]\d+|\d+ \d+\[.,]\d+|\d+$" }
         };
 
         public static bool ValidateInput(DataType dataType, string input)

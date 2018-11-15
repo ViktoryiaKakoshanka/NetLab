@@ -16,13 +16,13 @@ namespace VectorProgram
 
             ShowActionsWithVectors(vectorFirst, vectorSecond);
 
-            ShowMultiplicationAndVectors(vectorFirst, vectorSecond);
-
             CompareVectors(vectorFirst, vectorSecond);
 
             ShowVectorMultiplication(vectorFirst, vectorSecond);
 
             ShowAngleBetweenVectors(vectorFirst, vectorSecond);
+
+            ShowMultiplicationVectorsByNumber(vectorFirst, vectorSecond);
 
             ReadKey();
         }
@@ -30,7 +30,8 @@ namespace VectorProgram
         private void ShowAngleBetweenVectors(Vector vectorFirst, Vector vectorSecond)
         {
             var angle = vectorFirst.AngleBetweenVectors(vectorSecond);
-            WriteLine($"The angle between {vectorFirst.ToString()} and {vectorSecond.ToString()} = {angle.ToString()}");
+            WriteLine($"The angle between {vectorFirst.ToString()} and {vectorSecond.ToString()} = {Math.Abs(angle).ToString()}");
+            WriteLine(string.Empty);
         }
 
         private void CompareVectors(Vector first, Vector second)
@@ -38,16 +39,17 @@ namespace VectorProgram
             WriteLine("Compare vectors:");
             WriteLine($"{first.ToString()} == {second.ToString()} = {(first == second).ToString()}");
             WriteLine($"{first.ToString()} != {second.ToString()} = {(first != second).ToString()}");
+            WriteLine(string.Empty);
         }
 
-        private void ShowMultiplicationAndVectors(Vector first, Vector second)
+        private void ShowMultiplicationVectorsByNumber(Vector first, Vector second)
         {
             var numericMultiplier = GetUserNumericMultiplier();
             WriteLine("Multiplication of vectors by number:");
 
             WriteLine($"{first.ToString()} * {numericMultiplier.ToString()} = {(first * numericMultiplier).ToString()}");
-            WriteLine($"{second.ToString()} * {numericMultiplier.ToString()} = {(second * numericMultiplier).ToString()}\n");
-
+            WriteLine($"{second.ToString()} * {numericMultiplier.ToString()} = {(second * numericMultiplier).ToString()}");
+            WriteLine(string.Empty);
             WriteLine($"{numericMultiplier.ToString()} * {first.ToString()} = {(numericMultiplier * first).ToString()}");
             WriteLine($"{numericMultiplier.ToString()} * {second.ToString()} = {(numericMultiplier * second).ToString()}");
         }
@@ -58,24 +60,26 @@ namespace VectorProgram
             WriteLine($"{first.ToString()} + {second.ToString()} = {(first + second).ToString()}");
             WriteLine($"{first.ToString()} - {second.ToString()} = {(first - second).ToString()}");
             WriteLine($"{first.ToString()} * {second.ToString()} = {(first * second).ToString()}");
+            WriteLine(string.Empty);
         }
 
         private void ShowVectors(Vector first, Vector second)
         {
             WriteLine("Your vectors:");
             WriteLine($"1 vector: {first.ToString()}");
-            WriteLine($"2 vector: {second.ToString()}");
+            WriteLine($"2 vector: {second.ToString()}\n");
         }
 
         private void ShowVectorMultiplication(Vector first, Vector second)
         {
             var VectorMultiplication = Vector.VectorMultiplicate(first, second);
-            WriteLine($"VectorMultiplication = {VectorMultiplication}");
+            WriteLine($"VectorMultiplication: {first.ToString()} x {second.ToString()} = {VectorMultiplication}");
+            WriteLine(string.Empty);
         }
 
         private Vector GetUserVector(string orderByVectors)
         {
-            var userInput = RequestUserInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space.");
+            var userInput = RequestUserInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
             return ParseUserInputAndCreateVector(userInput);
         }
 
@@ -87,15 +91,10 @@ namespace VectorProgram
             double.TryParse(userInput.Replace(",", "."), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out numericInput);
             return numericInput;
         }
-
-        private void WriteErrorMessage()
-        {
-            WriteLine("You entered non-correct numbers.");
-        }
-        
+                
         private Vector ParseUserInputAndCreateVector(string userInput)
         {
-            var coords = DataParser.ParseUserInput(userInput);
+            var coords = DataParser.ParseStringToArray(userInput);
             return new Vector(coords[0], coords[1], coords[2]);
         }
         
@@ -121,20 +120,16 @@ namespace VectorProgram
             return correctInput;
         }
 
-        private void WriteLine(string text)
-        {
-            Console.WriteLine(text);
-        }
-
         private string ReadLine(string text)
         {
             WriteLine(text);
             return Console.ReadLine();
         }
 
-        private void ReadKey()
-        {
-            Console.ReadKey(true);
-        }
+        private void WriteLine(string text) => Console.WriteLine(text);
+
+        private void WriteErrorMessage() => WriteLine("You entered non-correct numbers.");
+
+        private void ReadKey() => Console.ReadKey(true);
     }
 }

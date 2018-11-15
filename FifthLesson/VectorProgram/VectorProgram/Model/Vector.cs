@@ -3,7 +3,7 @@ using VectorProgram.Controller;
 
 namespace VectorProgram.Model
 {
-    public class Vector : IEquatable<Vector>
+    public class Vector : IEquatable<Vector>, IVector
     {
         #region Properties
         public double FirstCoordinate { get; private set; }
@@ -11,10 +11,7 @@ namespace VectorProgram.Model
         public double ThirdCoordinate { get; private set; }
         public double Length
         {
-            get
-            {
-                return Math.Round(Math.Sqrt(Math.Pow(FirstCoordinate, 2) + Math.Pow(SecondCoordinate, 2) + Math.Pow(ThirdCoordinate, 2)), 3);
-            }
+            get => Math.Round(Math.Sqrt(Math.Pow(FirstCoordinate, 2) + Math.Pow(SecondCoordinate, 2) + Math.Pow(ThirdCoordinate, 2)), 3);
         }
         #endregion
 
@@ -28,14 +25,17 @@ namespace VectorProgram.Model
 
         public Vector() : this(0, 0, 0) { }
 
-        public Vector(Vector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate) { }
+        public Vector(IVector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate) { }
         #endregion
 
-        #region override ToString() GetHashCode() Equals() 
-        public override string ToString()
+        public double AngleBetweenVectors(IVector vector)
         {
-            return $"({FirstCoordinate}, {SecondCoordinate}, {ThirdCoordinate})";
+            var angle = VectorHelper.AngleBetweenVectors(this, vector);
+            return Math.Round(angle, 3);
         }
+
+        #region override ToString() GetHashCode() Equals() 
+        public override string ToString() => $"({FirstCoordinate}, {SecondCoordinate}, {ThirdCoordinate})";
 
         public override int GetHashCode() => GetHashCodeHelper(
                new int[]
@@ -102,16 +102,7 @@ namespace VectorProgram.Model
 
         public static bool Equals(Vector first, Vector second) => first?.Equals(second) ?? (object)first == (object)second;
 
-        public double AngleBetweenVectors(Vector vector)
-        {
-            var angle = VectorHelper.AngleBetweenVectors(this, vector);
-            return Math.Round(angle, 3);
-        }
-
-        public static string VectorMultiplicate(Vector first, Vector second)
-        {
-            return VectorHelper.VectorMultiplicate(first, second);
-        }
+        public static string VectorMultiplicate(IVector first, IVector second) =>  VectorHelper.VectorMultiplicate(first, second);
 
         protected static int GetHashCodeHelper(int[] hashCodeProperties)
         {
@@ -127,7 +118,7 @@ namespace VectorProgram.Model
             return result;
         }
 
-        protected static bool EqualsHelper(Vector first, Vector second) =>
+        protected static bool EqualsHelper(IVector first, IVector second) =>
             first.FirstCoordinate == second.FirstCoordinate &&
             first.SecondCoordinate == second.SecondCoordinate &&
             first.ThirdCoordinate == second.ThirdCoordinate;

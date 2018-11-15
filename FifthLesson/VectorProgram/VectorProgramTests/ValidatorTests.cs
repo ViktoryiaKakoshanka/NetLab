@@ -13,7 +13,7 @@ namespace VectorProgramTests
             bool actual;
 
             var inputMultiplier = new[] { "1", "56565", "1.0", "1,54" };
-            var inputVector = new[] { "0,005 0,005 0,005", "0.549 0.549 0.549", "1 1 1" };
+            var inputVector = new[] { " 1 1 1", "0,005 0,005 0,005", "0.549 0.549 0.549", "1 1 1" };
 
             foreach (var item in inputMultiplier)
             {
@@ -23,8 +23,8 @@ namespace VectorProgramTests
 
             foreach (var item in inputVector)
             {
-                actual = Validator.ValidateInput(DataType.Multiplier, item);
-                Assert.AreEqual(true, actual);
+                actual = Validator.ValidateInput(DataType.Vector, item);
+                Assert.AreEqual(true, actual, $"{item} = {actual}");
             }
         }
 
@@ -34,7 +34,7 @@ namespace VectorProgramTests
             bool actual;
 
             var inputMultiplier = new[] { string.Empty, "asf" };
-            var inputVector = new[] { "kl", string.Empty };
+            var inputVector = new[] { "kl", string.Empty,  "1 1 1 ", "   1 1 1   " };
 
             foreach (var item in inputMultiplier)
             {
@@ -44,8 +44,8 @@ namespace VectorProgramTests
 
             foreach (var item in inputVector)
             {
-                actual = Validator.ValidateInput(DataType.Multiplier, item);
-                Assert.AreEqual(false, actual);
+                actual = Validator.ValidateInput(DataType.Vector, item);
+                Assert.AreEqual(false, actual, $"{item} = {actual}");
             }
         }
     }
