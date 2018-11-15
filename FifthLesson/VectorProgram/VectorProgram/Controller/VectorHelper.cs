@@ -5,30 +5,54 @@ namespace VectorProgram.Controller
 {
     public static class VectorHelper
     {
-        public static double AngleBetweenVectors(IVector ferst, IVector second)
+        public static double CalculateAngleBetweenVectors(IVector first, IVector second)
         {
-            var scalarMultiple = ferst.FirstCoordinate * second.FirstCoordinate + ferst.SecondCoordinate * second.SecondCoordinate + ferst.ThirdCoordinate * second.ThirdCoordinate;
+            var scalarMultiplicationResult = first.FirstCoordinate * second.FirstCoordinate + first.SecondCoordinate * second.SecondCoordinate + first.ThirdCoordinate * second.ThirdCoordinate;
 
-            var moduleFirstVector = Math.Sqrt(Math.Pow(ferst.FirstCoordinate, 2) + Math.Pow(ferst.SecondCoordinate, 2) + Math.Pow(ferst.ThirdCoordinate, 2));
-            var moduleSecondVector = Math.Sqrt(Math.Pow(second.FirstCoordinate, 2) + Math.Pow(second.SecondCoordinate, 2) + Math.Pow(second.ThirdCoordinate, 2));
+            var moduleFirstVector = CalculateModuleVector(first);
+            var moduleSecondVector = CalculateModuleVector(second);
             var moduleMultipleVectors = moduleFirstVector * moduleSecondVector;
 
-            var angle = scalarMultiple / moduleMultipleVectors;
+            var angle = scalarMultiplicationResult / moduleMultipleVectors;
 
             return angle;
         }
 
-        public static string VectorMultiplicate(IVector first, IVector second)
+        public static string CalculateVectorMultiplicate(IVector first, IVector second)
         {
-            var i = 1;
-            var j = 1;
-            var k = 1;
-
-            var determinantOne = (first.SecondCoordinate * second.ThirdCoordinate - first.ThirdCoordinate * second.SecondCoordinate) * i;
-            var determinantTwo = (first.ThirdCoordinate * second.FirstCoordinate - first.FirstCoordinate * second.ThirdCoordinate) * j;
-            var determinantThree = (first.FirstCoordinate * second.SecondCoordinate - first.SecondCoordinate * second.FirstCoordinate) * k;
+            var arrayForFirstOrta = new[,] {
+                { first.SecondCoordinate, first.ThirdCoordinate },
+                { second.SecondCoordinate, second.ThirdCoordinate }
+            };
+            var arrayForSecondOrta = new[,] {
+                { first.FirstCoordinate, first.ThirdCoordinate },
+                { second.FirstCoordinate, second.ThirdCoordinate }
+            };
+            var arrayForThirdOrta = new[,] {
+                { first.FirstCoordinate, first.SecondCoordinate },
+                { second.FirstCoordinate, second.SecondCoordinate }
+            };
+            
+            var determinantOne = CalculateDeterminantTwoByTwo(arrayForFirstOrta);
+            var determinantTwo = CalculateDeterminantTwoByTwo(arrayForFirstOrta);
+            var determinantThree = CalculateDeterminantTwoByTwo(arrayForFirstOrta);
 
             return $"({determinantOne.ToString()}) * i + ({determinantTwo.ToString()}) * j + ({determinantThree.ToString()}) * k";
+        }
+
+        public static double CalculateModuleVector(IVector vector)
+        {
+            var powFirst = Math.Pow(vector.FirstCoordinate, 2);
+            var powSecond = Math.Pow(vector.SecondCoordinate, 2);
+            var powThird = Math.Pow(vector.ThirdCoordinate, 2);
+
+            var result = Math.Sqrt(powFirst + powSecond + powThird);
+            return Math.Abs(result);
+        }
+
+        private static double CalculateDeterminantTwoByTwo(double[,] elements)
+        {
+            return elements[0,0] * elements[1,1] - elements[0, 1] * elements[1, 0];
         }
 
     }

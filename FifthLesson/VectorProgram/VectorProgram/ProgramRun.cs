@@ -14,7 +14,7 @@ namespace VectorProgram
 
             ShowVectors(vectorFirst, vectorSecond);
 
-            ShowActionsWithVectors(vectorFirst, vectorSecond);
+            ShowResultsActionsWithVectors(vectorFirst, vectorSecond);
 
             CompareVectors(vectorFirst, vectorSecond);
 
@@ -29,16 +29,16 @@ namespace VectorProgram
 
         private void ShowAngleBetweenVectors(Vector vectorFirst, Vector vectorSecond)
         {
-            var angle = vectorFirst.AngleBetweenVectors(vectorSecond);
-            WriteLine($"The angle between {vectorFirst.ToString()} and {vectorSecond.ToString()} = {Math.Abs(angle).ToString()}");
+            var angle = vectorFirst.CalculateAngleBetweenVectors(vectorSecond);
+            WriteLine($"The angle between {vectorFirst} and {vectorSecond} = {Math.Abs(angle)}");
             WriteLine(string.Empty);
         }
 
         private void CompareVectors(Vector first, Vector second)
         {
             WriteLine("Compare vectors:");
-            WriteLine($"{first.ToString()} == {second.ToString()} = {(first == second).ToString()}");
-            WriteLine($"{first.ToString()} != {second.ToString()} = {(first != second).ToString()}");
+            WriteLine($"{first} == {second} = {(first == second)}");
+            WriteLine($"{first} != {second} = {(first != second)}");
             WriteLine(string.Empty);
         }
 
@@ -47,33 +47,33 @@ namespace VectorProgram
             var numericMultiplier = GetUserNumericMultiplier();
             WriteLine("Multiplication of vectors by number:");
 
-            WriteLine($"{first.ToString()} * {numericMultiplier.ToString()} = {(first * numericMultiplier).ToString()}");
-            WriteLine($"{second.ToString()} * {numericMultiplier.ToString()} = {(second * numericMultiplier).ToString()}");
+            WriteLine($"{first} * {numericMultiplier} = {(first * numericMultiplier)}");
+            WriteLine($"{second} * {numericMultiplier} = {(second * numericMultiplier)}");
             WriteLine(string.Empty);
-            WriteLine($"{numericMultiplier.ToString()} * {first.ToString()} = {(numericMultiplier * first).ToString()}");
-            WriteLine($"{numericMultiplier.ToString()} * {second.ToString()} = {(numericMultiplier * second).ToString()}");
+            WriteLine($"{numericMultiplier} * {first} = {(numericMultiplier * first)}");
+            WriteLine($"{numericMultiplier} * {second} = {(numericMultiplier * second)}");
         }
 
-        private void ShowActionsWithVectors(Vector first, Vector second)
+        private void ShowResultsActionsWithVectors(Vector first, Vector second)
         {
             WriteLine("Actions with vectors:");
-            WriteLine($"{first.ToString()} + {second.ToString()} = {(first + second).ToString()}");
-            WriteLine($"{first.ToString()} - {second.ToString()} = {(first - second).ToString()}");
-            WriteLine($"{first.ToString()} * {second.ToString()} = {(first * second).ToString()}");
+            WriteLine($"{first} + {second} = {(first + second)}");
+            WriteLine($"{first} - {second} = {(first - second)}");
+            WriteLine($"{first} * {second} = {(first * second)}");
             WriteLine(string.Empty);
         }
 
         private void ShowVectors(Vector first, Vector second)
         {
             WriteLine("Your vectors:");
-            WriteLine($"1 vector: {first.ToString()}");
-            WriteLine($"2 vector: {second.ToString()}\n");
+            WriteLine($"1 vector: {first}");
+            WriteLine($"2 vector: {second}\n");
         }
 
         private void ShowVectorMultiplication(Vector first, Vector second)
         {
-            var VectorMultiplication = Vector.VectorMultiplicate(first, second);
-            WriteLine($"VectorMultiplication: {first.ToString()} x {second.ToString()} = {VectorMultiplication}");
+            var VectorMultiplication = Vector.CalculateVectorMultiplicate(first, second);
+            WriteLine($"VectorMultiplication: {first} x {second} = {VectorMultiplication}");
             WriteLine(string.Empty);
         }
 
