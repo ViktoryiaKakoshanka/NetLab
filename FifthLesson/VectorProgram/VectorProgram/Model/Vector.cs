@@ -12,7 +12,9 @@ namespace VectorProgram.Model
         {
             get => Math.Round(Math.Sqrt(Math.Pow(FirstCoordinate, 2) + Math.Pow(SecondCoordinate, 2) + Math.Pow(ThirdCoordinate, 2)), 3);
         }
-        
+
+        public Vector() { }
+
         public Vector(double coordinateFirst, double coordinateSecond, double coordinateThird)
         {
             FirstCoordinate = coordinateFirst;
@@ -69,28 +71,32 @@ namespace VectorProgram.Model
 
         public static Vector operator +(Vector first, Vector second)
         {
-            first.FirstCoordinate += second.FirstCoordinate;
-            first.SecondCoordinate += second.SecondCoordinate;
-            first.ThirdCoordinate += second.ThirdCoordinate;
-
-            return first;
+            return new Vector
+            {
+                FirstCoordinate = first.FirstCoordinate + second.FirstCoordinate,
+                SecondCoordinate = first.SecondCoordinate + second.SecondCoordinate,
+                ThirdCoordinate = first.ThirdCoordinate + second.ThirdCoordinate
+            };
         }
 
         public static Vector operator -(Vector first, Vector second)
         {
-            first.FirstCoordinate -= second.FirstCoordinate;
-            first.SecondCoordinate -= second.SecondCoordinate;
-            first.ThirdCoordinate -= second.ThirdCoordinate;
-
-            return first;
+            return new Vector
+            {
+                FirstCoordinate = first.FirstCoordinate - second.FirstCoordinate,
+                SecondCoordinate = first.SecondCoordinate - second.SecondCoordinate,
+                ThirdCoordinate = first.ThirdCoordinate - second.ThirdCoordinate
+            };
         }
 
         public static Vector operator *(double numeric, Vector vector)
         {
-            vector.FirstCoordinate *= numeric;
-            vector.SecondCoordinate *= numeric;
-            vector.ThirdCoordinate *= numeric;
-            return vector;
+            return new Vector
+            {
+                FirstCoordinate = vector.FirstCoordinate * numeric,
+                SecondCoordinate = vector.SecondCoordinate * numeric,
+                ThirdCoordinate = vector.ThirdCoordinate * numeric
+            };
         }
 
         public static Vector operator *(Vector vector, double numeric)
