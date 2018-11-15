@@ -19,9 +19,7 @@ namespace VectorProgram.Model
             SecondCoordinate = coordinateSecond;
             ThirdCoordinate = coordinateThird;
         }
-
-        public Vector() : this(0, 0, 0) { }
-
+        
         public Vector(Vector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate) { }
 
         public double CalculateAngleBetweenVectors(Vector vector)
@@ -55,31 +53,44 @@ namespace VectorProgram.Model
 
         public override bool Equals(object obj) => this.Equals(obj as Vector);
   
+        public bool Equals(Vector other)
+        {
+            if ((object)this == (object)other) return true;
+            if ((object)other == null) return false;
+            if (GetType() != other.GetType()) return false;
+            var ValueСomparison = FirstCoordinate == other.FirstCoordinate && SecondCoordinate == other.SecondCoordinate && ThirdCoordinate == other.ThirdCoordinate;
+            return ValueСomparison;
+        }
+
+        public static bool Equals(Vector first, Vector second)
+        {
+            return (first != null) ? first.Equals(second) : (object)first == (object)second;
+        }
+
         public static Vector operator +(Vector first, Vector second)
         {
-            var result = new Vector(first);
+            first.FirstCoordinate += second.FirstCoordinate;
+            first.SecondCoordinate += second.SecondCoordinate;
+            first.ThirdCoordinate += second.ThirdCoordinate;
 
-            result.FirstCoordinate += second.FirstCoordinate;
-            result.SecondCoordinate += second.SecondCoordinate;
-            result.ThirdCoordinate += second.ThirdCoordinate;
-
-            return result;
+            return first;
         }
 
         public static Vector operator -(Vector first, Vector second)
         {
-            var result = new Vector(first);
+            first.FirstCoordinate -= second.FirstCoordinate;
+            first.SecondCoordinate -= second.SecondCoordinate;
+            first.ThirdCoordinate -= second.ThirdCoordinate;
 
-            result.FirstCoordinate -= second.FirstCoordinate;
-            result.SecondCoordinate -= second.SecondCoordinate;
-            result.ThirdCoordinate -= second.ThirdCoordinate;
-
-            return result;
+            return first;
         }
 
         public static Vector operator *(double numeric, Vector vector)
         {
-            return new Vector(vector.FirstCoordinate * numeric, vector.SecondCoordinate * numeric, vector.ThirdCoordinate * numeric);
+            vector.FirstCoordinate *= numeric;
+            vector.SecondCoordinate *= numeric;
+            vector.ThirdCoordinate *= numeric;
+            return vector;
         }
 
         public static Vector operator *(Vector vector, double numeric)
@@ -96,20 +107,6 @@ namespace VectorProgram.Model
 
         public static bool operator !=(Vector first, Vector second) => !Equals(first, second);
   
-        public bool Equals(Vector other)
-        {
-            if ((object)this == (object)other) return true;
-            if ((object)other == null) return false;
-            if (GetType() != other.GetType()) return false;
-            var ValueСomparison = FirstCoordinate == other.FirstCoordinate && SecondCoordinate == other.SecondCoordinate && ThirdCoordinate == other.ThirdCoordinate;
-            return ValueСomparison;
-        }
-
-        public static bool Equals(Vector first, Vector second)
-        {
-            return (first != null) ? first.Equals(second) : (object)first == (object)second;
-        }
-
         public static Vector CalculateVectorMultiplicate(Vector first, Vector second) =>  VectorHelper.CalculateVectorMultiplicate(first, second);
     }
 }

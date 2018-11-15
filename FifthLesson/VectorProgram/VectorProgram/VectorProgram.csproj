@@ -46,7 +46,6 @@
     <Compile Include="Controller\Validator.cs" />
     <Compile Include="Controller\VectorHelper.cs" />
     <Compile Include="Model\DataType.cs" />
-    <Compile Include="Model\IVector.cs" />
     <Compile Include="Model\Vector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRun.cs" />

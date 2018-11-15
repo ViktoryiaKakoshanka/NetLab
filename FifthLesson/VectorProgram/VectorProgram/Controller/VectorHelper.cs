@@ -5,12 +5,13 @@ namespace VectorProgram.Controller
 {
     public static class VectorHelper
     {
-        public static double CalculateAngleBetweenVectors(IVector first, IVector second)
+        public static double CalculateAngleBetweenVectors(Vector first, Vector second)
         {
-            var scalarMultiplicationResult = first.FirstCoordinate * second.FirstCoordinate + first.SecondCoordinate * second.SecondCoordinate + first.ThirdCoordinate * second.ThirdCoordinate;
+            var scalarMultiplicationResult = first * second;
 
             var moduleFirstVector = CalculateModuleVector(first);
             var moduleSecondVector = CalculateModuleVector(second);
+
             var moduleMultipleVectors = moduleFirstVector * moduleSecondVector;
 
             var angle = scalarMultiplicationResult / moduleMultipleVectors;
@@ -18,7 +19,7 @@ namespace VectorProgram.Controller
             return angle;
         }
 
-        public static string CalculateVectorMultiplicate(IVector first, IVector second)
+        public static Vector CalculateVectorMultiplicate(Vector first, Vector second)
         {
             var arrayForFirstOrta = new[,] {
                 { first.SecondCoordinate, first.ThirdCoordinate },
@@ -37,10 +38,10 @@ namespace VectorProgram.Controller
             var determinantTwo = CalculateDeterminantTwoByTwo(arrayForFirstOrta);
             var determinantThree = CalculateDeterminantTwoByTwo(arrayForFirstOrta);
 
-            return $"({determinantOne.ToString()}) * i + ({determinantTwo.ToString()}) * j + ({determinantThree.ToString()}) * k";
+            return new Vector(determinantOne, determinantTwo, determinantThree);
         }
 
-        public static double CalculateModuleVector(IVector vector)
+        public static double CalculateModuleVector(Vector vector)
         {
             var powFirst = Math.Pow(vector.FirstCoordinate, 2);
             var powSecond = Math.Pow(vector.SecondCoordinate, 2);
@@ -54,6 +55,7 @@ namespace VectorProgram.Controller
         {
             return elements[0,0] * elements[1,1] - elements[0, 1] * elements[1, 0];
         }
+
 
     }
 }
