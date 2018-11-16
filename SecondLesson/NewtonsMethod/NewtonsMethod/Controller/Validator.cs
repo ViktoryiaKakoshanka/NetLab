@@ -8,9 +8,9 @@ namespace NewtonsMethod.Controller
     {
         private static readonly IDictionary<InputedParams, string> validationRules = new Dictionary<InputedParams, string>
         {
-            {InputedParams.Numerical, @"\d+\.\d+|\d+" },
-            {InputedParams.Power, @"\d+" },
-            {InputedParams.Аccurancy, @"0\.\d+|1" }
+            {InputedParams.Numerical, @"\d+\[.|,]\d+|\d+" },
+            {InputedParams.Power, @"\d+^[\W|,]" },
+            {InputedParams.Аccurancy, @"^0[.,]\d+|1$" }
         };
 
         public static bool ValidateInput(string input, InputedParams param)
