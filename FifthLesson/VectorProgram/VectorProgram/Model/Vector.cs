@@ -36,36 +36,35 @@ namespace VectorProgram.Model
 
         public override int GetHashCode()
         {
-            var hashCodeProperties = new int[]
-                {
-                    FirstCoordinate.GetHashCode(),
-                    SecondCoordinate.GetHashCode(),
-                    ThirdCoordinate.GetHashCode()
-                };
-
-            var result = hashCodeProperties[0];
-
-            for (int i = 1; i < hashCodeProperties.Length; i++)
-            {
-                result = unchecked(result * 397) ^ hashCodeProperties[i];
-            }
-
+            var firstHashCode = FirstCoordinate.GetHashCode();
+            var secondHashCode = SecondCoordinate.GetHashCode();
+            var thirdHashCode = ThirdCoordinate.GetHashCode();
+            
+            var result = firstHashCode;
+            result = unchecked(result * 397) ^ secondHashCode;
+            result = unchecked(result * 397) ^ thirdHashCode;
+            
             return result;
         }
 
-        public override bool Equals(object obj) => this.Equals(obj as Vector);
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return (this.GetType() != obj.GetType()) ? false : this.Equals((Vector)obj);
+        }
   
         public bool Equals(Vector other)
         {
+            if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            if ((object)other == null) return false;
             var ValueСomparison = FirstCoordinate == other.FirstCoordinate && SecondCoordinate == other.SecondCoordinate && ThirdCoordinate == other.ThirdCoordinate;
             return ValueСomparison;
         }
 
         public static bool Equals(Vector first, Vector second)
         {
-            return (first != null) ? first.Equals(second) : (object)first == (object)second;
+            return ((object)first != null) ? first.Equals(second) : (object)first == (object)second;
         }
 
         public static Vector operator +(Vector first, Vector second)
@@ -112,6 +111,6 @@ namespace VectorProgram.Model
 
         public static bool operator !=(Vector first, Vector second) => !Equals(first, second);
   
-        public static Vector CalculateVectorMultiplicate(Vector first, Vector second) =>  VectorHelper.CalculateVectorMultiplicate(first, second);
+        public static Vector CalculateVectorsMultiplication(Vector first, Vector second) =>  VectorHelper.CalculateVectorMultiplication(first, second);
     }
 }

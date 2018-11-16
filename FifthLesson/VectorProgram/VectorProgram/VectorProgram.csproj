@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ArrayDeterminantCalculator.cs" />
     <Compile Include="Controller\DataParser.cs" />
     <Compile Include="Controller\Validator.cs" />
     <Compile Include="Controller\VectorHelper.cs" />

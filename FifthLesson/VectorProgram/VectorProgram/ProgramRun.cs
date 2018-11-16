@@ -13,16 +13,12 @@ namespace VectorProgram
 
             ShowVectors(vectors[0], vectors[1]);
 
-            ShowResultsActionsWithVectors(vectors[0], vectors[1]);
+            ShowResultsActionsWithVectors(vectors);
 
             CompareVectors(vectors[0], vectors[1]);
-
-            ShowVectorMultiplication(vectors[0], vectors[1]);
-
+            
             ShowAngleBetweenVectors(vectors[0], vectors[1]);
-
-            ShowMultiplicationVectorsByNumber(vectors[0], vectors[1]);
-
+            
             Console.ReadKey(true);
         }
 
@@ -33,7 +29,7 @@ namespace VectorProgram
 
             return new[] { vectorFirst, vectorSecond };
         }
-
+        
         private void ShowVectors(Vector first, Vector second)
         {
             Console.WriteLine("Your vectors:");
@@ -41,13 +37,11 @@ namespace VectorProgram
             Console.WriteLine($"2 vector: {second}\n");
         }
 
-        private void ShowResultsActionsWithVectors(Vector first, Vector second)
+        private void ShowResultsActionsWithVectors(Vector[] vectors)
         {
-            Console.WriteLine("Actions with vectors:");
-            Console.WriteLine($"{first} + {second} = {(first + second)}");
-            Console.WriteLine($"{first} - {second} = {(first - second)}");
-            Console.WriteLine($"{first} * {second} = {(first * second)}");
-            Console.WriteLine(string.Empty);
+            ShowResultsSimpleActionsWithVectors(vectors[0], vectors[1]);
+            ShowVectorsMultiplication(vectors[0], vectors[1]);
+            ShowMultiplicationVectorsByNumber(vectors[0], vectors[1]);
         }
 
         private void CompareVectors(Vector first, Vector second)
@@ -58,17 +52,26 @@ namespace VectorProgram
             Console.WriteLine(string.Empty);
         }
 
-        private void ShowVectorMultiplication(Vector first, Vector second)
-        {
-            var vectorMultiplication = Vector.CalculateVectorMultiplicate(first, second);
-            Console.WriteLine($"VectorMultiplication: {first} x {second} = {VectorMultiplication}");
-            Console.WriteLine(string.Empty);
-        }
-
         private void ShowAngleBetweenVectors(Vector vectorFirst, Vector vectorSecond)
         {
             var angle = vectorFirst.CalculateAngleBetweenVectors(vectorSecond);
             Console.WriteLine($"The angle between {vectorFirst} and {vectorSecond} = {Math.Abs(angle)}");
+            Console.WriteLine(string.Empty);
+        }
+
+        private void ShowResultsSimpleActionsWithVectors(Vector first, Vector second)
+        {
+            Console.WriteLine("Actions with vectors:");
+            Console.WriteLine($"{first} + {second} = {(first + second)}");
+            Console.WriteLine($"{first} - {second} = {(first - second)}");
+            Console.WriteLine($"{first} * {second} = {(first * second)}");
+            Console.WriteLine(string.Empty);
+        }
+
+        private void ShowVectorsMultiplication(Vector first, Vector second)
+        {
+            var vectorMultiplication = Vector.CalculateVectorsMultiplication(first, second);
+            Console.WriteLine($"VectorMultiplication: {first} x {second} = {vectorMultiplication}");
             Console.WriteLine(string.Empty);
         }
 
@@ -93,7 +96,7 @@ namespace VectorProgram
         private double GetUserNumericMultiplier()
         {
             double numericInput;
-            var userInput = RequestUserInput(DataType.Multiplier, "Enter a number to produce a vector by a number:");
+            var userInput = RequestUserInput(DataType.Multiplier, "Enter multiplier:");
 
             double.TryParse(userInput.Replace(",", "."), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out numericInput);
             return numericInput;
@@ -105,16 +108,16 @@ namespace VectorProgram
             return new Vector(coords[0], coords[1], coords[2]);
         }
         
-        private string RequestUserInput(DataType dataType, string welcomMessage)
+        private string RequestUserInput(DataType dataType, string welcomeMessage)
         {
             var userInput = string.Empty;
-            var correctInput = false;
+            var isUserInputCorrect = false;
 
-            while (!correctInput)
+            while (!isUserInputCorrect)
             {
-                Console.WriteLine(welcomMessage);
+                Console.WriteLine(welcomeMessage);
                 userInput = Console.ReadLine();
-                correctInput = ValidateUserInput(dataType, userInput);
+                isUserInputCorrect = ValidateUserInput(dataType, userInput);
             }
             
             return userInput;
@@ -122,12 +125,12 @@ namespace VectorProgram
 
         private bool ValidateUserInput(DataType dataType, string userInput)
         {
-            var correctInput = false;
-            correctInput = Validator.ValidateInput(dataType, userInput);
-            if (!correctInput) WriteErrorMessage();
-            return correctInput;
+            var isUserInputCorrect = false;
+            isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
+            if (!isUserInputCorrect) WriteErrorMessage();
+            return isUserInputCorrect;
         }
         
-        private void WriteErrorMessage() => Console.WriteLine("You entered non-correct numbers.");
+        private void WriteErrorMessage() => Console.WriteLine("You entered incorrect numbers.");
     }
 }

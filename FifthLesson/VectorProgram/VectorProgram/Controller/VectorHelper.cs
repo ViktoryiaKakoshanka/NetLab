@@ -9,34 +9,23 @@ namespace VectorProgram.Controller
         {
             var scalarMultiplicationResult = first * second;
 
-            var moduleFirstVector = CalculateModuleVector(first);
-            var moduleSecondVector = CalculateModuleVector(second);
+            var firstVectorModule = CalculateModuleVector(first);
+            var secondVectorModule = CalculateModuleVector(second);
 
-            var moduleMultipleVectors = moduleFirstVector * moduleSecondVector;
+            var productOfVectorModules = firstVectorModule * secondVectorModule;
 
-            var angle = scalarMultiplicationResult / moduleMultipleVectors;
+            var angle = scalarMultiplicationResult / productOfVectorModules;
 
             return angle;
         }
 
-        public static Vector CalculateVectorMultiplicate(Vector first, Vector second)
+        public static Vector CalculateVectorMultiplication(Vector first, Vector second)
         {
-            var arrayForFirstOrta = new[,] {
-                { first.SecondCoordinate, first.ThirdCoordinate },
-                { second.SecondCoordinate, second.ThirdCoordinate }
-            };
-            var arrayForSecondOrta = new[,] {
-                { first.FirstCoordinate, first.ThirdCoordinate },
-                { second.FirstCoordinate, second.ThirdCoordinate }
-            };
-            var arrayForThirdOrta = new[,] {
-                { first.FirstCoordinate, first.SecondCoordinate },
-                { second.FirstCoordinate, second.SecondCoordinate }
-            };
+            var arrayForOrts = CreateArrayOrts(first, second);
             
-            var determinantOne = CalculateDeterminantTwoByTwo(arrayForFirstOrta);
-            var determinantTwo = CalculateDeterminantTwoByTwo(arrayForFirstOrta);
-            var determinantThree = CalculateDeterminantTwoByTwo(arrayForFirstOrta);
+            var determinantOne = ArrayDeterminantCalculator.CalculateDeterminantTwoByTwo(arrayForOrts[0]);
+            var determinantTwo = ArrayDeterminantCalculator.CalculateDeterminantTwoByTwo(arrayForOrts[1]);
+            var determinantThree = ArrayDeterminantCalculator.CalculateDeterminantTwoByTwo(arrayForOrts[2]);
 
             return new Vector(determinantOne, determinantTwo, determinantThree);
         }
@@ -51,11 +40,27 @@ namespace VectorProgram.Controller
             return Math.Abs(result);
         }
 
-        private static double CalculateDeterminantTwoByTwo(double[,] elements)
+        private static double[][,] CreateArrayOrts(Vector first, Vector second)
         {
-            return elements[0,0] * elements[1,1] - elements[0, 1] * elements[1, 0];
+            var arrayOrts = new[]
+            {
+                new[,]
+                {
+                    { first.SecondCoordinate, first.ThirdCoordinate },
+                    { second.SecondCoordinate, second.ThirdCoordinate },
+                },
+                new[,]
+                {
+                    { first.FirstCoordinate, first.ThirdCoordinate },
+                    { second.FirstCoordinate, second.ThirdCoordinate }
+                },
+                new[,]
+                {
+                    { first.FirstCoordinate, first.SecondCoordinate },
+                    { second.FirstCoordinate, second.SecondCoordinate }
+                }
+            };
+            return arrayOrts;
         }
-
-
     }
 }
