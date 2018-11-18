@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorProgram", "VectorProg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorProgramTests", "VectorProgramTests\VectorProgramTests.csproj", "{35B08544-1C17-451C-8F1A-53DC0486710E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialProgram", "PolynomialProgram\PolynomialProgram.csproj", "{FE4902D0-6A60-4435-800D-792A2B90954E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialProgramTests", "PolynomialProgramTests\PolynomialProgramTests.csproj", "{B8448311-737A-49C4-8048-901443DE3F8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{35B08544-1C17-451C-8F1A-53DC0486710E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35B08544-1C17-451C-8F1A-53DC0486710E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35B08544-1C17-451C-8F1A-53DC0486710E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE4902D0-6A60-4435-800D-792A2B90954E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4902D0-6A60-4435-800D-792A2B90954E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4902D0-6A60-4435-800D-792A2B90954E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4902D0-6A60-4435-800D-792A2B90954E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8448311-737A-49C4-8048-901443DE3F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8448311-737A-49C4-8048-901443DE3F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8448311-737A-49C4-8048-901443DE3F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8448311-737A-49C4-8048-901443DE3F8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
