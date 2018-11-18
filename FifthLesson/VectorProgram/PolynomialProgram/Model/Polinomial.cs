@@ -16,8 +16,7 @@ namespace PolynomialProgram.Model
             Monomials = monomials;
         }
 
-        public Polynomial(Polynomial polynomial) :
-            this(polynomial.Power, polynomial.Monomials) { }
+        public Polynomial(Polynomial polynomial) : this(polynomial.Power, polynomial.Monomials) { }
 
         public override string ToString()
         {

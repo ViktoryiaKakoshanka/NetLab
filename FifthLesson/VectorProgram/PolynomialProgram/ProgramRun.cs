@@ -8,8 +8,8 @@ namespace PolynomialProgram
 {
     public class ProgramRun
     {
-        IConsoleView _view;
-        Polynomial[] _polynomials = new Polynomial[2];
+        private IConsoleView _view;
+        private Polynomial[] _polynomials = new Polynomial[2];
         public void Run(IConsoleView view)
         {
             _view = view;
@@ -142,6 +142,5 @@ namespace PolynomialProgram
             return isUserInputCorrect;
         }
 
-        
     }
 }
