@@ -95,11 +95,8 @@ namespace VectorProgram
 
         private double GetUserNumericMultiplier()
         {
-            double numericInput;
             var userInput = RequestUserInput(DataType.Multiplier, "Enter multiplier:");
-
-            double.TryParse(userInput.Replace(",", "."), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out numericInput);
-            return numericInput;
+            return DataParser.DoubleTryParse(userInput);
         }
                 
         private Vector ParseUserInputAndCreateVector(string userInput)

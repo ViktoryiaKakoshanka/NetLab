@@ -3,6 +3,8 @@
     public enum DataType
     {
         Vector,
-        Multiplier
+        Multiplier,
+        Power,
+        Monomial
     }
 }

@@ -9,7 +9,9 @@ namespace VectorProgram.Controller
         private static readonly IDictionary<DataType, string> validationRules = new Dictionary<DataType, string>
         {
             {DataType.Multiplier, @"\d+\[.,]\d+|\d+" },
-            {DataType.Vector, @"^\d+\[.,]\d+|\d+ \d+\[.,]\d+|\d+ \d+\[.,]\d+|\d+$" }
+            {DataType.Vector, @"^\d+\[.,]\d+|\d+ \d+\[.,]\d+|\d+ \d+\[.,]\d+|\d+$" },
+            {DataType.Power, @"\d+$" },
+            {DataType.Monomial, @"\d+\[.,]\d+|\d+" },
         };
 
         public static bool ValidateInput(DataType dataType, string input)
