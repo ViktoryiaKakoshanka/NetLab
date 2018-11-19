@@ -64,7 +64,7 @@ namespace VectorProgram.Model
 
         public static bool Equals(Vector first, Vector second)
         {
-            return ((object)first != null) ? first.Equals(second) : (object)first == (object)second;
+            return (!(first is null)) ? first.Equals(second) : (second is null);
         }
 
         public static Vector operator +(Vector first, Vector second)

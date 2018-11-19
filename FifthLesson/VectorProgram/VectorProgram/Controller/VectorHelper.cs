@@ -23,9 +23,9 @@ namespace VectorProgram.Controller
         {
             var arrayForOrts = CreateArrayOrts(first, second);
             
-            var determinantOne = ArrayDeterminantCalculator.CalculateDeterminantTwoByTwo(arrayForOrts[0]);
-            var determinantTwo = ArrayDeterminantCalculator.CalculateDeterminantTwoByTwo(arrayForOrts[1]);
-            var determinantThree = ArrayDeterminantCalculator.CalculateDeterminantTwoByTwo(arrayForOrts[2]);
+            var determinantOne = ArrayDeterminantCalculator.CalculateDeterminant(arrayForOrts[0]);
+            var determinantTwo = ArrayDeterminantCalculator.CalculateDeterminant(arrayForOrts[1]);
+            var determinantThree = ArrayDeterminantCalculator.CalculateDeterminant(arrayForOrts[2]);
 
             return new Vector(determinantOne, determinantTwo, determinantThree);
         }

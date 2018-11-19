@@ -12,22 +12,20 @@ namespace VectorProgram.Controller
 
             for (var i = 0; i < arr.Length; i++)
             {
-                arrResult[i] = Convert.ToDouble(arr[i]);
+                arrResult[i] = ParseToDouble(arr[i]);
             }
 
             return arrResult;
         }
 
-        public static double DoubleTryParse(string inputData)
+        public static double ParseToDouble(string inputData)
         {
-            double.TryParse(inputData.Replace(",", "."), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double result);
-            return result;
+            return double.Parse(inputData.Replace(",", "."), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"));
         }
 
-        public static int IntTryParse(string inputData)
+        public static int ParseToInt(string inputData)
         {
-            int.TryParse(inputData.Replace(",", "."), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out int result);
-            return result;
+            return int.Parse(inputData);
         }
     }
 }

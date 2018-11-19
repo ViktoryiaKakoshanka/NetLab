@@ -13,7 +13,7 @@ namespace VectorProgram
 
             ShowVectors(vectors[0], vectors[1]);
 
-            ShowResultsActionsWithVectors(vectors);
+            ShowActionsWithVectorsResults(vectors);
 
             CompareVectors(vectors[0], vectors[1]);
             
@@ -37,11 +37,11 @@ namespace VectorProgram
             Console.WriteLine($"2 vector: {second}\n");
         }
 
-        private void ShowResultsActionsWithVectors(Vector[] vectors)
+        private void ShowActionsWithVectorsResults(Vector[] vectors)
         {
             ShowResultsSimpleActionsWithVectors(vectors[0], vectors[1]);
-            ShowVectorsMultiplication(vectors[0], vectors[1]);
-            ShowMultiplicationVectorsByNumber(vectors[0], vectors[1]);
+            ShowVectorsMultiplicationResult(vectors[0], vectors[1]);
+            ShowMultiplicationVectorsByNumberResult(vectors[0], vectors[1]);
         }
 
         private void CompareVectors(Vector first, Vector second)
@@ -68,21 +68,20 @@ namespace VectorProgram
             Console.WriteLine(string.Empty);
         }
 
-        private void ShowVectorsMultiplication(Vector first, Vector second)
+        private void ShowVectorsMultiplicationResult(Vector first, Vector second)
         {
-            var vectorMultiplication = Vector.CalculateVectorsMultiplication(first, second);
-            Console.WriteLine($"VectorMultiplication: {first} x {second} = {vectorMultiplication}");
+            var vectorMultiplicationResult = Vector.CalculateVectorsMultiplication(first, second);
+            Console.WriteLine($"Vector multiplication: {first} x {second} = {vectorMultiplicationResult}");
             Console.WriteLine(string.Empty);
         }
 
-        private void ShowMultiplicationVectorsByNumber(Vector first, Vector second)
+        private void ShowMultiplicationVectorsByNumberResult(Vector first, Vector second)
         {
             var numericMultiplier = GetUserNumericMultiplier();
             Console.WriteLine("Multiplication of vectors by number:");
 
             Console.WriteLine($"{first} * {numericMultiplier} = {(first * numericMultiplier)}");
-            Console.WriteLine($"{second} * {numericMultiplier} = {(second * numericMultiplier)}");
-            Console.WriteLine(string.Empty);
+            Console.WriteLine($"{second} * {numericMultiplier} = {(second * numericMultiplier)}\n");
             Console.WriteLine($"{numericMultiplier} * {first} = {(numericMultiplier * first)}");
             Console.WriteLine($"{numericMultiplier} * {second} = {(numericMultiplier * second)}");
         }
@@ -96,7 +95,7 @@ namespace VectorProgram
         private double GetUserNumericMultiplier()
         {
             var userInput = RequestUserInput(DataType.Multiplier, "Enter multiplier:");
-            return DataParser.DoubleTryParse(userInput);
+            return DataParser.ParseToDouble(userInput);
         }
                 
         private Vector ParseUserInputAndCreateVector(string userInput)

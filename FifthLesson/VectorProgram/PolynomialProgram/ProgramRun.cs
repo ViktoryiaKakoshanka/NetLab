@@ -95,13 +95,13 @@ namespace PolynomialProgram
         private int GetUserPower()
         {
             var userInput = RequestUserInput(DataType.Power, "Enter power:");
-            return DataParser.IntTryParse(userInput);
+            return DataParser.ParseToInt(userInput);
         }
 
         private int GetUserMultiplier()
         {
             var userInput = RequestUserInput(DataType.Multiplier, "Enter multiplier:");
-            return DataParser.IntTryParse(userInput);
+            return DataParser.ParseToInt(userInput);
         }
         
         private IDictionary<int, double> GetUserMonomials(int power)
@@ -113,7 +113,7 @@ namespace PolynomialProgram
             for (int i = power; i >= 1; i--)
             {
                 userInput = RequestUserInput(DataType.Monomial, $"Enter monomial in {i} power:");
-                currentMonomial = DataParser.DoubleTryParse(userInput);
+                currentMonomial = DataParser.ParseToDouble(userInput);
                 resultMonomials.Add(i, currentMonomial);
             }
 

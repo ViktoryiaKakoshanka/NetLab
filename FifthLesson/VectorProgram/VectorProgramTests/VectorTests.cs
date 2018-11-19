@@ -46,7 +46,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void ScalarMultiplicateOfVectors_returnedVectorScalarMultiplication()
+        public void ScalarMultiplicationOfVectors_returnedScalarMultiplication()
         {
             var expect = 50;
             var actual = firstVector * secondVector;

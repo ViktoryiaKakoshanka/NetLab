@@ -18,24 +18,6 @@ namespace PolynomialProgram.Model
 
         public Polynomial(Polynomial polynomial) : this(polynomial.Power, polynomial.Monomials) { }
 
-        public override string ToString()
-        {
-            var result = string.Empty;
-            for (int key = Power; key >= 0; key--)
-            {
-                if (Monomials[key] == 0) continue;
-                result += FormatedValues(Monomials[key]) + FormatedPowerForOutput(key);
-            }
-            return result;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return (this.GetType() != obj.GetType()) ? false : this.Equals((Polynomial)obj);
-        }
-
         public bool Equals(Polynomial other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -45,12 +27,30 @@ namespace PolynomialProgram.Model
             return true;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return (this.GetType() != obj.GetType()) ? false : this.Equals((Polynomial)obj);
+        }
+
         public override int GetHashCode()
         {
             var firstHashCode = Power.GetHashCode();
             var secondHashCode = Monomials.Sum(x => x.Value).GetHashCode();
 
             var result = unchecked(firstHashCode * 397) ^ secondHashCode;
+            return result;
+        }
+
+        public override string ToString()
+        {
+            var result = string.Empty;
+            for (int key = Power; key >= 0; key--)
+            {
+                if (Monomials[key] == 0) continue;
+                result += FormatedValues(Monomials[key]) + FormatedPowerForOutput(key);
+            }
             return result;
         }
 
