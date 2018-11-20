@@ -1,6 +1,4 @@
 ﻿using System;
-using TriangleLib.Model;
-using TriangleLib.Controller;
 
 namespace TriangleLib.View
 {

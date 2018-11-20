@@ -18,12 +18,12 @@ namespace TriangleLib.View
 
         public void PrintPerimetrTriangle(double perimetr)
         {
-            _view.WriteLine($"Perimeter of a triangle:{perimetr}");
+            _view.WriteLine($"Perimeter of a triangle: {perimetr}");
         }
 
         public void PrintAreaTriangle(double square)
         {
-            _view.WriteLine($"Area of ​​a triangle:{square}");
+            _view.WriteLine($"Area of ​​a triangle: {square}");
         }
 
         public void PrintDetailsTriangle(string triangle, double perimeter, double area)
