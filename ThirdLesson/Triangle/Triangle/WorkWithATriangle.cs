@@ -8,6 +8,7 @@ namespace TriangleLib
     class WorkWithATriangle
     {
         private IConsoleView _view;
+        private FormatedOutput _formatedOutput;
 
         public void RunProgram(IConsoleView view)
         {
@@ -15,60 +16,74 @@ namespace TriangleLib
             var secondSide = 0.0;
             var thirdSide = 0.0;
 
-            Triangle triangle;
             _view = view;
-
+            _formatedOutput = new FormatedOutput(_view);
+            
             _view.Clear();
 
-            EnterInputData(ref firstSide, '1');
-            EnterInputData(ref secondSide, '2');
-            EnterInputData(ref thirdSide, '3');
-            
+            GetSidesOfTriangle(ref firstSide, ref secondSide, ref thirdSide);
 
-            triangle = TryCreateTriangle( firstSide, secondSide, thirdSide);
+            var triangle = TryCreateTriangle(firstSide, secondSide, thirdSide);
+
             ShowDetails(triangle, view);
+
             FinishedRun();
+        }
+
+        private void GetSidesOfTriangle(ref double firstSide, ref double secondSide, ref double thirdSide)
+        {
+            firstSide = RequestUserInput('1');
+            secondSide = RequestUserInput('2');
+            thirdSide = RequestUserInput('3');
         }
 
         private static Triangle TryCreateTriangle(double firstSide, double secondSide, double thirdSide)
         {
             Triangle triangle = null;
-            if (ValidatingTriangleHelper.ValidateTriangle(firstSide, secondSide, thirdSide))
+            var isValidatingTriangle = Validator.ValidateTriangle(firstSide, secondSide, thirdSide);
+
+            if (isValidatingTriangle)
             {
                 triangle = new Triangle(firstSide, secondSide, thirdSide);
             }
             return triangle;
         }
 
-        private static void ShowDetails(Triangle triangle, IConsoleView view)
+        private void ShowDetails(Triangle triangle, IConsoleView view)
         {
             if(triangle != null)
             {
-                view.PrintDetailsTriangle(triangle);
+                var perimeter = TriangleCalculations.CalculateThePerimeter(triangle);
+                var area = TriangleCalculations.CalculateTheArea(triangle);
+                _formatedOutput.PrintDetailsTriangle(triangle.ToString(), perimeter, area);
             }
             else
             {
-                view.ShowWarningMessageTriangleNotExist();
+                _formatedOutput.ShowWarningMessageTriangleNotExist();
             }
         }
 
-        private void EnterInputData(ref double side, char sideNumber)
+        private double RequestUserInput(char sideNumber)
         {
+            var side = 0.0;
             while (side <= 0)
             {
-                VerifySideUser(ref side, sideNumber);
+                side = VerifySideUser(side, sideNumber);
             }
+            return side;
         }
 
-        private void VerifySideUser(ref double side, char sideNumber)
+        private double VerifySideUser(double side, char sideNumber)
         {
             _view.WriteLine($"Enter the value of {sideNumber} side");
-            side = ValidatingTriangleHelper.TryParseInputtingSide(_view.ReadLine());
-            if (side == 0.0) _view.ShowWarningMessage();
+            side = Validator.TryParseInputtingSide(_view.ReadLine());
+            if (side == 0.0)
+            {
+                _formatedOutput.ShowWarningMessage();
+            }
+            return side;
         }
-
-
-
+        
         private void FinishedRun()
         {
             _view.WriteLine("Would you like to start over? (yes - press Enter, no - any keyboard key)");

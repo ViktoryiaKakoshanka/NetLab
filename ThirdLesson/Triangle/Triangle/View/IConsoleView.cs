@@ -8,11 +8,6 @@ namespace TriangleLib.View
 {
     public interface IConsoleView
     {
-        void ShowWarningMessage();
-        void PrintPerimetrTriangle(double perimetr);
-        void PrintAreaTriangle(double square);
-        void PrintDetailsTriangle(Triangle triangle);
-        void ShowWarningMessageTriangleNotExist();
         void WriteLine(string text);
         string ReadLine();
         void Clear();
