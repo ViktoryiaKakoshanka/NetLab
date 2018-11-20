@@ -1,10 +1,13 @@
-﻿namespace VectorProgram
+﻿using VectorProgram.View;
+
+namespace VectorProgram
 {
     class Program
     {
         static void Main(string[] args)
         {
-           new ProgramRun().Run();
+            IConsoleView consoleView = new ConsoleView();
+            new ProgramRun().Run(consoleView);
         }
     }
 }

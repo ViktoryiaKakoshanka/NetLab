@@ -80,6 +80,5 @@ namespace PolynomialProgram.Model
             return (value != 1) ? $"x^{value}" : string.Empty;
         }
 
-
     }
 }

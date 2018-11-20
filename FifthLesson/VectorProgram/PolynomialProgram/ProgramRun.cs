@@ -1,25 +1,31 @@
 ﻿using PolynomialProgram.Model;
-using PolynomialProgram.View;
 using System.Collections.Generic;
 using VectorProgram.Controller;
 using VectorProgram.Model;
+using VectorProgram.View;
+using VectorProgram.UserInput;
 
 namespace PolynomialProgram
 {
     public class ProgramRun
     {
         private IConsoleView _view;
+        private IProcessingUserInput _userInput;
+        private View.FormattedOutput _formattedOutput;
         private Polynomial[] _polynomials = new Polynomial[2];
+
         public void Run(IConsoleView view)
         {
             _view = view;
+            _userInput = new ProcessingUserInput(_view);
+            _formattedOutput = new View.FormattedOutput(_view);
 
             Initialize();
-            ShowInputedPolynomials();
+            _formattedOutput.ShowInputedPolynomials(_polynomials[0], _polynomials[1]);
 
             //CreateAndShowPolynomials();
             var multiplier = GetUserMultiplier();
-            ShowResultsSimpleActionsWithPolynomials(multiplier);
+            SimpleActionsWithPolynomials(multiplier);
 
             _view.ReadKey();
         }
@@ -50,15 +56,17 @@ namespace PolynomialProgram
         private void CreateAndShowPolynomials()
         {
             CreatePolynomials();
-            ShowInputedPolynomials();
+            _formattedOutput.ShowInputedPolynomials(_polynomials[0], _polynomials[1]);
         }
 
-        private void ShowResultsSimpleActionsWithPolynomials(double multiplier)
+        private void SimpleActionsWithPolynomials(double multiplier)
         {
-            _view.WriteLine($"Sum: {GetSumPolynomials()}");
-            _view.WriteLine($"Difference: {GetDifferencePolynomials()}");
-            _view.WriteLine($"Multiplication polynomials: {GetMultiplicationPolynomials()}");
-            _view.WriteLine($"Multiplication first polynomial by : {GetMultiplicationNumberByPolynomial(multiplier)}");
+            var sumResult = GetSumPolynomials();
+            var differenceResult = GetDifferencePolynomials();
+            var multiplicationPolynomialsResult = GetMultiplicationPolynomials();
+            var multiplicationNumberByPolynomialResult = GetMultiplicationNumberByPolynomial(multiplier);
+            
+            _formattedOutput.ShowSimpleActionsWithPolynomialsResults(sumResult, differenceResult, multiplicationPolynomialsResult, multiplicationNumberByPolynomialResult);
         }
         
         private void CreatePolynomials()
@@ -66,16 +74,7 @@ namespace PolynomialProgram
             _polynomials[0] = GetUserPolynomial();
             _polynomials[1] = GetUserPolynomial();
         }
-
-        private void ShowInputedPolynomials()
-        {
-            _view.WriteLine("Your first polynomial:");
-            _view.WriteLine(_polynomials[0].ToString());
-
-            _view.WriteLine("Your second polynomial:");
-            _view.WriteLine(_polynomials[1].ToString());
-        }
-
+        
         private Polynomial GetSumPolynomials() => _polynomials[0] + _polynomials[1];
 
         private Polynomial GetDifferencePolynomials() => _polynomials[0] - _polynomials[1];
@@ -94,13 +93,13 @@ namespace PolynomialProgram
 
         private int GetUserPower()
         {
-            var userInput = RequestUserInput(DataType.Power, "Enter power:");
+            var userInput = _userInput.RequestUserInput(DataType.Power, "Enter power:");
             return DataParser.ParseToInt(userInput);
         }
 
         private int GetUserMultiplier()
         {
-            var userInput = RequestUserInput(DataType.Multiplier, "Enter multiplier:");
+            var userInput = _userInput.RequestUserInput(DataType.Multiplier, "Enter multiplier:");
             return DataParser.ParseToInt(userInput);
         }
         
@@ -112,34 +111,12 @@ namespace PolynomialProgram
 
             for (int i = power; i >= 1; i--)
             {
-                userInput = RequestUserInput(DataType.Monomial, $"Enter monomial in {i} power:");
+                userInput = _userInput.RequestUserInput(DataType.Monomial, $"Enter monomial in {i} power:");
                 currentMonomial = DataParser.ParseToDouble(userInput);
                 resultMonomials.Add(i, currentMonomial);
             }
 
             return resultMonomials;
-        }
-
-        private string RequestUserInput(DataType dataType, string welcomeMessage)
-        {
-            var userInput = string.Empty;
-            var isUserInputCorrect = false;
-
-            while (!isUserInputCorrect)
-            {
-                userInput = _view.ReadLine(welcomeMessage);
-                isUserInputCorrect = ValidateUserInput(dataType, userInput);
-            }
-
-            return userInput;
-        }
-
-        private bool ValidateUserInput(DataType dataType, string userInput)
-        {
-            var isUserInputCorrect = false;
-            isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
-            if (!isUserInputCorrect) _view.WriteErrorMessage();
-            return isUserInputCorrect;
         }
 
     }

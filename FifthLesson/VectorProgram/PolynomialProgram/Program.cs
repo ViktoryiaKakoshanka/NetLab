@@ -1,4 +1,4 @@
-﻿using PolynomialProgram.View;
+﻿using VectorProgram.View;
 
 namespace PolynomialProgram
 {
@@ -6,7 +6,7 @@ namespace PolynomialProgram
     {
         static void Main(string[] args)
         {
-            IConsoleView consoleView = new ConsoleView();
+            IConsoleView consoleView = new View.ConsoleView();
             new ProgramRun().Run(consoleView);
         }
     }

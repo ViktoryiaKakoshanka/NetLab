@@ -1,7 +1,6 @@
 ﻿using System;
-using VectorProgram.View;
 
-namespace PolynomialProgram.View
+namespace VectorProgram.View
 {
     public class ConsoleView : IConsoleView
     {

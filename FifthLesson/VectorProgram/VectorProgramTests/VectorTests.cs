@@ -7,9 +7,16 @@ namespace VectorProgramTests
     [TestClass]
     public class VectorTests
     {
-        private readonly Vector firstVector = new Vector(1, 2, 3);
-        private readonly Vector secondVector = new Vector(7, 8, 9);
+        Vector firstVector;
+        Vector secondVector;
         
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            firstVector = new Vector(1, 2, 3);
+            secondVector = new Vector(7, 8, 9);
+        }
+
         [TestMethod]
         public void SumOfVectors_returnedVectorSum()
         {

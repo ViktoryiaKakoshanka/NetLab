@@ -1,4 +1,4 @@
-﻿namespace PolynomialProgram.View
+﻿namespace VectorProgram.View
 {
     public interface IConsoleView
     {

@@ -104,7 +104,13 @@ namespace VectorProgram.Model
 
         public static double operator *(Vector first, Vector second)
         {
-            return first.FirstCoordinate * second.FirstCoordinate + first.SecondCoordinate * second.SecondCoordinate + first.ThirdCoordinate * second.ThirdCoordinate;
+            var multiplicationFirstCoordinates = first.FirstCoordinate * second.FirstCoordinate;
+            var multiplicationSecondCoordinates = first.SecondCoordinate * second.SecondCoordinate;
+            var multiplicationThirdCoordinates = first.ThirdCoordinate * second.ThirdCoordinate;
+
+            var sumMultiplicationCoordinates = multiplicationFirstCoordinates + multiplicationSecondCoordinates + multiplicationThirdCoordinates;
+
+            return sumMultiplicationCoordinates;
         }
 
         public static bool operator ==(Vector first, Vector second) => Equals(first, second);
