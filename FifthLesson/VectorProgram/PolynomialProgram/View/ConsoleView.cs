@@ -5,6 +5,7 @@ namespace PolynomialProgram.View
 {
     public class ConsoleView : IConsoleView
     {
+        //todo: rename
         public void ReadKey() => Console.ReadKey(true);
 
         public string ReadLine(string message)

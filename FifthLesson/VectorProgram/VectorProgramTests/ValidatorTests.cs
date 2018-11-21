@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VectorProgram.Controller;
 using VectorProgram.Model;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace VectorProgramTests
 {
@@ -10,15 +12,11 @@ namespace VectorProgramTests
         [TestMethod]
         public void ValidateInput_returnedIsCorrectMultiplier()
         {
-            bool actual;
+            var inputMultiplier = new List<string> { "1", "56565", "1.0", "1,54" };
 
-            var inputMultiplier = new[] { "1", "56565", "1.0", "1,54" };
-           
-            foreach (var item in inputMultiplier)
-            {
-                actual = Validator.ValidateInput(DataType.Multiplier, item);
-                Assert.IsTrue(actual);
-            }
+            var allParsedCorrect = inputMultiplier.All(x => Validator.ValidateInput(DataType.Multiplier, x));
+
+            Assert.IsTrue(allParsedCorrect);
         }
 
         [TestMethod]

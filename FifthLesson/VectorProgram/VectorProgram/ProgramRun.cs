@@ -32,8 +32,8 @@ namespace VectorProgram
 
         private Vector[] CreateVectors()
         {
-            Vector vectorFirst = GetUserVector("first");
-            Vector vectorSecond = GetUserVector("second");
+            Vector vectorFirst = RequestVector("first");
+            Vector vectorSecond = RequestVector("second");
 
             return new[] { vectorFirst, vectorSecond };
         }
@@ -48,7 +48,7 @@ namespace VectorProgram
         private void CompareVectors(Vector[] vectors)
         {
             var equalityResult = (vectors[0] == vectors[1]);
-            var inequalityResult = (vectors[0] != vectors[1]);
+            var inequalityResult = vectors[0] != vectors[1];
             _formattedOutput.ShowCompareVectorsResults(vectors, equalityResult, inequalityResult);
         }
 
@@ -92,10 +92,10 @@ namespace VectorProgram
             _formattedOutput.ShowMultiplicationVectorsByNumberResults(vectors, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
         }
         
-        private Vector GetUserVector(string orderByVectors)
+        private Vector RequestVector(string orderByVectors)
         {
             var userInput = _userInput.RequestUserInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
-            return ParseUserInputAndCreateVector(userInput);
+            return ParseVector(userInput);
         }
 
         private double GetUserNumberMultiplier()
@@ -104,7 +104,7 @@ namespace VectorProgram
             return DataParser.ParseToDouble(userInput);
         }
                 
-        private Vector ParseUserInputAndCreateVector(string userInput)
+        private Vector ParseVector(string userInput)
         {
             var coords = DataParser.ParseStringToArray(userInput);
             return new Vector(coords[0], coords[1], coords[2]);

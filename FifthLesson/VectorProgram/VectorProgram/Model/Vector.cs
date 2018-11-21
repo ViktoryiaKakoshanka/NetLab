@@ -102,6 +102,7 @@ namespace VectorProgram.Model
             return numeric * vector;
         }
 
+        //todo: create own method
         public static double operator *(Vector first, Vector second)
         {
             var multiplicationFirstCoordinates = first.FirstCoordinate * second.FirstCoordinate;
@@ -113,7 +114,7 @@ namespace VectorProgram.Model
             return sumMultiplicationCoordinates;
         }
 
-        public static bool operator ==(Vector first, Vector second) => Equals(first, second);
+        public static bool operator ==(Vector first, Vector second) => first.Equals(second);
 
         public static bool operator !=(Vector first, Vector second) => !Equals(first, second);
   
