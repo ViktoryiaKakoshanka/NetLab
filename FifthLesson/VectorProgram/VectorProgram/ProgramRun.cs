@@ -1,5 +1,4 @@
-﻿using System;
-using VectorProgram.Controller;
+﻿using VectorProgram.Controller;
 using VectorProgram.Model;
 using VectorProgram.UserInput;
 using VectorProgram.View;
@@ -21,13 +20,13 @@ namespace VectorProgram
 
             _formattedOutput.ShowVectors(vectors[0], vectors[1]);
 
-            ActionsWithVectors(vectors);
+            CallActionsWithVectors(vectors);
 
-            CompareVectors(vectors);
+            CallCompareVectors(vectors);
             
-            AngleBetweenVectors(vectors);
+            CallAngleBetweenVectors(vectors);
 
-            _view.ReadKey();
+            _view.PressKeyToContinue();
         }
 
         private Vector[] CreateVectors()
@@ -38,44 +37,49 @@ namespace VectorProgram
             return new[] { vectorFirst, vectorSecond };
         }
         
-        private void ActionsWithVectors(Vector[] vectors)
+        private void CallActionsWithVectors(Vector[] vectors)
         {
-            SimpleActionsWithVectors(vectors);
-            VectorsMultiplication(vectors);
-            MultiplicationVectorsByNumber(vectors);
+            CallSimpleActionsWithVectors(vectors);
+            CallVectorMultiplication(vectors);
+            CallMultiplyVectorsByNumber(vectors);
         }
 
-        private void CompareVectors(Vector[] vectors)
+        private void CallCompareVectors(Vector[] vectors)
         {
             var equalityResult = (vectors[0] == vectors[1]);
             var inequalityResult = vectors[0] != vectors[1];
             _formattedOutput.ShowCompareVectorsResults(vectors, equalityResult, inequalityResult);
         }
 
-        private void AngleBetweenVectors(Vector[] vectors)
+        private void CallAngleBetweenVectors(Vector[] vectors)
         {
-            var angle = vectors[0].CalculateAngleBetweenVectors(vectors[1]);
+            var angle = VectorHelper.CalculateAngle(vectors[0], vectors[1]);
             _formattedOutput.ShowAngleBetweenVectorsResult(vectors, angle);
         }
 
-        private void SimpleActionsWithVectors(Vector[] vectors)
+        private void CallSimpleActionsWithVectors(Vector[] vectors)
         {
             var sumResult = vectors[0] + vectors[1];
             var differenceResult = vectors[0] - vectors[1];
-            var multiplicationResult = vectors[0] * vectors[1];
 
-            _formattedOutput.ShowSimpleActionsWithVectorsResults(vectors, sumResult, differenceResult, multiplicationResult);
+            _formattedOutput.ShowSimpleActionsWithVectorsResults(vectors, sumResult, differenceResult);
         }
 
-        private void VectorsMultiplication(Vector[] vectors)
+        private void CallScalarMultiplication(Vector[] vectors)
         {
-            var vectorMultiplicationResult = Vector.CalculateVectorsMultiplication(vectors[0], vectors[1]);
+            var multiplicationResult = VectorHelper.CalculateScalarMultiplication(vectors[0], vectors[1]);
+            _formattedOutput.ShowScalarMultiplicationResult(vectors, multiplicationResult);
+        }
+
+        private void CallVectorMultiplication(Vector[] vectors)
+        {
+            var vectorMultiplicationResult = VectorHelper.CalculateVectorMultiplication(vectors[0], vectors[1]);
             _formattedOutput.ShowVectorsMultiplicationResult(vectors, vectorMultiplicationResult);
         }
 
-        private void MultiplicationVectorsByNumber(Vector[] vectors)
+        private void CallMultiplyVectorsByNumber(Vector[] vectors)
         {
-            var multiplier = GetUserNumberMultiplier();
+            var multiplier = RequestUserNumberMultiplier();
 
             var multiplicationVectorsByNumberRight = new[]
             {
@@ -98,15 +102,15 @@ namespace VectorProgram
             return ParseVector(userInput);
         }
 
-        private double GetUserNumberMultiplier()
+        private double RequestUserNumberMultiplier()
         {
             var userInput = _userInput.RequestUserInput(DataType.Multiplier, "Enter multiplier:");
-            return DataParser.ParseToDouble(userInput);
+            return DataParser.ParseDouble(userInput);
         }
                 
         private Vector ParseVector(string userInput)
         {
-            var coords = DataParser.ParseStringToArray(userInput);
+            var coords = DataParser.ParseArray(userInput);
             return new Vector(coords[0], coords[1], coords[2]);
         }
         

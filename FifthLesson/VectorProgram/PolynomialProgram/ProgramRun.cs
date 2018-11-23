@@ -12,7 +12,7 @@ namespace PolynomialProgram
         private IConsoleView _view;
         private IProcessingUserInput _userInput;
         private View.FormattedOutput _formattedOutput;
-        private Polynomial[] _polynomials = new Polynomial[2];
+        private List<Polynomial> _polynomials = new List<Polynomial>();
 
         public void Run(IConsoleView view)
         {
@@ -20,17 +20,17 @@ namespace PolynomialProgram
             _userInput = new ProcessingUserInput(_view);
             _formattedOutput = new View.FormattedOutput(_view);
 
-            Initialize();
-            _formattedOutput.ShowInputedPolynomials(_polynomials[0], _polynomials[1]);
+            InitializeDefaultPolinomials();
+            _formattedOutput.ShowInputedPolynomials(_polynomials);
 
-            //CreateAndShowPolynomials();
-            var multiplier = GetUserMultiplier();
-            SimpleActionsWithPolynomials(multiplier);
+            //CallPolynomials();
+            var multiplier = RequestUserMultiplier();
+            CallSimpleActionsWithPolynomials(multiplier);
 
-            _view.ReadKey();
+            _view.PressKeyToContinue();
         }
 
-        private void Initialize()
+        private void InitializeDefaultPolinomials()
         {
             var monomialsFirst = new Dictionary<int, double>()
             {
@@ -49,30 +49,36 @@ namespace PolynomialProgram
                 {5, -0.5},
             };
 
-            _polynomials[0] = new Polynomial(2, monomialsFirst);
-            _polynomials[1] = new Polynomial(5, monomialsSecond);
+            _polynomials.Add(new Polynomial(2, monomialsFirst));
+            _polynomials.Add(new Polynomial(2, monomialsSecond));
         }
 
-        private void CreateAndShowPolynomials()
+        private void CallPolynomials()
         {
             CreatePolynomials();
-            _formattedOutput.ShowInputedPolynomials(_polynomials[0], _polynomials[1]);
+            _formattedOutput.ShowInputedPolynomials(_polynomials);
         }
 
-        private void SimpleActionsWithPolynomials(double multiplier)
+        private void CallSimpleActionsWithPolynomials(double multiplier)
         {
             var sumResult = GetSumPolynomials();
             var differenceResult = GetDifferencePolynomials();
             var multiplicationPolynomialsResult = GetMultiplicationPolynomials();
-            var multiplicationNumberByPolynomialResult = GetMultiplicationNumberByPolynomial(multiplier);
             
-            _formattedOutput.ShowSimpleActionsWithPolynomialsResults(sumResult, differenceResult, multiplicationPolynomialsResult, multiplicationNumberByPolynomialResult);
+            _formattedOutput.ShowSimpleActionsWithPolynomialsResults(_polynomials, sumResult, differenceResult, multiplicationPolynomialsResult);
         }
-        
+
+        private void CallMultiplicationNumberByPolynomial(double multiplier)
+        {
+            var result = _polynomials[0] * multiplier;
+
+            _formattedOutput.ShowMultiplicationNumberByPolynomial(_polynomials[0], multiplier, result);
+        }
+
         private void CreatePolynomials()
         {
-            _polynomials[0] = GetUserPolynomial();
-            _polynomials[1] = GetUserPolynomial();
+            _polynomials.Add(RequestUserPolynomial());
+            _polynomials.Add(RequestUserPolynomial());
         }
         
         private Polynomial GetSumPolynomials() => _polynomials[0] + _polynomials[1];
@@ -80,30 +86,28 @@ namespace PolynomialProgram
         private Polynomial GetDifferencePolynomials() => _polynomials[0] - _polynomials[1];
 
         private Polynomial GetMultiplicationPolynomials() => _polynomials[0] * _polynomials[1];
-
-        private Polynomial GetMultiplicationNumberByPolynomial(double multiplier) => _polynomials[0] * multiplier;
-
-        private Polynomial GetUserPolynomial()
+        
+        private Polynomial RequestUserPolynomial()
         {
-            var power = GetUserPower();
-            var monomials = (power != 0) ? GetUserMonomials(power) : null;
+            var power = RequestUserPower();
+            var monomials = (power != 0) ? RequestUserMonomials(power) : null;
 
             return new Polynomial(power, monomials);
         }
 
-        private int GetUserPower()
+        private int RequestUserPower()
         {
             var userInput = _userInput.RequestUserInput(DataType.Power, "Enter power:");
-            return DataParser.ParseToInt(userInput);
+            return DataParser.ParseInt(userInput);
         }
 
-        private int GetUserMultiplier()
+        private int RequestUserMultiplier()
         {
             var userInput = _userInput.RequestUserInput(DataType.Multiplier, "Enter multiplier:");
-            return DataParser.ParseToInt(userInput);
+            return DataParser.ParseInt(userInput);
         }
         
-        private IDictionary<int, double> GetUserMonomials(int power)
+        private IDictionary<int, double> RequestUserMonomials(int power)
         {
             IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
             string userInput;
@@ -112,7 +116,7 @@ namespace PolynomialProgram
             for (int i = power; i >= 1; i--)
             {
                 userInput = _userInput.RequestUserInput(DataType.Monomial, $"Enter monomial in {i} power:");
-                currentMonomial = DataParser.ParseToDouble(userInput);
+                currentMonomial = DataParser.ParseDouble(userInput);
                 resultMonomials.Add(i, currentMonomial);
             }
 

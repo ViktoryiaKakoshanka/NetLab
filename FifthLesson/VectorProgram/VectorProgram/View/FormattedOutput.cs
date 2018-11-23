@@ -19,12 +19,16 @@ namespace VectorProgram.View
             _view.WriteLine($"2 vector: {second}\n");
         }
 
-        public void ShowSimpleActionsWithVectorsResults(Vector[] initialVectors, Vector sumResult, Vector differenceResult, double multiplicationResult)
+        public void ShowSimpleActionsWithVectorsResults(Vector[] initialVectors, Vector sumResult, Vector differenceResult)
         {
             _view.WriteLine("Actions with vectors:");
             _view.WriteLine($"{initialVectors[0]} + {initialVectors[1]} = {sumResult}");
             _view.WriteLine($"{initialVectors[0]} - {initialVectors[1]} = {differenceResult}");
-            _view.WriteLine($"{initialVectors[0]} * {initialVectors[1]} = {multiplicationResult}\n");
+        }
+
+        public void ShowScalarMultiplicationResult(Vector[] initialVectors, double result)
+        {
+            _view.WriteLine($"Scalar multiplication: {initialVectors[0]} * {initialVectors[1]} = {result}\n");
         }
 
         public void ShowVectorsMultiplicationResult(Vector[] initialVectors, Vector result)

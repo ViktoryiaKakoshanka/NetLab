@@ -54,9 +54,9 @@ namespace PolynomialProgram.Model
             return result;
         }
 
-        public static bool operator ==(Polynomial first, Polynomial second) => Equals(first, second);
+        public static bool operator ==(Polynomial first, Polynomial second) => first.Equals(second);
 
-        public static bool operator !=(Polynomial first, Polynomial second) => !Equals(first, second);
+        public static bool operator !=(Polynomial first, Polynomial second) => !first.Equals(second);
 
         public static Polynomial operator +(Polynomial first, Polynomial second) => PolynomialHelper.CalculateSumPolynomials(first, second);
 

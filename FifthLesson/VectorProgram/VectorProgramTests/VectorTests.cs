@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VectorProgram.Model;
 using System.Diagnostics;
+using VectorProgram.Controller;
 
 namespace VectorProgramTests
 {
@@ -55,33 +56,29 @@ namespace VectorProgramTests
         [TestMethod]
         public void ScalarMultiplicationOfVectors_returnedScalarMultiplication()
         {
-            var expect = 50;
-            var actual = firstVector * secondVector;
+            var expected = 50;
+            var actual = VectorHelper.CalculateScalarMultiplication(firstVector, secondVector);
 
-            Debug.WriteLine($"{firstVector} * {secondVector}: expect = {expect} actual = {actual}");
+            Debug.WriteLine($"{firstVector} * {secondVector}: expect = {expected} actual = {actual}");
             
-            Assert.AreEqual(expect, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void Equals_returnedTrue()
         {
-            var copyFirstVector = firstVector;
+            var copyRefFirstVector = firstVector;
             var newVector = new Vector(1, 2, 3);
             bool actual;
 
             Debug.WriteLine($"firstVector {firstVector}");
-            Debug.WriteLine($"copyFirstVector {copyFirstVector}");
+            Debug.WriteLine($"copyRefFirstVector {copyRefFirstVector}");
             Debug.WriteLine($"newVector {newVector}");
 
-            actual = Vector.Equals(copyFirstVector, firstVector);
+            actual = Vector.Equals(copyRefFirstVector, firstVector);
             Debug.WriteLine($"Equals(copyFirstVector, firstVector) = {actual};");
             Assert.IsTrue(actual);
-
-            actual = Vector.Equals(newVector, firstVector);
-            Debug.WriteLine($"Equals(newVector, firstVector) = {actual}");
-            Assert.IsTrue(actual);
-
+            
             actual = newVector == firstVector;
             Debug.WriteLine($"newVector == firstVector: {actual}");
             Assert.IsTrue(actual);
@@ -94,7 +91,7 @@ namespace VectorProgramTests
             Assert.AreEqual(firstVector.Equals(secondVector), secondVector.Equals(firstVector));
             
             Debug.WriteLine($"If x.Equals(у) = true and y.Equals(z) = true then x.Equals(z) = true");
-            actual = firstVector.Equals(copyFirstVector) && copyFirstVector.Equals(newVector) && firstVector.Equals(newVector);
+            actual = firstVector.Equals(copyRefFirstVector) && copyRefFirstVector.Equals(newVector) && firstVector.Equals(newVector);
             Assert.IsTrue(actual);
         }
 

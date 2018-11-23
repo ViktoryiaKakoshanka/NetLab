@@ -21,44 +21,32 @@ namespace VectorProgramTests
 
         [TestMethod]
         public void ValidateInput_returnedIsCorrectVector()
-        {
-            bool actual;
-            
-            var inputVector = new[] { " 1 1 1", "0,005 0,005 0,005", "0.549 0.549 0.549", "1 1 1" };
-            
-            foreach (var item in inputVector)
-            {
-                actual = Validator.ValidateInput(DataType.Vector, item);
-                Assert.IsTrue(actual, $"{item} = {actual}");
-            }
+        {            
+            var inputVector = new List<string> { " 1 1 1", "0,005 0,005 0,005", "0.549 0.549 0.549", "1 1 1" };
+
+            var allParsedCorrect = inputVector.All(x => Validator.ValidateInput(DataType.Vector, x));
+
+            Assert.IsTrue(allParsedCorrect);
         }
 
         [TestMethod]
         public void ValidateInput_returnedIsWrongMultiplier()
         {
-            bool actual;
+            var inputMultiplier = new List<string> { string.Empty, "asf" };
 
-            var inputMultiplier = new[] { string.Empty, "asf" };
+            var allParsedWrong = inputMultiplier.All(x => Validator.ValidateInput(DataType.Multiplier, x));
 
-            foreach (var item in inputMultiplier)
-            {
-                actual = Validator.ValidateInput(DataType.Multiplier, item);
-                Assert.IsFalse(actual);
-            }
+            Assert.IsFalse(allParsedWrong);
         }
 
         [TestMethod]
         public void ValidateInput_returnedIsWrongVector()
         {
-            bool actual;
-            
-            var inputVector = new[] { "kl", string.Empty, "1 1 1 ", "   1 1 1   ", "   1  1 1   " };
-            
-            foreach (var item in inputVector)
-            {
-                actual = Validator.ValidateInput(DataType.Vector, item);
-                Assert.IsFalse(actual, $"{item} = {actual}");
-            }
+            var inputVector = new List<string> { "kl", string.Empty, "1 1 1 ", "   1 1 1   ", "   1  1 1   " };
+
+            var allParsedWrong = inputVector.All(x => Validator.ValidateInput(DataType.Vector, x));
+
+            Assert.IsFalse(allParsedWrong);
         }
     }
 }

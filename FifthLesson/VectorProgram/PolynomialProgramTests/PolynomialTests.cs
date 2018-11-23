@@ -76,23 +76,20 @@ namespace PolynomialProgramTests
             bool actual;
             actual = Polynomial.Equals(_polynomialSecond, _polynomialFirst);
             Assert.IsFalse(actual);
-
-            actual = _polynomialSecond != _polynomialSecond;
-            Assert.IsFalse(actual);
         }
 
         [TestMethod]
         public void GetHashCode_returnedEqualGetHashCode()
         {
-            var copyFirstPolynomial = _polynomialFirst;
+            var copyRefFirstPolynomial = _polynomialFirst;
             var newPolynomialFirst = new Polynomial(_polynomialFirst);
 
             var hashCodeFirstPolynomial = _polynomialFirst.GetHashCode();
-            var hashCopyFirstPolynomial = copyFirstPolynomial.GetHashCode();
+            var hashCopyFirstPolynomial = copyRefFirstPolynomial.GetHashCode();
             var hashNewPolynomial = newPolynomialFirst.GetHashCode();
 
             Debug.WriteLine($"HashCode first Polynomial {_polynomialFirst} = {hashCodeFirstPolynomial}");
-            Debug.WriteLine($"HashCode copy first Polynomial {copyFirstPolynomial} = {hashCopyFirstPolynomial}");
+            Debug.WriteLine($"HashCode copy ref first Polynomial {copyRefFirstPolynomial} = {hashCopyFirstPolynomial}");
             Debug.WriteLine($"HashCode new Polynomial {newPolynomialFirst} = {hashNewPolynomial}");
 
             Assert.AreEqual(hashCodeFirstPolynomial, hashCopyFirstPolynomial);
@@ -112,11 +109,11 @@ namespace PolynomialProgramTests
                 {4, 0},
                 {5, -0.5},
             };
-            var expect = new Polynomial(5, expectMonomials);
+            var expected = new Polynomial(5, expectMonomials);
             var actual = _polynomialFirst + _polynomialSecond;
 
-            Debug.WriteLine($"expect = {expect} actual = {actual}");
-            Assert.AreEqual(expect, actual);
+            Debug.WriteLine($"expected = {expected} actual = {actual}");
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -131,11 +128,11 @@ namespace PolynomialProgramTests
                 {4, 0},
                 {5, -0.5},
             };
-            var expect = new Polynomial(5, expectMonomials);
+            var expected = new Polynomial(5, expectMonomials);
             var actual = _polynomialFirst - _polynomialSecond;
 
-            Debug.WriteLine($"expect = {expect} actual = {actual}");
-            Assert.AreEqual(expect, actual);
+            Debug.WriteLine($"expected = {expected} actual = {actual}");
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -152,11 +149,11 @@ namespace PolynomialProgramTests
                 {6, 0},
                 {7, -1.5},
             };
-            var expect = new Polynomial(7, expectMonomials);
+            var expected = new Polynomial(7, expectMonomials);
             var actual = _polynomialFirst * _polynomialSecond;
 
-            Debug.WriteLine($"expect = {expect} actual = {actual}");
-            Assert.AreEqual(expect, actual);
+            Debug.WriteLine($"expected = {expected} actual = {actual}");
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -171,11 +168,11 @@ namespace PolynomialProgramTests
                 {4, 0},
                 {5, 1},
             };
-            var expect = new Polynomial(5, expectMonomials);
+            var expected = new Polynomial(5, expectMonomials);
             var actual = _polynomialSecond * (-2);
 
-            Debug.WriteLine($"expect = {expect} actual = {actual}");
-            Assert.AreEqual(expect, actual);
+            Debug.WriteLine($"expected = {expected} actual = {actual}");
+            Assert.AreEqual(expected, actual);
         }
     }
 }

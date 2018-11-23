@@ -4,7 +4,7 @@ namespace VectorProgram.View
 {
     public class ConsoleView : IConsoleView
     {
-        public void ReadKey() => Console.ReadKey(true);
+        public void PressKeyToContinue() => Console.ReadKey(true);
 
         public string ReadLine(string message)
         {

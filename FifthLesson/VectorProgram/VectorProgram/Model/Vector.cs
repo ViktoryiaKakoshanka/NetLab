@@ -23,15 +23,7 @@ namespace VectorProgram.Model
         }
         
         public Vector(Vector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate) { }
-
-        public double CalculateAngleBetweenVectors(Vector vector)
-        {
-            var angle = VectorHelper.CalculateAngleBetweenVectors(this, vector);
-            return Math.Round(angle, 3);
-        }
-
-        public double CalculateModuleVector(Vector vector) => VectorHelper.CalculateModuleVector(vector);
-        
+                
         public override string ToString() => $"({FirstCoordinate}, {SecondCoordinate}, {ThirdCoordinate})";
 
         public override int GetHashCode()
@@ -61,12 +53,7 @@ namespace VectorProgram.Model
             var ValueСomparison = FirstCoordinate == other.FirstCoordinate && SecondCoordinate == other.SecondCoordinate && ThirdCoordinate == other.ThirdCoordinate;
             return ValueСomparison;
         }
-
-        public static bool Equals(Vector first, Vector second)
-        {
-            return (!(first is null)) ? first.Equals(second) : (second is null);
-        }
-
+        
         public static Vector operator +(Vector first, Vector second)
         {
             return new Vector
@@ -101,23 +88,9 @@ namespace VectorProgram.Model
         {
             return numeric * vector;
         }
-
-        //todo: create own method
-        public static double operator *(Vector first, Vector second)
-        {
-            var multiplicationFirstCoordinates = first.FirstCoordinate * second.FirstCoordinate;
-            var multiplicationSecondCoordinates = first.SecondCoordinate * second.SecondCoordinate;
-            var multiplicationThirdCoordinates = first.ThirdCoordinate * second.ThirdCoordinate;
-
-            var sumMultiplicationCoordinates = multiplicationFirstCoordinates + multiplicationSecondCoordinates + multiplicationThirdCoordinates;
-
-            return sumMultiplicationCoordinates;
-        }
-
+        
         public static bool operator ==(Vector first, Vector second) => first.Equals(second);
 
-        public static bool operator !=(Vector first, Vector second) => !Equals(first, second);
-  
-        public static Vector CalculateVectorsMultiplication(Vector first, Vector second) =>  VectorHelper.CalculateVectorMultiplication(first, second);
+        public static bool operator !=(Vector first, Vector second) => !first.Equals(second);
     }
 }

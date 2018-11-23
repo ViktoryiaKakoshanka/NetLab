@@ -1,5 +1,4 @@
-﻿using System;
-using VectorProgram.Controller;
+﻿using VectorProgram.Controller;
 using VectorProgram.Model;
 using VectorProgram.View;
 
@@ -21,8 +20,7 @@ namespace VectorProgram.UserInput
 
             while (!isUserInputCorrect)
             {
-                Console.WriteLine(welcomeMessage);
-                userInput = Console.ReadLine();
+                userInput = _view.ReadLine(welcomeMessage);
                 isUserInputCorrect = ValidateUserInput(dataType, userInput);
             }
 
@@ -32,8 +30,10 @@ namespace VectorProgram.UserInput
         private bool ValidateUserInput(DataType dataType, string userInput)
         {
             var isUserInputCorrect = false;
+
             isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
             if (!isUserInputCorrect) _view.WriteErrorMessage();
+
             return isUserInputCorrect;
         }
     }

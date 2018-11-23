@@ -14,11 +14,11 @@ namespace PolynomialProgram.Comtroller
 
             for (int i = 0; i <= maxPower; i++)
             {
-                var firstValue = (first.Monomials.ContainsKey(i)) ? first.Monomials[i] : 0;
-                var secondValue = (second.Monomials.ContainsKey(i)) ? second.Monomials[i] : 0;
-                var sumMonomial = firstValue + secondValue;
+                var firstMonomial = (first.Monomials.ContainsKey(i)) ? first.Monomials[i] : 0;
+                var secondMonomial = (second.Monomials.ContainsKey(i)) ? second.Monomials[i] : 0;
+                var sumMonomials = firstMonomial + secondMonomial;
 
-                resultMonomials.Add(i, sumMonomial);
+                resultMonomials.Add(i, sumMonomials);
             }
             return new Polynomial(maxPower, resultMonomials);
         }
