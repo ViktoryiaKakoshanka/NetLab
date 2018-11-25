@@ -76,9 +76,9 @@ namespace VectorProgram.Controller
             var multiplicationSecondCoordinates = first.SecondCoordinate * second.SecondCoordinate;
             var multiplicationThirdCoordinates = first.ThirdCoordinate * second.ThirdCoordinate;
 
-            var sumMultiplicationCoordinates = multiplicationFirstCoordinates + multiplicationSecondCoordinates + multiplicationThirdCoordinates;
+            var sumResult = multiplicationFirstCoordinates + multiplicationSecondCoordinates + multiplicationThirdCoordinates;
 
-            return sumMultiplicationCoordinates;
+            return sumResult;
         }
     }
 }

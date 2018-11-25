@@ -10,7 +10,7 @@ namespace PolynomialProgram
     public class ProgramRun
     {
         private IConsoleView _view;
-        private IProcessingUserInput _userInput;
+        private IUserInputProcessor _userInput;
         private View.FormattedOutput _formattedOutput;
         private List<Polynomial> _polynomials = new List<Polynomial>();
 

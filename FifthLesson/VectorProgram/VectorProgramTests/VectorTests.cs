@@ -78,23 +78,33 @@ namespace VectorProgramTests
             actual = Vector.Equals(copyRefFirstVector, firstVector);
             Debug.WriteLine($"Equals(copyFirstVector, firstVector) = {actual};");
             Assert.IsTrue(actual);
-            
+
             actual = newVector == firstVector;
             Debug.WriteLine($"newVector == firstVector: {actual}");
             Assert.IsTrue(actual);
-
+        }
+        [TestMethod]
+        public void CheckTheCorrectnessFirstProperty()
+        {
             Debug.WriteLine($"Check the correctness of the property Equals:");
             Debug.WriteLine($"x.Equals(x) = true");
             Assert.IsTrue(firstVector.Equals(firstVector));
-
+        }
+        [TestMethod]
+        public void CheckTheCorrectnessSecondProperty()
+        {
             Debug.WriteLine($"x.Equals(у) = y.Equals(x)");
             Assert.AreEqual(firstVector.Equals(secondVector), secondVector.Equals(firstVector));
-            
+        }
+
+        [TestMethod]
+        public void CheckTheCorrectnessThirdProperty(Vector copyRefFirstVector, Vector newVector)
+        {
+            bool actual;
             Debug.WriteLine($"If x.Equals(у) = true and y.Equals(z) = true then x.Equals(z) = true");
             actual = firstVector.Equals(copyRefFirstVector) && copyRefFirstVector.Equals(newVector) && firstVector.Equals(newVector);
             Assert.IsTrue(actual);
         }
-
 
         [TestMethod]
         public void Equals_returnedFalse()

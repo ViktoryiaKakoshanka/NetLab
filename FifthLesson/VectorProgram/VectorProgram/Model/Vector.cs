@@ -5,21 +5,23 @@ namespace VectorProgram.Model
 {
     public class Vector : IEquatable<Vector>
     {
+        private int digits = 3;
+
         public double FirstCoordinate { get; private set; }
         public double SecondCoordinate { get; private set; }
         public double ThirdCoordinate { get; private set; }
         public double Length
         {
-            get => Math.Round(Math.Sqrt(Math.Pow(FirstCoordinate, 2) + Math.Pow(SecondCoordinate, 2) + Math.Pow(ThirdCoordinate, 2)), 3);
+            get => Math.Round(Math.Sqrt(Math.Pow(FirstCoordinate, 2) + Math.Pow(SecondCoordinate, 2) + Math.Pow(ThirdCoordinate, 2)), digits);
         }
 
         public Vector() { }
 
-        public Vector(double coordinateFirst, double coordinateSecond, double coordinateThird)
+        public Vector(double firstCoordinate, double secondCoordinate, double thirdCoordinate)
         {
-            FirstCoordinate = coordinateFirst;
-            SecondCoordinate = coordinateSecond;
-            ThirdCoordinate = coordinateThird;
+            FirstCoordinate = firstCoordinate;
+            SecondCoordinate = secondCoordinate;
+            ThirdCoordinate = thirdCoordinate;
         }
         
         public Vector(Vector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate) { }
@@ -74,19 +76,19 @@ namespace VectorProgram.Model
             };
         }
 
-        public static Vector operator *(double numeric, Vector vector)
+        public static Vector operator *(double number, Vector vector)
         {
             return new Vector
             {
-                FirstCoordinate = vector.FirstCoordinate * numeric,
-                SecondCoordinate = vector.SecondCoordinate * numeric,
-                ThirdCoordinate = vector.ThirdCoordinate * numeric
+                FirstCoordinate = vector.FirstCoordinate * number,
+                SecondCoordinate = vector.SecondCoordinate * number,
+                ThirdCoordinate = vector.ThirdCoordinate * number
             };
         }
 
-        public static Vector operator *(Vector vector, double numeric)
+        public static Vector operator *(Vector vector, double number)
         {
-            return numeric * vector;
+            return number * vector;
         }
         
         public static bool operator ==(Vector first, Vector second) => first.Equals(second);

@@ -4,7 +4,7 @@ using VectorProgram.View;
 
 namespace VectorProgram.UserInput
 {
-    public class ProcessingUserInput : IProcessingUserInput
+    public class ProcessingUserInput : IUserInputProcessor
     {
         private IConsoleView _view;
 
