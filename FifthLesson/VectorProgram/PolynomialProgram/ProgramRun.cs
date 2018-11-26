@@ -4,6 +4,7 @@ using VectorProgram.Controller;
 using VectorProgram.Model;
 using VectorProgram.View;
 using VectorProgram.UserInput;
+using ViewFormattedOutput = PolynomialProgram.View.FormattedOutput;
 
 namespace PolynomialProgram
 {
@@ -11,14 +12,14 @@ namespace PolynomialProgram
     {
         private IConsoleView _view;
         private IUserInputProcessor _userInput;
-        private View.FormattedOutput _formattedOutput;
+        private ViewFormattedOutput _formattedOutput;
         private List<Polynomial> _polynomials = new List<Polynomial>();
 
         public void Run(IConsoleView view)
         {
             _view = view;
             _userInput = new ProcessingUserInput(_view);
-            _formattedOutput = new View.FormattedOutput(_view);
+            _formattedOutput = new ViewFormattedOutput(_view);
 
             InitializeDefaultPolinomials();
             _formattedOutput.ShowInputedPolynomials(_polynomials);
@@ -27,7 +28,7 @@ namespace PolynomialProgram
             var multiplier = RequestUserMultiplier();
             CallSimpleActionsWithPolynomials(multiplier);
 
-            _view.PressKeyToContinue();
+            _view.WaitForAnyKeyPress();
         }
 
         private void InitializeDefaultPolinomials()

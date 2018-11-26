@@ -5,7 +5,7 @@ namespace PolynomialProgram.View
 {
     public class ConsoleView : IConsoleView
     {
-        public void PressKeyToContinue() => Console.ReadKey(true);
+        public void WaitForAnyKeyPress() => Console.ReadKey(true);
 
         public string ReadLine(string message)
         {

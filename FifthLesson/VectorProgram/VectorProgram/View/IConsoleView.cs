@@ -4,7 +4,7 @@
     {
         void WriteLine(string text);
         string ReadLine(string message);
-        void PressKeyToContinue();
+        void WaitForAnyKeyPress();
         void WriteErrorMessage();
     }
 }

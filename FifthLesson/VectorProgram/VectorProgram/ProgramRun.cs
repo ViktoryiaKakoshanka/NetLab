@@ -26,12 +26,11 @@ namespace VectorProgram
             _formattedOutput.ShowVectors(vectors);
 
             CallActionsWithVectors(vectors);
-
+            CallScalarMultiplication(vectors);
             CompareVectors(vectors);
-
             CallAngleBetweenVectors(vectors);
 
-            _view.PressKeyToContinue();
+            _view.WaitForAnyKeyPress();
         }
 
         private List<Vector> CreateVectors()
