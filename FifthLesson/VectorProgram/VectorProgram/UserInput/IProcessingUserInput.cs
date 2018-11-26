@@ -4,6 +4,6 @@ namespace VectorProgram.UserInput
 {
     public interface IUserInputProcessor
     {
-        string RequestUserInput(DataType dataType, string welcomeMessage);
+        string RequestInput(DataType dataType, string welcomeMessage);
     }
 }

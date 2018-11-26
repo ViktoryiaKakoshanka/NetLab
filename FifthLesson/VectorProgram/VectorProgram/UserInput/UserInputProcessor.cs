@@ -4,16 +4,16 @@ using VectorProgram.View;
 
 namespace VectorProgram.UserInput
 {
-    public class ProcessingUserInput : IUserInputProcessor
+    public class UserInputProcessor : IUserInputProcessor
     {
         private IConsoleView _view;
 
-        public ProcessingUserInput(IConsoleView view)
+        public UserInputProcessor(IConsoleView view)
         {
             _view = view;
         }
 
-        public string RequestUserInput(DataType dataType, string welcomeMessage)
+        public string RequestInput(DataType dataType, string welcomeMessage)
         {
             var userInput = string.Empty;
             var isUserInputCorrect = false;

@@ -15,7 +15,7 @@ namespace VectorProgram
         public void Run(IConsoleView view)
         {
             _view = view;
-            _userInput = new ProcessingUserInput(_view);
+            _userInput = new UserInputProcessor(_view);
             _formattedOutput = new FormattedOutput(_view);
 
             var vectors = CreateVectors();
@@ -102,13 +102,13 @@ namespace VectorProgram
         
         private Vector RequestVector(string orderByVectors)
         {
-            var userInput = _userInput.RequestUserInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
+            var userInput = _userInput.RequestInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
             return ParseVector(userInput);
         }
 
         private double RequestMultiplier()
         {
-            var userInput = _userInput.RequestUserInput(DataType.Multiplier, "Enter multiplier:");
+            var userInput = _userInput.RequestInput(DataType.Multiplier, "Enter multiplier:");
             return DataParser.ParseDouble(userInput);
         }
                 
