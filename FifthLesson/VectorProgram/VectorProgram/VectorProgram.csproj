@@ -48,7 +48,7 @@
     <Compile Include="Model\DataType.cs" />
     <Compile Include="Model\Vector.cs" />
     <Compile Include="UserInput\IProcessingUserInput.cs" />
-    <Compile Include="UserInput\ProcessingUserInput.cs" />
+    <Compile Include="UserInput\UserInputProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

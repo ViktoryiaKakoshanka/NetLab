@@ -18,14 +18,14 @@ namespace PolynomialProgram
         public void Run(IConsoleView view)
         {
             _view = view;
-            _userInput = new ProcessingUserInput(_view);
+            _userInput = new UserInputProcessor(_view);
             _formattedOutput = new ViewFormattedOutput(_view);
 
             InitializeDefaultPolinomials();
             _formattedOutput.ShowInputedPolynomials(_polynomials);
 
             //CallPolynomials();
-            var multiplier = RequestUserMultiplier();
+            var multiplier = RequestMultiplier();
             CallSimpleActionsWithPolynomials(multiplier);
 
             _view.WaitForAnyKeyPress();
@@ -78,8 +78,8 @@ namespace PolynomialProgram
 
         private void CreatePolynomials()
         {
-            _polynomials.Add(RequestUserPolynomial());
-            _polynomials.Add(RequestUserPolynomial());
+            _polynomials.Add(RequestPolynomial());
+            _polynomials.Add(RequestPolynomial());
         }
         
         private Polynomial GetSumPolynomials() => _polynomials[0] + _polynomials[1];
@@ -88,27 +88,27 @@ namespace PolynomialProgram
 
         private Polynomial GetMultiplicationPolynomials() => _polynomials[0] * _polynomials[1];
         
-        private Polynomial RequestUserPolynomial()
+        private Polynomial RequestPolynomial()
         {
-            var power = RequestUserPower();
-            var monomials = (power != 0) ? RequestUserMonomials(power) : null;
+            var power = RequestPower();
+            var monomials = (power != 0) ? RequestMonomials(power) : null;
 
             return new Polynomial(power, monomials);
         }
 
-        private int RequestUserPower()
+        private int RequestPower()
         {
-            var userInput = _userInput.RequestUserInput(DataType.Power, "Enter power:");
+            var userInput = _userInput.RequestInput(DataType.Power, "Enter power:");
             return DataParser.ParseInt(userInput);
         }
 
-        private int RequestUserMultiplier()
+        private int RequestMultiplier()
         {
-            var userInput = _userInput.RequestUserInput(DataType.Multiplier, "Enter multiplier:");
+            var userInput = _userInput.RequestInput(DataType.Multiplier, "Enter multiplier:");
             return DataParser.ParseInt(userInput);
         }
         
-        private IDictionary<int, double> RequestUserMonomials(int power)
+        private IDictionary<int, double> RequestMonomials(int power)
         {
             IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
             string userInput;
@@ -116,7 +116,7 @@ namespace PolynomialProgram
 
             for (int i = power; i >= 1; i--)
             {
-                userInput = _userInput.RequestUserInput(DataType.Monomial, $"Enter monomial in {i} power:");
+                userInput = _userInput.RequestInput(DataType.Monomial, $"Enter monomial in {i} power:");
                 currentMonomial = DataParser.ParseDouble(userInput);
                 resultMonomials.Add(i, currentMonomial);
             }
