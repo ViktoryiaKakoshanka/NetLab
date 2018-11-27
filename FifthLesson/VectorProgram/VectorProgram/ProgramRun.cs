@@ -52,7 +52,7 @@ namespace VectorProgram
         {
             var equalityResult = (vectors[0] == vectors[1]);
             var inequalityResult = vectors[0] != vectors[1];
-            _formattedOutput.ShowCompareVectorsResults(vectors, equalityResult, inequalityResult);
+            _formattedOutput.ShowVectorsComparisonResults(vectors, equalityResult, inequalityResult);
         }
 
         private void CallAngleBetweenVectors(List<Vector> vectors)

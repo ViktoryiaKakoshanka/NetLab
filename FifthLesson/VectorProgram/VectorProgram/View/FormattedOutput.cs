@@ -50,7 +50,7 @@ namespace VectorProgram.View
             _view.WriteLine($"{multiplier} * {initialVectors[1]} = {resultNumberLeft[1]}");
         }
 
-        public void ShowCompareVectorsResults(List<Vector> initialVectors, bool equalityResult, bool inequalityResult)
+        public void ShowVectorsComparisonResults(List<Vector> initialVectors, bool equalityResult, bool inequalityResult)
         {
             _view.WriteLine("Compare vectors:");
             _view.WriteLine($"{initialVectors[0]} == {initialVectors[1]} = {equalityResult}");

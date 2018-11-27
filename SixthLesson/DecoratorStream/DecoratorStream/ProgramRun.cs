@@ -1,5 +1,6 @@
 ﻿using DecoratorStream.Model;
 using DecoratorStream.View;
+using System;
 using System.IO;
 
 namespace DecoratorStream
@@ -13,13 +14,13 @@ namespace DecoratorStream
             _view = view;
 
             ReadFile();
-
+            _view.WriteLine(Console.CursorLeft.ToString());
+            _view.WriteLine(Console.CursorTop.ToString());
             _view.WaitForAnyKeyPress();
         }
 
         private void ReadFile()
         {
-            // чтение из файла
             using (WorkWithText fstream = new WorkWithText(File.OpenRead(FileData.PUTH), _view))
             {
                 var array = new byte[fstream.Length];
@@ -28,7 +29,7 @@ namespace DecoratorStream
 
                 if (readResult != 0)
                 {
-                    var textFromFile = System.Text.Encoding.Default.GetString(array);
+                    var textFromFile = System.Text.Encoding.Unicode.GetString(array);
                     _view.WriteLine($"Text from file:\n {textFromFile}");
                 }
                 return;

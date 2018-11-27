@@ -29,13 +29,13 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void DifferenceOfVectors_returnedVectorDifference()
+        public void DifferenceOfVectors_returnNewVector_Test()
         {
-            var expect = new Vector(-6, -6, -6);
+            var expected = new Vector(-6, -6, -6);
             var actual = firstVector - secondVector;
 
-            Debug.WriteLine($"expect = {expect} actual = {actual}");
-            Assert.AreEqual(expect, actual);
+            Debug.WriteLine($"expect = {expected} actual = {actual}");
+            Assert.AreEqual(expected, actual);
         }
         
         [TestMethod]
@@ -54,7 +54,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void ScalarMultiplicationOfVectors_returnedScalarMultiplication()
+        public void ScalarMultiplicationOfVectors_returnNumber_Test()
         {
             var expected = 50;
             var actual = VectorHelper.CalculateScalarMultiplication(firstVector, secondVector);
@@ -67,20 +67,14 @@ namespace VectorProgramTests
         [TestMethod]
         public void Equals_returnedTrue()
         {
-            var copyRefFirstVector = firstVector;
             var newVector = new Vector(1, 2, 3);
             bool actual;
 
             Debug.WriteLine($"firstVector {firstVector}");
-            Debug.WriteLine($"copyRefFirstVector {copyRefFirstVector}");
             Debug.WriteLine($"newVector {newVector}");
 
-            actual = Vector.Equals(copyRefFirstVector, firstVector);
-            Debug.WriteLine($"Equals(copyFirstVector, firstVector) = {actual};");
-            Assert.IsTrue(actual);
-
-            actual = newVector == firstVector;
-            Debug.WriteLine($"newVector == firstVector: {actual}");
+            actual = newVector.Equals(firstVector);
+            Debug.WriteLine($"Equals(newVector, firstVector) = {actual};");
             Assert.IsTrue(actual);
         }
         [TestMethod]
@@ -98,7 +92,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void CheckTheCorrectnessThirdProperty(Vector copyRefFirstVector, Vector newVector)
+        public void Equals_CheckTheCorrectnessThirdProperty(Vector copyRefFirstVector, Vector newVector)
         {
             bool actual;
             Debug.WriteLine($"If x.Equals(у) = true and y.Equals(z) = true then x.Equals(z) = true");
@@ -107,35 +101,25 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void Equals_returnedFalse()
+        public void Equals_DifferentVectorsNotEqual_Test()
         {
-            var newVector = new Vector(1, 2, 3);
-
             bool actual;
-            actual = Vector.Equals(secondVector, firstVector);
-            Assert.IsFalse(actual);
-
-            actual = newVector != firstVector;
+            actual = secondVector.Equals(firstVector);
             Assert.IsFalse(actual);
         }
 
         [TestMethod]
-        public void GetHashCode_returnedEqualGetHashCode()
+        public void GetHashCode_ForSameVectorsAreEqual_Test()
         {
-            var copyFirstVector = firstVector;
             var newVector = new Vector(1, 2, 3);
 
             var hashCodeFirstVector = firstVector.GetHashCode();
-            var hashCopyFirstVector = copyFirstVector.GetHashCode();
-            var hashNewVector = newVector.GetHashCode();
+            var hashCodeNewVector = newVector.GetHashCode();
 
             Debug.WriteLine($"HashCode first Vector {firstVector} = {hashCodeFirstVector}");
-            Debug.WriteLine($"HashCode copy first Vector {copyFirstVector} = {hashCopyFirstVector}");
-            Debug.WriteLine($"HashCode new Vector {newVector} = {hashNewVector}");
-
-            Assert.AreEqual(hashCodeFirstVector, hashCopyFirstVector);
-            Assert.AreEqual(hashCopyFirstVector, hashNewVector);
-            Assert.AreEqual(hashCodeFirstVector, hashNewVector);
+            Debug.WriteLine($"HashCode new Vector {newVector} = {hashCodeNewVector}");
+            
+            Assert.AreEqual(hashCodeFirstVector, hashCodeNewVector);
         }
     }
 }

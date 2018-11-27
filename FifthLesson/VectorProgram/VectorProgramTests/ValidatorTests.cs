@@ -10,7 +10,7 @@ namespace VectorProgramTests
     public class ValidatorTests
     {
         [TestMethod]
-        public void ValidateInput_returnedIsCorrectMultiplier()
+        public void ValidateInput_CorrectMultiplierFormat_Test()
         {
             var inputMultiplier = new List<string> { "1", "56565", "1.0", "1,54" };
 

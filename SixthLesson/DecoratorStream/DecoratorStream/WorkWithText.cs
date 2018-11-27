@@ -1,6 +1,5 @@
 ﻿using DecoratorStream.Model;
 using DecoratorStream.View;
-using System;
 using System.IO;
 
 namespace DecoratorStream
@@ -33,9 +32,9 @@ namespace DecoratorStream
         public override int Read(byte[] buffer, int offset, int count)
         {
             var userInputProcessor = new UserInputProcessor(_view);
-            var maybePassword = userInputProcessor.RequestPassword();
+            var password = userInputProcessor.RequestPassword();
 
-            if (string.Intern(maybePassword) == string.Intern(FileData.PASSWORD))
+            if (string.Intern(password) == string.Intern(FileData.PASSWORD))
             {
                 return _stream.Read(buffer, offset, count);
             }
