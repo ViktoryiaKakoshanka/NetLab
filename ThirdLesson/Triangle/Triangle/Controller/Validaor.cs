@@ -2,7 +2,7 @@
 
 namespace TriangleLib.Controller
 {
-    public class ValidatingTriangleHelper
+    public class Validator
     {
         public static double TryParseInputtingSide(string maybeSide)
         {
@@ -13,7 +13,11 @@ namespace TriangleLib.Controller
 
         public static bool ValidateTriangle(double firstSide, double secondSide, double thirdSide)
         {
-            return ((firstSide <= secondSide + thirdSide) && (secondSide <= firstSide + thirdSide) && (thirdSide <= firstSide + secondSide));
+            var isDisparityFirstSide = firstSide <= secondSide + thirdSide;
+            var isDisparitySecondSide = secondSide <= firstSide + thirdSide;
+            var isDisparityThirdSide = thirdSide <= firstSide + secondSide;
+
+            return isDisparityFirstSide && isDisparitySecondSide && isDisparityThirdSide;
         }
     }
 }
