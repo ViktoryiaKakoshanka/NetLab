@@ -20,7 +20,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void ValidateInput_returnedIsCorrectVector()
+        public void ValidateInput_CorrectVectorFormat_Test()
         {            
             var inputVector = new List<string> { " 1 1 1", "0,005 0,005 0,005", "0.549 0.549 0.549", "1 1 1" };
 
@@ -30,7 +30,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void ValidateInput_returnedIsWrongMultiplier()
+        public void ValidateInput_WrongMultiplierFormat_Test()
         {
             var inputMultiplier = new List<string> { string.Empty, "asf" };
 
@@ -40,7 +40,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void ValidateInput_returnedIsWrongVector()
+        public void ValidateInput_WrongVectorFormat_Test()
         {
             var inputVector = new List<string> { "kl", string.Empty, "1 1 1 ", "   1 1 1   ", "   1  1 1   " };
 

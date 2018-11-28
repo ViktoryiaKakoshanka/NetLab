@@ -13,7 +13,7 @@ namespace PolynomialProgram
         private IConsoleView _view;
         private IUserInputProcessor _userInput;
         private ViewFormattedOutput _formattedOutput;
-        private List<Polynomial> _polynomials = new List<Polynomial>();
+        private IList<Polynomial> _polynomials = new List<Polynomial>();
 
         public void Run(IConsoleView view)
         {
@@ -22,7 +22,7 @@ namespace PolynomialProgram
             _formattedOutput = new ViewFormattedOutput(_view);
 
             InitializeDefaultPolinomials();
-            _formattedOutput.ShowInputedPolynomials(_polynomials);
+            _formattedOutput.ShowPolynomials(_polynomials);
 
             //CallPolynomials();
             var multiplier = RequestMultiplier();
@@ -57,7 +57,7 @@ namespace PolynomialProgram
         private void CallPolynomials()
         {
             CreatePolynomials();
-            _formattedOutput.ShowInputedPolynomials(_polynomials);
+            _formattedOutput.ShowPolynomials(_polynomials);
         }
 
         private void CallSimpleActionsWithPolynomials(double multiplier)
@@ -66,7 +66,7 @@ namespace PolynomialProgram
             var differenceResult = GetDifferencePolynomials();
             var multiplicationPolynomialsResult = GetMultiplicationPolynomials();
             
-            _formattedOutput.ShowSimpleActionsWithPolynomialsResults(_polynomials, sumResult, differenceResult, multiplicationPolynomialsResult);
+            _formattedOutput.ShowSimpleActionsWithPolynomialsResults(_polynomials[0], _polynomials[1], sumResult, differenceResult, multiplicationPolynomialsResult);
         }
 
         private void CallMultiplicationNumberByPolynomial(double multiplier)

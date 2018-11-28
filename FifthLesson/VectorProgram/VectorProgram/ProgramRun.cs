@@ -20,15 +20,12 @@ namespace VectorProgram
 
             var vectors = CreateVectors();
 
-            var isCorrectedListVectors = GetIsCorrectedListVectors(vectors);
-            if (isCorrectedListVectors) return;
-
             _formattedOutput.ShowVectors(vectors);
 
-            CallActionsWithVectors(vectors);
-            CallScalarMultiplication(vectors);
-            CompareVectors(vectors);
-            CallAngleBetweenVectors(vectors);
+            CallActionsWithVectors(vectors[0], vectors[1]);
+            CallScalarMultiplication(vectors[0], vectors[1]);
+            CompareVectors(vectors[0], vectors[1]);
+            CallAngleBetweenVectors(vectors[0], vectors[1]);
 
             _view.WaitForAnyKeyPress();
         }
@@ -41,63 +38,63 @@ namespace VectorProgram
             return new List<Vector>()  { vectorFirst, vectorSecond, vectorFirst };
         }
         
-        private void CallActionsWithVectors(List<Vector> vectors)
+        private void CallActionsWithVectors(Vector first, Vector second)
         {
-            CallSimpleActionsWithVectors(vectors);
-            CallVectorMultiplication(vectors);
-            CallMultiplyVectorsByNumber(vectors);
+            CallSimpleActionsWithVectors(first, second);
+            CallVectorMultiplication(first, second);
+            CallMultiplyVectorsByNumber(first, second);
         }
 
-        private void CompareVectors(List<Vector> vectors)
+        private void CompareVectors(Vector first, Vector second)
         {
-            var equalityResult = (vectors[0] == vectors[1]);
-            var inequalityResult = vectors[0] != vectors[1];
-            _formattedOutput.ShowVectorsComparisonResults(vectors, equalityResult, inequalityResult);
+            var equalityResult = (first == second);
+            var inequalityResult = first != second;
+            _formattedOutput.ShowVectorsComparisonResults(first, second, equalityResult, inequalityResult);
         }
 
-        private void CallAngleBetweenVectors(List<Vector> vectors)
+        private void CallAngleBetweenVectors(Vector first, Vector second)
         {
-            var angle = VectorHelper.CalculateAngle(vectors[0], vectors[1]);
-            _formattedOutput.ShowAngleBetweenVectorsResult(vectors, angle);
+            var angle = VectorHelper.CalculateAngle(first, second);
+            _formattedOutput.ShowAngleBetweenVectorsResult(first, second, angle);
         }
 
-        private void CallSimpleActionsWithVectors(List<Vector> vectors)
+        private void CallSimpleActionsWithVectors(Vector first, Vector second)
         {
-            var sumResult = vectors[0] + vectors[1];
-            var differenceResult = vectors[0] - vectors[1];
+            var sumResult = first + second;
+            var differenceResult = first - second;
 
-            _formattedOutput.ShowSimpleActionsWithVectorsResults(vectors, sumResult, differenceResult);
+            _formattedOutput.ShowSimpleActionsWithVectorsResults(first, second, sumResult, differenceResult);
         }
 
-        private void CallScalarMultiplication(List<Vector> vectors)
+        private void CallScalarMultiplication(Vector first, Vector second)
         {
-            var multiplicationResult = VectorHelper.CalculateScalarMultiplication(vectors[0], vectors[1]);
-            _formattedOutput.ShowScalarMultiplicationResult(vectors, multiplicationResult);
+            var multiplicationResult = VectorHelper.CalculateScalarMultiplication(first, second);
+            _formattedOutput.ShowScalarMultiplicationResult(first, second, multiplicationResult);
         }
 
-        private void CallVectorMultiplication(List<Vector> vectors)
+        private void CallVectorMultiplication(Vector first, Vector second)
         {
-            var vectorMultiplicationResult = VectorHelper.CalculateVectorMultiplication(vectors[0], vectors[1]);
-            _formattedOutput.ShowVectorsMultiplicationResult(vectors, vectorMultiplicationResult);
+            var vectorMultiplicationResult = VectorHelper.CalculateVectorMultiplication(first, second);
+            _formattedOutput.ShowVectorsMultiplicationResult(first, second, vectorMultiplicationResult);
         }
 
-        private void CallMultiplyVectorsByNumber(List<Vector> vectors)
+        private void CallMultiplyVectorsByNumber(Vector first, Vector second)
         {
             var multiplier = RequestMultiplier();
 
             var multiplicationVectorsByNumberRight = new List<Vector>
             {
-                (vectors[0] * multiplier),
-                (vectors[1] * multiplier)
+                (first * multiplier),
+                (second * multiplier)
             };
 
             var multiplicationVectorsByNumberLeft = new List<Vector>
             {
-                (multiplier * vectors[0]),
-                (multiplier * vectors[1])
+                (multiplier * first),
+                (multiplier * second)
             };
             
-            _formattedOutput.ShowMultiplicationVectorsByNumberResults(vectors, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
+            _formattedOutput.ShowMultiplicationVectorsByNumberResults(first, second, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
         }
         
         private Vector RequestVector(string orderByVectors)
@@ -116,11 +113,6 @@ namespace VectorProgram
         {
             var coords = DataParser.ParseArray(userInput);
             return new Vector(coords[0], coords[1], coords[2]);
-        }
-        
-        private bool GetIsCorrectedListVectors(List<Vector> vectors)
-        {
-            return (vectors.Count < 2 || vectors == null);
         }
     }
 }

@@ -13,24 +13,26 @@ namespace PolynomialProgram.View
             _view = view;
         }
 
-        public void ShowInputedPolynomials(IList<Polynomial> initialPolynomials)
+        public void ShowPolynomials(IList<Polynomial> initialPolynomials)
         {
-            _view.WriteLine("Your first polynomial:");
-            _view.WriteLine(initialPolynomials[0].ToString());
+            _view.WriteLine("Your polynomials:");
 
-            _view.WriteLine("Your second polynomial:");
-            _view.WriteLine(initialPolynomials[1].ToString());
+            foreach (var polynomial in initialPolynomials)
+            {
+                _view.WriteLine(polynomial.ToString());
+            }
         }
 
         public void ShowSimpleActionsWithPolynomialsResults(
-            IList<Polynomial> initialPolynomials,
+            Polynomial first,
+            Polynomial second,
             Polynomial sumPolynomials, 
             Polynomial differencePolynomials, 
             Polynomial multiplicationPolynomials)
         {
-            _view.WriteLine($"{initialPolynomials[0]} + {initialPolynomials[1]} = {sumPolynomials}");
-            _view.WriteLine($"{initialPolynomials[0]} - {initialPolynomials[1]} = {differencePolynomials}");
-            _view.WriteLine($"{initialPolynomials[0]} * {initialPolynomials[1]} = {multiplicationPolynomials}");
+            _view.WriteLine($"{first} + {second} = {sumPolynomials}");
+            _view.WriteLine($"{first} - {second} = {differencePolynomials}");
+            _view.WriteLine($"{first} * {second} = {multiplicationPolynomials}");
         }
 
         public void ShowMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, Polynomial result)

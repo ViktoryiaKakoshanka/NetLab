@@ -19,13 +19,13 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void SumOfVectors_returnedVectorSum()
+        public void SumOfVectors_returnNewVector_Test()
         {
-            var expect = new Vector(8, 10, 12);
+            var expected = new Vector(8, 10, 12);
             var actual = firstVector + secondVector;
 
-            Debug.WriteLine($"expect = {expect} actual = {actual}");
-            Assert.AreEqual(expect, actual);
+            Debug.WriteLine($"expect = {expected} actual = {actual}");
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -39,18 +39,17 @@ namespace VectorProgramTests
         }
         
         [TestMethod]
-        public void MultiplicationVectorsByNumber_returnedVectorMultiplicationByNumber()
+        public void MultiplicationVectorsByNumber_returnNewVector_Test()
         {
-            var expect = new Vector(-3, -6, -9);
+            var expected = new Vector(-3, -6, -9);
             var actualOne = firstVector * -3;
             var actualTwo = -3 * firstVector;
 
-            Debug.WriteLine($"{firstVector} * (-3): expect = {expect} actual = {actualOne}");
-            Debug.WriteLine($"(-3) * {firstVector}: expect = {expect} actual = {actualOne}");
+            Debug.WriteLine($"{firstVector} * (-3): expect = {expected} actual = {actualOne}");
+            Debug.WriteLine($"(-3) * {firstVector}: expect = {expected} actual = {actualOne}");
             
-            Assert.AreEqual(expect, actualOne);
-            Assert.AreEqual(expect, actualTwo);
-            Assert.AreEqual(actualOne, actualTwo);
+            Assert.AreEqual(expected, actualOne);
+            Assert.AreEqual(expected, actualTwo);
         }
 
         [TestMethod]
@@ -65,51 +64,53 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void Equals_returnedTrue()
+        public void Equals_IdenticalVectorsEqual_Test()
         {
             var newVector = new Vector(1, 2, 3);
-            bool actual;
 
             Debug.WriteLine($"firstVector {firstVector}");
             Debug.WriteLine($"newVector {newVector}");
 
-            actual = newVector.Equals(firstVector);
+            var actual = newVector.Equals(firstVector);
             Debug.WriteLine($"Equals(newVector, firstVector) = {actual};");
             Assert.IsTrue(actual);
         }
+
         [TestMethod]
-        public void CheckTheCorrectnessFirstProperty()
+        public void Equals_CheckCorrectnessReflexivity_Test()
         {
             Debug.WriteLine($"Check the correctness of the property Equals:");
             Debug.WriteLine($"x.Equals(x) = true");
             Assert.IsTrue(firstVector.Equals(firstVector));
         }
+
         [TestMethod]
-        public void CheckTheCorrectnessSecondProperty()
+        public void Equals_CheckCorrectnessSymmetry_Test()
         {
             Debug.WriteLine($"x.Equals(у) = y.Equals(x)");
             Assert.AreEqual(firstVector.Equals(secondVector), secondVector.Equals(firstVector));
         }
 
         [TestMethod]
-        public void Equals_CheckTheCorrectnessThirdProperty(Vector copyRefFirstVector, Vector newVector)
+        public void Equals_CheckCorrectnessTransitivity_Test()
         {
-            bool actual;
+            var newVector = new Vector(1, 2, 3);
+            var newFirstVector = new Vector(firstVector);
+
             Debug.WriteLine($"If x.Equals(у) = true and y.Equals(z) = true then x.Equals(z) = true");
-            actual = firstVector.Equals(copyRefFirstVector) && copyRefFirstVector.Equals(newVector) && firstVector.Equals(newVector);
+            var actual = firstVector.Equals(newFirstVector) && newFirstVector.Equals(newVector) && firstVector.Equals(newVector);
             Assert.IsTrue(actual);
         }
 
         [TestMethod]
         public void Equals_DifferentVectorsNotEqual_Test()
         {
-            bool actual;
-            actual = secondVector.Equals(firstVector);
+            var actual = secondVector.Equals(firstVector);
             Assert.IsFalse(actual);
         }
 
         [TestMethod]
-        public void GetHashCode_ForSameVectorsAreEqual_Test()
+        public void GetHashCode_ForSameVectorsEqual_Test()
         {
             var newVector = new Vector(1, 2, 3);
 

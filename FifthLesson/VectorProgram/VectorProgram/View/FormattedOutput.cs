@@ -13,7 +13,7 @@ namespace VectorProgram.View
             _view = view;
         }
 
-        public void ShowVectors(List<Vector> vectors)
+        public void ShowVectors(IList<Vector> vectors)
         {
             _view.WriteLine("Your vectors:");
 
@@ -23,44 +23,44 @@ namespace VectorProgram.View
             }
         }
 
-        public void ShowSimpleActionsWithVectorsResults(List<Vector> initialVectors, Vector sumResult, Vector differenceResult)
+        public void ShowSimpleActionsWithVectorsResults(Vector first, Vector second, Vector sumResult, Vector differenceResult)
         {
             _view.WriteLine("Actions with vectors:");
-            _view.WriteLine($"{initialVectors[0]} + {initialVectors[1]} = {sumResult}");
-            _view.WriteLine($"{initialVectors[0]} - {initialVectors[1]} = {differenceResult}");
+            _view.WriteLine($"{first} + {second} = {sumResult}");
+            _view.WriteLine($"{first} - {second} = {differenceResult}");
         }
 
-        public void ShowScalarMultiplicationResult(List<Vector> initialVectors, double result)
+        public void ShowScalarMultiplicationResult(Vector first, Vector second, double result)
         {
-            _view.WriteLine($"Scalar multiplication: {initialVectors[0]} * {initialVectors[1]} = {result}\n");
+            _view.WriteLine($"Scalar multiplication: {first} * {second} = {result}\n");
         }
 
-        public void ShowVectorsMultiplicationResult(List<Vector> initialVectors, Vector result)
+        public void ShowVectorsMultiplicationResult(Vector first, Vector second, Vector result)
         {
-            _view.WriteLine($"Vector multiplication: {initialVectors[0]} x {initialVectors[1]} = {result}\n");
+            _view.WriteLine($"Vector multiplication: {first} x {second} = {result}\n");
         }
 
-        public void ShowMultiplicationVectorsByNumberResults(List<Vector> initialVectors, List<Vector> resultNumberRight, List<Vector> resultNumberLeft, double multiplier)
+        public void ShowMultiplicationVectorsByNumberResults(Vector first, Vector second, IList<Vector> resultNumberRight, IList<Vector> resultNumberLeft, double multiplier)
         {
             _view.WriteLine("Multiplication of vectors by number:");
 
-            _view.WriteLine($"{initialVectors[0]} * {multiplier} = {resultNumberRight[0]}");
-            _view.WriteLine($"{initialVectors[1]} * {multiplier} = {resultNumberRight[1]}\n");
-            _view.WriteLine($"{multiplier} * {initialVectors[0]} = {resultNumberLeft[0]}");
-            _view.WriteLine($"{multiplier} * {initialVectors[1]} = {resultNumberLeft[1]}");
+            _view.WriteLine($"{first} * {multiplier} = {resultNumberRight[0]}");
+            _view.WriteLine($"{second} * {multiplier} = {resultNumberRight[1]}\n");
+            _view.WriteLine($"{multiplier} * {first} = {resultNumberLeft[0]}");
+            _view.WriteLine($"{multiplier} * {second} = {resultNumberLeft[1]}");
         }
 
-        public void ShowVectorsComparisonResults(List<Vector> initialVectors, bool equalityResult, bool inequalityResult)
+        public void ShowVectorsComparisonResults(Vector first, Vector second, bool equalityResult, bool inequalityResult)
         {
             _view.WriteLine("Compare vectors:");
-            _view.WriteLine($"{initialVectors[0]} == {initialVectors[1]} = {equalityResult}");
-            _view.WriteLine($"{initialVectors[0]} != {initialVectors[1]} = {inequalityResult}");
+            _view.WriteLine($"{first} == {second} = {equalityResult}");
+            _view.WriteLine($"{first} != {second} = {inequalityResult}");
             _view.WriteLine(string.Empty);
         }
 
-        public void ShowAngleBetweenVectorsResult(List<Vector> initialVectors, double angle)
+        public void ShowAngleBetweenVectorsResult(Vector first, Vector second, double angle)
         {
-            _view.WriteLine($"The angle between {initialVectors[0]} and {initialVectors[1]} = {Math.Abs(angle)}");
+            _view.WriteLine($"The angle between {first} and {second} = {Math.Abs(angle)}");
             _view.WriteLine(string.Empty);
         }
     }

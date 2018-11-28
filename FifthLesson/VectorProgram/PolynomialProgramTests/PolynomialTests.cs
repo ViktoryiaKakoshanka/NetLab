@@ -36,69 +36,68 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void Equals_returnedTrue()
+        public void Equals_IdenticalPolynomialsEqual_Test()
         {
-            var copyFirstPolynomial = _polynomialFirst;
             var newPolynomialFirst = new Polynomial(_polynomialFirst);
-            bool actual;
 
             Debug.WriteLine($"firstPolynomial {_polynomialFirst}");
-            Debug.WriteLine($"copyFirstPolynomial {copyFirstPolynomial}");
             Debug.WriteLine($"newPolynomialFirst {newPolynomialFirst}");
 
-            actual = Equals(copyFirstPolynomial, _polynomialFirst);
-            Debug.WriteLine($"Equals(copyFirstPolynomial, firstPolynomial) = {actual};");
-            Assert.IsTrue(actual);
-
-            actual = Equals(newPolynomialFirst, _polynomialFirst);
-            Debug.WriteLine($"Equals(newPolynomialFirst, firstPolynomial) = {actual}");
-            Assert.IsTrue(actual);
-
-            actual = newPolynomialFirst == _polynomialFirst;
-            Debug.WriteLine($"newVector == firstVector: {actual}");
-            Assert.IsTrue(actual);
-
-            Debug.WriteLine($"Check the correctness of the property Equals:");
-            Debug.WriteLine($"x.Equals(x) = true");
-            Assert.IsTrue(_polynomialFirst.Equals(_polynomialFirst));
-
-            Debug.WriteLine($"x.Equals(у) = y.Equals(x)");
-            Assert.AreEqual(_polynomialFirst.Equals(_polynomialSecond), _polynomialSecond.Equals(_polynomialFirst));
-
-            Debug.WriteLine($"If x.Equals(у) = true and y.Equals(z) = true then x.Equals(z) = true");
-            actual = _polynomialFirst.Equals(copyFirstPolynomial) && copyFirstPolynomial.Equals(newPolynomialFirst) && _polynomialFirst.Equals(newPolynomialFirst);
+            var actual = newPolynomialFirst.Equals(_polynomialFirst);
+            Debug.WriteLine($"newPolynomialFirst.Equals(firstPolynomial) = {actual}");
             Assert.IsTrue(actual);
         }
-        
+
         [TestMethod]
-        public void Equals_returnedFalse()
+        public void Equals_CheckCorrectnessReflexivity_Test()
         {
-            bool actual;
-            actual = Polynomial.Equals(_polynomialSecond, _polynomialFirst);
+            Debug.WriteLine($"x.Equals(x) = true");
+            Assert.IsTrue(_polynomialFirst.Equals(_polynomialFirst));
+        }
+
+        [TestMethod]
+        public void Equals_CheckCorrectnessSymmetry_Test()
+        {
+            Debug.WriteLine($"x.Equals(у) = y.Equals(x)");
+            Assert.AreEqual(_polynomialFirst.Equals(_polynomialSecond), _polynomialSecond.Equals(_polynomialFirst));
+        }
+
+        [TestMethod]
+        public void Equals_CheckCorrectnessTransitivity_Test()
+        {
+            var copyFirstPolynomial = new Polynomial(_polynomialFirst);
+            var newPolynomialFirst = new Polynomial(_polynomialFirst);
+
+            Debug.WriteLine($"If x.Equals(у) = true and y.Equals(z) = true then x.Equals(z) = true");
+            var actual = _polynomialFirst.Equals(copyFirstPolynomial) && copyFirstPolynomial.Equals(newPolynomialFirst) && _polynomialFirst.Equals(newPolynomialFirst);
+            Assert.IsTrue(actual);
+        }
+
+
+        [TestMethod]
+        public void Equals_DifferentPolynomialsNotEqual_Test()
+        {
+            var actual = _polynomialSecond.Equals(_polynomialFirst);
+            Debug.WriteLine($"polynomialSecond.Equals(firstPolynomial) = {actual}");
             Assert.IsFalse(actual);
         }
 
         [TestMethod]
-        public void GetHashCode_returnedEqualGetHashCode()
+        public void GetHashCode_ForSamePolynomialsEqual_Test()
         {
-            var copyRefFirstPolynomial = _polynomialFirst;
             var newPolynomialFirst = new Polynomial(_polynomialFirst);
 
             var hashCodeFirstPolynomial = _polynomialFirst.GetHashCode();
-            var hashCopyFirstPolynomial = copyRefFirstPolynomial.GetHashCode();
             var hashNewPolynomial = newPolynomialFirst.GetHashCode();
 
             Debug.WriteLine($"HashCode first Polynomial {_polynomialFirst} = {hashCodeFirstPolynomial}");
-            Debug.WriteLine($"HashCode copy ref first Polynomial {copyRefFirstPolynomial} = {hashCopyFirstPolynomial}");
             Debug.WriteLine($"HashCode new Polynomial {newPolynomialFirst} = {hashNewPolynomial}");
-
-            Assert.AreEqual(hashCodeFirstPolynomial, hashCopyFirstPolynomial);
-            Assert.AreEqual(hashCopyFirstPolynomial, hashNewPolynomial);
+            
             Assert.AreEqual(hashCodeFirstPolynomial, hashNewPolynomial);
         }
 
         [TestMethod]
-        public void SumOfPolynomials_returnedPolynomialSum()
+        public void SumOfPolynomials_returnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
@@ -117,7 +116,7 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void DifferenceOfPolynomials_returnedPolynomialDifference()
+        public void DifferenceOfPolynomials_returnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
@@ -136,7 +135,7 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void MultiplicateOfPolynomials_returnedPolynomialMultiplication()
+        public void MultiplicateOfPolynomials_returnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
@@ -157,7 +156,7 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void MultiplyNumberByPolynomial_returnedPolynomialMultiplicationByNumber()
+        public void MultiplyNumberByPolynomial_returnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
