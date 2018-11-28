@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NewtonsMethod.Model
+﻿namespace NewtonsMethod.Model
 {
     public class RadicalSign: IRadicalSign
     {

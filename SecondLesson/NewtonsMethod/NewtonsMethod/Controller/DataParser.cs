@@ -5,16 +5,14 @@ namespace NewtonsMethod.Controller
 {
     public class DataParser
     {
-        public double ParseStringToDouble(string value)
+        public double ParseDouble(string value)
         {
             var provider = new NumberFormatInfo();
             provider.CurrencyDecimalSeparator = ".";
+
             return Convert.ToDouble(value, provider);
         }
 
-        public int ParseStringToInt(string value)
-        {
-            return Convert.ToInt32(value);
-        }
+        public int ParseInt(string value) => Convert.ToInt32(value);
     }
 }
