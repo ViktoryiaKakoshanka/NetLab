@@ -1,8 +1,8 @@
 ﻿namespace BinaryConverting.Controller
 {
-    public class ValidatingInputDataHelper
+    public class DataParser
     {
-        public static int ValidateDataInputTryInt(string dataInput)
+        public static int ParseInt(string dataInput)
         {
             return int.Parse(dataInput);
         }

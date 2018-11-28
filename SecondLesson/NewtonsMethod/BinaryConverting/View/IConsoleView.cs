@@ -1,15 +1,11 @@
-﻿using BinaryConverting.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BinaryConverting.View
+﻿namespace BinaryConverting.View
 {
     interface IConsoleView
     {
-        void ShowResultByConversion(INumbers number);
-        void ShowWarningMessage(string messEx = null);
+        void WriteLine(string text);
+        string ReadLine();
+        string ReadLine(string message);
+        void WaitForAnyKeyPress();
+        void Clear();
     }
 }

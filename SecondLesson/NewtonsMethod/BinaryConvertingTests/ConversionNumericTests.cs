@@ -10,7 +10,7 @@ namespace BinaryConvertingTests
     public class ConversionNumericTests
     {
         [TestMethod]
-        public void NumberDecimalToBinaryTest_51_returned_110011()
+        public void NumberDecimalToBinary_51_returned_110011_Test()
         {
             INumbers numberMock = Mock.Of<INumbers>(x=> x.DecimalNumber==51);
             var externed = "110011";
@@ -21,7 +21,7 @@ namespace BinaryConvertingTests
         }
 
         [TestMethod]
-        public void NumberDecimalToBinaryTest_rand_10_30()
+        public void NumberDecimalToBinary_rand_10_30_Test()
         {
             var conversionNumeric = new ConversionNumeric();
 
@@ -35,7 +35,5 @@ namespace BinaryConvertingTests
                 Assert.AreSame(string.Intern(externed), string.Intern(numberMock.BinaryNumber), "Conversion from decimal number {0} to binary number system {1}", externed, numberMock.BinaryNumber);
             }
         }
-
-
     }
 }

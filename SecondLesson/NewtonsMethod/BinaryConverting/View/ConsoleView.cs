@@ -1,23 +1,21 @@
 ﻿using System;
-using BinaryConverting.Model;
 
 namespace BinaryConverting.View
 {
-    class ConsoleView: IConsoleView
+    class ConsoleView : IConsoleView
     {
-        public void ShowResultByConversion(INumbers number)
-        {
-            Console.WriteLine("Result:");
-            Console.WriteLine($"Decimal number:{number.DecimalNumber}");
-            Console.WriteLine($"Binary number:{number.BinaryNumber}");
+        public void Clear() => Console.Clear();
 
-            Console.ReadKey(true);
+        public string ReadLine(string message)
+        {
+            WriteLine(message);
+            return Console.ReadLine();
         }
 
-        public void ShowWarningMessage(string messEx = null)
-        {
-            Console.Clear();
-            Console.WriteLine($"{messEx} You must repeat the value entry. ");
-        }
+        public string ReadLine() => Console.ReadLine();
+
+        public void WaitForAnyKeyPress() => Console.ReadKey(true);
+        
+        public void WriteLine(string text) => Console.WriteLine(text);
     }
 }
