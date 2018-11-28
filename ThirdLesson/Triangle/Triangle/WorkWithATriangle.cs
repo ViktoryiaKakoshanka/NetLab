@@ -55,7 +55,7 @@ namespace TriangleLib
             {
                 var perimeter = TriangleCalculations.CalculateThePerimeter(triangle);
                 var area = TriangleCalculations.CalculateTheArea(triangle);
-                _formatedOutput.PrintDetailsTriangle(triangle.ToString(), perimeter, area);
+                _formatedOutput.ShowDetailsTriangle(triangle.ToString(), perimeter, area);
             }
             else
             {
@@ -76,7 +76,7 @@ namespace TriangleLib
         private double VerifySideUser(double side, char sideNumber)
         {
             _view.WriteLine($"Enter the value of {sideNumber} side");
-            side = Validator.TryParseInputtingSide(_view.ReadLine());
+            side = Validator.TryParseSide(_view.ReadLine());
             if (side == 0.0)
             {
                 _formatedOutput.ShowWarningMessage();
@@ -89,7 +89,7 @@ namespace TriangleLib
             _view.WriteLine("Would you like to start over? (yes - press Enter, no - any keyboard key)");
 
             var keyInfo = _view.ReadKey();
-            if(keyInfo.Key == ConsoleKey.Enter)
+            if(keyInfo.Key == _view.keyEnter)
             {
                 RunProgram(_view);
             }

@@ -4,6 +4,7 @@ namespace TriangleLib.View
 {
     public class FormatedOutput
     {
+        private const int DIGITS = 6;
         private IConsoleView _view;
 
         public FormatedOutput(IConsoleView view)
@@ -16,21 +17,21 @@ namespace TriangleLib.View
             _view.WriteLine("You entered an incorrect value for the side of the triangle.\nThe value must be greater than 0. ");
         }
 
-        public void PrintPerimetrTriangle(double perimetr)
+        public void ShowPerimetrTriangle(double perimetr)
         {
             _view.WriteLine($"Perimeter of a triangle: {perimetr}");
         }
 
-        public void PrintAreaTriangle(double square)
+        public void ShowAreaTriangle(double square)
         {
             _view.WriteLine($"Area of ​​a triangle: {square}");
         }
 
-        public void PrintDetailsTriangle(string triangle, double perimeter, double area)
+        public void ShowDetailsTriangle(string triangle, double perimeter, double area)
         {
             _view.WriteLine($"Sides of a triangle: {triangle}");
             _view.WriteLine($"Perimeter of a triangle: {perimeter}");
-            _view.WriteLine($"Area of ​​a triangle: {Math.Round(area, 6)}");
+            _view.WriteLine($"Area of ​​a triangle: {Math.Round(area, DIGITS)}");
         }
 
         public void ShowWarningMessageTriangleNotExist()

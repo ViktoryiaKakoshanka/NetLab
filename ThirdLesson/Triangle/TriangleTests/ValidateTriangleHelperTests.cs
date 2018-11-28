@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using TriangleLib.Controller;
+using System.Linq;
 
 namespace TriangleTests
 {
@@ -7,31 +9,38 @@ namespace TriangleTests
     public class ValidateTriangleHelperTests
     {
         [TestMethod]
-        public void ValidateTriangleTest_returnedTrue()
+        public void ValidateTriangle_CorrectTriangle_Test()
         {
-            var a = 1.0;
-            var b = 2.0;
-            var c = new double[] { 1.0, 2.0, 3.0, 4.0 };
-            var expected = new bool[] { true, true, true, false };
-            bool actual;
+            var firstSide = 1.0;
+            var secondSide = 2.0;
+            var thirdSide = new List<double> { 1.0, 2.0, 3.0 };
 
-            for (var i = 0; i < c.Length; i++)
-            {
-                actual = Validator.ValidateTriangle(a, b, c[i]);
+            var actual = thirdSide.All(x => Validator.ValidateTriangle(firstSide, secondSide, x));
 
-                Assert.AreEqual(expected[i], actual, $"Validate Triangle: expected={expected[i]}, actual={actual}");
-            }
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
-        public void TryParseInputtingSideTest_returnedDouble()
+        public void ValidateTriangle_WrongTriangle_Test()
         {
-            var diferentVariants = new string[] { "3.0", "3,0", "kj", " " };
-            var expectedVariants = new double[] { 3.0, 3.0, 0.0, 0.0 };
+            var firstSide = 1.0;
+            var secondSide = 2.0;
+            var thirdSide = 4.0;
 
-            for (var i = 0; i<diferentVariants.Length; i++)
+            var actual = Validator.ValidateTriangle(firstSide, secondSide, thirdSide);
+
+            Assert.IsFalse(actual);
+        }
+        
+        [TestMethod]
+        public void TryParseInputtingSide_returnNewNumber_Test()
+        {
+            var diferentVariants = new List<string> { "3.0", "3,0", "kj", " " };
+            var expectedVariants = new List<double> { 3.0, 3.0, 0.0, 0.0 };
+
+            for (var i = 0; i < diferentVariants.Count; i++)
             {
-                var actual = Validator.TryParseInputtingSide(diferentVariants[i]);
+                var actual = Validator.TryParseSide(diferentVariants[i]);
                 Assert.AreEqual(expectedVariants[i], actual, $"expected={expectedVariants[i]}, actual={actual}");
             }
         }

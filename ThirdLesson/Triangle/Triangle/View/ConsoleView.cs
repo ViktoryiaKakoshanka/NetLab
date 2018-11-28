@@ -2,8 +2,10 @@
 
 namespace TriangleLib.View
 {
-    class ConsoleView: IConsoleView
+    public class ConsoleView: IConsoleView
     {
+        public ConsoleKey keyEnter { get => ConsoleKey.Enter; }
+
         public void WriteLine(string text) => Console.WriteLine($"{text}");
 
         public string ReadLine() => Console.ReadLine();
