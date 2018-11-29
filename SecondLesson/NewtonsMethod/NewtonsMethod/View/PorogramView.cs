@@ -4,10 +4,7 @@ namespace NewtonsMethod.View
 {
     public class PorogramView : IProgramView
     {
-        public void ReadKeyTrue()
-        {
-            Console.ReadKey(true);
-        }
+        public void WaitForAnyKeyPress() => Console.ReadKey(true);
 
         public string ReadLine(string message)
         {
@@ -15,14 +12,8 @@ namespace NewtonsMethod.View
             return Console.ReadLine();
         }
 
-        public void WriteLine(string text)
-        {
-            Console.WriteLine(text);
-        }
+        public void WriteLine(string text) =>  Console.WriteLine(text);
 
-        public void ShowErrorMessageUserInput()
-        {
-            Console.WriteLine("You entered incorrect data");
-        }
+        public void ShowErrorMessageUserInput() => Console.WriteLine("You entered incorrect data");
     }
 }

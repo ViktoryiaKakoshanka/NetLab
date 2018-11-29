@@ -2,6 +2,7 @@
 using NewtonsMethod.Model;
 using NewtonsMethod.View;
 using System;
+using System.Collections.Generic;
 
 namespace NewtonsMethod
 {
@@ -9,58 +10,59 @@ namespace NewtonsMethod
     {
         private IProgramView _view;
         private IRadicalSign _radicalSign = null;
+        private const int DIGITS = 5;
 
         public void RunProgram(IProgramView programView)
         {
             _view = programView;
 
             var dataByUser = InitializeDataByUser();
-            _radicalSign = ParseAndCreateRadicalSign(dataByUser);
+            _radicalSign = ParseAndCreateRadicalSign(dataByUser[0], dataByUser[1], dataByUser[2]);
 
             var dataForCompare = PrepareDataForCompare();
-            PrintCompareResult(dataForCompare);
+            PrintCompareResult(dataForCompare[0], dataForCompare[1]);
         }
 
-        private string[] InitializeDataByUser()
+        private IList<string> InitializeDataByUser()
         {
             string numericalRoot, power, accurancy;
 
-            numericalRoot = RequestUserInput(InputedParams.Numerical, "Enter the number under the root");
-            power = RequestUserInput(InputedParams.Power, "Enter the root stem");
-            accurancy = RequestUserInput(InputedParams.Аccurancy, "Enter a calculation accuracy from 0 to 1");
+            numericalRoot = RequestUserInput(DataType.Numerical, "Enter the number under the root");
+            power = RequestUserInput(DataType.Power, "Enter the root stem");
+            accurancy = RequestUserInput(DataType.Аccurancy, "Enter a calculation accuracy from 0 to 1");
 
-            return new[] { numericalRoot, power, accurancy };
+            return new List<string> { numericalRoot, power, accurancy };
         }
 
-        private IRadicalSign ParseAndCreateRadicalSign(string[] dataByUser)
+        private IRadicalSign ParseAndCreateRadicalSign(string numericalRoot, string power, string accurancy)
         {
             var dataParser = new DataParser();
-            var parsedNumericalRoot = dataParser.ParseStringToDouble(dataByUser[0]);
-            var parsedPower = dataParser.ParseStringToInt(dataByUser[1]);
-            var parsedAccurancy = dataParser.ParseStringToDouble(dataByUser[2]);
+            var parsedNumericalRoot = dataParser.ParseDouble(numericalRoot);
+            var parsedPower = dataParser.ParseInt(power);
+            var parsedAccurancy = dataParser.ParseDouble(accurancy);
 
             return new RadicalSign(parsedNumericalRoot, parsedPower, parsedAccurancy);
         }
 
-        private double[] PrepareDataForCompare()
+        private IList<double> PrepareDataForCompare()
         {
             var calc = new Calculator();
             double radicalSignMethodNewton = calc.CalculateRadicalSign(_radicalSign);
             double radicalSignMathPow = calc.CalculateMathPow(_radicalSign);
 
-            return new[] { radicalSignMethodNewton, radicalSignMathPow };
+            return new List<double> { radicalSignMethodNewton, radicalSignMathPow };
         }
 
-        private void PrintCompareResult(double[] dataForCompare)
+        private void PrintCompareResult(double radicalSignMethodNewton, double radicalSignMathPow)
         {
             _view.WriteLine(_radicalSign.ToString());
-            _view.WriteLine($"Newton's method is {Math.Round(dataForCompare[0], 5)}");
+            _view.WriteLine($"Newton's method is {Math.Round(radicalSignMethodNewton, DIGITS)}");
             _view.WriteLine("Check");
-            _view.WriteLine($"{_radicalSign.Result} to degree {_radicalSign.Power} equally {Math.Round(dataForCompare[1], 5)}");
-            _view.ReadKeyTrue();
+            _view.WriteLine($"{_radicalSign.Result} to degree {_radicalSign.Power} equally {Math.Round(radicalSignMathPow, DIGITS)}");
+            _view.WaitForAnyKeyPress();
         }
 
-        private string RequestUserInput(InputedParams method, string welcomeMessage)
+        private string RequestUserInput(DataType method, string welcomeMessage)
         {
             var correctInput = false;
             var userInput = string.Empty;
@@ -73,7 +75,7 @@ namespace NewtonsMethod
             return userInput;
         }
 
-        private bool ValidateUserInput(InputedParams param, string userInput)
+        private bool ValidateUserInput(DataType param, string userInput)
         {
             var correctInput = Validator.ValidateInput(userInput, param);
             if (!correctInput) _view.ShowErrorMessageUserInput();

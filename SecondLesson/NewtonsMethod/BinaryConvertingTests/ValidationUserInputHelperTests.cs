@@ -4,25 +4,22 @@ using BinaryConverting.Controller;
 
 namespace BinaryConvertingTests
 {
-    /// <summary>
-    /// Summary description for ValidationUserInputHelperTests
-    /// </summary>
     [TestClass]
     public class ValidationUserInputHelperTests
     {
         [TestMethod]
         [ExpectedException(typeof(FormatException), AllowDerivedTypes = true)]
-        public void ValidationUserInput_FormatExceptionTest()
+        public void ValidationUserInput_FormatException_Test()
         {
-            ValidatingInputDataHelper.ValidateDataInputTryInt("kih");
+            DataParser.ParseInt("kih");
         }
 
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException), AllowDerivedTypes = true)]
-        public void ValidationUserInput_ArgumentNullExceptionTest()
+        public void ValidationUserInput_ArgumentNullException_Test()
         {
-            ValidatingInputDataHelper.ValidateDataInputTryInt(null);
+            DataParser.ParseInt(null);
         }
     }
 }

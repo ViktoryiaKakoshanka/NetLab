@@ -13,9 +13,6 @@
             ThirdSide = thirdSide;
         }
         
-        public override string ToString()
-        {
-            return FirstSide.ToString() + ", " + SecondSide.ToString() + ", " + ThirdSide.ToString();
-        }
+        public override string ToString() => FirstSide + ", " + SecondSide + ", " + ThirdSide;
     }
 }
