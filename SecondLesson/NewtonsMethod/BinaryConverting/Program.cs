@@ -7,8 +7,7 @@ namespace BinaryConverting
         static void Main(string[] args)
         {
             var mainLaunchProgram = new MainLaunchProgram();
-            var consoleView = new ConsoleView();
-            mainLaunchProgram.RunProgram(consoleView);
+            mainLaunchProgram.RunProgram(new ConsoleView());
         }
     }
 }

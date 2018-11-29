@@ -42,11 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\VerificateInputData.cs" />
+    <Compile Include="Controller\DataParser.cs" />
+    <Compile Include="Controller\Validator.cs" />
+    <Compile Include="Controller\VectorHelper.cs" />
+    <Compile Include="Model\DataType.cs" />
     <Compile Include="Model\Vector.cs" />
+    <Compile Include="UserInput\IProcessingUserInput.cs" />
+    <Compile Include="UserInput\UserInputProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ConsoleView.cs" />
+    <Compile Include="View\FormattedOutput.cs" />
+    <Compile Include="View\IConsoleView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

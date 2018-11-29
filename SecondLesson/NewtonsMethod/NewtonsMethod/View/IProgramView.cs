@@ -3,7 +3,7 @@
     public interface IProgramView
     {
         void WriteLine(string text);
-        void ReadKeyTrue();
+        void WaitForAnyKeyPress();
         string ReadLine(string message);
         void ShowErrorMessageUserInput();
     }

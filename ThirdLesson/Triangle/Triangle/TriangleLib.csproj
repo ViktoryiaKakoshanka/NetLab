@@ -43,11 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\TriangleCalculations.cs" />
-    <Compile Include="Controller\ValidatingTriangleHelper.cs" />
+    <Compile Include="Controller\Validaor.cs" />
     <Compile Include="Model\Triangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleView.cs" />
+    <Compile Include="View\FormatedOutput.cs" />
     <Compile Include="View\IConsoleView.cs" />
     <Compile Include="WorkWithATriangle.cs" />
   </ItemGroup>

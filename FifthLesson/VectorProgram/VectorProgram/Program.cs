@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using VectorProgram.View;
 
 namespace VectorProgram
 {
@@ -10,7 +6,8 @@ namespace VectorProgram
     {
         static void Main(string[] args)
         {
-           new ProgramRun().Run();
+            IConsoleView consoleView = new ConsoleView();
+            new ProgramRun().Run(consoleView);
         }
     }
 }
