@@ -1,67 +1,39 @@
 ﻿using System;
-using NewtonsMethod.Model;
 
 namespace NewtonsMethod.Controller
 {
-    public class Calculator: ICalculator
+    public class Calculator : ICalculator
     {
-        /// <summary>
-        /// Calculation of the nth root of a number by the Newton method with a given accuracy
-        /// </summary>
-        /// <param name="radicalSign"></param>
-        /// <returns></returns>
-        public double CalculateRadicalSign(IRadicalSign radicalSign)
-        {
-            radicalSign.Result = ComputeRadicalWithAccuracy(radicalSign);
-            return radicalSign.Result;
-        }
-        
-        public double CalculateMathPow(IRadicalSign radicalSign) => Math.Pow(radicalSign.Result, radicalSign.Power);
+        public double CalculateMathPow(double @base, int power) => Math.Pow(@base, power);
 
-        private double ComputeRadicalWithAccuracy(IRadicalSign radicalSign)
+        public double CalculateRoot(int degree, double radicand, double accuracy)
         {
-            double currentAccuracy;
-            var stepPassed = false;
-            var previousRadical = 1.0;
-            var currentRadical = 1.0;
+            var previousRoot = 1.0;
+            var currentRoot = 1.0;
+            var currentAccuracy = 0.0;
 
             do
             {
-                if (stepPassed) previousRadical = currentRadical;
+                currentRoot = CalculateRootByNewtonMethod(degree, radicand, previousRoot);
+                currentAccuracy = Math.Abs(previousRoot - currentRoot);
+                previousRoot = currentRoot;
+            } while (currentAccuracy > accuracy);
 
-                currentRadical = CalculateCurrentRadicalByMethodNewton(radicalSign, previousRadical);
-                stepPassed = true;
-                currentAccuracy = Math.Abs(previousRadical - currentRadical);
-
-            } while (currentAccuracy > radicalSign.Accuracy);
-
-            return currentRadical;
+            return currentRoot;
         }
 
-        private double CalculateCurrentRadicalByMethodNewton(IRadicalSign radicalSign, double previousRadical)
+        public bool ValidateRoot(double root, int power, double radicant, double accuracy)
         {
-            var previousPower = ErectInDegree(previousRadical, radicalSign.Power - 1);
-            var firstPartCalculation = 1.0 / radicalSign.Power;
-            var secondPartCalculation = (radicalSign.Power - 1.0) * previousRadical + radicalSign.NumericalRoot / previousPower;
-
-            var currentRadical = firstPartCalculation * secondPartCalculation;
-            return currentRadical;
+            return Math.Abs(Math.Pow(root, power) - radicant) <= accuracy;
         }
 
-        /// <summary>
-        /// Raising a number to a power
-        /// </summary>
-        /// <param name="number">number</param>
-        /// <param name="power">power</param>
-        /// <returns>number {value} in degree {power}</returns>
-        private double ErectInDegree(double number, int power)
+        private double CalculateRootByNewtonMethod(int degree, double radicand, double previousRoot)
         {
-            var numberConst = number;
-            for (var counter = 2; counter <= power; counter++)
-            {
-                number *= numberConst;
-            }
-            return number;
+            var rootInPower = CalculatorHelper.RaiseToPower(previousRoot, degree - 1);
+
+            var numerator = (degree - 1.0) * previousRoot + radicand / rootInPower;
+
+            return numerator / degree;
         }
 
     }

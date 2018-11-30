@@ -1,8 +1,6 @@
 ﻿using System;
 using BinaryConverting.Controller;
-using BinaryConverting.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace BinaryConvertingTests
 {
@@ -12,27 +10,26 @@ namespace BinaryConvertingTests
         [TestMethod]
         public void NumberDecimalToBinary_51_returned_110011_Test()
         {
-            INumbers numberMock = Mock.Of<INumbers>(x=> x.DecimalNumber==51);
+            var number = 51;
             var externed = "110011";
-            var conversionNumeric = new ConversionNumeric();
-            conversionNumeric.ConvertDecimalToBinary(numberMock);
+            var conversionNumeric = new NumberConverter();
+            var actual = conversionNumeric.ConvertDecimalToBinary(number);
 
-            Assert.AreSame(string.Intern(externed), string.Intern(numberMock.BinaryNumber));
+            Assert.AreSame(string.Intern(externed), string.Intern(actual));
         }
 
         [TestMethod]
         public void NumberDecimalToBinary_rand_10_30_Test()
         {
-            var conversionNumeric = new ConversionNumeric();
+            var conversionNumeric = new NumberConverter();
 
             for (int i = 10; i < 30; i++)
             {
-                INumbers numberMock = Mock.Of<INumbers>(x => x.DecimalNumber == i);
                 var externed = Convert.ToString(i, 2);
                 
-                conversionNumeric.ConvertDecimalToBinary(numberMock);
+                var actual = conversionNumeric.ConvertDecimalToBinary(i);
                 
-                Assert.AreSame(string.Intern(externed), string.Intern(numberMock.BinaryNumber), "Conversion from decimal number {0} to binary number system {1}", externed, numberMock.BinaryNumber);
+                Assert.AreSame(string.Intern(externed), string.Intern(actual), "Conversion from decimal number {0} to binary number system {1}", externed, actual);
             }
         }
     }

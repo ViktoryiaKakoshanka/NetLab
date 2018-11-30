@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewtonsMethod.Controller;
-using NewtonsMethod.Model;
 
 namespace NewtonsMethodTests
 {
@@ -9,21 +8,19 @@ namespace NewtonsMethodTests
     public class CalculationTests
     {
         [TestMethod]
-        public void CalculateRadicalSign_3_27_returned_3_Test()
+        public void CalculateRoot_3_27_returned_3_Test()
         {
-            var numericalRoot = 27.0;
-            var power = 3;
+            var radicand = 27.0;
+            var degree = 3;
             var accuracy = 0.000001;
-            var exected = 3.0;
+            var expected = 3.0;
 
-            var radicalSign = new RadicalSign(numericalRoot, power, accuracy);
-            
-            var calc = new Calculator();
-            calc.CalculateRadicalSign(radicalSign);
+            var calculator = new Calculator();
+            var result = calculator.CalculateRoot(degree, radicand, accuracy);
 
-            var actual = Math.Round(radicalSign.Result, 5);
+            var actual = Math.Round(result, 5);
 
-            Assert.AreEqual(exected, actual);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

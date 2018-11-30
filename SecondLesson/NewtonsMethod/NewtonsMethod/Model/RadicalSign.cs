@@ -6,8 +6,6 @@
         public double NumericalRoot { get; private set; }
         public double Accuracy { get; private set; }
         public double Result { get; set; }
-        
-        public RadicalSign() : this(5.0, 2, 0.0004) { }
 
         /// <summary>
         /// Number constructor under the power root
