@@ -6,47 +6,47 @@ namespace DecoratorStream
 {
     public abstract class BaseDecoratorStream : Stream
     {
-        private Stream _stream;
-        private IConsoleView _view;
+        protected Stream Stream { get; private set; }
+        protected IConsoleView ConsoleView { get; private set; }
         public BaseDecoratorStream(Stream stream, IConsoleView view) : base()
         {
-            _stream = stream;
-            _view = view;
+            Stream = stream;
+            ConsoleView = view;
         }
 
-        public override bool CanRead => _stream.CanRead;
+        public override bool CanRead => Stream.CanRead;
 
-        public override bool CanSeek => _stream.CanSeek;
+        public override bool CanSeek => Stream.CanSeek;
 
-        public override bool CanWrite => _stream.CanWrite;
+        public override bool CanWrite => Stream.CanWrite;
 
-        public override long Length => _stream.Length;
+        public override long Length => Stream.Length;
 
-        public override long Position { get => _stream.Position; set => _stream.Position = value; }
+        public override long Position { get => Stream.Position; set => Stream.Position = value; }
 
         public override void Flush()
         {
-            _stream.Flush();
+            Stream.Flush();
         }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return _stream.Read(buffer, offset, count);
+            return Stream.Read(buffer, offset, count);
         }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            return _stream.Seek(offset, origin);
+            return Stream.Seek(offset, origin);
         }
 
         public override void SetLength(long value)
         {
-            _stream.SetLength(value);
+            Stream.SetLength(value);
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            _stream.Write(buffer, offset, count);
+            Stream.Write(buffer, offset, count);
         }
     }
 }

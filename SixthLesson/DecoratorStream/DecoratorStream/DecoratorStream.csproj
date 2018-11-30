@@ -42,11 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Decorators\TextLoading.cs" />
+    <Compile Include="Decorators\TextLoader.cs" />
     <Compile Include="Decorators\PasswordRequestBeforeReading.cs" />
     <Compile Include="Model\FileData.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ProgramRun.cs" />
+    <Compile Include="ProgramRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInputProcessor.cs" />
     <Compile Include="View\ConsoleView.cs" />

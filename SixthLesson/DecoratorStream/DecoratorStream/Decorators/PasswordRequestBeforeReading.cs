@@ -4,28 +4,22 @@ using DecoratorStream.View;
 
 namespace DecoratorStream.Decorators
 {
-    public  class PasswordRequestBeforeReading : BaseDecoratorStream
+    public class PasswordRequestBeforeReading : BaseDecoratorStream
     {
-        private Stream _stream;
-        private IConsoleView _view;
-
-        public PasswordRequestBeforeReading(Stream stream, IConsoleView view) : base(stream, view)
-        {
-            _stream = stream;
-            _view = view;
-        }
+        public PasswordRequestBeforeReading(Stream stream, IConsoleView view) : base(stream, view) { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            var userInputProcessor = new UserInputProcessor(_view);
+            var userInputProcessor = new UserInputProcessor(ConsoleView);
             var password = userInputProcessor.RequestPassword();
 
-            if (string.Intern(password) == string.Intern(FileData.PASSWORD))
+            if (string.Intern(password) != string.Intern(FileData.PASSWORD))
             {
-                return _stream.Read(buffer, offset, count);
+                ConsoleView.ShowMessageErrorPassword();
+                return 0;
             }
-            else _view.ShowMessageErrorPassword();
-            return 0;
+
+            return Stream.Read(buffer, offset, count);
         }
     }
 }
