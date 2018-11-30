@@ -22,5 +22,10 @@ namespace DecoratorStream.View
         {
             WriteLine("You entered the wrong password");
         }
+
+        public void SetCursorPosition(int left, int top)
+        {
+            Console.SetCursorPosition(left, top);
+        }
     }
 }

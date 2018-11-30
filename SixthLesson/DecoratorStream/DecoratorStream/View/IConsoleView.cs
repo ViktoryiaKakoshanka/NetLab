@@ -6,5 +6,6 @@
         string ReadLine(string message);
         void WaitForAnyKeyPress();
         void ShowMessageErrorPassword();
+        void SetCursorPosition(int left, int top);
     }
 }

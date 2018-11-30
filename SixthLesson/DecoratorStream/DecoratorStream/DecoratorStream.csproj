@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decorators\TextLoading.cs" />
+    <Compile Include="Decorators\PasswordRequestBeforeReading.cs" />
     <Compile Include="Model\FileData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRun.cs" />
@@ -49,7 +51,7 @@
     <Compile Include="UserInputProcessor.cs" />
     <Compile Include="View\ConsoleView.cs" />
     <Compile Include="View\IConsoleView.cs" />
-    <Compile Include="WorkWithText.cs" />
+    <Compile Include="Decorators\BaseDecoratorStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

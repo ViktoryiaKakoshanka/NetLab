@@ -1,5 +1,6 @@
 ﻿using DecoratorStream.Model;
 using DecoratorStream.View;
+using DecoratorStream.Decorators;
 using System;
 using System.IO;
 
@@ -13,15 +14,26 @@ namespace DecoratorStream
         {
             _view = view;
 
-            ReadFile();
-            _view.WriteLine(Console.CursorLeft.ToString());
-            _view.WriteLine(Console.CursorTop.ToString());
+            ShowFileReadingStatus();
+
+            //ReadFileWithPassword();
+
             _view.WaitForAnyKeyPress();
         }
 
-        private void ReadFile()
+        private void ShowFileReadingStatus()
         {
-            using (WorkWithText fstream = new WorkWithText(File.OpenRead(FileData.PUTH), _view))
+            using (var fstream = new TextLoading(File.OpenRead(FileData.FILEPATH), _view))
+            {
+                byte[] bytes = new byte[fstream.Length + 10];
+                fstream.Read(bytes, 0, (int)fstream.Length);
+                fstream.Close();
+            }
+        }
+        
+        private void ReadFileWithPassword()
+        {
+            using (var fstream = new PasswordRequestBeforeReading(File.OpenRead(FileData.FILEPATH), _view))
             {
                 var array = new byte[fstream.Length];
 

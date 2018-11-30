@@ -4,11 +4,11 @@ using System.IO;
 
 namespace DecoratorStream
 {
-    public class WorkWithText : Stream
+    public abstract class BaseDecoratorStream : Stream
     {
         private Stream _stream;
         private IConsoleView _view;
-        public WorkWithText(Stream stream, IConsoleView view) : base()
+        public BaseDecoratorStream(Stream stream, IConsoleView view) : base()
         {
             _stream = stream;
             _view = view;
@@ -31,15 +31,7 @@ namespace DecoratorStream
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            var userInputProcessor = new UserInputProcessor(_view);
-            var password = userInputProcessor.RequestPassword();
-
-            if (string.Intern(password) == string.Intern(FileData.PASSWORD))
-            {
-                return _stream.Read(buffer, offset, count);
-            }
-            else _view.ShowMessageErrorPassword();
-            return 0;
+            return _stream.Read(buffer, offset, count);
         }
 
         public override long Seek(long offset, SeekOrigin origin)
