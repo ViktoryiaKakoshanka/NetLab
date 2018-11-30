@@ -6,8 +6,8 @@ namespace TriangleLib
     {
         static void Main(string[] args)
         {
-            var run = new WorkWithATriangle();
-            run.RunProgram(new ConsoleView());
+            var run = new ProgramRunner(new ConsoleView());
+            run.RunProgram();
         }
     }
 }

@@ -51,8 +51,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TriangleCalculations.cs" />
-    <Compile Include="ValidateTriangleHelperTests.cs" />
+    <Compile Include="TriangleHelperTests.cs" />
+    <Compile Include="ValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
