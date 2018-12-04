@@ -4,27 +4,26 @@ using System.Collections.Generic;
 
 namespace FirstLessonConsoleApp.Menu
 {
-    public class ReadCoordinatesFromConsoleMenuItem : MenuItem
+    public class CoordinatesFromConsoleMenuItem : MenuItem
     {
-        public ReadCoordinatesFromConsoleMenuItem(int orderNumber, string text, IView view):base(orderNumber, text, view) { }
+        public CoordinatesFromConsoleMenuItem(int orderNumber, string text, IView view) : base(orderNumber, text, view) { }
 
         public override void Execute()
         {
+            Coordinate coordinate;
             var coordinates = new List<Coordinate>();
 
             GetView().PrintMessage("Enter the coordinates:");
 
-            var coordinate = new Coordinate();
-
-            while (coordinate != null)
+            do
             {
                 var userInput = GetView().ReadLine();
-                coordinate = CoordinatesHelper.ParseUserInputToCoordinate(userInput);
-                if (coordinate != null)
+
+                if (CoordinateHelper.TryParseCoordinate(userInput, out coordinate))
                 {
                     coordinates.Add(coordinate);
                 }
-            }
+            } while (coordinate != null);
 
             GetView().PrintCoordinates(coordinates);
         }

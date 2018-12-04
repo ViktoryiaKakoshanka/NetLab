@@ -1,12 +1,8 @@
-﻿using FirstLessonConsoleApp.Model;
-using FirstLessonWPFApplication.Controller;
+﻿using FirstLessonConsoleApp;
+using FirstLessonConsoleApp.Model;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Text;
 using System.Windows;
+using System.Linq;
 
 namespace FirstLessonWPFApplication
 {
@@ -15,8 +11,6 @@ namespace FirstLessonWPFApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        private CoordinatesFromFile file = new CoordinatesFromFile();
-
         /// <summary>
         /// Point of entry
         /// </summary>
@@ -30,15 +24,15 @@ namespace FirstLessonWPFApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormatedCoordinatesFile_Click(object sender, RoutedEventArgs e)
+        private void ReadCoordinatesFromFileOnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-            
+
             if (openFile.ShowDialog() == true)
             {
-                file.ReadFileInListbox(openFile.FileName);
+                var coordinatesFromFile = CoordinatesFromFileHelper.ReadCoordinatesFromFile(openFile.FileName);
+                coordinatesFromFile.ToList().ForEach(x => listbxOutputCoordinates.Items.Add(x));
             }
-            FormatedCoordinatesOutputFromFile();
         }
 
 
@@ -47,28 +41,18 @@ namespace FirstLessonWPFApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormatedCoordinatesOutput_Click(object sender, RoutedEventArgs e)
+        private void ReadCoordinatesFromTextBoxOnClick(object sender, RoutedEventArgs e)
         {
             var userInput = tbInputCoordinates.Text;
-            if(userInput != string.Empty)
-            {
-                listbxOutputCoordinates.Items.Add(new FormattedСoordinate().FormatedMethod(userInput));
-            }
-            else
-            {
-                MessageBox.Show("Enter the coordinates");
-            }
-        }
+            Coordinate coordinate;
 
-        /// <summary>
-        /// Call formatting on the coordinate line read from the file
-        /// </summary>
-        public void FormatedCoordinatesOutputFromFile()
-        {
-            foreach (var field in file.GetListCoordinatesFromFile())
+            if (!CoordinateHelper.TryParseCoordinate(userInput, out coordinate))
             {
-                listbxOutputCoordinates.Items.Add(new FormattedСoordinate().FormatedMethod(field));
+                MessageBox.Show("Wrong coordinates format", "Error");
+                return;
             }
+
+            listbxOutputCoordinates.Items.Add(coordinate);
         }
     }
 }

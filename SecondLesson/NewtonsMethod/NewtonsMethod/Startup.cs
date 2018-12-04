@@ -2,64 +2,59 @@
 using NewtonsMethod.Model;
 using NewtonsMethod.View;
 using System;
-using System.Collections.Generic;
 
 namespace NewtonsMethod
 {
     public class Startup
     {
-        private IProgramView _view;
-        private IRadicalSign _radicalSign = null;
-        private const int DIGITS = 5;
+        private const int DECIMAL_PLACES = 5;
 
-        public void RunProgram(IProgramView programView)
+        private IProgramView _programView;
+        private double _radicant, _accuracy;
+        private int _degree;
+
+        public Startup(IProgramView programView)
         {
-            _view = programView;
-
-            var dataByUser = InitializeDataByUser();
-            _radicalSign = ParseAndCreateRadicalSign(dataByUser[0], dataByUser[1], dataByUser[2]);
-
-            var dataForCompare = PrepareDataForCompare();
-            PrintCompareResult(dataForCompare[0], dataForCompare[1]);
+            _programView = programView;
         }
 
-        private IList<string> InitializeDataByUser()
+        public void RunProgram()
         {
-            string numericalRoot, power, accurancy;
+            Initialize();
 
-            numericalRoot = RequestUserInput(DataType.Numerical, "Enter the number under the root");
-            power = RequestUserInput(DataType.Power, "Enter the root stem");
-            accurancy = RequestUserInput(DataType.Аccurancy, "Enter a calculation accuracy from 0 to 1");
+            var calculator = new Calculator();
+            var rootByNewtonMethod = calculator.CalculateRoot(_degree, _radicant, _accuracy);
+            _programView.WriteLine($"Root by Newton's method with accuracy {_accuracy}: {Math.Round(rootByNewtonMethod, DECIMAL_PLACES)}");
 
-            return new List<string> { numericalRoot, power, accurancy };
+            var isValidRoot = calculator.ValidateRoot(rootByNewtonMethod, _degree, _radicant, _accuracy);
+            _programView.WriteLine($"Is valid calculated root: {isValidRoot}");
+
+            _programView.WaitForAnyKeyPress();
         }
 
-        private IRadicalSign ParseAndCreateRadicalSign(string numericalRoot, string power, string accurancy)
+        private void Initialize()
         {
-            var dataParser = new DataParser();
-            var parsedNumericalRoot = dataParser.ParseDouble(numericalRoot);
-            var parsedPower = dataParser.ParseInt(power);
-            var parsedAccurancy = dataParser.ParseDouble(accurancy);
-
-            return new RadicalSign(parsedNumericalRoot, parsedPower, parsedAccurancy);
+            RequestRadicant();
+            RequestDegree();
+            RequestAccuracy();
         }
 
-        private IList<double> PrepareDataForCompare()
+        private void RequestAccuracy()
         {
-            var calc = new Calculator();
-            double radicalSignMethodNewton = calc.CalculateRadicalSign(_radicalSign);
-            double radicalSignMathPow = calc.CalculateMathPow(_radicalSign);
-
-            return new List<double> { radicalSignMethodNewton, radicalSignMathPow };
+            var accuracyString = RequestUserInput(DataType.Аccurancy, "Enter accuracy from 0 to 1");
+            _accuracy = DataParser.ParseDouble(accuracyString);
         }
 
-        private void PrintCompareResult(double radicalSignMethodNewton, double radicalSignMathPow)
+        private void RequestDegree()
         {
-            _view.WriteLine(_radicalSign.ToString());
-            _view.WriteLine($"Newton's method is {Math.Round(radicalSignMethodNewton, DIGITS)}");
-            _view.WriteLine("Check");
-            _view.WriteLine($"{_radicalSign.Result} to degree {_radicalSign.Power} equally {Math.Round(radicalSignMathPow, DIGITS)}");
-            _view.WaitForAnyKeyPress();
+            var degreeString = RequestUserInput(DataType.Power, "Enter root degree");
+            _degree = DataParser.ParseInt(degreeString);
+        }
+
+        private void RequestRadicant()
+        {
+            var radicantString = RequestUserInput(DataType.Numerical, "Enter radicand");
+            _radicant = DataParser.ParseDouble(radicantString);
         }
 
         private string RequestUserInput(DataType method, string welcomeMessage)
@@ -69,7 +64,7 @@ namespace NewtonsMethod
 
             while (!correctInput)
             {
-                userInput = _view.ReadLine(welcomeMessage);
+                userInput = _programView.ReadLine(welcomeMessage);
                 correctInput = ValidateUserInput(method, userInput);
             }
             return userInput;
@@ -78,7 +73,7 @@ namespace NewtonsMethod
         private bool ValidateUserInput(DataType param, string userInput)
         {
             var correctInput = Validator.ValidateInput(userInput, param);
-            if (!correctInput) _view.ShowErrorMessageUserInput();
+            if (!correctInput) _programView.ShowErrorMessageUserInput();
 
             return correctInput;
         }

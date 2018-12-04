@@ -2,7 +2,7 @@
 
 namespace NewtonsMethod.View
 {
-    public class PorogramView : IProgramView
+    public class ProgramView : IProgramView
     {
         public void WaitForAnyKeyPress() => Console.ReadKey(true);
 

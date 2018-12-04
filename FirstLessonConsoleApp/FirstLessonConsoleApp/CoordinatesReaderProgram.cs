@@ -1,6 +1,7 @@
 ﻿using FirstLessonConsoleApp.Menu;
 using FirstLessonConsoleApp.View;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FirstLessonConsoleApp
 {
@@ -44,8 +45,8 @@ namespace FirstLessonConsoleApp
 
         private void InitializeMenuItems(string coordinatesFilePath)
         {
-            _menuItems.Add(new ReadCoordinatesFromConsoleMenuItem(1, "input coordinates from the keyboard", _view));
-            _menuItems.Add(new ReadCoordinatesFromFileMenuItem(2, "input coordinates from file", _view, coordinatesFilePath));
+            _menuItems.Add(new CoordinatesFromConsoleMenuItem(1, "input coordinates from the keyboard", _view));
+            _menuItems.Add(new CoordinatesFromFileMenuItem(2, "input coordinates from file", _view, coordinatesFilePath));
             _menuItems.Add(new ExitMenuItem(3, "exit", _view));
         }
 
@@ -58,23 +59,7 @@ namespace FirstLessonConsoleApp
                 return null;
             }
 
-            return FindMenuItemByIndex(index);
-        }
-
-        private MenuItem FindMenuItemByIndex(int index)
-        {
-            MenuItem selectedItem = null;
-
-            foreach (var item in _menuItems)
-            {
-                if (item.OrderNumber == index)
-                {
-                    selectedItem = item;
-                    break;
-                }
-            }
-
-            return selectedItem;
+            return _menuItems.FirstOrDefault(x => x.OrderNumber == index);
         }
     }
 }
