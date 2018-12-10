@@ -8,26 +8,29 @@ namespace VectorProgram
 {
     class ProgramRun
     {
-        private IConsoleView _view;
-        private FormattedOutput _formattedOutput;
+        private IConsoleView _consoleView;
+        private IVectorView _vectorView;
         private IUserInputProcessor _userInput;
 
-        public void Run(IConsoleView view)
+        public ProgramRun(IConsoleView view)
         {
-            _view = view;
-            _userInput = new UserInputProcessor(_view);
-            _formattedOutput = new FormattedOutput(_view);
+            _consoleView = view;
+        }
+
+        public void Run()
+        {
+            _userInput = new UserInputProcessor(_consoleView);
 
             var vectors = CreateVectors();
 
-            _formattedOutput.ShowVectors(vectors);
+            _vectorView.ShowVectors(vectors);
 
             CallActionsWithVectors(vectors[0], vectors[1]);
             CallScalarMultiplication(vectors[0], vectors[1]);
             CompareVectors(vectors[0], vectors[1]);
             CallAngleBetweenVectors(vectors[0], vectors[1]);
 
-            _view.WaitForAnyKeyPress();
+            _consoleView.WaitForAnyKeyPress();
         }
 
         private List<Vector> CreateVectors()
@@ -49,13 +52,13 @@ namespace VectorProgram
         {
             var equalityResult = (first == second);
             var inequalityResult = first != second;
-            _formattedOutput.ShowVectorsComparisonResults(first, second, equalityResult, inequalityResult);
+            _vectorView.ShowVectorsComparisonResults(first, second, equalityResult, inequalityResult);
         }
 
         private void CallAngleBetweenVectors(Vector first, Vector second)
         {
             var angle = VectorHelper.CalculateAngle(first, second);
-            _formattedOutput.ShowAngleBetweenVectorsResult(first, second, angle);
+            _vectorView.ShowAngleBetweenVectorsResult(first, second, angle);
         }
 
         private void CallSimpleActionsWithVectors(Vector first, Vector second)
@@ -63,19 +66,19 @@ namespace VectorProgram
             var sumResult = first + second;
             var differenceResult = first - second;
 
-            _formattedOutput.ShowSimpleActionsWithVectorsResults(first, second, sumResult, differenceResult);
+            _vectorView.ShowSimpleActionsWithVectorsResults(first, second, sumResult, differenceResult);
         }
 
         private void CallScalarMultiplication(Vector first, Vector second)
         {
             var multiplicationResult = VectorHelper.CalculateScalarMultiplication(first, second);
-            _formattedOutput.ShowScalarMultiplicationResult(first, second, multiplicationResult);
+            _vectorView.ShowScalarMultiplicationResult(first, second, multiplicationResult);
         }
 
         private void CallVectorMultiplication(Vector first, Vector second)
         {
             var vectorMultiplicationResult = VectorHelper.CalculateVectorMultiplication(first, second);
-            _formattedOutput.ShowVectorsMultiplicationResult(first, second, vectorMultiplicationResult);
+            _vectorView.ShowVectorsMultiplicationResult(first, second, vectorMultiplicationResult);
         }
 
         private void CallMultiplyVectorsByNumber(Vector first, Vector second)
@@ -93,8 +96,8 @@ namespace VectorProgram
                 (multiplier * first),
                 (multiplier * second)
             };
-            
-            _formattedOutput.ShowMultiplicationVectorsByNumberResults(first, second, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
+
+            _vectorView.ShowMultiplicationVectorsByNumberResults(first, second, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
         }
         
         private Vector RequestVector(string orderByVectors)

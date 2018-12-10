@@ -3,8 +3,9 @@
     public interface IRadicalSign
     {
         int Power { get; }
-        double NumericalRoot { get; }
+        double Number { get; }
         double Accuracy { get; }
-        double Result { get; set;  }
+        double Root { get; }
+        void SetRoot(double root);
     }
 }

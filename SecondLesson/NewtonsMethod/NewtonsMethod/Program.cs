@@ -6,8 +6,8 @@ namespace NewtonsMethod
     {
         static void Main(string[] args)
         {
-            var start = new Startup();
-            start.RunProgram(new PorogramView());
+            var start = new Startup(new PorogramView());
+            start.RunProgram();
         }
     }
 }

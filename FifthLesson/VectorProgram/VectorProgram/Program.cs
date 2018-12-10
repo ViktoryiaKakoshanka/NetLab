@@ -7,7 +7,7 @@ namespace VectorProgram
         static void Main(string[] args)
         {
             IConsoleView consoleView = new ConsoleView();
-            new ProgramRun().Run(consoleView);
+            new ProgramRun(consoleView).Run();
         }
     }
 }

@@ -9,21 +9,23 @@ namespace NewtonsMethod
     public class Startup
     {
         private IProgramView _view;
-        private IRadicalSign _radicalSign = null;
         private const int DIGITS = 5;
 
-        public void RunProgram(IProgramView programView)
+        public Startup(IProgramView programView)
         {
             _view = programView;
-
-            var dataByUser = InitializeDataByUser();
-            _radicalSign = ParseAndCreateRadicalSign(dataByUser[0], dataByUser[1], dataByUser[2]);
-
-            var dataForCompare = PrepareDataForCompare();
-            PrintCompareResult(dataForCompare[0], dataForCompare[1]);
         }
 
-        private IList<string> InitializeDataByUser()
+        public void RunProgram()
+        {
+            var dataByUser = RequestDataByUser();
+            var radicalSign = CreateRadicalSign(dataByUser[0], dataByUser[1], dataByUser[2]);
+
+            var dataForCompare = PrepareDataForCompare(radicalSign);
+            PrintCompareResult(radicalSign, dataForCompare[0], dataForCompare[1]);
+        }
+
+        private IList<string> RequestDataByUser()
         {
             string numericalRoot, power, accurancy;
 
@@ -34,7 +36,7 @@ namespace NewtonsMethod
             return new List<string> { numericalRoot, power, accurancy };
         }
 
-        private IRadicalSign ParseAndCreateRadicalSign(string numericalRoot, string power, string accurancy)
+        private IRadicalSign CreateRadicalSign(string numericalRoot, string power, string accurancy)
         {
             var dataParser = new DataParser();
             var parsedNumericalRoot = dataParser.ParseDouble(numericalRoot);
@@ -44,25 +46,25 @@ namespace NewtonsMethod
             return new RadicalSign(parsedNumericalRoot, parsedPower, parsedAccurancy);
         }
 
-        private IList<double> PrepareDataForCompare()
+        private IList<double> PrepareDataForCompare(IRadicalSign radicalSign)
         {
-            var calc = new Calculator();
-            double radicalSignMethodNewton = calc.CalculateRadicalSign(_radicalSign);
-            double radicalSignMathPow = calc.CalculateMathPow(_radicalSign);
+            var calculator = new Calculator();
+            var radicalSignMethodNewton = calculator.CalculateRadicalSign(radicalSign);
+            double radicalSignMathPow = calculator.CalculateMathPow(radicalSign);
 
             return new List<double> { radicalSignMethodNewton, radicalSignMathPow };
         }
 
-        private void PrintCompareResult(double radicalSignMethodNewton, double radicalSignMathPow)
+        private void PrintCompareResult(IRadicalSign radicalSign, double radicalSignMethodNewton, double radicalSignMathPow)
         {
-            _view.WriteLine(_radicalSign.ToString());
+            _view.WriteLine(radicalSign.ToString());
             _view.WriteLine($"Newton's method is {Math.Round(radicalSignMethodNewton, DIGITS)}");
             _view.WriteLine("Check");
-            _view.WriteLine($"{_radicalSign.Result} to degree {_radicalSign.Power} equally {Math.Round(radicalSignMathPow, DIGITS)}");
+            _view.WriteLine($"{radicalSign.Root} to degree {radicalSign.Power} equally {Math.Round(radicalSignMathPow, DIGITS)}");
             _view.WaitForAnyKeyPress();
         }
 
-        private string RequestUserInput(DataType method, string welcomeMessage)
+        private string RequestUserInput(DataType dataType, string welcomeMessage)
         {
             var correctInput = false;
             var userInput = string.Empty;
@@ -70,7 +72,7 @@ namespace NewtonsMethod
             while (!correctInput)
             {
                 userInput = _view.ReadLine(welcomeMessage);
-                correctInput = ValidateUserInput(method, userInput);
+                correctInput = ValidateUserInput(dataType, userInput);
             }
             return userInput;
         }
