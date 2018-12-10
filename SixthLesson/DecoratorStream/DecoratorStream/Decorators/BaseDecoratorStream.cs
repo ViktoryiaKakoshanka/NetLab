@@ -8,6 +8,7 @@ namespace DecoratorStream
     {
         protected Stream Stream { get; private set; }
         protected IConsoleView ConsoleView { get; private set; }
+
         public BaseDecoratorStream(Stream stream, IConsoleView view) : base()
         {
             Stream = stream;
@@ -24,29 +25,14 @@ namespace DecoratorStream
 
         public override long Position { get => Stream.Position; set => Stream.Position = value; }
 
-        public override void Flush()
-        {
-            Stream.Flush();
-        }
+        public override void Flush() => Stream.Flush();
 
-        public override int Read(byte[] buffer, int offset, int count)
-        {
-            return Stream.Read(buffer, offset, count);
-        }
+        public override int Read(byte[] buffer, int offset, int count) => Stream.Read(buffer, offset, count);
 
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            return Stream.Seek(offset, origin);
-        }
+        public override long Seek(long offset, SeekOrigin origin) => Stream.Seek(offset, origin);
 
-        public override void SetLength(long value)
-        {
-            Stream.SetLength(value);
-        }
+        public override void SetLength(long value) => Stream.SetLength(value);
 
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            Stream.Write(buffer, offset, count);
-        }
+        public override void Write(byte[] buffer, int offset, int count) => Stream.Write(buffer, offset, count);
     }
 }

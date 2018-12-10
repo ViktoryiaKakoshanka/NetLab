@@ -18,14 +18,32 @@ namespace DecoratorStream.View
 
         public void WriteLine(string text) => Console.WriteLine(text);
 
-        public void ShowMessageErrorPassword()
+        public void ShowMessageErrorPassword() => WriteLine("You entered the wrong password!");
+
+        public void SetCursorPosition(int left, int top) => Console.SetCursorPosition(left, top);
+
+        public void ShowReadText(string text) => WriteLine($"Text from file:\n {text}");
+
+        public string RequestPassword() => ReadLine("Enter the password to read the file.");
+
+        public void ShowCurrentStatusRead(string percents, int numberLineToPrint)
         {
-            WriteLine("You entered the wrong password");
+            SetCursorPosition(0, numberLineToPrint);
+            WriteLine(percents + "%  ");
         }
 
-        public void SetCursorPosition(int left, int top)
+        public void ShowVerticalLine(int nextPositionVerticalLine, int numberLineToPrint)
         {
-            Console.SetCursorPosition(left, top);
+            SetCursorPosition(nextPositionVerticalLine, numberLineToPrint);
+            WriteLine("|");
         }
+
+        public void ShowLastPercents(int numberLineToPrint)
+        {
+            SetCursorPosition(0, numberLineToPrint);
+            WriteLine("100% ");
+        }
+
+        public void GoToLastLine(int numberLastLine) => SetCursorPosition(0, numberLastLine);
     }
 }
