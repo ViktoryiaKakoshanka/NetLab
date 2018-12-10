@@ -6,7 +6,7 @@ namespace FirstLessonConsoleApp.Menu
 {
     public class ReadCoordinatesFromConsoleMenuItem : MenuItem
     {
-        public ReadCoordinatesFromConsoleMenuItem(int orderNumber, string text, IView view):base(orderNumber, text, view) { }
+        public ReadCoordinatesFromConsoleMenuItem(int orderNumber, string text, IView view) : base(orderNumber, text, view) { }
 
         public override void Execute()
         {

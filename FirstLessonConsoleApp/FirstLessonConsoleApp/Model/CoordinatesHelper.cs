@@ -16,7 +16,10 @@ namespace FirstLessonConsoleApp.Model
             var x = 0.0;
             var y = 0.0;
 
-            if(!double.TryParse(parts[0], NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out x) || !double.TryParse(parts[1], NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out y))
+            var numberStyle = NumberStyles.Number;
+            var culture = CultureInfo.CreateSpecificCulture("en-US");
+
+            if (!double.TryParse(parts[0], numberStyle, culture, out x) || !double.TryParse(parts[1], numberStyle, culture, out y))
             {
                 return null;
             }
