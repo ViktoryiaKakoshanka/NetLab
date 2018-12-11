@@ -13,13 +13,10 @@ namespace FirstLessonConsoleApp.Model
                 return null;
             }
 
-            var x = 0.0;
-            var y = 0.0;
-
-            var numberStyle = NumberStyles.Number;
+            const NumberStyles numberStyle = NumberStyles.Number;
             var culture = CultureInfo.CreateSpecificCulture("en-US");
 
-            if (!double.TryParse(parts[0], numberStyle, culture, out x) || !double.TryParse(parts[1], numberStyle, culture, out y))
+            if (!double.TryParse(parts[0], numberStyle, culture, out var x) || !double.TryParse(parts[1], numberStyle, culture, out var y))
             {
                 return null;
             }

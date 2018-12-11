@@ -1,11 +1,5 @@
-﻿using FirstLessonConsoleApp.Model;
-using FirstLessonWPFApplication.Controller;
+﻿using FirstLessonWPFApplication.Controller;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Text;
 using System.Windows;
 
 namespace FirstLessonWPFApplication
@@ -15,7 +9,7 @@ namespace FirstLessonWPFApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        private CoordinatesFromFile file = new CoordinatesFromFile();
+        private readonly CoordinatesFromFile _file = new CoordinatesFromFile();
 
         /// <summary>
         /// Point of entry
@@ -30,13 +24,13 @@ namespace FirstLessonWPFApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormatedCoordinatesFile_Click(object sender, RoutedEventArgs e)
+        private void FormatedCoordinatesFileOnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
             
             if (openFile.ShowDialog() == true)
             {
-                file.ReadFileInListbox(openFile.FileName);
+                _file.ReadFileInListbox(openFile.FileName);
             }
             FormatedCoordinatesOutputFromFile();
         }
@@ -47,12 +41,12 @@ namespace FirstLessonWPFApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormatedCoordinatesOutput_Click(object sender, RoutedEventArgs e)
+        private void FormatedCoordinatesOutputOnClick(object sender, RoutedEventArgs e)
         {
             var userInput = tbInputCoordinates.Text;
             if(userInput != string.Empty)
             {
-                listbxOutputCoordinates.Items.Add(new FormattedСoordinate().FormatedMethod(userInput));
+                listbxOutputCoordinates.Items.Add(new Format().FormatСoordinates(userInput));
             }
             else
             {
@@ -65,9 +59,9 @@ namespace FirstLessonWPFApplication
         /// </summary>
         public void FormatedCoordinatesOutputFromFile()
         {
-            foreach (var field in file.GetListCoordinatesFromFile())
+            foreach (var field in _file.GetListCoordinatesFromFile())
             {
-                listbxOutputCoordinates.Items.Add(new FormattedСoordinate().FormatedMethod(field));
+                listbxOutputCoordinates.Items.Add(new Format().FormatСoordinates(field));
             }
         }
     }
