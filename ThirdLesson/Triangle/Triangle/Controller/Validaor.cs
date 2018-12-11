@@ -4,13 +4,12 @@ namespace TriangleLib.Controller
 {
     public class Validator
     {
-        public static double TryParseSide(string maybeSide)
+        public static double TryParseSide(string side)
         {
-            double side = 0.0;
-            maybeSide = maybeSide.Replace(",", ".");
+            side = side.Replace(",", ".");
 
-            double.TryParse(maybeSide, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out side);
-            return side;
+            double.TryParse(side, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out var parsedSide);
+            return parsedSide;
         }
 
         public static bool ValidateTriangle(double firstSide, double secondSide, double thirdSide)

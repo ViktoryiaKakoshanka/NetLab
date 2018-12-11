@@ -8,12 +8,12 @@ namespace TriangleTests
     [TestClass]
     public class TriangleCalculationsTests
     {
-        Triangle triangle;
+        TriangleLib triangle;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            triangle = new Triangle(1, 2, 2);
+            triangle = new TriangleLib(1, 2, 2);
         }
 
         [TestMethod]

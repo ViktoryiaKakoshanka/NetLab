@@ -4,10 +4,10 @@ namespace TriangleLib
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            var run = new WorkWithATriangle();
-            run.RunProgram(new ConsoleView());
+            var run = new WorkWithATriangle(new ConsoleView());
+            run.RunProgram();
         }
     }
 }

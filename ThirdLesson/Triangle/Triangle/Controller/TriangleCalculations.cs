@@ -15,9 +15,9 @@ namespace TriangleLib.Controller
             var semiperimeterWithoutSecondSide = semiperimeter - triangle.SecondSide;
             var semiperimeterWithoutThirdSide = semiperimeter - triangle.ThirdSide;
 
-            var multiplicationAllParts = semiperimeter * semiperimeterWithoutFirstSide * semiperimeterWithoutSecondSide * semiperimeterWithoutThirdSide;
+            var multiplicationOfAllParts = semiperimeter * semiperimeterWithoutFirstSide * semiperimeterWithoutSecondSide * semiperimeterWithoutThirdSide;
             
-            return Math.Sqrt(multiplicationAllParts);
+            return Math.Sqrt(multiplicationOfAllParts);
         }
     }
 }
