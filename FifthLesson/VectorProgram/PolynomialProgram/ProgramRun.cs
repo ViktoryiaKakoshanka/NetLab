@@ -4,7 +4,7 @@ using VectorProgram.Controller;
 using VectorProgram.Model;
 using VectorProgram.View;
 using VectorProgram.UserInput;
-using ViewFormattedOutput = PolynomialProgram.View.FormattedOutput;
+using IPolinomialView = PolynomialProgram.View.IPolinomialView;
 
 namespace PolynomialProgram
 {
@@ -12,15 +12,18 @@ namespace PolynomialProgram
     {
         private IConsoleView _view;
         private IUserInputProcessor _userInput;
-        private ViewFormattedOutput _formattedOutput;
+        private IPolinomialView _formattedOutput;
         private IList<Polynomial> _polynomials = new List<Polynomial>();
 
-        public void Run(IConsoleView view)
+        public ProgramRun(IConsoleView consoleView, IPolinomialView polinomialView)
         {
-            _view = view;
+            _view = consoleView;
+            _formattedOutput = polinomialView;
             _userInput = new UserInputProcessor(_view);
-            _formattedOutput = new ViewFormattedOutput(_view);
+        }
 
+        public void Run()
+        {
             InitializeDefaultPolinomials();
             _formattedOutput.ShowPolynomials(_polynomials);
 
@@ -91,9 +94,9 @@ namespace PolynomialProgram
         private Polynomial RequestPolynomial()
         {
             var power = RequestPower();
-            var monomials = (power != 0) ? RequestMonomials(power) : null;
+            var monomial = (power != 0) ? RequestMonomials(power) : null;
 
-            return new Polynomial(power, monomials);
+            return new Polynomial(power, monomial);
         }
 
         private int RequestPower()
@@ -114,7 +117,7 @@ namespace PolynomialProgram
             string userInput;
             double currentMonomial;
 
-            for (int i = power; i >= 1; i--)
+            for (var i = power; i >= 1; i--)
             {
                 userInput = _userInput.RequestInput(DataType.Monomial, $"Enter monomial in {i} power:");
                 currentMonomial = DataParser.ParseDouble(userInput);

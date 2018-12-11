@@ -1,4 +1,4 @@
-﻿using PolynomialProgram.Comtroller;
+﻿using PolynomialProgram.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace PolynomialProgram.Model
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             if (Power != other.Power) return false;
-            var result = Monomials.Keys.All(k => other.Monomials.ContainsKey(k) && object.Equals(Monomials[k], other.Monomials[k]));
+            var result = Monomials.Keys.All(k => other.Monomials.ContainsKey(k) && Equals(Monomials[k], other.Monomials[k]));
             return true;
         }
 
@@ -31,7 +31,7 @@ namespace PolynomialProgram.Model
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return (this.GetType() != obj.GetType()) ? false : this.Equals((Polynomial)obj);
+            return (GetType() != obj.GetType()) ? false : Equals((Polynomial)obj);
         }
 
         public override int GetHashCode()

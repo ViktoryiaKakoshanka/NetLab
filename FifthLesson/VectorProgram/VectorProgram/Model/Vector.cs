@@ -4,7 +4,7 @@ namespace VectorProgram.Model
 {
     public class Vector : IEquatable<Vector>
     {
-        private int digits = 3;
+        private readonly int digits = 3;
 
         public double FirstCoordinate { get; private set; }
         public double SecondCoordinate { get; private set; }
@@ -44,7 +44,7 @@ namespace VectorProgram.Model
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return (this.GetType() != obj.GetType()) ? false : this.Equals((Vector)obj);
+            return (GetType() != obj.GetType()) ? false : Equals((Vector)obj);
         }
   
         public bool Equals(Vector other)

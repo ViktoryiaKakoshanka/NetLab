@@ -18,7 +18,6 @@ namespace VectorProgram.Controller
         {
             Regex regex = new Regex(validationRules[dataType]);
             return regex.IsMatch(input);
-
         }
     }
 }

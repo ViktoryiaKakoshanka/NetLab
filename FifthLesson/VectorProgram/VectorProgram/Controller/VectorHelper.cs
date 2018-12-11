@@ -7,7 +7,7 @@ namespace VectorProgram.Controller
     {
         public static double CalculateAngle(Vector first, Vector second)
         {
-            var scalarMultiplicationResult = VectorHelper.CalculateScalarMultiplication(first, second);
+            var scalarMultiplicationResult = CalculateScalarMultiplication(first, second);
 
             var firstVectorModule = CalculateModule(first);
             var secondVectorModule = CalculateModule(second);
@@ -37,6 +37,7 @@ namespace VectorProgram.Controller
             var powThird = Math.Pow(vector.ThirdCoordinate, 2);
 
             var result = Math.Sqrt(powFirst + powSecond + powThird);
+
             return Math.Abs(result);
         }
 

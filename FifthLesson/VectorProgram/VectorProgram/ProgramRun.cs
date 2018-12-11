@@ -26,9 +26,6 @@ namespace VectorProgram
             _vectorView.ShowVectors(vectors);
 
             CallActionsWithVectors(vectors[0], vectors[1]);
-            CallScalarMultiplication(vectors[0], vectors[1]);
-            CompareVectors(vectors[0], vectors[1]);
-            CallAngleBetweenVectors(vectors[0], vectors[1]);
 
             _consoleView.WaitForAnyKeyPress();
         }
@@ -46,11 +43,14 @@ namespace VectorProgram
             CallSimpleActionsWithVectors(first, second);
             CallVectorMultiplication(first, second);
             CallMultiplyVectorsByNumber(first, second);
+            CallScalarMultiplication(first, second);
+            CompareVectors(first, second);
+            CallAngleBetweenVectors(first, second);
         }
 
         private void CompareVectors(Vector first, Vector second)
         {
-            var equalityResult = (first == second);
+            var equalityResult = first == second;
             var inequalityResult = first != second;
             _vectorView.ShowVectorsComparisonResults(first, second, equalityResult, inequalityResult);
         }
@@ -87,14 +87,14 @@ namespace VectorProgram
 
             var multiplicationVectorsByNumberRight = new List<Vector>
             {
-                (first * multiplier),
-                (second * multiplier)
+                first * multiplier,
+                second * multiplier
             };
 
             var multiplicationVectorsByNumberLeft = new List<Vector>
             {
-                (multiplier * first),
-                (multiplier * second)
+                multiplier * first,
+                multiplier * second
             };
 
             _vectorView.ShowMultiplicationVectorsByNumberResults(first, second, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);

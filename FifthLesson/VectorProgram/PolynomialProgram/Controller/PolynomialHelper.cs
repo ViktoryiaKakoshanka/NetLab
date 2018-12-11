@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PolynomialProgram.Comtroller
+namespace PolynomialProgram.Controller
 {
     public static class PolynomialHelper
     {
