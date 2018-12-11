@@ -7,20 +7,23 @@ namespace BinaryConverting
 {
     class MainLaunchProgram
     {
-        INumbers _number = new Numbers();
-        FormattedOutput _formattedOutput;
-        IConsoleView _consoleView;
+        readonly INumbers _number = new Numbers();
+        private readonly IConsoleView _consoleView;
+        private readonly IConvertingView _convertingView;
 
-        public void RunProgram(IConsoleView consoleView)
+        public MainLaunchProgram(ConsoleView consoleView)
         {
             _consoleView = consoleView;
-            _formattedOutput = new FormattedOutput(_consoleView);
+            _convertingView = consoleView;
+        }
 
-            var conversionNumeric = new ConversionNumeric();
+        public void RunProgram()
+        {
+            var conversionNumeric = new ConversionNumber();
             RequestDecimalNumber();
 
             conversionNumeric.ConvertDecimalToBinary(_number);
-            _formattedOutput.ShowResultByConversion(_number);
+            _convertingView.ShowResultByConversion(_number);
         }
 
         private void RequestDecimalNumber()
@@ -29,25 +32,24 @@ namespace BinaryConverting
             {
                 try
                 {
-                    _consoleView.WriteLine("Enter a non-negative decimal integer.");
                     ParseUserInput();
 
                     if (_number.DecimalNumber <= 0)
                     {
-                        _formattedOutput.ShowWarningMessageForRepeat("Number is <= 0.");
+                        _convertingView.ShowWarningMessageForRepeat("Number is <= 0.");
                         continue;
                     }
                 }
                 catch (FormatException)
                 {
                     _number.DecimalNumber = 0;
-                    _formattedOutput.ShowMessageFormatException();
+                    _convertingView.ShowMessageFormatException();
                     continue;
                 }
                 catch (ArgumentNullException)
                 {
                     _number.DecimalNumber = 0;
-                    _formattedOutput.ShowMessageArgumentNullException();
+                    _convertingView.ShowMessageArgumentNullException();
                     continue;
                 }
                 break;
@@ -56,8 +58,8 @@ namespace BinaryConverting
 
         private void ParseUserInput()
         {
-            var input = _consoleView.ReadLine();
-            _number.DecimalNumber = DataParser.ParseInt(input);
+            var input = _consoleView.ReadLine("Enter a non-negative decimal integer.");
+            _number.DecimalNumber = Convert.ToInt32(input);
         }
 
     }

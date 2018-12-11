@@ -42,17 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\ConversionNumeric.cs" />
-    <Compile Include="Controller\IConversionNumeric.cs" />
-    <Compile Include="Controller\DataParser.cs" />
+    <Compile Include="Controller\ConversionNumber.cs" />
     <Compile Include="MainLaunchProgram.cs" />
     <Compile Include="Model\INumbers.cs" />
     <Compile Include="Model\Numbers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleView.cs" />
-    <Compile Include="View\FormattedOutput.cs" />
     <Compile Include="View\IConsoleView.cs" />
+    <Compile Include="View\IConvertingView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

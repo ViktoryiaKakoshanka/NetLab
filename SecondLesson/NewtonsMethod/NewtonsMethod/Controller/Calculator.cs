@@ -3,31 +3,31 @@ using NewtonsMethod.Model;
 
 namespace NewtonsMethod.Controller
 {
-    public class Calculator: ICalculator
+    public class Calculator
     {
         /// <summary>
         /// Calculation of the nth root of a number by the Newton method with a given accuracy
         /// </summary>
         /// <param name="radicalSign"></param>
         /// <returns></returns>
-        public double CalculateRadicalSign(IRadicalSign radicalSign)
+        public static double CalculateRadicalSign(IRadicalSign radicalSign)
         {
-            var root = ComputeRadicalWithAccuracy(radicalSign);
+            var root = CalculateRadicalWithAccuracy(radicalSign);
             radicalSign.SetRoot(root);
             return root;
         }
         
-        public double CalculateMathPow(IRadicalSign radicalSign) => Math.Pow(radicalSign.Root, radicalSign.Power);
+        public static double CalculateRootNumber(IRadicalSign radicalSign) => Math.Pow(radicalSign.Root, radicalSign.Power);
 
-        private double ComputeRadicalWithAccuracy(IRadicalSign radicalSign)
+        private static double CalculateRadicalWithAccuracy(IRadicalSign radicalSign)
         {
             double currentAccuracy;
             var previousRadical = 1.0;
-            var currentRadical = 1.0;
+            double currentRadical;
 
             do
             {
-                currentRadical = CalculateCurrentRadicalByMethodNewton(radicalSign, previousRadical);
+                currentRadical = CalculateCurrentRadical(radicalSign, previousRadical);
                 currentAccuracy = Math.Abs(previousRadical - currentRadical);
                 previousRadical = currentRadical;
 
@@ -36,7 +36,7 @@ namespace NewtonsMethod.Controller
             return currentRadical;
         }
 
-        private double CalculateCurrentRadicalByMethodNewton(IRadicalSign radicalSign, double previousRadical)
+        private static double CalculateCurrentRadical(IRadicalSign radicalSign, double previousRadical)
         {
             var previousPower = ErectInDegree(previousRadical, radicalSign.Power - 1);
             var firstPartCalculation = 1.0 / radicalSign.Power;
@@ -51,7 +51,7 @@ namespace NewtonsMethod.Controller
         /// <param name="number">number</param>
         /// <param name="power">power</param>
         /// <returns>number {value} in degree {power}</returns>
-        private double ErectInDegree(double number, int power)
+        private static double ErectInDegree(double number, int power)
         {
             if (power <= 1)
             {

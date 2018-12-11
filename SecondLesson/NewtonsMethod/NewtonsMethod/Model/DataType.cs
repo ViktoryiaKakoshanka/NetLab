@@ -4,6 +4,6 @@
     {
         Power,
         Numerical,
-        Аccurancy
+        Accuracy
     }
 }

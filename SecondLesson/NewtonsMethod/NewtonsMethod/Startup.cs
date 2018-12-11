@@ -3,13 +3,14 @@ using NewtonsMethod.Model;
 using NewtonsMethod.View;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace NewtonsMethod
 {
     public class Startup
     {
-        private IProgramView _view;
-        private const int DIGITS = 5;
+        private readonly IProgramView _view;
+        private const int Digits = 5;
 
         public Startup(IProgramView programView)
         {
@@ -27,30 +28,30 @@ namespace NewtonsMethod
 
         private IList<string> RequestDataByUser()
         {
-            string numericalRoot, power, accurancy;
+            var numericalRoot = RequestUserInput(DataType.Numerical, "Enter the number under the root");
+            var power = RequestUserInput(DataType.Power, "Enter the root stem");
+            var accuracy = RequestUserInput(DataType.Accuracy, "Enter a calculation accuracy from 0 to 1");
 
-            numericalRoot = RequestUserInput(DataType.Numerical, "Enter the number under the root");
-            power = RequestUserInput(DataType.Power, "Enter the root stem");
-            accurancy = RequestUserInput(DataType.Аccurancy, "Enter a calculation accuracy from 0 to 1");
-
-            return new List<string> { numericalRoot, power, accurancy };
+            return new List<string> { numericalRoot, power, accuracy };
         }
 
-        private IRadicalSign CreateRadicalSign(string numericalRoot, string power, string accurancy)
+        private IRadicalSign CreateRadicalSign(string numericalRoot, string power, string accuracy)
         {
-            var dataParser = new DataParser();
-            var parsedNumericalRoot = dataParser.ParseDouble(numericalRoot);
-            var parsedPower = dataParser.ParseInt(power);
-            var parsedAccurancy = dataParser.ParseDouble(accurancy);
+            var provider = new NumberFormatInfo
+            {
+                CurrencyDecimalSeparator = "."
+            };
+            var parsedNumericalRoot = Convert.ToDouble(numericalRoot, provider);
+            var parsedPower = Convert.ToInt32(power);
+            var parsedAccuracy = Convert.ToDouble(accuracy, provider);
 
-            return new RadicalSign(parsedNumericalRoot, parsedPower, parsedAccurancy);
+            return new RadicalSign(parsedNumericalRoot, parsedPower, parsedAccuracy);
         }
 
         private IList<double> PrepareDataForCompare(IRadicalSign radicalSign)
         {
-            var calculator = new Calculator();
-            var radicalSignMethodNewton = calculator.CalculateRadicalSign(radicalSign);
-            double radicalSignMathPow = calculator.CalculateMathPow(radicalSign);
+            var radicalSignMethodNewton = Calculator.CalculateRadicalSign(radicalSign);
+            var radicalSignMathPow = Calculator.CalculateRootNumber(radicalSign);
 
             return new List<double> { radicalSignMethodNewton, radicalSignMathPow };
         }
@@ -58,9 +59,9 @@ namespace NewtonsMethod
         private void PrintCompareResult(IRadicalSign radicalSign, double radicalSignMethodNewton, double radicalSignMathPow)
         {
             _view.WriteLine(radicalSign.ToString());
-            _view.WriteLine($"Newton's method is {Math.Round(radicalSignMethodNewton, DIGITS)}");
+            _view.WriteLine($"Newton's method is {Math.Round(radicalSignMethodNewton, Digits)}");
             _view.WriteLine("Check");
-            _view.WriteLine($"{radicalSign.Root} to degree {radicalSign.Power} equally {Math.Round(radicalSignMathPow, DIGITS)}");
+            _view.WriteLine($"{radicalSign.Root} to degree {radicalSign.Power} equally {Math.Round(radicalSignMathPow, Digits)}");
             _view.WaitForAnyKeyPress();
         }
 

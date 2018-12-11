@@ -11,19 +11,18 @@ namespace NewtonsMethodTests
         [TestMethod]
         public void CalculateRadicalSign_3_27_returned_3_Test()
         {
-            var numericalRoot = 27.0;
-            var power = 3;
-            var accuracy = 0.000001;
-            var exected = 3.0;
+            const double numericalRoot = 27.0;
+            const int power = 3;
+            const double accuracy = 0.000001;
+            const double expected = 3.0;
 
             var radicalSign = new RadicalSign(numericalRoot, power, accuracy);
             
-            var calc = new Calculator();
-            calc.CalculateRadicalSign(radicalSign);
+            Calculator.CalculateRadicalSign(radicalSign);
 
-            var actual = Math.Round(radicalSign.Result, 5);
+            var actual = Math.Round(radicalSign.Root, 5);
 
-            Assert.AreEqual(exected, actual);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

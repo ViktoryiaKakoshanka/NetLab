@@ -2,12 +2,10 @@
 {
     public class RadicalSign: IRadicalSign
     {
-        public int Power { get; private set; }
-        public double Number { get; private set; }
-        public double Accuracy { get; private set; }
+        public int Power { get; }
+        public double Number { get; }
+        public double Accuracy { get; }
         public double Root { get; private set; }
-        
-        public RadicalSign() : this(5.0, 2, 0.0004) { }
 
         /// <summary>
         /// Number constructor under the power root

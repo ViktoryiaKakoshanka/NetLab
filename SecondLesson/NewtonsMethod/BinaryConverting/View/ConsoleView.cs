@@ -1,21 +1,39 @@
-﻿using System;
+﻿using BinaryConverting.Model;
+using System;
 
 namespace BinaryConverting.View
 {
-    class ConsoleView : IConsoleView
+    public class ConsoleView : IConsoleView, IConvertingView
     {
-        public void Clear() => Console.Clear();
-
         public string ReadLine(string message)
         {
             WriteLine(message);
             return Console.ReadLine();
         }
-
-        public string ReadLine() => Console.ReadLine();
-
-        public void WaitForAnyKeyPress() => Console.ReadKey(true);
         
-        public void WriteLine(string text) => Console.WriteLine(text);
+        public void ShowResultByConversion(INumbers number)
+        {
+            WriteLine("Result:");
+            WriteLine($"Decimal number:{number.DecimalNumber}");
+            WriteLine($"Binary number:{number.BinaryNumber}");
+
+            WaitForAnyKeyPress();
+        }
+
+        public void ShowWarningMessageForRepeat(string messEx = null)
+        {
+            Clear();
+            WriteLine($"{messEx} You must repeat the value entry. ");
+        }
+
+        public void ShowMessageFormatException() => WriteLine("Invalid format entered.");
+
+        public void ShowMessageArgumentNullException() => WriteLine("The value entered is empty.");
+
+        private static void WriteLine(string text) => Console.WriteLine(text);
+
+        private static void WaitForAnyKeyPress() => Console.ReadKey(true);
+
+        private static void Clear() => Console.Clear();
     }
 }
