@@ -6,7 +6,7 @@ namespace DecoratorStream.Decorators
 {
     public class RequestPasswordDecorator : BaseDecoratorStream
     {
-        public RequestPasswordDecorator(Stream stream, IConsoleView view) : base(stream, view) { }
+        public RequestPasswordDecorator(Stream stream, IView view) : base(stream, view) { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

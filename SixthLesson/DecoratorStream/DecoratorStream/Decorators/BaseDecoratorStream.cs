@@ -1,15 +1,14 @@
-﻿using DecoratorStream.Model;
+﻿using System.IO;
 using DecoratorStream.View;
-using System.IO;
 
-namespace DecoratorStream
+namespace DecoratorStream.Decorators
 {
     public abstract class BaseDecoratorStream : Stream
     {
-        protected Stream Stream { get; private set; }
-        protected IConsoleView ConsoleView { get; private set; }
+        protected Stream Stream { get; }
+        protected IView ConsoleView { get; }
 
-        public BaseDecoratorStream(Stream stream, IConsoleView view) : base()
+        protected BaseDecoratorStream(Stream stream, IView view)
         {
             Stream = stream;
             ConsoleView = view;
@@ -34,5 +33,10 @@ namespace DecoratorStream
         public override void SetLength(long value) => Stream.SetLength(value);
 
         public override void Write(byte[] buffer, int offset, int count) => Stream.Write(buffer, offset, count);
+
+        public void SomeMethod()
+        {
+
+        }
     }
 }

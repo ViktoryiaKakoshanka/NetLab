@@ -2,7 +2,7 @@
 
 namespace DecoratorStream.View
 {
-    public class ConsoleView : IConsoleView
+    public class ConsoleView : IView
     {
         public void WaitForAnyKeyPress()
         {

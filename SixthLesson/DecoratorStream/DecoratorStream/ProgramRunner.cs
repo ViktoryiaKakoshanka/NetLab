@@ -8,9 +8,9 @@ namespace DecoratorStream
 {
     public class ProgramRunner
     {
-        private IConsoleView _consoleView;
+        private readonly IView _consoleView;
 
-        public ProgramRunner(IConsoleView consoleView)
+        public ProgramRunner(IView consoleView)
         {
             _consoleView = consoleView;
         }
@@ -28,7 +28,7 @@ namespace DecoratorStream
         {
             using (var fileStream = new ProgressReadDecorator(File.OpenRead(ConfigurationManager.AppSettings["filePath"]), _consoleView))
             {
-                var buffer = new byte[fileStream.Length + FileData.COUNTBYTESTOREAD];
+                var buffer = new byte[fileStream.Length + FileData.CountBytesToRead];
                 fileStream.Read(buffer, 0, (int)fileStream.Length);
             }
         }

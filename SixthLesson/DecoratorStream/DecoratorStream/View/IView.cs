@@ -1,6 +1,6 @@
 ﻿namespace DecoratorStream.View
 {
-    public interface IConsoleView
+    public interface IView
     {
         void WriteLine(string text);
         string ReadLine(string message);
