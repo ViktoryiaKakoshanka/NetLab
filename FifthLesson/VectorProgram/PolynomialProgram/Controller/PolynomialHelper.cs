@@ -6,16 +6,16 @@ namespace PolynomialProgram.Controller
 {
     public static class PolynomialHelper
     {
-        public static Polynomial CalculateSumPolynomials(Polynomial first, Polynomial second)
+        public static Polynomial Sum(Polynomial first, Polynomial second)
         {
             IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
 
             var maxPower = Math.Max(first.Power, second.Power);
 
-            for (int i = 0; i <= maxPower; i++)
+            for (var i = 0; i <= maxPower; i++)
             {
-                var firstMonomial = (first.Monomials.ContainsKey(i)) ? first.Monomials[i] : 0;
-                var secondMonomial = (second.Monomials.ContainsKey(i)) ? second.Monomials[i] : 0;
+                var firstMonomial = first.Monomials.ContainsKey(i) ? first.Monomials[i] : 0;
+                var secondMonomial = second.Monomials.ContainsKey(i) ? second.Monomials[i] : 0;
                 var sumMonomials = firstMonomial + secondMonomial;
 
                 resultMonomials.Add(i, sumMonomials);
@@ -23,55 +23,75 @@ namespace PolynomialProgram.Controller
             return new Polynomial(maxPower, resultMonomials);
         }
 
-        public static Polynomial CalculateDifferencePolynomials(Polynomial first, Polynomial second)
+        public static Polynomial Subtract(Polynomial first, Polynomial second)
         {
             IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
 
             var maxPower = Math.Max(first.Power, second.Power);
 
-            for (int i = 0; i <= maxPower; i++)
+            for (var i = 0; i <= maxPower; i++)
             {
-                var firstValue = (first.Monomials.ContainsKey(i)) ? first.Monomials[i] : 0;
-                var secondValue = (second.Monomials.ContainsKey(i)) ? second.Monomials[i] : 0;
+                var firstValue = first.Monomials.ContainsKey(i) ? first.Monomials[i] : 0;
+                var secondValue = second.Monomials.ContainsKey(i) ? second.Monomials[i] : 0;
                 var differenceMonomial = firstValue - secondValue;
 
-                resultMonomials.Add(i, differenceMonomial);
+                if (!differenceMonomial.IsEquals(0))
+                {
+                    resultMonomials.Add(i, differenceMonomial);
+                }
             }
             return new Polynomial(maxPower, resultMonomials);
         }
 
-        public static Polynomial CalculateMultiplicationPolynomials(Polynomial first, Polynomial second)
+        public static Polynomial Multiply(Polynomial first, Polynomial second)
         {
             IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
-            var resultPower = first.Power + second.Power;
+            var resultMaxPower = first.Power + second.Power;
             var maxPower = Math.Max(first.Power, second.Power);
 
-            for (int i = 0; i <= maxPower; i++)
+            for (var i = 0; i <= maxPower; i++)
             {
-                var firstValue = (first.Monomials.ContainsKey(i)) ? first.Monomials[i] : 0;
-                for (int j = 0; j <= maxPower; j++)
+                if (!first.Monomials.ContainsKey(i))
                 {
-                    var secondtValue = (second.Monomials.ContainsKey(j)) ? second.Monomials[j] : 0;
-                    var currentValue = firstValue * secondtValue;
+                    continue;
+                }
+
+                var firstValue = first.Monomials[i];
+                for (var j = 0; j <= maxPower; j++)
+                {
+                    if (!second.Monomials.ContainsKey(j))
+                    {
+                        continue;
+                    }
+
+                    var secondValue = second.Monomials[j];
+                    var currentValue = firstValue * secondValue;
                     var currentPower = i + j;
 
                     if (resultMonomials.ContainsKey(currentPower))
+                    {
                         resultMonomials[currentPower] += currentValue;
+                    }
                     else
+                    {
                         resultMonomials.Add(currentPower, currentValue);
+                    }
                 }
             }
 
-            return new Polynomial(resultPower, resultMonomials);
+            return new Polynomial(resultMaxPower, resultMonomials);
         }
 
-        public static Polynomial MultiplyNumberByPolynomial(Polynomial polynomial, double number)
+        public static Polynomial MultiplyByConstant(Polynomial polynomial, double number)
         {
             var resultPolynomial = new Polynomial(polynomial);
 
-            for (int key = 0; key <= polynomial.Power; key++)
+            for (var key = 0; key <= polynomial.Power; key++)
             {
-                polynomial.Monomials[key] *= number;
+                if (polynomial.Monomials.ContainsKey(key))
+                {
+                    polynomial.Monomials[key] *= number;
+                }
             }
 
             return resultPolynomial;

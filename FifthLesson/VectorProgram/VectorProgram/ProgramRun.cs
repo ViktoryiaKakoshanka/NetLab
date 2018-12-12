@@ -1,34 +1,28 @@
 ﻿using System.Collections.Generic;
 using VectorProgram.Controller;
 using VectorProgram.Model;
-using VectorProgram.UserInput;
 using VectorProgram.View;
 
 namespace VectorProgram
 {
-    class ProgramRun
+    internal class ProgramRun
     {
-        private readonly IConsoleView _consoleView;
-        private readonly IVectorView _vectorView;
-        private IUserInputProcessor _userInput;
+        private readonly IView _view;
 
-        public ProgramRun(ConsoleView view)
+        public ProgramRun(IView view)
         {
-            _consoleView = view;
-            _vectorView = view;
+            _view = view;
         }
 
         public void Run()
         {
-            _userInput = new UserInputProcessor(_consoleView);
-
             var vectors = CreateVectors();
 
-            _vectorView.ShowVectors(vectors);
+            _view.ShowVectors(vectors);
 
             CallActionsWithVectors(vectors[0], vectors[1]);
 
-            _consoleView.WaitForAnyKeyPress();
+            _view.Exit();
         }
 
         private List<Vector> CreateVectors()
@@ -36,7 +30,7 @@ namespace VectorProgram
             var vectorFirst = RequestVector("first");
             var vectorSecond = RequestVector("second");
 
-            return new List<Vector>()  { vectorFirst, vectorSecond, vectorFirst };
+            return new List<Vector> { vectorFirst, vectorSecond, vectorFirst };
         }
         
         private void CallActionsWithVectors(Vector first, Vector second)
@@ -53,13 +47,13 @@ namespace VectorProgram
         {
             var equalityResult = first == second;
             var inequalityResult = first != second;
-            _vectorView.ShowVectorsComparisonResults(first, second, equalityResult, inequalityResult);
+            _view.ShowVectorsComparisonResults(first, second, equalityResult, inequalityResult);
         }
 
         private void CallAngleBetweenVectors(Vector first, Vector second)
         {
             var angle = VectorHelper.CalculateAngle(first, second);
-            _vectorView.ShowAngleBetweenVectorsResult(first, second, angle);
+            _view.ShowAngleBetweenVectorsResult(first, second, angle);
         }
 
         private void CallSimpleActionsWithVectors(Vector first, Vector second)
@@ -67,19 +61,19 @@ namespace VectorProgram
             var sumResult = first + second;
             var differenceResult = first - second;
 
-            _vectorView.ShowSimpleActionsWithVectorsResults(first, second, sumResult, differenceResult);
+            _view.ShowSimpleActionsWithVectorsResults(first, second, sumResult, differenceResult);
         }
 
         private void CallScalarMultiplication(Vector first, Vector second)
         {
             var multiplicationResult = VectorHelper.CalculateScalarMultiplication(first, second);
-            _vectorView.ShowScalarMultiplicationResult(first, second, multiplicationResult);
+            _view.ShowScalarMultiplicationResult(first, second, multiplicationResult);
         }
 
         private void CallVectorMultiplication(Vector first, Vector second)
         {
             var vectorMultiplicationResult = VectorHelper.CalculateVectorMultiplication(first, second);
-            _vectorView.ShowVectorsMultiplicationResult(first, second, vectorMultiplicationResult);
+            _view.ShowVectorsMultiplicationResult(first, second, vectorMultiplicationResult);
         }
 
         private void CallMultiplyVectorsByNumber(Vector first, Vector second)
@@ -98,18 +92,18 @@ namespace VectorProgram
                 multiplier * second
             };
 
-            _vectorView.ShowMultiplicationVectorsByNumberResults(first, second, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
+            _view.ShowMultiplicationVectorsByNumberResults(first, second, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
         }
         
         private Vector RequestVector(string orderByVectors)
         {
-            var userInput = _userInput.RequestInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
+            var userInput = RequestInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
             return ParseVector(userInput);
         }
 
         private double RequestMultiplier()
         {
-            var userInput = _userInput.RequestInput(DataType.Multiplier, "Enter multiplier:");
+            var userInput = RequestInput(DataType.Multiplier, "Enter multiplier:");
             return DataParser.ParseDouble(userInput);
         }
                 
@@ -117,6 +111,28 @@ namespace VectorProgram
         {
             var coords = DataParser.ParseArray(userInput);
             return new Vector(coords[0], coords[1], coords[2]);
+        }
+
+        private string RequestInput(DataType dataType, string welcomeMessage)
+        {
+            var userInput = string.Empty;
+            var isUserInputCorrect = false;
+
+            while (!isUserInputCorrect)
+            {
+                userInput = _view.ReadLine(welcomeMessage);
+                isUserInputCorrect = ValidateUserInput(dataType, userInput);
+            }
+
+            return userInput;
+        }
+
+        private bool ValidateUserInput(DataType dataType, string userInput)
+        {
+            var isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
+            if (!isUserInputCorrect) _view.WriteErrorMessage();
+
+            return isUserInputCorrect;
         }
     }
 }

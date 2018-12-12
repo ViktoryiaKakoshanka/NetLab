@@ -17,18 +17,14 @@ namespace PolynomialProgramTests
             var monomialsFirst = new Dictionary<int, double>()
             {
                 {0, -5},
-                {1, 0},
-                {2, 3},
+                {2, 3}
             };
 
             var monomialsSecond = new Dictionary<int, double>()
             {
                 {0, 4},
-                {1, 0},
                 {2, -3},
-                {3, 0},
-                {4, 0},
-                {5, -0.5},
+                {5, -0.5}
             };
 
             _polynomialFirst = new Polynomial(2, monomialsFirst);
@@ -51,14 +47,14 @@ namespace PolynomialProgramTests
         [TestMethod]
         public void Equals_CheckCorrectnessReflexivity_Test()
         {
-            Debug.WriteLine($"x.Equals(x) = true");
+            Debug.WriteLine("x.Equals(x) = true");
             Assert.IsTrue(_polynomialFirst.Equals(_polynomialFirst));
         }
 
         [TestMethod]
         public void Equals_CheckCorrectnessSymmetry_Test()
         {
-            Debug.WriteLine($"x.Equals(у) = y.Equals(x)");
+            Debug.WriteLine("x.Equals(у) = y.Equals(x)");
             Assert.AreEqual(_polynomialFirst.Equals(_polynomialSecond), _polynomialSecond.Equals(_polynomialFirst));
         }
 
@@ -68,12 +64,11 @@ namespace PolynomialProgramTests
             var copyFirstPolynomial = new Polynomial(_polynomialFirst);
             var newPolynomialFirst = new Polynomial(_polynomialFirst);
 
-            Debug.WriteLine($"If x.Equals(у) = true and y.Equals(z) = true then x.Equals(z) = true");
+            Debug.WriteLine("If x.Equals(у) = true and y.Equals(z) = true then x.Equals(z) = true");
             var actual = _polynomialFirst.Equals(copyFirstPolynomial) && copyFirstPolynomial.Equals(newPolynomialFirst) && _polynomialFirst.Equals(newPolynomialFirst);
             Assert.IsTrue(actual);
         }
-
-
+        
         [TestMethod]
         public void Equals_DifferentPolynomialsNotEqual_Test()
         {
@@ -97,7 +92,7 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void SumOfPolynomials_returnNewPolynomial_Test()
+        public void Sum_returnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
@@ -116,16 +111,13 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void DifferenceOfPolynomials_returnNewPolynomial_Test()
+        public void Subtract_returnNewPolynomial_Test()
         {
-            var expectMonomials = new Dictionary<int, double>()
+            var expectMonomials = new Dictionary<int, double>
             {
                 {0, -9},
-                {1, 0},
                 {2, 6},
-                {3, 0},
-                {4, 0},
-                {5, -0.5},
+                {5, 0.5}
             };
             var expected = new Polynomial(5, expectMonomials);
             var actual = _polynomialFirst - _polynomialSecond;
@@ -135,17 +127,14 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void MultiplicateOfPolynomials_returnNewPolynomial_Test()
+        public void Multiply_returnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
                 {0, -20},
-                {1, 0},
                 {2, 27},
-                {3, 0},
-                {4, 6},
+                {4, -9},
                 {5, 2.5},
-                {6, 0},
                 {7, -1.5},
             };
             var expected = new Polynomial(7, expectMonomials);
@@ -156,22 +145,26 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void MultiplyNumberByPolynomial_returnNewPolynomial_Test()
+        public void MultiplyByConstant_returnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
                 {0, -8},
-                {1, 0},
                 {2, 6},
-                {3, 0},
-                {4, 0},
-                {5, 1},
+                {5, 1}
             };
             var expected = new Polynomial(5, expectMonomials);
             var actual = _polynomialSecond * (-2);
 
             Debug.WriteLine($"expected = {expected} actual = {actual}");
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ToString_CorrectedOutput()
+        {
+            const string expected = "-0.5x^5-3x^2+4";
+            Assert.AreEqual(expected, _polynomialSecond.ToString());
         }
     }
 }

@@ -4,9 +4,13 @@ using VectorProgram.Model;
 
 namespace VectorProgram.View
 {
-    public class ConsoleView : IConsoleView, IVectorView
+    public class ConsoleView : IView
     {
-        public void WaitForAnyKeyPress() => Console.ReadKey(true);
+        public void Exit()
+        {
+            WriteLine("Press any key to exit.");
+            Console.ReadKey(true);
+        }
 
         public string ReadLine(string message)
         {

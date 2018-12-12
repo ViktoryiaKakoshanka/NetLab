@@ -1,13 +1,12 @@
 ﻿using PolynomialProgram.Model;
 using System;
 using System.Collections.Generic;
-using VectorProgram.View;
 
 namespace PolynomialProgram.View
 {
-    public class ConsoleView : IConsoleView, IPolinomialView
+    public class ConsoleView : IView
     {
-        public void WaitForAnyKeyPress()
+        public void Exit()
         {
             WriteLine("Press any key to exit.");
             Console.ReadKey(true);

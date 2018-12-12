@@ -43,23 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ExtensionForDouble.cs" />
     <Compile Include="Controller\PolynomialHelper.cs" />
     <Compile Include="Model\Polinomial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleView.cs" />
-    <Compile Include="View\IPolinomialView.cs" />
+    <Compile Include="View\IView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\VectorProgram\VectorProgram.csproj">
-      <Project>{c58af970-46c7-45ec-bfa9-c2fe2a8bfca0}</Project>
-      <Name>VectorProgram</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

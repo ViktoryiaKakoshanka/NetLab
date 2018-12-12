@@ -1,4 +1,5 @@
 ﻿using System;
+using PolynomialProgram.Controller;
 
 namespace VectorProgram.Model
 {
@@ -43,9 +44,16 @@ namespace VectorProgram.Model
   
         public bool Equals(Vector other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            var valueComparison = FirstCoordinate == other.FirstCoordinate && SecondCoordinate == other.SecondCoordinate && ThirdCoordinate == other.ThirdCoordinate;
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            var valueComparison = FirstCoordinate.IsEquals(other.FirstCoordinate) && SecondCoordinate.IsEquals(other.SecondCoordinate) && ThirdCoordinate.IsEquals(other.ThirdCoordinate);
             return valueComparison;
         }
         

@@ -1,6 +1,6 @@
-﻿using VectorProgram.View;
+﻿using PolynomialProgram.View;
+using VectorProgram.View;
 using ConsoleView = PolynomialProgram.View.ConsoleView;
-using IPolinomialView = PolynomialProgram.View.IPolinomialView;
 
 namespace PolynomialProgram
 {
@@ -8,9 +8,8 @@ namespace PolynomialProgram
     {
         static void Main(string[] args)
         {
-            IConsoleView consoleView = new ConsoleView();
-            IPolinomialView polinomialView = new ConsoleView();
-            new ProgramRun(consoleView, polinomialView).Run();
+            IView view = new ConsoleView();
+            new ProgramRun(view).Run();
         }
     }
 }
