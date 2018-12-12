@@ -14,8 +14,6 @@ namespace VectorProgram.View
             return Console.ReadLine();
         }
 
-        public void WriteLine(string text) => Console.WriteLine(text);
-
         public void WriteErrorMessage() => Console.WriteLine("You entered incorrect numbers.");
 
         public void ShowVectors(IList<Vector> vectors)
@@ -68,5 +66,7 @@ namespace VectorProgram.View
             WriteLine($"The angle between {first} and {second} = {Math.Abs(angle)}");
             WriteLine(string.Empty);
         }
+
+        private static void WriteLine(string text) => Console.WriteLine(text);
     }
 }

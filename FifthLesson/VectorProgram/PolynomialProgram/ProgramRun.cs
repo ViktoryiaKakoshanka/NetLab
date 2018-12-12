@@ -4,46 +4,47 @@ using VectorProgram.Controller;
 using VectorProgram.Model;
 using VectorProgram.View;
 using VectorProgram.UserInput;
-using IPolinomialView = PolynomialProgram.View.IPolinomialView;
+using IPolynomialView = PolynomialProgram.View.IPolinomialView;
 
 namespace PolynomialProgram
 {
     public class ProgramRun
     {
-        private IConsoleView _view;
-        private IUserInputProcessor _userInput;
-        private IPolinomialView _formattedOutput;
-        private IList<Polynomial> _polynomials = new List<Polynomial>();
+        private readonly IConsoleView _view;
+        private readonly IUserInputProcessor _userInput;
+        private readonly IPolynomialView _formattedOutput;
+        private readonly IList<Polynomial> _polynomials = new List<Polynomial>();
 
-        public ProgramRun(IConsoleView consoleView, IPolinomialView polinomialView)
+        public ProgramRun(IConsoleView consoleView, IPolynomialView polynomialView)
         {
             _view = consoleView;
-            _formattedOutput = polinomialView;
+            _formattedOutput = polynomialView;
             _userInput = new UserInputProcessor(_view);
         }
 
         public void Run()
         {
-            InitializeDefaultPolinomials();
+            InitializeDefaultPolynomials();
             _formattedOutput.ShowPolynomials(_polynomials);
 
             //CallPolynomials();
+            CallSimpleActionsWithPolynomials();
             var multiplier = RequestMultiplier();
-            CallSimpleActionsWithPolynomials(multiplier);
+            CallMultiplicationNumberByPolynomial(multiplier);
 
             _view.WaitForAnyKeyPress();
         }
 
-        private void InitializeDefaultPolinomials()
+        private void InitializeDefaultPolynomials()
         {
-            var monomialsFirst = new Dictionary<int, double>()
+            var monomialsFirst = new Dictionary<int, double>
             {
                 {0, -5},
                 {1, 0},
                 {2, 3},
             };
 
-            var monomialsSecond = new Dictionary<int, double>()
+            var monomialsSecond = new Dictionary<int, double>
             {
                 {0, 4},
                 {1, 0},
@@ -63,7 +64,7 @@ namespace PolynomialProgram
             _formattedOutput.ShowPolynomials(_polynomials);
         }
 
-        private void CallSimpleActionsWithPolynomials(double multiplier)
+        private void CallSimpleActionsWithPolynomials()
         {
             var sumResult = GetSumPolynomials();
             var differenceResult = GetDifferencePolynomials();
@@ -94,7 +95,7 @@ namespace PolynomialProgram
         private Polynomial RequestPolynomial()
         {
             var power = RequestPower();
-            var monomial = (power != 0) ? RequestMonomials(power) : null;
+            var monomial = power != 0 ? RequestMonomials(power) : null;
 
             return new Polynomial(power, monomial);
         }
@@ -114,13 +115,11 @@ namespace PolynomialProgram
         private IDictionary<int, double> RequestMonomials(int power)
         {
             IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
-            string userInput;
-            double currentMonomial;
 
             for (var i = power; i >= 1; i--)
             {
-                userInput = _userInput.RequestInput(DataType.Monomial, $"Enter monomial in {i} power:");
-                currentMonomial = DataParser.ParseDouble(userInput);
+                var userInput = _userInput.RequestInput(DataType.Monomial, $"Enter monomial in {i} power:");
+                var currentMonomial = DataParser.ParseDouble(userInput);
                 resultMonomials.Add(i, currentMonomial);
             }
 

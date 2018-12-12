@@ -31,7 +31,7 @@ namespace PolynomialProgram.Model
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return (GetType() != obj.GetType()) ? false : Equals((Polynomial)obj);
+            return GetType() == obj.GetType() && Equals((Polynomial)obj);
         }
 
         public override int GetHashCode()

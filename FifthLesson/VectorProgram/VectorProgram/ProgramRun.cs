@@ -8,13 +8,14 @@ namespace VectorProgram
 {
     class ProgramRun
     {
-        private IConsoleView _consoleView;
-        private IVectorView _vectorView;
+        private readonly IConsoleView _consoleView;
+        private readonly IVectorView _vectorView;
         private IUserInputProcessor _userInput;
 
-        public ProgramRun(IConsoleView view)
+        public ProgramRun(ConsoleView view)
         {
             _consoleView = view;
+            _vectorView = view;
         }
 
         public void Run()
@@ -32,8 +33,8 @@ namespace VectorProgram
 
         private List<Vector> CreateVectors()
         {
-            Vector vectorFirst = RequestVector("first");
-            Vector vectorSecond = RequestVector("second");
+            var vectorFirst = RequestVector("first");
+            var vectorSecond = RequestVector("second");
 
             return new List<Vector>()  { vectorFirst, vectorSecond, vectorFirst };
         }

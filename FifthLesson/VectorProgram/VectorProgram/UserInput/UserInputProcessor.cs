@@ -6,7 +6,7 @@ namespace VectorProgram.UserInput
 {
     public class UserInputProcessor : IUserInputProcessor
     {
-        private IConsoleView _view;
+        private readonly IConsoleView _view;
 
         public UserInputProcessor(IConsoleView view)
         {
@@ -29,9 +29,7 @@ namespace VectorProgram.UserInput
 
         private bool ValidateUserInput(DataType dataType, string userInput)
         {
-            var isUserInputCorrect = false;
-
-            isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
+            var isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
             if (!isUserInputCorrect) _view.WriteErrorMessage();
 
             return isUserInputCorrect;

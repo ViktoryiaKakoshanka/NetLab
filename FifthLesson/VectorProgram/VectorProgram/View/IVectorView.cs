@@ -3,7 +3,7 @@ using VectorProgram.Model;
 
 namespace VectorProgram.View
 {
-    interface IVectorView
+    internal interface IVectorView
     {
         void ShowVectors(IList<Vector> vectors);
 

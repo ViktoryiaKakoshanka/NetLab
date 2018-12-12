@@ -2,12 +2,11 @@
 
 namespace VectorProgram
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            IConsoleView consoleView = new ConsoleView();
-            new ProgramRun(consoleView).Run();
+            new ProgramRun(new ConsoleView()).Run();
         }
     }
 }
