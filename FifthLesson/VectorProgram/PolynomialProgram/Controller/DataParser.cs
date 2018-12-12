@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace VectorProgram.Controller
+namespace PolynomialProgram.Controller
 {
     public class DataParser
     {

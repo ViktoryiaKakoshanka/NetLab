@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using VectorProgram.Model;
+using PolynomialProgram.Model;
 
-namespace VectorProgram.Controller
+namespace PolynomialProgram.Controller
 {
     public static class Validator
     {

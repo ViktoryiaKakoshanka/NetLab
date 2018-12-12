@@ -1,4 +1,4 @@
-﻿namespace VectorProgram.Model
+﻿namespace PolynomialProgram.Model
 {
     public enum DataType
     {

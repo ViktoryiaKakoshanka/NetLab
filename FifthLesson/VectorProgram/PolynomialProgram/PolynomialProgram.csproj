@@ -43,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\DataParser.cs" />
     <Compile Include="Controller\ExtensionForDouble.cs" />
     <Compile Include="Controller\PolynomialHelper.cs" />
+    <Compile Include="Controller\Validator.cs" />
+    <Compile Include="Model\DataType.cs" />
     <Compile Include="Model\Polinomial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRun.cs" />

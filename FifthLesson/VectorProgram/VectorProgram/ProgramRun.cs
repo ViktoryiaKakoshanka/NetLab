@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using PolynomialProgram.Controller;
+using PolynomialProgram.Model;
 using VectorProgram.Controller;
 using VectorProgram.Model;
 using VectorProgram.View;
@@ -9,7 +11,7 @@ namespace VectorProgram
     {
         private readonly IView _view;
 
-        public ProgramRun(IView view)
+        internal ProgramRun(IView view)
         {
             _view = view;
         }

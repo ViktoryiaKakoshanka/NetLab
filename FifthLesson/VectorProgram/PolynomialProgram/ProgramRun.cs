@@ -2,8 +2,7 @@
 using PolynomialProgram.Model;
 using System.Collections.Generic;
 using PolynomialProgram.View;
-using VectorProgram.Controller;
-using VectorProgram.Model;
+using PolynomialProgram.Controller;
 
 namespace PolynomialProgram
 {
@@ -72,13 +71,13 @@ namespace PolynomialProgram
         private int RequestPower()
         {
             var userInput = RequestInput(DataType.Power, "Enter power:");
-            return DataParser.ParseInt(userInput);
+            return Convert.ToInt32(userInput);
         }
 
         private int RequestMultiplier()
         {
             var userInput = RequestInput(DataType.Multiplier, "Enter multiplier:");
-            return DataParser.ParseInt(userInput);
+            return Convert.ToInt32(userInput);
         }
         
         private IDictionary<int, double> RequestMonomials(int power)
