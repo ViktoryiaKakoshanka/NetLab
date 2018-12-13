@@ -7,7 +7,7 @@ namespace DecoratorStream
         static void Main(string[] args)
         {
             IView consoleView = new ConsoleView();
-            new ProgramRunner(consoleView).Run();
+            new InitializationListDecorators(consoleView).Run();
         }
     }
 }

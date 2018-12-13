@@ -36,7 +36,7 @@ namespace DecoratorStream.Decorators
 
         public void SomeMethod()
         {
-
+           
         }
     }
 }
