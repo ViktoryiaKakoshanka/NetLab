@@ -26,7 +26,7 @@ namespace DecoratorStream
 
         private void ShowFileReadStatus()
         {
-            using (var fileStream = new ProgressReadDecorator(File.OpenRead(ConfigurationManager.AppSettings["filePath"]), _consoleView))
+            using (Stream fileStream = new ProgressReadDecorator(File.OpenRead(ConfigurationManager.AppSettings["filePath"]), _consoleView))
             {
                 var buffer = new byte[fileStream.Length + FileData.CountBytesToRead];
                 fileStream.Read(buffer, 0, (int)fileStream.Length);
@@ -35,7 +35,7 @@ namespace DecoratorStream
 
         private void ReadFileWithPassword()
         {
-            using (var fileStream = new RequestPasswordDecorator(File.OpenRead(ConfigurationManager.AppSettings["filePath"]), _consoleView))
+            using (Stream fileStream = new RequestPasswordDecorator(File.OpenRead(ConfigurationManager.AppSettings["filePath"]), _consoleView))
             {
                 var buffer = new byte[fileStream.Length];
 
