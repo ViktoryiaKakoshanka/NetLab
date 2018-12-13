@@ -6,59 +6,27 @@ using PolynomialProgram.Controller;
 
 namespace PolynomialProgram
 {
-    public class ProgramRun
+    public class ProgramRunner
     {
         private readonly IView _view;
         private readonly IList<Polynomial> _polynomials = new List<Polynomial>();
 
-        public ProgramRun(IView view)
+        public ProgramRunner(IView view)
         {
             _view = view;
         }
 
         public void Run()
         {
-            CallPolynomials();
-            CallSimpleActionsWithPolynomials();
+            var firstPolynomial = RequestPolynomial();
+            var secondPolynomial = RequestPolynomial();
+
+            ProgramRunnerHelper.CallSimpleActionsWithPolynomials(firstPolynomial, secondPolynomial, _view);
             var multiplier = RequestMultiplier();
-            CallMultiplicationNumberByPolynomial(multiplier);
+            ProgramRunnerHelper.CallMultiplicationNumberByPolynomial(firstPolynomial, multiplier, _view);
 
             _view.Exit();
         }
-        
-        private void CallPolynomials()
-        {
-            CreatePolynomials();
-            _view.ShowPolynomials(_polynomials);
-        }
-
-        private void CallSimpleActionsWithPolynomials()
-        {
-            var sumResult = GetSumPolynomials();
-            var differenceResult = GetDifferencePolynomials();
-            var multiplicationPolynomialsResult = GetMultiplicationPolynomials();
-
-            _view.ShowSimpleActionsWithPolynomialsResults(_polynomials[0], _polynomials[1], sumResult, differenceResult, multiplicationPolynomialsResult);
-        }
-
-        private void CallMultiplicationNumberByPolynomial(double multiplier)
-        {
-            var result = _polynomials[0] * multiplier;
-
-            _view.ShowMultiplicationNumberByPolynomial(_polynomials[0], multiplier, result);
-        }
-
-        private void CreatePolynomials()
-        {
-            _polynomials.Add(RequestPolynomial());
-            _polynomials.Add(RequestPolynomial());
-        }
-        
-        private Polynomial GetSumPolynomials() => _polynomials[0] + _polynomials[1];
-
-        private Polynomial GetDifferencePolynomials() => _polynomials[0] - _polynomials[1];
-
-        private Polynomial GetMultiplicationPolynomials() => _polynomials[0] * _polynomials[1];
         
         private Polynomial RequestPolynomial()
         {

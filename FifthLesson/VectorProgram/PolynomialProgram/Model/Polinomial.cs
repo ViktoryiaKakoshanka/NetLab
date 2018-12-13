@@ -57,7 +57,7 @@ namespace PolynomialProgram.Model
         public override int GetHashCode()
         {
             var firstHashCode = Power.GetHashCode();
-            var secondHashCode = Monomials.Sum(x => Convert.ToInt32(x.Value) ^ 397);
+            var secondHashCode = Monomials.Aggregate(0, (current, pair) => current ^ Convert.ToInt32(pair.Value));
 
             return unchecked(firstHashCode * 397) ^ secondHashCode;
         }

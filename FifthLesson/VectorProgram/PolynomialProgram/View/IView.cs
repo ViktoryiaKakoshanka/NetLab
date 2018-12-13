@@ -1,5 +1,4 @@
 ﻿using PolynomialProgram.Model;
-using System.Collections.Generic;
 
 namespace PolynomialProgram.View
 {
@@ -8,7 +7,6 @@ namespace PolynomialProgram.View
         string ReadLine(string message);
         void Exit();
         void WriteErrorMessage();
-        void ShowPolynomials(IList<Polynomial> initialPolynomials);
         void ShowSimpleActionsWithPolynomialsResults(
             Polynomial first,
             Polynomial second,

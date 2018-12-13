@@ -8,7 +8,7 @@ namespace PolynomialProgram
         static void Main()
         {
             IView view = new ConsoleView();
-            new ProgramRun(view).Run();
+            new ProgramRunner(view).Run();
         }
     }
 }

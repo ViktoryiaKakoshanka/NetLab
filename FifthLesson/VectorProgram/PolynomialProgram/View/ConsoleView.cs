@@ -22,14 +22,11 @@ namespace PolynomialProgram.View
 
         public void WriteErrorMessage() => Console.WriteLine("You entered incorrect numbers.");
 
-        public void ShowPolynomials(IList<Polynomial> initialPolynomials)
+        public void ShowPolynomials(Polynomial first, Polynomial second)
         {
-            WriteLine("Your polynomials:");
-
-            foreach (var polynomial in initialPolynomials)
-            {
-                WriteLine(polynomial.ToString());
-            }
+            WriteLine("Your polynomials:\n");
+            WriteLine(first.ToString());
+            WriteLine(second.ToString());
         }
 
         public void ShowSimpleActionsWithPolynomialsResults(
