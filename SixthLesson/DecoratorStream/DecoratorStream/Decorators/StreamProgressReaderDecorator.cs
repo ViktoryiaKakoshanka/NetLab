@@ -6,7 +6,9 @@ namespace DecoratorStream.Decorators
 {
     internal class StreamProgressReaderDecorator : StreamBaseDecorator
     {
-        internal StreamProgressReaderDecorator(Stream stream, IView view) : base(stream, view)     { }
+        internal StreamProgressReaderDecorator(Stream stream, IView view) : base(stream, view)
+        {
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
