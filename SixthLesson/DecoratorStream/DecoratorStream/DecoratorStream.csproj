@@ -43,16 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Decorators\ProgressReadDecorator.cs" />
-    <Compile Include="Decorators\RequestPasswordDecorator.cs" />
+    <Compile Include="Decorators\StreamProgressReaderDecorator.cs" />
+    <Compile Include="Decorators\StreamRequestPasswordDecorator.cs" />
     <Compile Include="Model\FileData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRunner.cs" />
-    <Compile Include="ProgressRead.cs" />
+    <Compile Include="ProgressReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleView.cs" />
     <Compile Include="View\IView.cs" />
-    <Compile Include="Decorators\BaseDecoratorStream.cs" />
+    <Compile Include="Decorators\StreamBaseDecorator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -3,15 +3,15 @@ using DecoratorStream.View;
 
 namespace DecoratorStream.Decorators
 {
-    public abstract class BaseDecoratorStream : Stream
+    public abstract class StreamBaseDecorator : Stream
     {
         protected Stream Stream { get; }
-        protected IView ConsoleView { get; }
+        protected IView View { get; }
 
-        protected BaseDecoratorStream(Stream stream, IView view)
+        protected StreamBaseDecorator(Stream stream, IView view)
         {
             Stream = stream;
-            ConsoleView = view;
+            View = view;
         }
 
         public override bool CanRead => Stream.CanRead;
@@ -33,10 +33,5 @@ namespace DecoratorStream.Decorators
         public override void SetLength(long value) => Stream.SetLength(value);
 
         public override void Write(byte[] buffer, int offset, int count) => Stream.Write(buffer, offset, count);
-
-        public void SomeMethod()
-        {
-           
-        }
     }
 }

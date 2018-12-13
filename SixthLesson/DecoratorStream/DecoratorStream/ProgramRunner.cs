@@ -1,75 +1,43 @@
-﻿using System.Collections;
-using System.ComponentModel;
+﻿using DecoratorStream.Decorators;
 using DecoratorStream.Model;
 using DecoratorStream.View;
-using DecoratorStream.Decorators;
-using System.IO;
 using System.Configuration;
-using System.Collections.Generic;
+using System.IO;
 
 namespace DecoratorStream
 {
-    public class InitializationListDecorators
+    public class ProgramRunner
     {
-        private readonly IView _consoleView;
-        private IList<Stream> _listStreamDecorators;
-        private readonly Stream _stream;
-
-        public InitializationListDecorators(IView consoleView)
+        private readonly IView _view;
+        private readonly string _filePath;
+        
+        public ProgramRunner(IView view)
         {
-            _consoleView = consoleView;
-            _stream = File.OpenRead(ConfigurationManager.AppSettings["filePath"]);
-
-            InitializeListDecorators();
+            _view = view;
+            _filePath = ConfigurationManager.AppSettings["filePath"];
         }
 
         public void Run()
         {
-            ShowFileReadStatus();
-
-            ReadFileWithPassword();
-
-            _consoleView.WaitForAnyKeyPress();
+            ReadFile();
+            _view.Exit();
         }
 
-        private void ShowFileReadStatus()
+        private void ReadFile()
         {
-            using (Stream fileStream = new ProgressReadDecorator(_stream, _consoleView))
+            using (var fileStream = CreateStream(_filePath, _view))
             {
                 var buffer = new byte[fileStream.Length + FileData.CountBytesToRead];
                 fileStream.Read(buffer, 0, (int)fileStream.Length);
             }
         }
 
-        private void ReadFileWithPassword()
+        private static Stream CreateStream(string filePath, IView view)
         {
-            using (Stream fileStream = new RequestPasswordDecorator(_stream, _consoleView))
-            {
-                var buffer = new byte[fileStream.Length];
+            Stream stream = File.OpenRead(filePath);
+            stream = new StreamProgressReaderDecorator(stream, view);
 
-                var readResult = fileStream.Read(buffer, 0, buffer.Length);
-
-                if (readResult == 0)
-                {
-                    return;
-                }
-
-                var textFromFile = System.Text.Encoding.Default.GetString(buffer);
-                _consoleView.ShowReadText(textFromFile);
-            }
+            return new StreamRequestPasswordDecorator(stream, view);
         }
-
-        private void InitializeListDecorators()
-        {
-            _listStreamDecorators.Add(new RequestPasswordDecorator(_stream, _consoleView));
-            _listStreamDecorators.Add(new ProgressReadDecorator(_stream, _consoleView));
-        }
-
-        private Stream GetDecorator()
-        {
-
-            return null;
-        }
-        
     }
 }

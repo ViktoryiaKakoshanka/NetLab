@@ -2,6 +2,6 @@
 {
     public static class FileData
     {
-        public const int CountBytesToRead = 5;
+        public const int CountBytesToRead = 1;
     }
 }

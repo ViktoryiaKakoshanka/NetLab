@@ -4,14 +4,15 @@ using System.IO;
 
 namespace DecoratorStream.Decorators
 {
-    internal class ProgressReadDecorator : BaseDecoratorStream
+    internal class StreamProgressReaderDecorator : StreamBaseDecorator
     {
-        internal ProgressReadDecorator(Stream stream, IView view) : base(stream, view)     { }
+        internal StreamProgressReaderDecorator(Stream stream, IView view) : base(stream, view)     { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
             var restBytesRead = count;
             var startBytesRead = offset;
+            var previousCountPercents = 0;
 
             do
             {
@@ -20,13 +21,13 @@ namespace DecoratorStream.Decorators
                 startBytesRead += countReadingBytes;
                 restBytesRead -= countReadingBytes;
 
-                new ProgressRead(ConsoleView).ShowProgressRead(startBytesRead, count);
+                previousCountPercents = ProgressReader.ShowProgressRead(previousCountPercents, startBytesRead, count, View);
 
             } while (restBytesRead > 0);
+
+            View.FinishRead();
+
             return count;
         }
-
-
-        
     }
 }
