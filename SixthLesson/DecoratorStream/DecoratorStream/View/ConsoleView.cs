@@ -20,7 +20,7 @@ namespace DecoratorStream.View
             WriteLine(percents + "%  ");
         }
 
-        public void ShowSymbol(int nextPositionVerticalLine, int numberLineToPrint, char symbol)
+        public void DrawSymbol(int nextPositionVerticalLine, int numberLineToPrint, char symbol)
         {
             SetCursorPosition(nextPositionVerticalLine, numberLineToPrint);
             WriteLine(symbol.ToString());

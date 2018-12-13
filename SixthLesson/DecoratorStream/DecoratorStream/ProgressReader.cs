@@ -38,7 +38,7 @@ namespace DecoratorStream
 
             for (var item = previousPartReadPercents; item < nextPartReadPercents; item++)
             {
-                _view.ShowSymbol(item, 3, '|');
+                _view.DrawSymbol(item, 3, '|');
             }
 
             partPrintedSymbols = nextPartReadPercents;
