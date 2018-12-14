@@ -21,9 +21,9 @@ namespace DecoratorStream.Decorators
 
             while (countBytesForReading > 0)
             {
-                var countReadingBytes = base.Read(buffer, offset, countBytesForReading);
+                var readBytes = base.Read(buffer, offset, countBytesForReading);
 
-                offset += countReadingBytes;
+                offset += readBytes;
                 countBytesForReading = CalculateActualQuantityBytesForReading(offset, count);
 
                 printedProgress = ProgressDemonstrator.ShowProgress(printedProgress, offset, count, _view);
