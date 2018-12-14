@@ -5,8 +5,8 @@
         void Exit();
         void ShowMessageErrorPassword();
         string RequestPassword();
-        void ShowCurrentStatusRead(string percents, int numberLineToPrint);
-        void ShowSymbol(int countIteration, int numberLineToPrint, char symbol);
+        void ShowCurrentStatusInPercent(string percents, int numberLineToPrint);
+        void DrawSymbol(int countIteration, int numberLineToPrint, char symbol);
         void FinishRead();
     }
 }

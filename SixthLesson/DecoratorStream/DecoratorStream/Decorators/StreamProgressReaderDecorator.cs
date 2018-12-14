@@ -1,4 +1,4 @@
-﻿using DecoratorStream.Model;
+﻿using System;
 using DecoratorStream.View;
 using System.IO;
 
@@ -6,30 +6,38 @@ namespace DecoratorStream.Decorators
 {
     internal class StreamProgressReaderDecorator : StreamBaseDecorator
     {
-        internal StreamProgressReaderDecorator(Stream stream, IView view) : base(stream, view)
+        public const int CountBytesToRead = 1;
+        private readonly IView _view;
+
+        internal StreamProgressReaderDecorator(Stream stream, IView view) : base(stream)
         {
+            _view = view;
         }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            var restBytesRead = count;
-            var startBytesRead = offset;
-            var previousCountPercents = 0;
+            var countBytesForReading = CalculateActualQuantityBytesForReading(offset, count);
+            var printedProgress = 0;
 
-            do
+            while (countBytesForReading > 0)
             {
-                var countReadingBytes = Stream.Read(buffer, startBytesRead, FileData.CountBytesToRead);
+                var countReadingBytes = base.Read(buffer, offset, countBytesForReading);
 
-                startBytesRead += countReadingBytes;
-                restBytesRead -= countReadingBytes;
+                offset += countReadingBytes;
+                countBytesForReading = CalculateActualQuantityBytesForReading(offset, count);
 
-                previousCountPercents = ProgressReader.ShowProgressRead(previousCountPercents, startBytesRead, count, View);
+                printedProgress = ProgressDemonstrator.ShowProgress(printedProgress, offset, count, _view);
+            }
 
-            } while (restBytesRead > 0);
-
-            View.FinishRead();
+            _view.FinishRead();
 
             return count;
+        }
+
+        private static int CalculateActualQuantityBytesForReading(int readBytes, int totalBytes)
+        {
+            var restBytes = totalBytes - readBytes;
+            return Math.Min(restBytes, CountBytesToRead);
         }
     }
 }

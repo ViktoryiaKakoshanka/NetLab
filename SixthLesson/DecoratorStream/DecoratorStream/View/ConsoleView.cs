@@ -14,7 +14,7 @@ namespace DecoratorStream.View
         
         public string RequestPassword() => ReadLine("Enter the password to read the file.");
 
-        public void ShowCurrentStatusRead(string percents, int numberLineToPrint)
+        public void ShowCurrentStatusInPercent(string percents, int numberLineToPrint)
         {
             SetCursorPosition(0, numberLineToPrint);
             WriteLine(percents + "%  ");

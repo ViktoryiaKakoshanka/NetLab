@@ -6,17 +6,21 @@ namespace DecoratorStream.Decorators
 {
     public class StreamRequestPasswordDecorator : StreamBaseDecorator
     {
-        internal StreamRequestPasswordDecorator(Stream stream, IView view) : base(stream, view) { }
+        private readonly IView _view;
+        internal StreamRequestPasswordDecorator(Stream stream, IView view) : base(stream)
+        {
+            _view = view;
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            var password = View.RequestPassword();
+            var password = _view.RequestPassword();
 
             if (string.Intern(password) == string.Intern(ConfigurationManager.AppSettings["filePassword"]))
             {
-                return Stream.Read(buffer, offset, count);
+                return base.Read(buffer, offset, count);
             }
-            View.ShowMessageErrorPassword();
+            _view.ShowMessageErrorPassword();
             return 0;
         }
     }

@@ -1,17 +1,14 @@
 ﻿using System.IO;
-using DecoratorStream.View;
 
 namespace DecoratorStream.Decorators
 {
     public abstract class StreamBaseDecorator : Stream
     {
-        protected Stream Stream { get; }
-        protected IView View { get; }
+        private Stream Stream { get; }
 
-        protected StreamBaseDecorator(Stream stream, IView view)
+        protected StreamBaseDecorator(Stream stream)
         {
             Stream = stream;
-            View = view;
         }
 
         public override bool CanRead => Stream.CanRead;
