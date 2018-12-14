@@ -1,19 +1,38 @@
-﻿namespace Quadrangles
+﻿using System;
+
+namespace Quadrangles
 {
-    internal class Rectangle : Figure
+    public class Rectangle : Quadrangle
     {
-        public Rectangle(double sideFirst, double sideSecond, double sideThird, double sideFourth) : base(sideFirst, sideSecond, sideThird, sideFourth)
+        private double _edge;
+
+        public double Edge
         {
+            get => _edge;
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException($"{value} cannot be the edge of a rectangle.\nThe edge of the quadrangle must be positive and greater than 0.");
+                }
+
+                _edge = value;
+            }
+        }
+
+        public Rectangle(double firstEdge, double secondEdge) : base(firstEdge)
+        {
+            Edge = secondEdge;
         }
 
         public override double CalculatePerimeter()
         {
-            return (SideFirst + SideSecond) * 2;
+            return (MainEdge + Edge) * 2;
         }
 
         public override double CalculateSquare()
         {
-            return SideFirst * SideSecond;
+            return MainEdge * Edge;
         }
     }
 }

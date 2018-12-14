@@ -1,25 +1,34 @@
-﻿namespace Quadrangles
-{
-    internal class Rhombus : Figure
-    {
-        public double DiagonalFirst { get; }
-        public double DiagonalSecond { get; }
+﻿using System;
 
-        public Rhombus(double sideFirst, double sideSecond, double sideThird, double sideFourth, double diagonalFirst, double diagonalSecond) 
-            : base(sideFirst, sideSecond, sideThird, sideFourth)
+namespace Quadrangles
+{
+    public class Rhombus : Square
+    {
+        private double _angle;
+
+        private double Angle
         {
-            DiagonalFirst = diagonalFirst;
-            DiagonalSecond = diagonalSecond;
+            get => _angle;
+            set
+            {
+                if (value <= 0 || value >= 180)
+                {
+                    throw new ArgumentException($"{value} cannot be the angle of a rhombus.\nThe tilt angle must be greater than 0 and less than 180.");
+                }
+
+                _angle = value;
+            }
         }
 
-        public override double CalculatePerimeter()
+        public Rhombus(double edge, double angle) : base(edge)
         {
-            return (SideFirst + SideSecond) * 2;
+            Angle = angle;
         }
 
         public override double CalculateSquare()
         {
-            return DiagonalFirst * DiagonalSecond / 2;
+            var radians = Math.PI * Angle / 180D;
+            return base.CalculateSquare() * Math.Sin(radians);
         }
     }
 }

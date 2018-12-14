@@ -1,22 +1,34 @@
-﻿namespace Quadrangles
+﻿using System;
+
+namespace Quadrangles
 {
-    internal class Parallelogram : Figure
+    public class Parallelogram : Rectangle
     {
-        public double Height { get; }
+        private double _angle;
 
-        public Parallelogram(double sideFirst, double sideSecond, double sideThird, double sideFourth, double height) : base(sideFirst, sideSecond, sideThird, sideFourth)
+        private double Angle
         {
-            Height = height;
+            get => _angle;
+            set
+            {
+                if (value <= 0 || value >= 180)
+                {
+                    throw new ArgumentException($"{value} cannot be the angle of a parallelogram.\nThe tilt angle must be greater than 0 and less than 180.");
+                }
+
+                _angle = value;
+            }
         }
 
-        public override double CalculatePerimeter()
+        public Parallelogram(double firstEdge, double secondEdge, double angle) : base(firstEdge, secondEdge)
         {
-            return (SideFirst + SideSecond) * 2;
+            Angle = angle;
         }
-
+        
         public override double CalculateSquare()
         {
-            return SideFirst * SideSecond;
+            var radians = Math.PI * Angle / 180D;
+            return base.CalculateSquare() * Math.Sin(radians);
         }
     }
 }

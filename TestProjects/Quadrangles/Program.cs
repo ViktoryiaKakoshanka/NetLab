@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Quadrangles
+﻿namespace Quadrangles
 {
     internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             new ProgramRunner().Run();
         }

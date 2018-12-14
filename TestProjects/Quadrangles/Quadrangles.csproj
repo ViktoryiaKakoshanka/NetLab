@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Figure.cs" />
+    <Compile Include="Quadrangle.cs" />
     <Compile Include="Parallelogram.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRunner.cs" />

@@ -2,20 +2,20 @@
 
 namespace Quadrangles
 {
-    internal class Square : Figure
+    public class Square : Quadrangle
     {
-        internal Square(double sideFirst, double sideSecond, double sideThird, double sideFourth) : base(sideFirst, sideSecond, sideThird, sideFourth)
+        public Square(double edge) : base(edge)
         {
         }
 
         public override double CalculatePerimeter()
         {
-            return SideFirst * 4.0;
+            return MainEdge * 4.0;
         }
 
         public override double CalculateSquare()
         {
-            return Math.Pow(SideFirst, 2);
+            return Math.Pow(MainEdge, 2);
         }
     }
 }
