@@ -20,7 +20,7 @@ namespace DecoratorStream.Decorators
             {
                 return base.Read(buffer, offset, count);
             }
-            _view.ShowMessageErrorPassword();
+            _view.NotifyWrongPassword();
             return 0;
         }
     }

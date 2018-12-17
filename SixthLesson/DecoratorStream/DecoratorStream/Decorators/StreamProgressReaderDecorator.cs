@@ -26,7 +26,7 @@ namespace DecoratorStream.Decorators
                 offset += readBytes;
                 countBytesForReading = GetByteCountToRead(offset, count);
 
-                printedProgress = ProgressDemonstrator.ShowProgress(printedProgress, offset, count, _view);
+                printedProgress = ProgressReporter.ShowProgress(printedProgress, offset, count, _view);
             }
 
             _view.FinishRead();

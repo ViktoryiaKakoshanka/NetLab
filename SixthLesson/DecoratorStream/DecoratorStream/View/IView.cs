@@ -3,10 +3,10 @@
     public interface IView
     {
         void Exit();
-        void ShowMessageErrorPassword();
+        void NotifyWrongPassword();
         string RequestPassword();
-        void ShowCurrentStatusInPercent(string percents, int numberLineToPrint);
-        void DrawSymbol(int countIteration, int numberLineToPrint, char symbol);
+        void ShowCurrentStatusInPercent(int percents, int numberLineToPrint);
+        void UpdateProgressBar(int countPrintedSymbols, int countNextSymbols);
         void FinishRead();
     }
 }
