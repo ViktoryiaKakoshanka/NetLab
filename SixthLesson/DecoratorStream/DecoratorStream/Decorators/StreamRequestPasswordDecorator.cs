@@ -16,7 +16,7 @@ namespace DecoratorStream.Decorators
         {
             var password = _view.RequestPassword();
 
-            if (string.Intern(password) == string.Intern(ConfigurationManager.AppSettings["filePassword"]))
+            if (password == ConfigurationManager.AppSettings["filePassword"])
             {
                 return base.Read(buffer, offset, count);
             }

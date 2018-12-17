@@ -16,7 +16,7 @@ namespace DecoratorStream.Decorators
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            var countBytesForReading = CalculateActualQuantityBytesForReading(offset, count);
+            var countBytesForReading = GetByteCountToRead(offset, count);
             var printedProgress = 0;
 
             while (countBytesForReading > 0)
@@ -24,7 +24,7 @@ namespace DecoratorStream.Decorators
                 var readBytes = base.Read(buffer, offset, countBytesForReading);
 
                 offset += readBytes;
-                countBytesForReading = CalculateActualQuantityBytesForReading(offset, count);
+                countBytesForReading = GetByteCountToRead(offset, count);
 
                 printedProgress = ProgressDemonstrator.ShowProgress(printedProgress, offset, count, _view);
             }
@@ -34,7 +34,7 @@ namespace DecoratorStream.Decorators
             return count;
         }
 
-        private static int CalculateActualQuantityBytesForReading(int readBytes, int totalBytes)
+        private static int GetByteCountToRead(int readBytes, int totalBytes)
         {
             var restBytes = totalBytes - readBytes;
             return Math.Min(restBytes, CountBytesToRead);
