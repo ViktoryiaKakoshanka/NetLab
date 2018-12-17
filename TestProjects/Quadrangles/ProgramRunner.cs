@@ -13,7 +13,7 @@ namespace Quadrangles
                 new Rectangle(2, 4),
                 new Parallelogram(7, 5, 5),
                 new Rhombus(10, 16),
-                new Trapezoid(2, 5, 2, 3.61, 2)
+                new Trapezoid(6, 4, 4, 6)
             };
 
             foreach (var figure in listFigure)

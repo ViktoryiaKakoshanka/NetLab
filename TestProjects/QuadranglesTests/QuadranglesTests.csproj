@@ -54,6 +54,7 @@
     <Compile Include="RectangleTests.cs" />
     <Compile Include="RhombusTests.cs" />
     <Compile Include="SquareTests.cs" />
+    <Compile Include="TrapezoidTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

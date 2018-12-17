@@ -7,7 +7,6 @@ namespace Quadrangles
         private double _topBase;
         private double _leftEdge;
         private double _rightEdge;
-        private double _height;
 
         public double TopBase
         {
@@ -51,27 +50,19 @@ namespace Quadrangles
             }
         }
 
-        public double Height
-        {
-            get => _height;
-            set
-            {
-                if (value <= 0)
-                {
-                    throw GetNewArgumentException(value);
-                }
+        public double Height { get; }
 
-                _height = value;
-            }
-        }
-
-        public Trapezoid(double bottomBase, double topBase, double leftEdge, double rightEdge, double height) :
+        public Trapezoid(double bottomBase, double topBase, double leftEdge, double rightEdge) :
             base(bottomBase)
         {
+            if (!IsTrapezoid(bottomBase, topBase, leftEdge, rightEdge))
+            {
+                throw new ArgumentException("There is no such trapezoid.");
+            }
             _topBase = topBase;
             _leftEdge = leftEdge;
             _rightEdge = rightEdge;
-            _height = height;
+            Height = CalculateHeight();
         }
 
         public override double CalculatePerimeter()
@@ -88,6 +79,25 @@ namespace Quadrangles
         {
             return new ArgumentException(
                 $"{value} cannot be the edge of a trapezoid.\nThe edge of the quadrangle must be positive and greater than 0.");
+        }
+
+        private static bool IsTrapezoid(double bottomBase, double topBase, double leftEdge, double rightEdge)
+        {
+            if (topBase == bottomBase)
+            {
+                return false;
+            }
+            return leftEdge + rightEdge > bottomBase - topBase;
+        }
+
+        private double CalculateHeight()
+        {
+            
+
+            var a = Math.Pow(MainEdge - TopBase, 2) + Math.Pow(LeftEdge, 2) - Math.Pow(RightEdge, 2);
+            var b = 2 * (MainEdge - TopBase);
+            var height = Math.Sqrt(Math.Pow(LeftEdge, 2) - Math.Pow(a/b, 2));
+            return height;
         }
     }
 }
