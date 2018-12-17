@@ -2,11 +2,11 @@
 
 namespace Quadrangles
 {
-    public class Parallelogram : Rectangle
+    public class Parallelogram : Quadrangle
     {
         private double _angle;
 
-        private double Angle
+        public double Angle
         {
             get => _angle;
             set
@@ -20,7 +20,7 @@ namespace Quadrangles
             }
         }
 
-        public Parallelogram(double firstEdge, double secondEdge, double angle) : base(firstEdge, secondEdge)
+        public Parallelogram(double firstEdge, double secondEdge, double angle) : base(firstEdge, secondEdge, firstEdge, secondEdge)
         {
             Angle = angle;
         }
@@ -28,7 +28,7 @@ namespace Quadrangles
         public override double CalculateSquare()
         {
             var radians = Math.PI * Angle / 180D;
-            return base.CalculateSquare() * Math.Sin(radians);
+            return FirstEdge * SecondEdge * Math.Sin(radians);
         }
     }
 }

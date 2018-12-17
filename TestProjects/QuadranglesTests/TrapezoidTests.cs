@@ -12,7 +12,7 @@ namespace QuadranglesTests
         [TestInitialize]
         public void TestInitialize()
         {
-            _trapezoid = new Trapezoid(6.0, 4.0, 4.0, 4.0);
+            _trapezoid = new Trapezoid(4.0, 4.0, 4.0, 6.0);
         }
 
         [TestMethod]
