@@ -10,7 +10,7 @@ namespace QuadranglesTests
         private Rhombus _rhombus;
 
         [TestInitialize]
-        private void TestInitialize()
+        public void TestInitialize()
         {
             _rhombus = new Rhombus(2.5, 3.3);
         }
@@ -35,7 +35,7 @@ namespace QuadranglesTests
         [TestMethod]
         public void CalculateSquare_CorrectResult_Test()
         {
-            const double expected = 8.2;
+            const double expected = 0.4;
 
             var actual = Math.Round(_rhombus.CalculateSquare(), 1);
 

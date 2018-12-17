@@ -10,7 +10,7 @@ namespace QuadranglesTests
         private Square _rhombus;
 
         [TestInitialize]
-        private void TestInitialize()
+        public void TestInitialize()
         {
             _rhombus = new Square(2.5);
         }
@@ -25,7 +25,7 @@ namespace QuadranglesTests
         [TestMethod]
         public void CalculatePerimeter_CorrectResult_Test()
         {
-            const double expected = 11.6;
+            const double expected = 10;
 
             var actual = Math.Round(_rhombus.CalculatePerimeter(), 1);
 
@@ -35,7 +35,7 @@ namespace QuadranglesTests
         [TestMethod]
         public void CalculateSquare_CorrectResult_Test()
         {
-            const double expected = 8.2;
+            const double expected = 6.2;
 
             var actual = Math.Round(_rhombus.CalculateSquare(), 1);
 
