@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using VectorProgram.Model;
+﻿using VectorProgram.Model;
 
 namespace VectorProgram.View
 {
-    internal interface IView
+    public interface IView
     {
         void Exit();
         string ReadLine(string message);
-        void WriteErrorMessage();
-        void ShowVectors(IList<Vector> vectors);
+        void ShowErrorMessage();
+        void ShowVectors(Vector first, Vector second);
         void ShowSimpleActionsWithVectorsResults(Vector first, Vector second, Vector sumResult, Vector differenceResult);
-        void ShowScalarMultiplicationResult(Vector first, Vector second, double result);
-        void ShowVectorsMultiplicationResult(Vector first, Vector second, Vector result);
-        void ShowMultiplicationVectorsByNumberResults(Vector first, Vector second, IList<Vector> resultNumberRight, IList<Vector> resultNumberLeft, double multiplier);
+        void ShowScalarProductResult(Vector first, Vector second, double result);
+        void ShowVectorProductResult(Vector first, Vector second, Vector result);
+        void ShowProductVectorsByConstantResults(Vector first, Vector second, Vector resultNumberRight, Vector resultNumberLeft, double multiplier);
         void ShowVectorsComparisonResults(Vector first, Vector second, bool equalityResult, bool inequalityResult);
         void ShowAngleBetweenVectorsResult(Vector first, Vector second, double angle);
     }

@@ -6,7 +6,7 @@ namespace PolynomialProgram.View
     {
         string ReadLine(string message);
         void Exit();
-        void WriteErrorMessage();
+        void ShowErrorMessage();
         void ShowSimpleActionsWithPolynomialsResults(
             Polynomial first,
             Polynomial second,

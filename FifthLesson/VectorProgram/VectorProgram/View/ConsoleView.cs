@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using VectorProgram.Model;
 
 namespace VectorProgram.View
@@ -8,69 +7,62 @@ namespace VectorProgram.View
     {
         public void Exit()
         {
-            WriteLine("Press any key to exit.");
+            Console.WriteLine("Press any key to exit.");
             Console.ReadKey(true);
         }
 
         public string ReadLine(string message)
         {
-            WriteLine(message);
+            Console.WriteLine(message);
             return Console.ReadLine();
         }
 
-        public void WriteErrorMessage() => Console.WriteLine("You entered incorrect numbers.");
+        public void ShowErrorMessage() => Console.WriteLine("You entered incorrect numbers.");
 
-        public void ShowVectors(IList<Vector> vectors)
+        public void ShowVectors(Vector first, Vector second)
         {
-            WriteLine("Your vectors:");
-
-            foreach (var vector in vectors)
-            {
-                WriteLine(vector.ToString());
-            }
+            Console.WriteLine("Your vectors:");
+            Console.WriteLine(first.ToString());
+            Console.WriteLine(second.ToString());
         }
 
         public void ShowSimpleActionsWithVectorsResults(Vector first, Vector second, Vector sumResult, Vector differenceResult)
         {
-            WriteLine("Actions with vectors:");
-            WriteLine($"{first} + {second} = {sumResult}");
-            WriteLine($"{first} - {second} = {differenceResult}");
+            Console.WriteLine("Actions with vectors:");
+            Console.WriteLine($"{first} + {second} = {sumResult}");
+            Console.WriteLine($"{first} - {second} = {differenceResult}");
         }
 
-        public void ShowScalarMultiplicationResult(Vector first, Vector second, double result)
+        public void ShowScalarProductResult(Vector first, Vector second, double result)
         {
-            WriteLine($"Scalar multiplication: {first} * {second} = {result}\n");
+            Console.WriteLine($"Scalar product: {first} * {second} = {result}\n");
         }
 
-        public void ShowVectorsMultiplicationResult(Vector first, Vector second, Vector result)
+        public void ShowVectorProductResult(Vector first, Vector second, Vector result)
         {
-            WriteLine($"Vector multiplication: {first} x {second} = {result}\n");
+            Console.WriteLine($"Vector product: {first} x {second} = {result}\n");
         }
 
-        public void ShowMultiplicationVectorsByNumberResults(Vector first, Vector second, IList<Vector> resultNumberRight, IList<Vector> resultNumberLeft, double multiplier)
+        public void ShowProductVectorsByConstantResults(Vector first, Vector second, Vector resultNumberRight, Vector resultNumberLeft, double multiplier)
         {
-            WriteLine("Multiplication of vectors by number:");
+            Console.WriteLine("Multiplication of vectors by number:");
 
-            WriteLine($"{first} * {multiplier} = {resultNumberRight[0]}");
-            WriteLine($"{second} * {multiplier} = {resultNumberRight[1]}\n");
-            WriteLine($"{multiplier} * {first} = {resultNumberLeft[0]}");
-            WriteLine($"{multiplier} * {second} = {resultNumberLeft[1]}");
+            Console.WriteLine($"{first} * {multiplier} = {resultNumberRight}\n");
+            Console.WriteLine($"{multiplier} * {first} = {resultNumberLeft}");
         }
 
         public void ShowVectorsComparisonResults(Vector first, Vector second, bool equalityResult, bool inequalityResult)
         {
-            WriteLine("Compare vectors:");
-            WriteLine($"{first} == {second} = {equalityResult}");
-            WriteLine($"{first} != {second} = {inequalityResult}");
-            WriteLine(string.Empty);
+            Console.WriteLine("Compare vectors:");
+            Console.WriteLine($"{first} == {second} = {equalityResult}");
+            Console.WriteLine($"{first} != {second} = {inequalityResult}");
+            Console.WriteLine(string.Empty);
         }
 
         public void ShowAngleBetweenVectorsResult(Vector first, Vector second, double angle)
         {
-            WriteLine($"The angle between {first} and {second} = {Math.Abs(angle)}");
-            WriteLine(string.Empty);
+            Console.WriteLine($"The angle between {first} and {second} = {Math.Abs(angle)}");
+            Console.WriteLine(string.Empty);
         }
-
-        private static void WriteLine(string text) => Console.WriteLine(text);
     }
 }

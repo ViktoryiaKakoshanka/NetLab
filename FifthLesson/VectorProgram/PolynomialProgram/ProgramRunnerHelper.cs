@@ -6,16 +6,16 @@ namespace PolynomialProgram
     internal static class ProgramRunnerHelper
     {
 
-        public static void CallSimpleActionsWithPolynomials(Polynomial first, Polynomial second, IView view)
+        public static void PerformSimpleActionsWithPolynomials(Polynomial first, Polynomial second, IView view)
         {
-            var sumPolynomials = first + second;
-            var differencePolynomials = first - second;
-            var multiplicationPolynomials = first * second;
+            var sumResult = first + second;
+            var subtractResult = first - second;
+            var multiplicationResult = first * second;
 
-            view.ShowSimpleActionsWithPolynomialsResults(first, second, sumPolynomials, differencePolynomials, multiplicationPolynomials);
+            view.ShowSimpleActionsWithPolynomialsResults(first, second, sumResult, subtractResult, multiplicationResult);
         }
 
-        public static void CallMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, IView view)
+        public static void MultiplyPolynomialByConstant(Polynomial polynomial, double multiplier, IView view)
         {
             var result = polynomial * multiplier;
 

@@ -9,7 +9,9 @@ namespace VectorProgram.Model
         public double SecondCoordinate { get; private set; }
         public double ThirdCoordinate { get; private set; }
 
-        public Vector() { }
+        public Vector()
+        {
+        }
 
         public Vector(double firstCoordinate, double secondCoordinate, double thirdCoordinate)
         {
@@ -17,8 +19,10 @@ namespace VectorProgram.Model
             SecondCoordinate = secondCoordinate;
             ThirdCoordinate = thirdCoordinate;
         }
-        
-        public Vector(Vector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate) { }
+
+        public Vector(Vector vector) : this(vector.FirstCoordinate, vector.SecondCoordinate, vector.ThirdCoordinate)
+        {
+        }
                 
         public override string ToString() => $"({FirstCoordinate}, {SecondCoordinate}, {ThirdCoordinate})";
 
@@ -53,7 +57,9 @@ namespace VectorProgram.Model
             {
                 return true;
             }
-            var valueComparison = FirstCoordinate.IsEquals(other.FirstCoordinate) && SecondCoordinate.IsEquals(other.SecondCoordinate) && ThirdCoordinate.IsEquals(other.ThirdCoordinate);
+            var valueComparison = FirstCoordinate.IsEquals(other.FirstCoordinate) && 
+                                  SecondCoordinate.IsEquals(other.SecondCoordinate) && 
+                                  ThirdCoordinate.IsEquals(other.ThirdCoordinate);
             return valueComparison;
         }
         

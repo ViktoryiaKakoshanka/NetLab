@@ -7,25 +7,23 @@ namespace PolynomialProgram.View
     {
         public void Exit()
         {
-            WriteLine("Press any key to exit.");
+            Console.WriteLine("Press any key to exit.");
             Console.ReadKey(true);
         }
 
         public string ReadLine(string message)
         {
-            WriteLine(message);
+            Console.WriteLine(message);
             return Console.ReadLine();
         }
 
-        public void WriteLine(string text) => Console.WriteLine(text);
-
-        public void WriteErrorMessage() => Console.WriteLine("You entered incorrect numbers.");
+        public void ShowErrorMessage() => Console.WriteLine("You entered incorrect numbers.");
 
         public void ShowPolynomials(Polynomial first, Polynomial second)
         {
-            WriteLine("Your polynomials:\n");
-            WriteLine(first.ToString());
-            WriteLine(second.ToString());
+            Console.WriteLine("Your polynomials:\n");
+            Console.WriteLine(first.ToString());
+            Console.WriteLine(second.ToString());
         }
 
         public void ShowSimpleActionsWithPolynomialsResults(
@@ -35,14 +33,14 @@ namespace PolynomialProgram.View
             Polynomial differencePolynomials,
             Polynomial multiplicationPolynomials)
         {
-            WriteLine($"{first} + {second} = {sumPolynomials}");
-            WriteLine($"{first} - {second} = {differencePolynomials}");
-            WriteLine($"{first} * {second} = {multiplicationPolynomials}");
+            Console.WriteLine($"{first} + {second} = {sumPolynomials}");
+            Console.WriteLine($"{first} - {second} = {differencePolynomials}");
+            Console.WriteLine($"{first} * {second} = {multiplicationPolynomials}");
         }
 
         public void ShowMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, Polynomial result)
         {
-            WriteLine($"{polynomial} * {multiplier} = {result}");
+            Console.WriteLine($"{polynomial} * {multiplier} = {result}");
         }
     }
 }

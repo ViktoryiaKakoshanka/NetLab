@@ -9,7 +9,6 @@ namespace PolynomialProgram
     public class ProgramRunner
     {
         private readonly IView _view;
-        private readonly IList<Polynomial> _polynomials = new List<Polynomial>();
 
         public ProgramRunner(IView view)
         {
@@ -23,9 +22,9 @@ namespace PolynomialProgram
 
             _view.ShowPolynomials(firstPolynomial, secondPolynomial);
 
-            ProgramRunnerHelper.CallSimpleActionsWithPolynomials(firstPolynomial, secondPolynomial, _view);
+            ProgramRunnerHelper.PerformSimpleActionsWithPolynomials(firstPolynomial, secondPolynomial, _view);
             var multiplier = RequestMultiplier();
-            ProgramRunnerHelper.CallMultiplicationNumberByPolynomial(firstPolynomial, multiplier, _view);
+            ProgramRunnerHelper.MultiplyPolynomialByConstant(firstPolynomial, multiplier, _view);
 
             _view.Exit();
         }
@@ -44,22 +43,22 @@ namespace PolynomialProgram
             return Convert.ToInt32(userInput);
         }
 
-        private int RequestMultiplier()
+        private double RequestMultiplier()
         {
             var userInput = RequestInput(DataType.Multiplier, "Enter multiplier:");
-            return Convert.ToInt32(userInput);
+            return Convert.ToDouble(userInput);
         }
         
         private IDictionary<int, double> RequestMonomials(int power)
         {
-            IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
+            var resultMonomials = new Dictionary<int, double>();
 
             for (var i = power; i >= 1; i--)
             {
                 var userInput = RequestInput(DataType.Monomial, $"Enter monomial in {i} power:");
                 var currentMonomial = DataParser.ParseDouble(userInput);
                 
-                if (Convert.ToInt32(currentMonomial) != 0)
+                if ((int)currentMonomial != 0)
                 {
                     resultMonomials.Add(i, currentMonomial);
                 }
@@ -87,7 +86,7 @@ namespace PolynomialProgram
             var isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
             if (!isUserInputCorrect)
             {
-                _view.WriteErrorMessage();
+                _view.ShowErrorMessage();
             }
 
             return isUserInputCorrect;

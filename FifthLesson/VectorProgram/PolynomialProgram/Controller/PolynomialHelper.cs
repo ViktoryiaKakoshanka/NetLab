@@ -8,7 +8,7 @@ namespace PolynomialProgram.Controller
     {
         public static Polynomial Sum(Polynomial first, Polynomial second)
         {
-            IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
+            var resultMonomials = new Dictionary<int, double>();
 
             var maxPower = Math.Max(first.Power, second.Power);
 
@@ -25,7 +25,7 @@ namespace PolynomialProgram.Controller
 
         public static Polynomial Subtract(Polynomial first, Polynomial second)
         {
-            IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
+            var resultMonomials = new Dictionary<int, double>();
 
             var maxPower = Math.Max(first.Power, second.Power);
 
@@ -45,7 +45,7 @@ namespace PolynomialProgram.Controller
 
         public static Polynomial Multiply(Polynomial first, Polynomial second)
         {
-            IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
+            var resultMonomials = new Dictionary<int, double>();
             var resultMaxPower = first.Power + second.Power;
             var maxPower = Math.Max(first.Power, second.Power);
 

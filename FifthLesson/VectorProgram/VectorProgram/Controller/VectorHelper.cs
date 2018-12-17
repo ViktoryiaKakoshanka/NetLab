@@ -7,14 +7,14 @@ namespace VectorProgram.Controller
     {
         public static double CalculateAngle(Vector first, Vector second)
         {
-            var scalarMultiplicationResult = ScalarProduct(first, second);
+            var scalarProduct = ScalarProduct(first, second);
 
-            var firstVectorModule = CalculateModule(first);
-            var secondVectorModule = CalculateModule(second);
+            var firstModule = CalculateModule(first);
+            var secondModule = CalculateModule(second);
 
-            var productOfVectorModules = firstVectorModule * secondVectorModule;
+            var productOfVectorModules = firstModule * secondModule;
 
-            var angle = scalarMultiplicationResult / productOfVectorModules;
+            var angle = scalarProduct / productOfVectorModules;
 
             return angle;
         }

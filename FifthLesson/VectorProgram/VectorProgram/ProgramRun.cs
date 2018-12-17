@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using PolynomialProgram.Controller;
+﻿using PolynomialProgram.Controller;
 using PolynomialProgram.Model;
-using VectorProgram.Controller;
 using VectorProgram.Model;
 using VectorProgram.View;
 
@@ -18,89 +16,15 @@ namespace VectorProgram
 
         public void Run()
         {
-            var vectors = CreateVectors();
-
-            _view.ShowVectors(vectors);
-
-            CallActionsWithVectors(vectors[0], vectors[1]);
-
-            _view.Exit();
-        }
-
-        private List<Vector> CreateVectors()
-        {
             var vectorFirst = RequestVector("first");
             var vectorSecond = RequestVector("second");
 
-            return new List<Vector> { vectorFirst, vectorSecond, vectorFirst };
-        }
-        
-        private void CallActionsWithVectors(Vector first, Vector second)
-        {
-            CallSimpleActionsWithVectors(first, second);
-            CallVectorMultiplication(first, second);
-            CallMultiplyVectorsByNumber(first, second);
-            CallScalarMultiplication(first, second);
-            CompareVectors(first, second);
-            CallAngleBetweenVectors(first, second);
-        }
+            _view.ShowVectors(vectorFirst, vectorSecond);
 
-        private void CompareVectors(Vector first, Vector second)
-        {
-            var equalityResult = first == second;
-            var inequalityResult = first != second;
-            _view.ShowVectorsComparisonResults(first, second, equalityResult, inequalityResult);
-        }
-
-        private void CallAngleBetweenVectors(Vector first, Vector second)
-        {
-            var angle = VectorHelper.CalculateAngle(first, second);
-            _view.ShowAngleBetweenVectorsResult(first, second, angle);
-        }
-
-        private void CallSimpleActionsWithVectors(Vector first, Vector second)
-        {
-            var sumResult = first + second;
-            var differenceResult = first - second;
-
-            _view.ShowSimpleActionsWithVectorsResults(first, second, sumResult, differenceResult);
-        }
-
-        private void CallScalarMultiplication(Vector first, Vector second)
-        {
-            var multiplicationResult = VectorHelper.ScalarProduct(first, second);
-            _view.ShowScalarMultiplicationResult(first, second, multiplicationResult);
-        }
-
-        private void CallVectorMultiplication(Vector first, Vector second)
-        {
-            var vectorMultiplicationResult = VectorHelper.VectorProduct(first, second);
-            _view.ShowVectorsMultiplicationResult(first, second, vectorMultiplicationResult);
-        }
-
-        private void CallMultiplyVectorsByNumber(Vector first, Vector second)
-        {
             var multiplier = RequestMultiplier();
+            ProgramRunnerHelper.CallActionsWithVectors(vectorFirst, vectorSecond, multiplier, _view);
 
-            var multiplicationVectorsByNumberRight = new List<Vector>
-            {
-                first * multiplier,
-                second * multiplier
-            };
-
-            var multiplicationVectorsByNumberLeft = new List<Vector>
-            {
-                multiplier * first,
-                multiplier * second
-            };
-
-            _view.ShowMultiplicationVectorsByNumberResults(first, second, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
-        }
-        
-        private Vector RequestVector(string orderByVectors)
-        {
-            var userInput = RequestInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
-            return ParseVector(userInput);
+            _view.Exit();
         }
 
         private double RequestMultiplier()
@@ -108,8 +32,14 @@ namespace VectorProgram
             var userInput = RequestInput(DataType.Multiplier, "Enter multiplier:");
             return DataParser.ParseDouble(userInput);
         }
+        
+        private Vector RequestVector(string orderByVectors)
+        {
+            var userInput = RequestInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
+            return ParseVector(userInput);
+        }
                 
-        private Vector ParseVector(string userInput)
+        private static Vector ParseVector(string userInput)
         {
             var coords = DataParser.ParseArray(userInput);
             return new Vector(coords[0], coords[1], coords[2]);
@@ -132,7 +62,7 @@ namespace VectorProgram
         private bool ValidateUserInput(DataType dataType, string userInput)
         {
             var isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
-            if (!isUserInputCorrect) _view.WriteErrorMessage();
+            if (!isUserInputCorrect) _view.ShowErrorMessage();
 
             return isUserInputCorrect;
         }
