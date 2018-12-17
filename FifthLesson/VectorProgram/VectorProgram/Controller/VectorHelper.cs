@@ -7,7 +7,7 @@ namespace VectorProgram.Controller
     {
         public static double CalculateAngle(Vector first, Vector second)
         {
-            var scalarMultiplicationResult = CalculateScalarMultiplication(first, second);
+            var scalarMultiplicationResult = ScalarProduct(first, second);
 
             var firstVectorModule = CalculateModule(first);
             var secondVectorModule = CalculateModule(second);
@@ -19,13 +19,13 @@ namespace VectorProgram.Controller
             return angle;
         }
 
-        public static Vector CalculateVectorMultiplication(Vector first, Vector second)
+        public static Vector VectorProduct(Vector first, Vector second)
         {
-            var arrayForOrts = CreateArrayOrts(first, second);
+            var arrayOfOrts = CreateArrayOfOrts(first, second);
             
-            var determinantOne = CalculateDeterminant(arrayForOrts[0]);
-            var determinantTwo = CalculateDeterminant(arrayForOrts[1]);
-            var determinantThree = CalculateDeterminant(arrayForOrts[2]);
+            var determinantOne = CalculateDeterminant(arrayOfOrts[0]);
+            var determinantTwo = CalculateDeterminant(arrayOfOrts[1]);
+            var determinantThree = CalculateDeterminant(arrayOfOrts[2]);
 
             return new Vector(determinantOne, determinantTwo, determinantThree);
         }
@@ -41,9 +41,9 @@ namespace VectorProgram.Controller
             return Math.Abs(result);
         }
 
-        private static double[][,] CreateArrayOrts(Vector first, Vector second)
+        private static double[][,] CreateArrayOfOrts(Vector first, Vector second)
         {
-            var arrayOrts = new[]
+            var arrayOfOrts = new[]
             {
                 new[,]
                 {
@@ -61,7 +61,7 @@ namespace VectorProgram.Controller
                     { second.FirstCoordinate, second.SecondCoordinate }
                 }
             };
-            return arrayOrts;
+            return arrayOfOrts;
         }
 
         public static double CalculateDeterminant(double[,] array)
@@ -71,7 +71,7 @@ namespace VectorProgram.Controller
             return mainDiagonal - sideDiagonal;
         }
 
-        public static double CalculateScalarMultiplication(Vector first, Vector second)
+        public static double ScalarProduct(Vector first, Vector second)
         {
             var multiplicationFirstCoordinates = first.FirstCoordinate * second.FirstCoordinate;
             var multiplicationSecondCoordinates = first.SecondCoordinate * second.SecondCoordinate;

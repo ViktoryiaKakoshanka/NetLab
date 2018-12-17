@@ -1,6 +1,5 @@
 ﻿using PolynomialProgram.Model;
 using System;
-using System.Collections.Generic;
 
 namespace PolynomialProgram.View
 {

@@ -21,6 +21,8 @@ namespace PolynomialProgram
             var firstPolynomial = RequestPolynomial();
             var secondPolynomial = RequestPolynomial();
 
+            _view.ShowPolynomials(firstPolynomial, secondPolynomial);
+
             ProgramRunnerHelper.CallSimpleActionsWithPolynomials(firstPolynomial, secondPolynomial, _view);
             var multiplier = RequestMultiplier();
             ProgramRunnerHelper.CallMultiplicationNumberByPolynomial(firstPolynomial, multiplier, _view);

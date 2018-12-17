@@ -15,5 +15,6 @@ namespace PolynomialProgram.View
             Polynomial multiplicationPolynomials);
 
         void ShowMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, Polynomial result);
+        void ShowPolynomials(Polynomial first, Polynomial second);
     }
 }

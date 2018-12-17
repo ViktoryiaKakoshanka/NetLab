@@ -56,7 +56,7 @@ namespace VectorProgramTests
         public void ScalarMultiplicationOfVectors_returnNumber_Test()
         {
             var expected = 50;
-            var actual = VectorHelper.CalculateScalarMultiplication(_firstVector, _secondVector);
+            var actual = VectorHelper.ScalarProduct(_firstVector, _secondVector);
 
             Debug.WriteLine($"{_firstVector} * {_secondVector}: expect = {expected} actual = {actual}");
             

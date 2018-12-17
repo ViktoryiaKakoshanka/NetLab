@@ -68,13 +68,13 @@ namespace VectorProgram
 
         private void CallScalarMultiplication(Vector first, Vector second)
         {
-            var multiplicationResult = VectorHelper.CalculateScalarMultiplication(first, second);
+            var multiplicationResult = VectorHelper.ScalarProduct(first, second);
             _view.ShowScalarMultiplicationResult(first, second, multiplicationResult);
         }
 
         private void CallVectorMultiplication(Vector first, Vector second)
         {
-            var vectorMultiplicationResult = VectorHelper.CalculateVectorMultiplication(first, second);
+            var vectorMultiplicationResult = VectorHelper.VectorProduct(first, second);
             _view.ShowVectorsMultiplicationResult(first, second, vectorMultiplicationResult);
         }
 
