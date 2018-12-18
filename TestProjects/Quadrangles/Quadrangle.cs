@@ -4,34 +4,13 @@ namespace Quadrangles
 {
     public abstract class Quadrangle
     {
-        private double _firstEdge;
-        private double _secondEdge;
-        private double _thirdEdge;
-        private double _fourthEdge;
+        public double FirstEdge { get; }
 
-        public double FirstEdge
-        {
-            get => _firstEdge;
-            private set => _firstEdge = ValidateEdge(value);
-        }
+        public double SecondEdge { get; }
 
-        public double SecondEdge
-        {
-            get => _secondEdge;
-            private set => _secondEdge = ValidateEdge(value);
-        }
+        public double ThirdEdge { get; }
 
-        public double ThirdEdge
-        {
-            get => _thirdEdge;
-            private set => _thirdEdge = ValidateEdge(value);
-        }
-
-        public double FourthEdge
-        {
-            get => _fourthEdge;
-            private set => _fourthEdge = ValidateEdge(value);
-        }
+        public double FourthEdge { get; }
 
         protected Quadrangle(double firstEdge, double secondEdge, double thirdEdge, double fourthEdge)
         {
@@ -39,6 +18,7 @@ namespace Quadrangles
             SecondEdge = secondEdge;
             ThirdEdge = thirdEdge;
             FourthEdge = fourthEdge;
+            ValidateEdges();
         }
 
         public double CalculatePerimeter()
@@ -48,14 +28,12 @@ namespace Quadrangles
 
         public abstract double CalculateSquare();
 
-        private static double ValidateEdge(double value)
+        private void ValidateEdges()
         {
-            if (value <= 0)
+            if (FirstEdge <= 0 || SecondEdge <= 0 || ThirdEdge <= 0|| FourthEdge <= 0)
             {
-                throw new ArgumentException($"{value} cannot be the edge of a quadrilateral.\nThe edge of the quadrangle must be positive and greater than 0.");
+                throw new ArgumentException("The edge of the quadrangle must be positive and greater than 0.");
             }
-
-            return value;
         }
     }
 }
