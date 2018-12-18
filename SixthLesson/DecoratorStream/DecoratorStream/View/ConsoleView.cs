@@ -4,6 +4,8 @@ namespace DecoratorStream.View
 {
     public class ConsoleView : IView
     {
+        private int _currentProgress;
+
         public void Exit()
         {
             Console.WriteLine("Press any key to exit.");
@@ -25,13 +27,15 @@ namespace DecoratorStream.View
             SetCursorPosition(0, Console.CursorTop + 2);
         }
 
-        public void UpdateProgressBar(int countPrintedSymbols, int countNextSymbols)
+        public void UpdateProgressBar(int countNextSymbols)
         {
-            for (var position = countPrintedSymbols; position < countNextSymbols; position++)
+            for (var position = _currentProgress; position < countNextSymbols; position++)
             {
                 SetCursorPosition(position, 3);
                 Console.WriteLine('|');
             }
+
+            _currentProgress = countNextSymbols;
         }
 
         private static void SetCursorPosition(int left, int top) => Console.SetCursorPosition(left, top);

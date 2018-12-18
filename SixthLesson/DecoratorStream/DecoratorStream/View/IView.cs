@@ -6,7 +6,7 @@
         void NotifyWrongPassword();
         string RequestPassword();
         void ShowCurrentStatusInPercent(int percents, int numberLineToPrint);
-        void UpdateProgressBar(int countPrintedSymbols, int countNextSymbols);
+        void UpdateProgressBar(int countNextSymbols);
         void FinishRead();
     }
 }

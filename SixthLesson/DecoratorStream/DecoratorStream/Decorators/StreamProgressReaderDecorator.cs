@@ -17,7 +17,6 @@ namespace DecoratorStream.Decorators
         public override int Read(byte[] buffer, int offset, int count)
         {
             var countBytesForReading = GetByteCountToRead(offset, count);
-            var printedProgress = 0;
 
             while (countBytesForReading > 0)
             {
@@ -26,7 +25,7 @@ namespace DecoratorStream.Decorators
                 offset += readBytes;
                 countBytesForReading = GetByteCountToRead(offset, count);
 
-                printedProgress = ProgressReporter.ShowProgress(printedProgress, offset, count, _view);
+                ProgressReporter.ShowProgress(offset, count, _view);
             }
 
             _view.FinishRead();
