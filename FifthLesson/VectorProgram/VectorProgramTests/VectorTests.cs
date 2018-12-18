@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VectorProgram.Model;
 using System.Diagnostics;
-using VectorProgram.Controller;
 
 namespace VectorProgramTests
 {
@@ -55,8 +54,8 @@ namespace VectorProgramTests
         [TestMethod]
         public void ScalarMultiplicationOfVectors_returnNumber_Test()
         {
-            var expected = 50;
-            var actual = VectorHelper.ScalarProduct(_firstVector, _secondVector);
+            const int expected = 50;
+            var actual = Vector.CalculateScalarProduct(_firstVector, _secondVector);
 
             Debug.WriteLine($"{_firstVector} * {_secondVector}: expect = {expected} actual = {actual}");
             

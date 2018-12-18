@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq;
 
 namespace PolynomialProgram.Controller
 {
@@ -6,15 +7,8 @@ namespace PolynomialProgram.Controller
     {
         public static double[] ParseArray(string inputData)
         {
-            var arr = inputData.Trim(' ').Split(' ');
-            var arrResult = new double[arr.Length];
-
-            for (var i = 0; i < arr.Length; i++)
-            {
-                arrResult[i] = ParseDouble(arr[i]);
-            }
-
-            return arrResult;
+            var arr = inputData.Trim().Split(' ');
+            return arr.Select(ParseDouble).ToArray();
         }
 
         public static double ParseDouble(string inputData)

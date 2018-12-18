@@ -1,12 +1,11 @@
-﻿using VectorProgram.Controller;
-using VectorProgram.Model;
+﻿using VectorProgram.Model;
 using VectorProgram.View;
 
 namespace VectorProgram
 {
     public static class ProgramRunnerHelper
     {
-        public static void CallActionsWithVectors(Vector first, Vector second, double multiplier, IView view)
+        public static void PerformActionsWithVectors(Vector first, Vector second, double multiplier, IView view)
         {
             ExecuteSimpleActionsWithVectors(first, second, view);
             ExecuteVectorProduct(first, second, view);
@@ -26,7 +25,7 @@ namespace VectorProgram
 
         public static void ExecuteVectorProduct(Vector first, Vector second, IView view)
         {
-            var vectorMultiplicationResult = VectorHelper.VectorProduct(first, second);
+            var vectorMultiplicationResult = Vector.CalculateVectorProduct(first, second);
             view.ShowVectorProductResult(first, second, vectorMultiplicationResult);
         }
 
@@ -39,7 +38,7 @@ namespace VectorProgram
 
         public static void ExecuteScalarProduct(Vector first, Vector second, IView view)
         {
-            var multiplicationResult = VectorHelper.ScalarProduct(first, second);
+            var multiplicationResult = Vector.CalculateScalarProduct(first, second);
             view.ShowScalarProductResult(first, second, multiplicationResult);
         }
 
@@ -52,7 +51,7 @@ namespace VectorProgram
 
         public static void ExecuteCalculatingAngleBetweenVectors(Vector first, Vector second, IView view)
         {
-            var angle = VectorHelper.CalculateAngle(first, second);
+            var angle = Vector.CalculateAngle(first, second);
             view.ShowAngleBetweenVectorsResult(first, second, angle);
         }
     }

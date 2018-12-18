@@ -1,45 +1,44 @@
 ﻿using PolynomialProgram.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PolynomialProgram.Controller
 {
     public static class PolynomialHelper
     {
+        private enum Action
+        {
+            Sum,
+            Subtraction
+        }
+
         public static Polynomial Sum(Polynomial first, Polynomial second)
         {
-            var resultMonomials = new Dictionary<int, double>();
-
-            var maxPower = Math.Max(first.Power, second.Power);
-
-            for (var i = 0; i <= maxPower; i++)
-            {
-                var firstMonomial = first.Monomials.ContainsKey(i) ? first.Monomials[i] : 0;
-                var secondMonomial = second.Monomials.ContainsKey(i) ? second.Monomials[i] : 0;
-                var sumMonomials = firstMonomial + secondMonomial;
-
-                resultMonomials.Add(i, sumMonomials);
-            }
-            return new Polynomial(maxPower, resultMonomials);
+            return CalculateNewPolynomial(first, second, Action.Sum);
         }
 
         public static Polynomial Subtract(Polynomial first, Polynomial second)
         {
+            return CalculateNewPolynomial(first, second, Action.Subtraction);
+        }
+
+
+        private static Polynomial CalculateNewPolynomial(Polynomial first, Polynomial second, Action action)
+        {
             var resultMonomials = new Dictionary<int, double>();
 
             var maxPower = Math.Max(first.Power, second.Power);
 
             for (var i = 0; i <= maxPower; i++)
             {
-                var firstValue = first.Monomials.ContainsKey(i) ? first.Monomials[i] : 0;
-                var secondValue = second.Monomials.ContainsKey(i) ? second.Monomials[i] : 0;
-                var differenceMonomial = firstValue - secondValue;
+                var firstValue = GetCoefficient(first, i);
+                var secondValue = GetCoefficient(second, i);
 
-                if (!differenceMonomial.IsEquals(0))
-                {
-                    resultMonomials.Add(i, differenceMonomial);
-                }
+                var result = action == Action.Sum ? firstValue + secondValue : firstValue - secondValue;
+                resultMonomials.Add(i, result);
             }
+
             return new Polynomial(maxPower, resultMonomials);
         }
 
@@ -51,20 +50,20 @@ namespace PolynomialProgram.Controller
 
             for (var i = 0; i <= maxPower; i++)
             {
-                if (!first.Monomials.ContainsKey(i))
+                var firstValue = GetCoefficient(first, i);
+                if (firstValue.IsEqual(0))
                 {
                     continue;
                 }
-
-                var firstValue = first.Monomials[i];
+                
                 for (var j = 0; j <= maxPower; j++)
                 {
-                    if (!second.Monomials.ContainsKey(j))
+                    var secondValue = GetCoefficient(second, j);
+                    if (secondValue.IsEqual(0))
                     {
                         continue;
                     }
 
-                    var secondValue = second.Monomials[j];
                     var currentValue = firstValue * secondValue;
                     var currentPower = i + j;
 
@@ -84,17 +83,15 @@ namespace PolynomialProgram.Controller
 
         public static Polynomial MultiplyByConstant(Polynomial polynomial, double number)
         {
-            var resultPolynomial = new Polynomial(polynomial);
-
-            for (var key = 0; key <= polynomial.Power; key++)
-            {
-                if (polynomial.Monomials.ContainsKey(key))
-                {
-                    polynomial.Monomials[key] *= number;
-                }
-            }
-
-            return resultPolynomial;
+            var enumerable = polynomial.Monomials.ToDictionary(pair => pair.Key, pair => pair.Value * number);
+            return new Polynomial(polynomial.Power, enumerable);
         }
+
+        private static double GetCoefficient(Polynomial first, int i)
+        {
+            return first.Monomials.ContainsKey(i) ? first.Monomials[i] : 0;
+        }
+
+
     }
 }

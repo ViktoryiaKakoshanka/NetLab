@@ -22,7 +22,7 @@ namespace VectorProgram
             _view.ShowVectors(vectorFirst, vectorSecond);
 
             var multiplier = RequestMultiplier();
-            ProgramRunnerHelper.CallActionsWithVectors(vectorFirst, vectorSecond, multiplier, _view);
+            ProgramRunnerHelper.PerformActionsWithVectors(vectorFirst, vectorSecond, multiplier, _view);
 
             _view.Exit();
         }

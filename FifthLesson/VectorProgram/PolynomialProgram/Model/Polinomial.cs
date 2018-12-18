@@ -36,7 +36,7 @@ namespace PolynomialProgram.Model
                 return false;
             }
 
-            var result = Monomials.Keys.All(k => other.Monomials.ContainsKey(k) && Monomials[k].IsEquals(other.Monomials[k]));
+            var result = Monomials.Keys.All(k => other.Monomials.ContainsKey(k) && Monomials[k].IsEqual(other.Monomials[k]));
             return result;
         }
 
@@ -91,7 +91,7 @@ namespace PolynomialProgram.Model
         
         private static string FormatCoefficientForOutput(double coefficient)
         {
-            if (coefficient.IsEquals(1))
+            if (coefficient.IsEqual(1))
             {
                 return string.Empty;
             }
