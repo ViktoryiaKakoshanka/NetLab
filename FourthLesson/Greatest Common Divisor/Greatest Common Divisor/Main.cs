@@ -35,7 +35,7 @@ namespace Greatest_Common_Divisor
             MessageBox.Show(@"Numbers must be integers and separated by spaces. Enter the numbers again.");
         }
 
-        public void ReadUserInputAndWriteResult(string userInput, GcdAlgorithmType algorithmType)
+        public void ReadUserInputAndWriteResult(string userInput, AlgorithmType algorithmType)
         {
             if (ValidateUserInt(userInput))
             {
@@ -52,9 +52,9 @@ namespace Greatest_Common_Divisor
             }
         }
 
-        private void RunAlgorithm(GcdAlgorithmType algorithmType, int[] arrNumbers)
+        private void RunAlgorithm(AlgorithmType algorithmType, int[] arrNumbers)
         {
-            if (algorithmType == GcdAlgorithmType.Euclidean)
+            if (algorithmType == AlgorithmType.Euclidean)
             {
                 RunAlgorithmEuclidean(arrNumbers);
             }
@@ -100,31 +100,31 @@ namespace Greatest_Common_Divisor
         private void GetFormattedResult(int[] numbers)
         {
             var s = new StringBuilder();
-            s.AppendFormat("{0}", "НОД( ");
+            s.AppendFormat("{0}", "GCD( ");
             foreach (var item in numbers)
             {
                 s.AppendFormat("{0} ", item.ToString());
             }
-            s.Append($") = {_result.Gcd}");
-            s.Append(_result.IterationsCount == 0 ? "\n" : $" and number of iterations = {_result.IterationsCount}\n");
+            s.Append($") = {_result.GreatestCommonDivisor}");
+            s.Append(_result.NumberOfIterations == 0 ? "\n" : $" and number of iterations = {_result.NumberOfIterations}\n");
             _formattedResult = s.ToString();
         }
 
         private void AlgorithmEuclideanOnClick(object sender, EventArgs e)
         {
-            ReadUserInputAndWriteResult(numbersForGCD.Text, GcdAlgorithmType.Euclidean);
+            ReadUserInputAndWriteResult(numbersForGCD.Text, AlgorithmType.Euclidean);
             lblresult.Text += PrintResult();
         }
 
         private void AlgorithmStainOnClick(object sender, EventArgs e)
         {
-            ReadUserInputAndWriteResult(numbersForGCD.Text, GcdAlgorithmType.Stain);
+            ReadUserInputAndWriteResult(numbersForGCD.Text, AlgorithmType.Stain);
             lblresult.Text += PrintResult();
         }
 
         private void RunAlgorithmEuclidean(int[] userNumbers)
         {
-            _result = new EuclideanGcdAlgorithm().Calculate(userNumbers);
+            _result = new EuclideanAlgorithm().Calculate(userNumbers);
         }
 
         private void RunAlgorithmStain(int[] userNumbers)

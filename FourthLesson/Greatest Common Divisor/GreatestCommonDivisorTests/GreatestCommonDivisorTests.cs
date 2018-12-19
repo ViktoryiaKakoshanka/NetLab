@@ -24,7 +24,7 @@ namespace GreatestCommonDivisorTests
             var expected = new int[] { 6, 18, 1, 5, 6};
             foreach (var item in arr)
             {
-                actual = new EuclideanGcdAlgorithm().Calculate(item).Gcd;
+                actual = new EuclideanAlgorithm().Calculate(item).GreatestCommonDivisor;
                 Assert.AreEqual(expected[count], actual);
                 count++;
             }
@@ -34,7 +34,7 @@ namespace GreatestCommonDivisorTests
         public void EuclideanGcdAlgorithmTest_30_18_42_returned_6()
         {
             var arr = new[] { 30, 18, 42 };
-            var a = new EuclideanGcdAlgorithm().Calculate(arr).Gcd;
+            var a = new EuclideanAlgorithm().Calculate(arr).GreatestCommonDivisor;
             Assert.AreEqual(6, a);
         }
 
@@ -52,7 +52,7 @@ namespace GreatestCommonDivisorTests
             var expected = new int[] { 6, 18, 1, 5 };
             foreach (var item in arr)
             {
-                actual = new StainGcdAlgorithm().Calculate(item).Gcd;
+                actual = new StainGcdAlgorithm().Calculate(item).GreatestCommonDivisor;
                 Assert.AreEqual(expected[count], actual);
                 count++;
             }
