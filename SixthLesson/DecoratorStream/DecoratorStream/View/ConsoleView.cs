@@ -27,15 +27,15 @@ namespace DecoratorStream.View
             SetCursorPosition(0, Console.CursorTop + 2);
         }
 
-        public void UpdateProgressBar(int countNextSymbols)
+        public void UpdateProgressBar(int currentProgress)
         {
-            for (var position = _currentProgress; position < countNextSymbols; position++)
+            for (var position = _currentProgress; position < currentProgress; position++)
             {
                 SetCursorPosition(position, 3);
                 Console.WriteLine('|');
             }
 
-            _currentProgress = countNextSymbols;
+            _currentProgress = currentProgress;
         }
 
         private static void SetCursorPosition(int left, int top) => Console.SetCursorPosition(left, top);
