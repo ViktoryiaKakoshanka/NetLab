@@ -10,9 +10,9 @@ namespace PolynomialProgram.View
         void ShowSimpleActionsWithPolynomialsResults(
             Polynomial first,
             Polynomial second,
-            Polynomial sumPolynomials,
-            Polynomial differencePolynomials,
-            Polynomial multiplicationPolynomials);
+            Polynomial sumResult,
+            Polynomial differenceResult,
+            Polynomial multiplicationResult);
 
         void ShowMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, Polynomial result);
         void ShowPolynomials(Polynomial first, Polynomial second);

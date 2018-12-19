@@ -17,11 +17,13 @@ namespace PolynomialProgram.Model
             Monomials = monomials;
         }
 
-        public Polynomial(Polynomial polynomial) : this(polynomial.Power, polynomial.Monomials) { }
+        public Polynomial(Polynomial polynomial) : this(polynomial.Power, polynomial.Monomials)
+        {
+        }
 
         public bool Equals(Polynomial other)
         {
-            if (ReferenceEquals(null, other))
+            if (ReferenceEquals(other, null))
             {
                 return false;
             }
@@ -31,48 +33,25 @@ namespace PolynomialProgram.Model
                 return true;
             }
 
-            if (Power != other.Power)
-            {
-                return false;
-            }
-
-            var result = Monomials.Keys.All(k => other.Monomials.ContainsKey(k) && Monomials[k].IsEqual(other.Monomials[k]));
-            return result;
+            return Power == other.Power && Monomials.Keys.All(k => other.Monomials.ContainsKey(k) && Monomials[k].IsEqual(other.Monomials[k]));
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            return GetType() == obj.GetType() && Equals((Polynomial)obj);
+            return Equals(obj as Polynomial);
         }
 
         public override int GetHashCode()
         {
             var firstHashCode = Power.GetHashCode();
-            var secondHashCode = Monomials.Aggregate(0, (current, pair) => current ^ Convert.ToInt32(pair.Value));
+            var secondHashCode = Monomials.Aggregate(0, (current, pair) => current ^ (int)pair.Value);
 
             return unchecked(firstHashCode * 397) ^ secondHashCode;
         }
 
         public override string ToString()
         {
-            var result = string.Empty;
-            for (var key = Power; key >= 0; key--)
-            {
-                if (Monomials.ContainsKey(key))
-                {
-                    result += FormatCoefficientForOutput(Monomials[key]) + FormatPowerForOutput(key);
-                }
-            }
-            return result;
+            return string.Concat(Monomials.Select(GetMonomial).Reverse().ToList());
         }
 
         public static bool operator ==(Polynomial first, Polynomial second) => first != null && first.Equals(second);
@@ -89,6 +68,11 @@ namespace PolynomialProgram.Model
 
         public static Polynomial operator *(double number, Polynomial polynomial) => polynomial * number;
         
+        private static string GetMonomial(KeyValuePair<int, double> pair)
+        {
+            return !pair.Value.IsEqual(0) ? FormatCoefficientForOutput(pair.Value) + FormatPowerForOutput(pair.Key) : string.Empty;
+        }
+
         private static string FormatCoefficientForOutput(double coefficient)
         {
             if (coefficient.IsEqual(1))
@@ -98,15 +82,13 @@ namespace PolynomialProgram.Model
             return coefficient < 0 ? coefficient.ToString(CultureInfo.CurrentCulture) : $"+{coefficient}";
         }
 
-        private static string FormatPowerForOutput(int value)
+        private static string FormatPowerForOutput(int power)
         {
-            if (value == 0)
+            if (power == 0)
             {
                 return string.Empty;
             }
-            return value != 1 ? $"x^{value}" : string.Empty;
+            return power != 1 ? $"x^{power}" : "x";
         }
-
-        
     }
 }

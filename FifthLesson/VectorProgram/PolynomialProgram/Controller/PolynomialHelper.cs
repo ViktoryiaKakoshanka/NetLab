@@ -7,65 +7,27 @@ namespace PolynomialProgram.Controller
 {
     public static class PolynomialHelper
     {
-        private enum Action
-        {
-            Sum,
-            Subtraction
-        }
-
         public static Polynomial Sum(Polynomial first, Polynomial second)
         {
-            return CalculateNewPolynomial(first, second, Action.Sum);
+            return CallPolynomialAction(first, second, (a, b) => a + b);
         }
 
         public static Polynomial Subtract(Polynomial first, Polynomial second)
         {
-            return CalculateNewPolynomial(first, second, Action.Subtraction);
-        }
-
-
-        private static Polynomial CalculateNewPolynomial(Polynomial first, Polynomial second, Action action)
-        {
-            var resultMonomials = new Dictionary<int, double>();
-
-            var maxPower = Math.Max(first.Power, second.Power);
-
-            for (var i = 0; i <= maxPower; i++)
-            {
-                var firstValue = GetCoefficient(first, i);
-                var secondValue = GetCoefficient(second, i);
-
-                var result = action == Action.Sum ? firstValue + secondValue : firstValue - secondValue;
-                resultMonomials.Add(i, result);
-            }
-
-            return new Polynomial(maxPower, resultMonomials);
+            return CallPolynomialAction(first, second, (a, b) => a - b);
         }
 
         public static Polynomial Multiply(Polynomial first, Polynomial second)
         {
             var resultMonomials = new Dictionary<int, double>();
             var resultMaxPower = first.Power + second.Power;
-            var maxPower = Math.Max(first.Power, second.Power);
 
-            for (var i = 0; i <= maxPower; i++)
+            foreach (var firstMonomial in first.Monomials)
             {
-                var firstValue = GetCoefficient(first, i);
-                if (firstValue.IsEqual(0))
+                foreach (var secondMonomial in second.Monomials)
                 {
-                    continue;
-                }
-                
-                for (var j = 0; j <= maxPower; j++)
-                {
-                    var secondValue = GetCoefficient(second, j);
-                    if (secondValue.IsEqual(0))
-                    {
-                        continue;
-                    }
-
-                    var currentValue = firstValue * secondValue;
-                    var currentPower = i + j;
+                    var currentValue = firstMonomial.Value * secondMonomial.Value;
+                    var currentPower = firstMonomial.Key + secondMonomial.Key;
 
                     if (resultMonomials.ContainsKey(currentPower))
                     {
@@ -78,20 +40,27 @@ namespace PolynomialProgram.Controller
                 }
             }
 
+            resultMonomials = resultMonomials.OrderBy(pair => pair.Key).ToDictionary(pair => pair.Key, pair => pair.Value);
             return new Polynomial(resultMaxPower, resultMonomials);
         }
 
         public static Polynomial MultiplyByConstant(Polynomial polynomial, double number)
         {
-            var enumerable = polynomial.Monomials.ToDictionary(pair => pair.Key, pair => pair.Value * number);
-            return new Polynomial(polynomial.Power, enumerable);
+            var monomials = polynomial.Monomials.ToDictionary(pair => pair.Key, pair => pair.Value * number);
+            return new Polynomial(polynomial.Power, monomials);
         }
 
         private static double GetCoefficient(Polynomial first, int i)
         {
-            return first.Monomials.ContainsKey(i) ? first.Monomials[i] : 0;
+            return first.Monomials.ContainsKey(i) ? first.Monomials[i] : 0D;
         }
 
-
+        private static Polynomial CallPolynomialAction(Polynomial first, Polynomial second, Func<double, double, double> action)
+        {
+            var maxPower = Math.Max(first.Power, second.Power);
+            var monomials = Enumerable.Range(0, maxPower + 1).ToDictionary(x => x, x => action(GetCoefficient(first, x), GetCoefficient(second, x)));
+            
+            return new Polynomial(maxPower, monomials);
+        }
     }
 }

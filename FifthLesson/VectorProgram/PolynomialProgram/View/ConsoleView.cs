@@ -29,13 +29,13 @@ namespace PolynomialProgram.View
         public void ShowSimpleActionsWithPolynomialsResults(
             Polynomial first,
             Polynomial second,
-            Polynomial sumPolynomials,
-            Polynomial differencePolynomials,
-            Polynomial multiplicationPolynomials)
+            Polynomial sumResult,
+            Polynomial differenceResult,
+            Polynomial multiplicationResult)
         {
-            Console.WriteLine($"{first} + {second} = {sumPolynomials}");
-            Console.WriteLine($"{first} - {second} = {differencePolynomials}");
-            Console.WriteLine($"{first} * {second} = {multiplicationPolynomials}");
+            Console.WriteLine($"{first} + {second} = {sumResult}");
+            Console.WriteLine($"{first} - {second} = {differenceResult}");
+            Console.WriteLine($"{first} * {second} = {multiplicationResult}");
         }
 
         public void ShowMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, Polynomial result)
