@@ -1,6 +1,5 @@
 ﻿using System;
 using MatrixProject.Controller;
-using MatrixProject.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatrixProjectTests
@@ -8,33 +7,31 @@ namespace MatrixProjectTests
     [TestClass]
     public class MatrixHelperTests
     {
-        private Matrix _first;
-        private Matrix _second;
-        private Matrix _third;
+        private double[,] _first;
+        private double[,] _second;
+        private double[,] _third;
+
 
         [TestInitialize]
         public void TestInitialize()
         {
-            var array = new[,] 
+            _first = new[,] 
             {
                 { 1D, 2D},
                 { 3D, 4D}
             };
-            _first = new Matrix(array, array.GetLength(0), array.GetLength(1));
 
-            array = new[,]
+            _second = new[,]
             {
                 { 1D},
                 { 2D}
             };
-            _second = new Matrix(array, array.GetLength(0), array.GetLength(1));
 
-            array = new[,]
+            _third = new[,]
             {
                 { 1D, 2D },
                 { 3D, 4D }
             };
-            _third = new Matrix(array, array.GetLength(0), array.GetLength(1));
         }
 
         [TestMethod]
@@ -46,7 +43,7 @@ namespace MatrixProjectTests
                 {6.0, 8.0}
             };
 
-            var actual = MatrixHelper.Sum(_first, _third).Array;
+            var actual = _first.AddArray(_third);
             
             Assert.IsTrue(IsEqualsArrays(expected, actual));
         }
@@ -60,7 +57,7 @@ namespace MatrixProjectTests
                 {0D, 0D}
             };
 
-            var actual = MatrixHelper.Subtract(_first, _third).Array;
+            var actual = _first.SubtractArray(_third);
 
             Assert.IsTrue(IsEqualsArrays(expected, actual));
         }
@@ -69,7 +66,7 @@ namespace MatrixProjectTests
         [ExpectedException(typeof(InvalidOperationException))]
         public void SubtractMatrices_InvalidOperationException_Test()
         {
-            var actual = MatrixHelper.Subtract(_first, _second).Array;
+            var actual = _first.SubtractArray(_second);
         }
 
         [TestMethod]
@@ -81,7 +78,7 @@ namespace MatrixProjectTests
                 { 11D }
             };
 
-            var actual = MatrixHelper.Multiply(_first, _second).Array;
+            var actual = _first.MultiplyArray(_second);
 
             Assert.IsTrue(IsEqualsArrays(expected, actual));
         }
@@ -90,16 +87,14 @@ namespace MatrixProjectTests
         [ExpectedException(typeof(InvalidOperationException))]
         public void MultiplyMatrices_InvalidOperationException_Test()
         {
-            var array = new[,]
+            var second = new[,]
             {
                 { 5D },
                 { 5D },
                 { 11D }
             };
 
-            var second = new Matrix(array, 3, 2);
-
-            var actual = MatrixHelper.Multiply(_first, second).Array;
+            var actual = _first.MultiplyArray(second);
         }
 
         private static bool IsEqualsArrays(double[,] firstArray, double[,] secondArray)

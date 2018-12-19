@@ -43,8 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\MatrixHelper.cs" />
-    <Compile Include="Model\Matrix.cs" />
+    <Compile Include="Controller\DoubleExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

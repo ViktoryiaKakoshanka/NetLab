@@ -1,6 +1,5 @@
 ﻿using System;
 using MatrixProject.Controller;
-using MatrixProject.Model;
 using MatrixProject.View;
 
 namespace MatrixProject
@@ -19,30 +18,30 @@ namespace MatrixProject
             var random = new Random();
             var first = InitializeMatrix(random, 2, 2);
             var second = InitializeMatrix(random, 2, 2);
-
+            
             PerformActions(first, second);
         }
 
-        private void PerformActions(Matrix first, Matrix second)
+        private void PerformActions(double[,] first, double[,] second)
         {
             _view.ShowMatrix(first, "first");
             _view.ShowMatrix(second, "second");
-            _view.ShowMatrix(MatrixHelper.Sum(first, second), "Sum");
-            _view.ShowMatrix(MatrixHelper.Subtract(first, second), "Subtract");
-            _view.ShowMatrix(MatrixHelper.Multiply(first, second), "Multiply");
+            _view.ShowMatrix(first.AddArray(second), "Sum");
+            _view.ShowMatrix(first.SubtractArray(second), "Subtract");
+            _view.ShowMatrix(first.MultiplyArray(second), "Multiply");
         }
 
-        private static Matrix InitializeMatrix(Random random,int numberLines, int numberColumns)
+        private static double[,] InitializeMatrix(Random random,int numberLines, int numberColumns)
         {
-            var array = new double[numberLines, numberColumns];
+            var matrix = new double[numberLines, numberColumns];
             for (var i = 0; i < numberLines; i++)
             {
                 for (var j = 0; j < numberColumns; j++)
                 {
-                    array[i, j] = random.NextDouble() * 10;
+                    matrix[i, j] = random.NextDouble() * 10;
                 }
             }
-            return new Matrix(array, numberLines, numberColumns);
+            return matrix;
         }
     }
 }

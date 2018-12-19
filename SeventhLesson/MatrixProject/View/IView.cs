@@ -1,9 +1,7 @@
-﻿using MatrixProject.Model;
-
-namespace MatrixProject.View
+﻿namespace MatrixProject.View
 {
     public interface IView
     {
-        void ShowMatrix(Matrix matrix, string message = null);
+        void ShowMatrix(double[,] matrix, string message = null);
     }
 }
