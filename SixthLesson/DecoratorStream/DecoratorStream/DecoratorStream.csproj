@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Decorators\StreamProgressReaderDecorator.cs" />
+    <Compile Include="Decorators\StreamProgressReportingDecorator.cs" />
     <Compile Include="Decorators\StreamRequestPasswordDecorator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRunner.cs" />

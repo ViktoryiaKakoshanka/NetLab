@@ -34,7 +34,7 @@ namespace DecoratorStream
         private static Stream CreateStream(string filePath, IView view)
         {
             Stream stream = File.OpenRead(filePath);
-            stream = new StreamProgressReaderDecorator(stream, view);
+            stream = new StreamProgressReportingDecorator(stream, view);
 
             return new StreamRequestPasswordDecorator(stream, view);
         }

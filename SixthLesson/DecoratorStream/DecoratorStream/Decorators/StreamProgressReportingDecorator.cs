@@ -4,12 +4,12 @@ using System.IO;
 
 namespace DecoratorStream.Decorators
 {
-    internal class StreamProgressReaderDecorator : StreamBaseDecorator
+    internal class StreamProgressReportingDecorator : StreamBaseDecorator
     {
         public const int CountBytesToRead = 1;
         private readonly IView _view;
 
-        internal StreamProgressReaderDecorator(Stream stream, IView view) : base(stream)
+        internal StreamProgressReportingDecorator(Stream stream, IView view) : base(stream)
         {
             _view = view;
         }
