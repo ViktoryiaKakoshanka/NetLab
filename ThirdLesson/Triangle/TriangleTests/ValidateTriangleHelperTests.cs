@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
-using TriangleLib.Controller;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TriangleLib.Controller;
 
 namespace TriangleTests
 {
@@ -10,11 +12,11 @@ namespace TriangleTests
         [TestMethod]
         public void ValidateTriangle_CorrectTriangle_Test()
         {
-            var firstSide = 1.0;
-            var secondSide = 2.0;
-            var thirdSide = new List<double> { 1.0, 2.0, 3.0 };
+            const double firstEdge = 1.0;
+            const double secondEdge = 2.0;
+            var thirdEdge = new List<double> { 1.0, 2.0, 3.0 };
 
-            var actual = thirdSide.All(x => Validator.ValidateTriangle(firstSide, secondSide, x));
+            var actual = thirdEdge.All(x => Validator.ValidateTriangle(firstEdge, secondEdge, x));
 
             Assert.IsTrue(actual);
         }

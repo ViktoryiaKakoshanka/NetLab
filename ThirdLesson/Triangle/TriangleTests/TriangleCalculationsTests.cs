@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TriangleLib.Model;
 using TriangleLib.Controller;
+using TriangleLib.Model;
 
 namespace TriangleTests
 {
