@@ -43,9 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\DoubleExtensions.cs" />
+    <Compile Include="Controller\DoubleMatrixExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramRunner.cs" />
+    <Compile Include="ProgramRunnerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleView.cs" />
     <Compile Include="View\IView.cs" />

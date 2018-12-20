@@ -39,11 +39,11 @@ namespace MatrixProjectTests
         {
             var expected = new[,]
             {
-                {2.0, 4.0},
-                {6.0, 8.0}
+                {2D, 4D},
+                {6D, 8D}
             };
 
-            var actual = _first.AddArray(_third);
+            var actual = _first.AddMatrix(_third);
             
             Assert.IsTrue(IsEqualsArrays(expected, actual));
         }
@@ -57,7 +57,7 @@ namespace MatrixProjectTests
                 {0D, 0D}
             };
 
-            var actual = _first.SubtractArray(_third);
+            var actual = _first.SubtractMatrix(_third);
 
             Assert.IsTrue(IsEqualsArrays(expected, actual));
         }
@@ -66,7 +66,7 @@ namespace MatrixProjectTests
         [ExpectedException(typeof(InvalidOperationException))]
         public void SubtractMatrices_InvalidOperationException_Test()
         {
-            var actual = _first.SubtractArray(_second);
+            var actual = _first.SubtractMatrix(_second);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace MatrixProjectTests
                 { 11D }
             };
 
-            var actual = _first.MultiplyArray(_second);
+            var actual = _first.MultiplyByMatrix(_second);
 
             Assert.IsTrue(IsEqualsArrays(expected, actual));
         }
@@ -94,7 +94,7 @@ namespace MatrixProjectTests
                 { 11D }
             };
 
-            var actual = _first.MultiplyArray(second);
+            var actual = _first.MultiplyByMatrix(second);
         }
 
         private static bool IsEqualsArrays(double[,] firstArray, double[,] secondArray)

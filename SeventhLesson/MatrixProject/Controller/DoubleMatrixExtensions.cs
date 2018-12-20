@@ -2,34 +2,23 @@
 
 namespace MatrixProject.Controller
 {
-    public static class DoubleExtensions
+    public static class DoubleMatrixExtensions
     {
-        public static double[,] AddArray(this double[,] first, double[,] second)
+        public static double[,] AddMatrix(this double[,] first, double[,] second)
         {
-            if (!IsCorrectForSimpleActions(first, second))
-            {
-                throw new InvalidOperationException("Matrices must be the same size.");
-            }
+            VerifyPossibilityOfSummation(first, second);
             return ExecuteSimpleAction(first, second, (a, b) => a + b);
         }
 
-        public static double[,] SubtractArray(this double[,] first, double[,] second)
+        public static double[,] SubtractMatrix(this double[,] first, double[,] second)
         {
-            if (!IsCorrectForSimpleActions(first, second))
-            {
-                throw new InvalidOperationException("Matrices must be the same size.");
-            }
+            VerifyPossibilityOfSummation(first, second);
             return ExecuteSimpleAction(first, second, (a, b) => a - b);
         }
 
-        public static double[,] MultiplyArray(this double[,] first, double[,] second)
+        public static double[,] MultiplyByMatrix(this double[,] first, double[,] second)
         {
-            if (!IsCorrectForMultiply(first, second))
-            {
-                throw new InvalidOperationException(
-                    "Multiplication is not calculated. The number of columns of the first matrix must be equal to the number of rows of another matrix.");
-            }
-
+            VerifyPossibilityOfMultiplication(first, second);
             var matrix = new double[second.GetLength(0), second.GetLength(1)];
 
             for (var k = 0; k < second.GetLength(1); k++)
@@ -46,14 +35,22 @@ namespace MatrixProject.Controller
             return matrix;
         }
 
-        private static bool IsCorrectForSimpleActions(double[,] first, double[,] second)
+        private static void VerifyPossibilityOfSummation(double[,] first, double[,] second)
         {
-            return first.GetLength(0) == second.GetLength(0) && first.GetLength(1) == second.GetLength(1);
+            if (first.GetLength(0) != second.GetLength(0) && 
+                first.GetLength(1) != second.GetLength(1))
+            {
+                throw new InvalidOperationException("Matrices must be the same size.");
+            }
         }
-
-        private static bool IsCorrectForMultiply(double[,] first, double[,] second)
+        
+        private static void VerifyPossibilityOfMultiplication(double[,] first, double[,] second)
         {
-            return first.GetLength(1) == second.GetLength(0);
+            if (first.GetLength(1) != second.GetLength(0))
+            {
+                throw new InvalidOperationException(
+                    "Multiplication is not calculated. The number of columns of the first matrix must be equal to the number of rows of another matrix.");
+            }
         }
 
         private static double[,] ExecuteSimpleAction(double[,] first, double[,] second, Func<double, double, double> action)
