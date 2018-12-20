@@ -8,7 +8,7 @@ namespace PolynomialProgram.Model
 {
     public class Polynomial : IEquatable<Polynomial>
     {
-        public int Power { get; }
+        public int Power { get; private set; }
         public IDictionary<int, double> Monomials { get; }
 
         public Polynomial(int power, IDictionary<int, double> monomials)
@@ -16,11 +16,7 @@ namespace PolynomialProgram.Model
             Power = power;
             Monomials = monomials;
         }
-
-        public Polynomial(Polynomial polynomial) : this(polynomial.Power, polynomial.Monomials)
-        {
-        }
-
+        
         public bool Equals(Polynomial other)
         {
             if (ReferenceEquals(other, null))
@@ -51,7 +47,7 @@ namespace PolynomialProgram.Model
 
         public override string ToString()
         {
-            return string.Concat(Monomials.Select(GetMonomial).Reverse().ToList());
+            return String.Concat(Monomials.Select(GetMonomial).Reverse().ToList());
         }
 
         public static bool operator ==(Polynomial first, Polynomial second) => first != null && first.Equals(second);
@@ -67,17 +63,32 @@ namespace PolynomialProgram.Model
         public static Polynomial operator *(Polynomial polynomial, double number) => PolynomialHelper.MultiplyByConstant(polynomial, number);
 
         public static Polynomial operator *(double number, Polynomial polynomial) => polynomial * number;
-        
+
+        public Polynomial ImprovePolynomial()
+        {
+            foreach (var keyValuePair in Monomials.OrderByDescending(x => x.Key))
+            {
+                if (!keyValuePair.Value.IsEqual(0))
+                {
+                    break;
+                }
+                Monomials.Remove(keyValuePair);
+                Power--;
+            }
+
+            return this;
+        }
+
         private static string GetMonomial(KeyValuePair<int, double> pair)
         {
-            return !pair.Value.IsEqual(0) ? FormatCoefficientForOutput(pair.Value) + FormatPowerForOutput(pair.Key) : string.Empty;
+            return !pair.Value.IsEqual(0) ? FormatCoefficientForOutput(pair.Value) + FormatPowerForOutput(pair.Key) : String.Empty;
         }
 
         private static string FormatCoefficientForOutput(double coefficient)
         {
             if (coefficient.IsEqual(1))
             {
-                return string.Empty;
+                return String.Empty;
             }
             return coefficient < 0 ? coefficient.ToString(CultureInfo.CurrentCulture) : $"+{coefficient}";
         }
@@ -86,7 +97,7 @@ namespace PolynomialProgram.Model
         {
             if (power == 0)
             {
-                return string.Empty;
+                return String.Empty;
             }
             return power != 1 ? $"x^{power}" : "x";
         }

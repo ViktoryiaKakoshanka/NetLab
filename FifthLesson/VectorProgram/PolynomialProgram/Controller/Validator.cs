@@ -10,7 +10,7 @@ namespace PolynomialProgram.Controller
         {
             {DataType.Multiplier, @"\d+\[.,]\d+|\d+" },
             {DataType.Vector, @"^\d+\[.,]\d+|\d+ \d+\[.,]\d+|\d+ \d+\[.,]\d+|\d+$" },
-            {DataType.Power, @"\d+$" },
+            {DataType.Power, @"[1-9]+$" },
             {DataType.Monomial, @"\d+\[.,]\d+|\d+" },
         };
 

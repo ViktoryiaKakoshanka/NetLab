@@ -11,7 +11,7 @@ namespace VectorProgram.View
             Console.ReadKey(true);
         }
 
-        public string ReadLine(string message)
+        public string ReadInput(string message)
         {
             Console.WriteLine(message);
             return Console.ReadLine();

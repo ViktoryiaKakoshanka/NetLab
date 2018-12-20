@@ -1,7 +1,7 @@
 ﻿using System;
 using VectorProgram.Model;
 
-namespace VectorProgram.Controller
+namespace VectorProgram
 {
     public static class VectorHelper
     {

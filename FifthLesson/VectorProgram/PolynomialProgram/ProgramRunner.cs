@@ -19,7 +19,7 @@ namespace PolynomialProgram
         {
             var firstPolynomial = RequestPolynomial();
             var secondPolynomial = RequestPolynomial();
-
+            
             _view.ShowPolynomials(firstPolynomial, secondPolynomial);
 
             ProgramRunnerHelper.PerformSimpleActionsWithPolynomials(firstPolynomial, secondPolynomial, _view);
@@ -32,9 +32,7 @@ namespace PolynomialProgram
         private Polynomial RequestPolynomial()
         {
             var power = RequestPower();
-            var monomial = power != 0 ? RequestMonomials(power) : null;
-
-            return new Polynomial(power, monomial);
+            return new Polynomial(power, RequestMonomials(power));
         }
 
         private int RequestPower()
@@ -52,16 +50,13 @@ namespace PolynomialProgram
         private IDictionary<int, double> RequestMonomials(int power)
         {
             var resultMonomials = new Dictionary<int, double>();
-
-            for (var i = power; i >= 1; i--)
+            
+            for (var i = power; i >= 0; i--)
             {
                 var userInput = RequestInput(DataType.Monomial, $"Enter monomial in {i} power:");
                 var currentMonomial = DataParser.ParseDouble(userInput);
-                
-                if ((int)currentMonomial != 0)
-                {
-                    resultMonomials.Add(i, currentMonomial);
-                }
+
+                resultMonomials.Add(i, currentMonomial);
             }
 
             return resultMonomials;
@@ -69,15 +64,13 @@ namespace PolynomialProgram
 
         private string RequestInput(DataType dataType, string welcomeMessage)
         {
-            var userInput = string.Empty;
-            var isUserInputCorrect = false;
+            string userInput;
 
-            while (!isUserInputCorrect)
+            do
             {
                 userInput = _view.ReadLine(welcomeMessage);
-                isUserInputCorrect = ValidateUserInput(dataType, userInput);
-            }
-
+            } while (!ValidateUserInput(dataType, userInput));
+            
             return userInput;
         }
 

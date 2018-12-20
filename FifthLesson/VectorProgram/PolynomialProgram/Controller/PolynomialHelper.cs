@@ -9,12 +9,12 @@ namespace PolynomialProgram.Controller
     {
         public static Polynomial Sum(Polynomial first, Polynomial second)
         {
-            return CallPolynomialAction(first, second, (a, b) => a + b);
+            return CallPolynomialSum(first, second, (a, b) => a + b);
         }
 
         public static Polynomial Subtract(Polynomial first, Polynomial second)
         {
-            return CallPolynomialAction(first, second, (a, b) => a - b);
+            return CallPolynomialSum(first, second, (a, b) => a - b);
         }
 
         public static Polynomial Multiply(Polynomial first, Polynomial second)
@@ -41,26 +41,26 @@ namespace PolynomialProgram.Controller
             }
 
             resultMonomials = resultMonomials.OrderBy(pair => pair.Key).ToDictionary(pair => pair.Key, pair => pair.Value);
-            return new Polynomial(resultMaxPower, resultMonomials);
+            return new Polynomial(resultMaxPower, resultMonomials).ImprovePolynomial();
         }
 
         public static Polynomial MultiplyByConstant(Polynomial polynomial, double number)
         {
             var monomials = polynomial.Monomials.ToDictionary(pair => pair.Key, pair => pair.Value * number);
-            return new Polynomial(polynomial.Power, monomials);
+            return new Polynomial(polynomial.Power, monomials).ImprovePolynomial();
         }
-
+        
         private static double GetCoefficient(Polynomial first, int i)
         {
             return first.Monomials.ContainsKey(i) ? first.Monomials[i] : 0D;
         }
 
-        private static Polynomial CallPolynomialAction(Polynomial first, Polynomial second, Func<double, double, double> action)
+        private static Polynomial CallPolynomialSum(Polynomial first, Polynomial second, Func<double, double, double> sum)
         {
             var maxPower = Math.Max(first.Power, second.Power);
-            var monomials = Enumerable.Range(0, maxPower + 1).ToDictionary(x => x, x => action(GetCoefficient(first, x), GetCoefficient(second, x)));
+            var monomials = Enumerable.Range(0, maxPower + 1).ToDictionary(x => x, x => sum(GetCoefficient(first, x), GetCoefficient(second, x)));
             
-            return new Polynomial(maxPower, monomials);
+            return new Polynomial(maxPower, monomials).ImprovePolynomial();
         }
     }
 }

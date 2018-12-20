@@ -47,14 +47,12 @@ namespace VectorProgram
 
         private string RequestInput(DataType dataType, string welcomeMessage)
         {
-            var userInput = string.Empty;
-            var isUserInputCorrect = false;
+            string userInput;
 
-            while (!isUserInputCorrect)
+            do
             {
-                userInput = _view.ReadLine(welcomeMessage);
-                isUserInputCorrect = ValidateUserInput(dataType, userInput);
-            }
+                userInput = _view.ReadInput(welcomeMessage);
+            } while (ValidateUserInput(dataType, userInput));
 
             return userInput;
         }
@@ -62,7 +60,10 @@ namespace VectorProgram
         private bool ValidateUserInput(DataType dataType, string userInput)
         {
             var isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
-            if (!isUserInputCorrect) _view.ShowErrorMessage();
+            if (!isUserInputCorrect)
+            {
+                _view.ShowErrorMessage();
+            }
 
             return isUserInputCorrect;
         }

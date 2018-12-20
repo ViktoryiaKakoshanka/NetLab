@@ -1,6 +1,5 @@
 ﻿using VectorProgram.Model;
 using VectorProgram.View;
-using VectorProgram.Controller;
 
 namespace VectorProgram
 {

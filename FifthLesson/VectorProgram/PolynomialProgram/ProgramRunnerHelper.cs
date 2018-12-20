@@ -5,7 +5,6 @@ namespace PolynomialProgram
 {
     internal static class ProgramRunnerHelper
     {
-
         public static void PerformSimpleActionsWithPolynomials(Polynomial first, Polynomial second, IView view)
         {
             var sumResult = first + second;

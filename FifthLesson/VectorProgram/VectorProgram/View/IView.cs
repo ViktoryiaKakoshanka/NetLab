@@ -5,7 +5,7 @@ namespace VectorProgram.View
     public interface IView
     {
         void Exit();
-        string ReadLine(string message);
+        string ReadInput(string message);
         void ShowErrorMessage();
         void ShowVectors(Vector first, Vector second);
         void ShowSimpleActionsWithVectorsResults(Vector first, Vector second, Vector sumResult, Vector differenceResult);
