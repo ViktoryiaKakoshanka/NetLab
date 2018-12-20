@@ -3,9 +3,9 @@ using System;
 
 namespace BinaryConverting.View
 {
-    public class ConsoleView : IConsoleView, IConvertingView
+    public class ConsoleView : IView
     {
-        public string ReadLine(string message)
+        public string ReadInput(string message)
         {
             WriteLine(message);
             return Console.ReadLine();
@@ -20,7 +20,7 @@ namespace BinaryConverting.View
             WaitForAnyKeyPress();
         }
 
-        public void ShowWarningMessageForRepeat(string messEx = null)
+        public void ShowWarningMessage(string messEx = null)
         {
             Clear();
             WriteLine($"{messEx} You must repeat the value entry. ");

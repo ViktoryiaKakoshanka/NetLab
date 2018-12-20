@@ -5,16 +5,14 @@ using System;
 
 namespace BinaryConverting
 {
-    class MainLaunchProgram
+    internal class ProgramRunner
     {
-        readonly INumbers _number = new Numbers();
-        private readonly IConsoleView _consoleView;
-        private readonly IConvertingView _convertingView;
+        private readonly INumbers _number = new Numbers();
+        private readonly IView _view;
 
-        public MainLaunchProgram(ConsoleView consoleView)
+        public ProgramRunner(IView view)
         {
-            _consoleView = consoleView;
-            _convertingView = consoleView;
+            _view = view;
         }
 
         public void RunProgram()
@@ -23,7 +21,6 @@ namespace BinaryConverting
             RequestDecimalNumber();
 
             conversionNumeric.ConvertDecimalToBinary(_number);
-            _convertingView.ShowResultByConversion(_number);
         }
 
         private void RequestDecimalNumber()
@@ -36,20 +33,20 @@ namespace BinaryConverting
 
                     if (_number.DecimalNumber <= 0)
                     {
-                        _convertingView.ShowWarningMessageForRepeat("Number is <= 0.");
+                        _view.ShowWarningMessage("Number is <= 0.");
                         continue;
                     }
                 }
                 catch (FormatException)
                 {
                     _number.DecimalNumber = 0;
-                    _convertingView.ShowMessageFormatException();
+                    _view.ShowMessageFormatException();
                     continue;
                 }
                 catch (ArgumentNullException)
                 {
                     _number.DecimalNumber = 0;
-                    _convertingView.ShowMessageArgumentNullException();
+                    _view.ShowMessageArgumentNullException();
                     continue;
                 }
                 break;
@@ -58,9 +55,8 @@ namespace BinaryConverting
 
         private void ParseUserInput()
         {
-            var input = _consoleView.ReadLine("Enter a non-negative decimal integer.");
+            var input = _view.ReadInput("Enter a non-negative decimal integer.");
             _number.DecimalNumber = Convert.ToInt32(input);
         }
-
     }
 }
