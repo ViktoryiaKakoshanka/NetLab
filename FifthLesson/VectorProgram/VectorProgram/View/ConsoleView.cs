@@ -43,12 +43,11 @@ namespace VectorProgram.View
             Console.WriteLine($"Vector product: {first} x {second} = {result}\n");
         }
 
-        public void ShowProductVectorsByConstantResults(Vector first, Vector second, Vector resultNumberRight, Vector resultNumberLeft, double multiplier)
+        public void ShowProductVectorsByConstantResults(Vector first, Vector result, double multiplier)
         {
             Console.WriteLine("Multiplication of vectors by number:");
 
-            Console.WriteLine($"{first} * {multiplier} = {resultNumberRight}\n");
-            Console.WriteLine($"{multiplier} * {first} = {resultNumberLeft}");
+            Console.WriteLine($"{first} * {multiplier} = {result}\n");
         }
 
         public void ShowVectorsComparisonResults(Vector first, Vector second, bool equalityResult, bool inequalityResult)

@@ -1,5 +1,6 @@
 ﻿using VectorProgram.Model;
 using VectorProgram.View;
+using VectorProgram.Controller;
 
 namespace VectorProgram
 {
@@ -25,20 +26,19 @@ namespace VectorProgram
 
         public static void ExecuteVectorProduct(Vector first, Vector second, IView view)
         {
-            var vectorMultiplicationResult = Vector.CalculateVectorProduct(first, second);
+            var vectorMultiplicationResult = VectorHelper.CalculateVectorProduct(first, second);
             view.ShowVectorProductResult(first, second, vectorMultiplicationResult);
         }
 
         public static void ExecuteMultiplyVectorByConstant(Vector first, Vector second, double multiplier, IView view)
         {
-            var right = first * multiplier;
-            var left = multiplier * first;
-            view.ShowProductVectorsByConstantResults(first, second, right, left, multiplier);
+            var result = first * multiplier;
+            view.ShowProductVectorsByConstantResults(first, result, multiplier);
         }
 
         public static void ExecuteScalarProduct(Vector first, Vector second, IView view)
         {
-            var multiplicationResult = Vector.CalculateScalarProduct(first, second);
+            var multiplicationResult = VectorHelper.CalculateScalarProduct(first, second);
             view.ShowScalarProductResult(first, second, multiplicationResult);
         }
 
@@ -51,7 +51,7 @@ namespace VectorProgram
 
         public static void ExecuteCalculatingAngleBetweenVectors(Vector first, Vector second, IView view)
         {
-            var angle = Vector.CalculateAngle(first, second);
+            var angle = VectorHelper.CalculateAngle(first, second);
             view.ShowAngleBetweenVectorsResult(first, second, angle);
         }
     }

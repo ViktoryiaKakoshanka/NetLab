@@ -11,7 +11,7 @@ namespace VectorProgram.View
         void ShowSimpleActionsWithVectorsResults(Vector first, Vector second, Vector sumResult, Vector differenceResult);
         void ShowScalarProductResult(Vector first, Vector second, double result);
         void ShowVectorProductResult(Vector first, Vector second, Vector result);
-        void ShowProductVectorsByConstantResults(Vector first, Vector second, Vector resultNumberRight, Vector resultNumberLeft, double multiplier);
+        void ShowProductVectorsByConstantResults(Vector first, Vector result, double multiplier);
         void ShowVectorsComparisonResults(Vector first, Vector second, bool equalityResult, bool inequalityResult);
         void ShowAngleBetweenVectorsResult(Vector first, Vector second, double angle);
     }
