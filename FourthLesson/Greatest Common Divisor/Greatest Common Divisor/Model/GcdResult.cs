@@ -12,12 +12,7 @@ namespace Greatest_Common_Divisor.Model
         {
             _calculationHistory.Add(step, new[] { firstNumber, secondNumber });
         }
-
-        public void ClearCalculationHistory()
-        {
-            _calculationHistory.Clear();
-        }
-
+        
         public IDictionary<int, int[]> GetCalculationHistory()
         {
             return _calculationHistory;
