@@ -1,5 +1,5 @@
 ﻿using System;
-using PolynomialProgram.Controller;
+using PolynomialProgram.Helpers;
 
 namespace VectorProgram.Model
 {
@@ -16,10 +16,6 @@ namespace VectorProgram.Model
             Z = z;
         }
 
-        public Vector(Vector vector) : this(vector.X, vector.Y, vector.Z)
-        {
-        }
-                
         public override string ToString() => $"({X}, {Y}, {Z})";
 
         public override int GetHashCode()

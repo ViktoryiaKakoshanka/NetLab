@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using PolynomialProgram.Model;
 
-namespace PolynomialProgram.Controller
+namespace PolynomialProgram
 {
     public static class Validator
     {

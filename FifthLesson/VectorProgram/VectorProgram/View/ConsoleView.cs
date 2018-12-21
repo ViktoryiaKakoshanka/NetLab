@@ -11,7 +11,7 @@ namespace VectorProgram.View
             Console.ReadKey(true);
         }
 
-        public string ReadInput(string message)
+        public string RequestInput(string message)
         {
             Console.WriteLine(message);
             return Console.ReadLine();
@@ -26,31 +26,31 @@ namespace VectorProgram.View
             Console.WriteLine(second.ToString());
         }
 
-        public void ShowSimpleActionsWithVectorsResults(Vector first, Vector second, Vector sumResult, Vector differenceResult)
+        public void ShowResultsOfVectorSum(Vector first, Vector second, Vector sumResult, Vector differenceResult)
         {
             Console.WriteLine("Actions with vectors:");
             Console.WriteLine($"{first} + {second} = {sumResult}");
             Console.WriteLine($"{first} - {second} = {differenceResult}");
         }
 
-        public void ShowScalarProductResult(Vector first, Vector second, double result)
+        public void ShowResultOfScalarProduct(Vector first, Vector second, double result)
         {
             Console.WriteLine($"Scalar product: {first} * {second} = {result}\n");
         }
 
-        public void ShowVectorProductResult(Vector first, Vector second, Vector result)
+        public void ShowResultOfVectorProduct(Vector first, Vector second, Vector result)
         {
             Console.WriteLine($"Vector product: {first} x {second} = {result}\n");
         }
 
-        public void ShowProductVectorsByConstantResults(Vector first, Vector result, double multiplier)
+        public void ShowResultOfProductVectorsByConstant(Vector first, Vector result, double multiplier)
         {
             Console.WriteLine("Multiplication of vectors by number:");
 
             Console.WriteLine($"{first} * {multiplier} = {result}\n");
         }
 
-        public void ShowVectorsComparisonResults(Vector first, Vector second, bool equalityResult, bool inequalityResult)
+        public void ShowResultsOfVectorsComparison(Vector first, Vector second, bool equalityResult, bool inequalityResult)
         {
             Console.WriteLine("Compare vectors:");
             Console.WriteLine($"{first} == {second} = {equalityResult}");
@@ -58,7 +58,7 @@ namespace VectorProgram.View
             Console.WriteLine(string.Empty);
         }
 
-        public void ShowAngleBetweenVectorsResult(Vector first, Vector second, double angle)
+        public void ShowAngleBetweenVectors(Vector first, Vector second, double angle)
         {
             Console.WriteLine($"The angle between {first} and {second} = {Math.Abs(angle)}");
             Console.WriteLine(string.Empty);
