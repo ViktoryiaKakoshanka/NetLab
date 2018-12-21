@@ -6,7 +6,6 @@ namespace Greatest_Common_Divisor.Model
     {
         public int GreatestCommonDivisor { get; set; }
         public int NumberOfIterations { get; set; }
-
         private readonly IDictionary<int, int[]> _calculationHistory = new Dictionary<int, int[]>();
 
         public void AddCalculationHistory(int firstNumber, int secondNumber, int step)
