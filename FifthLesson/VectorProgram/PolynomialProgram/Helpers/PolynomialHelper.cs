@@ -47,7 +47,7 @@ namespace PolynomialProgram.Helpers
         public static Polynomial MultiplyByConstant(Polynomial polynomial, double number)
         {
             var monomials = polynomial.Monomials.ToDictionary(pair => pair.Key, pair => pair.Value * number);
-            return new Polynomial(polynomial.Power, monomials).CorrectPolynomial();
+            return new Polynomial(polynomial.Power, monomials);
         }
         
         private static double GetCoefficient(Polynomial first, int i)
