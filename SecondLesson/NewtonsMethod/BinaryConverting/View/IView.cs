@@ -4,10 +4,9 @@ namespace BinaryConverting.View
 {
     public interface IView
     {
-        string ReadInput(string message);
+        string RequestInput(string message);
         void ShowResultByConversion(INumbers number);
         void ShowWarningMessage(string messEx = null);
         void ShowMessageFormatException();
-        void ShowMessageArgumentNullException();
     }
 }

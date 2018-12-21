@@ -5,35 +5,27 @@ namespace BinaryConverting.View
 {
     public class ConsoleView : IView
     {
-        public string ReadInput(string message)
+        public string RequestInput(string message)
         {
-            WriteLine(message);
+            Console.WriteLine(message);
             return Console.ReadLine();
         }
         
         public void ShowResultByConversion(INumbers number)
         {
-            WriteLine("Result:");
-            WriteLine($"Decimal number:{number.DecimalNumber}");
-            WriteLine($"Binary number:{number.BinaryNumber}");
+            Console.WriteLine("Result:");
+            Console.WriteLine($"Decimal number: {number.DecimalNumber}");
+            Console.WriteLine($"Binary number: {number.BinaryNumber}");
 
-            WaitForAnyKeyPress();
+            Console.ReadKey(true);
         }
 
         public void ShowWarningMessage(string messEx = null)
         {
-            Clear();
-            WriteLine($"{messEx} You must repeat the value entry. ");
+            Console.Clear();
+            Console.WriteLine($"{messEx} You must repeat the value entry. ");
         }
 
-        public void ShowMessageFormatException() => WriteLine("Invalid format entered.");
-
-        public void ShowMessageArgumentNullException() => WriteLine("The value entered is empty.");
-
-        private static void WriteLine(string text) => Console.WriteLine(text);
-
-        private static void WaitForAnyKeyPress() => Console.ReadKey(true);
-
-        private static void Clear() => Console.Clear();
+        public void ShowMessageFormatException() => Console.WriteLine("Invalid format entered.");
     }
 }

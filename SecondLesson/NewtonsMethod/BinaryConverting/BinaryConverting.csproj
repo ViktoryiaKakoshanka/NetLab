@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\ConversionNumber.cs" />
+    <Compile Include="Helpers\NumberEnstensions.cs" />
     <Compile Include="ProgramRunner.cs" />
     <Compile Include="Model\INumbers.cs" />
     <Compile Include="Model\Numbers.cs" />
