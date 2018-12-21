@@ -7,7 +7,7 @@ namespace TriangleLib.View
     {
         private const int Digits = 3;
 
-        public string ReadInput(string welcomeMessage)
+        public string RequestInput(string welcomeMessage)
         {
             Console.WriteLine(welcomeMessage);
             return Console.ReadLine();

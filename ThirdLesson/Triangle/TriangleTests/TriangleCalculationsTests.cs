@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TriangleLib.Controller;
+using TriangleLib.Helpers;
 using TriangleLib.Model;
 
 namespace TriangleTests
@@ -21,7 +21,7 @@ namespace TriangleTests
         {
             const int expected = 5;
 
-            var actual = TriangleCalculations.CalculatePerimeter(_triangle);
+            var actual = TriangleHelper.CalculatePerimeter(_triangle);
 
             Assert.AreEqual(expected, actual, $"Perimeter: expected={expected}, actual={actual}");
         }
@@ -31,7 +31,7 @@ namespace TriangleTests
         {
             const double expected = 0.968246;
 
-            var actual = TriangleCalculations.CalculateArea(_triangle);
+            var actual = TriangleHelper.CalculateArea(_triangle);
 
             Assert.AreEqual(expected, Math.Round(actual, 6), $"Area: expected={expected}, actual={Math.Round(actual, 6)}");
         }

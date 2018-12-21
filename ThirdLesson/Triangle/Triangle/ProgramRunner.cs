@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using TriangleLib.Controller;
+using TriangleLib.Helpers;
 using TriangleLib.View;
 using TriangleLib.Model;
 
@@ -41,8 +41,8 @@ namespace TriangleLib
         {
             if(triangle != null)
             {
-                var perimeter = TriangleCalculations.CalculatePerimeter(triangle);
-                var area = TriangleCalculations.CalculateArea(triangle);
+                var perimeter = TriangleHelper.CalculatePerimeter(triangle);
+                var area = TriangleHelper.CalculateArea(triangle);
                 _view.ShowTriangleDetails(triangle, perimeter, area);
             }
             else
@@ -58,7 +58,7 @@ namespace TriangleLib
 
             do
             {
-                userInput = _view.ReadInput($"Enter the value of {sideNumber} edge");
+                userInput = _view.RequestInput($"Enter the value of {sideNumber} edge");
                 
             } while (!double.TryParse(userInput, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out edge) && edge <= 0);
 

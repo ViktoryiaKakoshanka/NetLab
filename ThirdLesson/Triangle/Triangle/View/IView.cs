@@ -4,7 +4,7 @@ namespace TriangleLib.View
 {
     public interface IConsoleView
     {
-        string ReadInput(string welcomeMessage);
+        string RequestInput(string welcomeMessage);
         void Exit();
         void ShowTriangleDetails(Triangle triangle, double perimeter, double area);
         void ShowMessageTriangleDoesNotExist();

@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\TriangleCalculations.cs" />
-    <Compile Include="Controller\Validaor.cs" />
+    <Compile Include="Helpers\TriangleHelper.cs" />
+    <Compile Include="Helpers\Validaor.cs" />
     <Compile Include="Model\Triangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
