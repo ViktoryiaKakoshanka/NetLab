@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MatrixProject
+namespace MatrixProject.Helpers
 {
     public static class ProgramRunnerHelper
     {

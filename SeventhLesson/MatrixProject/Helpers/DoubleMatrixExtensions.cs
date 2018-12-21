@@ -1,24 +1,24 @@
 ﻿using System;
 
-namespace MatrixProject.Controller
+namespace MatrixProject.Helpers
 {
     public static class DoubleMatrixExtensions
     {
         public static double[,] AddMatrix(this double[,] first, double[,] second)
         {
-            VerifyPossibilityOfSummation(first, second);
+            CanSum(first, second);
             return ExecuteSimpleAction(first, second, (a, b) => a + b);
         }
 
         public static double[,] SubtractMatrix(this double[,] first, double[,] second)
         {
-            VerifyPossibilityOfSummation(first, second);
+            CanSum(first, second);
             return ExecuteSimpleAction(first, second, (a, b) => a - b);
         }
 
         public static double[,] MultiplyByMatrix(this double[,] first, double[,] second)
         {
-            VerifyPossibilityOfMultiplication(first, second);
+            CanMultiply(first, second);
             var matrix = new double[second.GetLength(0), second.GetLength(1)];
 
             for (var k = 0; k < second.GetLength(1); k++)
@@ -35,16 +35,16 @@ namespace MatrixProject.Controller
             return matrix;
         }
 
-        private static void VerifyPossibilityOfSummation(double[,] first, double[,] second)
+        private static void CanSum(double[,] first, double[,] second)
         {
-            if (first.GetLength(0) != second.GetLength(0) && 
+            if (first.GetLength(0) != second.GetLength(0) || 
                 first.GetLength(1) != second.GetLength(1))
             {
                 throw new InvalidOperationException("Matrices must be the same size.");
             }
         }
         
-        private static void VerifyPossibilityOfMultiplication(double[,] first, double[,] second)
+        private static void CanMultiply(double[,] first, double[,] second)
         {
             if (first.GetLength(1) != second.GetLength(0))
             {

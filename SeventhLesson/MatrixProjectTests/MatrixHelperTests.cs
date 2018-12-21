@@ -1,5 +1,5 @@
 ﻿using System;
-using MatrixProject.Controller;
+using MatrixProject.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatrixProjectTests
