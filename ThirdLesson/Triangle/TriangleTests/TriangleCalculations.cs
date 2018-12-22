@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using TriangleLib.Model;
 using TriangleLib.Controller;
 
@@ -11,10 +8,17 @@ namespace TriangleTests
     [TestClass]
     public class TriangleCalculationsTests
     {
-        [TestMethod]
-        public void CalculateThePerimeterTest_returned_PerimeterTriangle()
+        TriangleLib triangle;
+
+        [TestInitialize]
+        public void TestInitialize()
         {
-            var triangle = new Triangle(1, 2, 2);
+            triangle = new TriangleLib(1, 2, 2);
+        }
+
+        [TestMethod]
+        public void CalculateThePerimeter_returnNewNumber_Test()
+        {
             var expected = 5;
 
             var actual = TriangleCalculations.CalculateThePerimeter(triangle);
@@ -24,9 +28,8 @@ namespace TriangleTests
         }
 
         [TestMethod]
-        public void CalculateTheArea_returned_AreaTriangle()
+        public void CalculateTheArea_returnNewNumber_Test()
         {
-            var triangle = new Triangle(1, 2, 2);
             var expected = 0.968246;
 
             var actual = TriangleCalculations.CalculateTheArea(triangle);

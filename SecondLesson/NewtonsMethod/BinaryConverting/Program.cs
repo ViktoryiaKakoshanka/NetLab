@@ -4,11 +4,10 @@ namespace BinaryConverting
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            var mainLaunchProgram = new MainLaunchProgram();
-            var consoleView = new ConsoleView();
-            mainLaunchProgram.RunProgram(consoleView);
+            var mainLaunchProgram = new MainLaunchProgram(new ConsoleView());
+            mainLaunchProgram.RunProgram();
         }
     }
 }

@@ -1,99 +1,140 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using PolynomialProgram.Controller;
+using PolynomialProgram.Model;
 using VectorProgram.Controller;
 using VectorProgram.Model;
+using VectorProgram.View;
 
 namespace VectorProgram
 {
-    class ProgramRun
+    internal class ProgramRun
     {
+        private readonly IView _view;
+
+        internal ProgramRun(IView view)
+        {
+            _view = view;
+        }
+
         public void Run()
         {
-            Vector vectorFirst = EnterUserData("first");
-            Vector vectorSecond = EnterUserData("second");
+            var vectors = CreateVectors();
 
-            ShowVectorsAndActions(vectorFirst, vectorSecond);
-            ShowMultiplicationAndVectors(vectorFirst, vectorSecond);
-            CompareVectors(vectorFirst, vectorSecond);
+            _view.ShowVectors(vectors);
 
-            Console.WriteLine($"The angle between {vectorFirst.ToString()} and {vectorSecond.ToString()} = {(vectorFirst.AngleBetweenVectors(vectorSecond)).ToString()}");
+            CallActionsWithVectors(vectors[0], vectors[1]);
 
-            Console.ReadKey();
+            _view.Exit();
         }
 
-        private static void CompareVectors(Vector vectorFirst, Vector vectorSecond)
+        private List<Vector> CreateVectors()
         {
-            Console.WriteLine($"{vectorFirst.ToString()} == {vectorSecond.ToString()} = {(vectorFirst == vectorSecond).ToString()}");
-            Console.WriteLine($"{vectorFirst.ToString()} != {vectorSecond.ToString()} = {(vectorFirst != vectorSecond).ToString()}");
-        }
+            var vectorFirst = RequestVector("first");
+            var vectorSecond = RequestVector("second");
 
-        private void ShowMultiplicationAndVectors(Vector vectorFirst, Vector vectorSecond)
-        {
-            Console.WriteLine("Enter a number to produce a vector by a number:");
-            var numericInput = ReadInputDoubleAndVerificate();
-            Console.WriteLine($"{vectorFirst.ToString()} * {numericInput.ToString()} = {(vectorFirst * numericInput).ToString()}");
-            Console.WriteLine($"{vectorSecond.ToString()} * {numericInput.ToString()} = {(vectorSecond * numericInput).ToString()}");
-
-            Console.WriteLine($"{numericInput.ToString()} * {vectorFirst.ToString()} = {(numericInput * vectorFirst).ToString()}");
-            Console.WriteLine($"{numericInput.ToString()} * {vectorSecond.ToString()} = {(numericInput * vectorSecond).ToString()}");
-        }
-
-        private static void ShowVectorsAndActions(Vector vectorFirst, Vector vectorSecond)
-        {
-            Console.WriteLine("Your vectors:");
-            Console.WriteLine($"1 vector: {vectorFirst.ToString()}");
-            Console.WriteLine($"2 vector: {vectorSecond.ToString()}");
-
-            Console.WriteLine("Actions with vectors:");
-            Console.WriteLine($"{vectorFirst.ToString()} + {vectorSecond.ToString()} = {(vectorFirst + vectorSecond).ToString()}");
-            Console.WriteLine($"{vectorFirst.ToString()} - {vectorSecond.ToString()} = {(vectorFirst - vectorSecond).ToString()}");
-            Console.WriteLine($"{vectorFirst.ToString()} * {vectorSecond.ToString()} = {(vectorFirst * vectorSecond).ToString()}");
-        }
-
-        private Vector EnterUserData(string orderByVectors)
-        {
-            Console.WriteLine($"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space.");
-            var userInput = ReadInputCoordsAndVerificate();
-            return ParseUserInputAndCreateVector(userInput);
-        }
-
-        private void WriteErrorMessage()
-        {
-            Console.WriteLine("You entered non-correct numbers.");
+            return new List<Vector> { vectorFirst, vectorSecond, vectorFirst };
         }
         
-        private Vector ParseUserInputAndCreateVector(string userInput)
+        private void CallActionsWithVectors(Vector first, Vector second)
         {
-            var coords = VerificateInputData.ParseUserInput(userInput);
+            CallSimpleActionsWithVectors(first, second);
+            CallVectorMultiplication(first, second);
+            CallMultiplyVectorsByNumber(first, second);
+            CallScalarMultiplication(first, second);
+            CompareVectors(first, second);
+            CallAngleBetweenVectors(first, second);
+        }
+
+        private void CompareVectors(Vector first, Vector second)
+        {
+            var equalityResult = first == second;
+            var inequalityResult = first != second;
+            _view.ShowVectorsComparisonResults(first, second, equalityResult, inequalityResult);
+        }
+
+        private void CallAngleBetweenVectors(Vector first, Vector second)
+        {
+            var angle = VectorHelper.CalculateAngle(first, second);
+            _view.ShowAngleBetweenVectorsResult(first, second, angle);
+        }
+
+        private void CallSimpleActionsWithVectors(Vector first, Vector second)
+        {
+            var sumResult = first + second;
+            var differenceResult = first - second;
+
+            _view.ShowSimpleActionsWithVectorsResults(first, second, sumResult, differenceResult);
+        }
+
+        private void CallScalarMultiplication(Vector first, Vector second)
+        {
+            var multiplicationResult = VectorHelper.CalculateScalarMultiplication(first, second);
+            _view.ShowScalarMultiplicationResult(first, second, multiplicationResult);
+        }
+
+        private void CallVectorMultiplication(Vector first, Vector second)
+        {
+            var vectorMultiplicationResult = VectorHelper.CalculateVectorMultiplication(first, second);
+            _view.ShowVectorsMultiplicationResult(first, second, vectorMultiplicationResult);
+        }
+
+        private void CallMultiplyVectorsByNumber(Vector first, Vector second)
+        {
+            var multiplier = RequestMultiplier();
+
+            var multiplicationVectorsByNumberRight = new List<Vector>
+            {
+                first * multiplier,
+                second * multiplier
+            };
+
+            var multiplicationVectorsByNumberLeft = new List<Vector>
+            {
+                multiplier * first,
+                multiplier * second
+            };
+
+            _view.ShowMultiplicationVectorsByNumberResults(first, second, multiplicationVectorsByNumberRight, multiplicationVectorsByNumberLeft, multiplier);
+        }
+        
+        private Vector RequestVector(string orderByVectors)
+        {
+            var userInput = RequestInput(DataType.Vector, $"Enter the coordinates of the {orderByVectors} three-dimensional vector separated by a space:");
+            return ParseVector(userInput);
+        }
+
+        private double RequestMultiplier()
+        {
+            var userInput = RequestInput(DataType.Multiplier, "Enter multiplier:");
+            return DataParser.ParseDouble(userInput);
+        }
+                
+        private Vector ParseVector(string userInput)
+        {
+            var coords = DataParser.ParseArray(userInput);
             return new Vector(coords[0], coords[1], coords[2]);
         }
 
-        private string ReadInputCoordsAndVerificate()
+        private string RequestInput(DataType dataType, string welcomeMessage)
         {
-            var userInput = Console.ReadLine();
-            while(!VerificateInputData.VerifyInputDataCoordsVector(userInput))
+            var userInput = string.Empty;
+            var isUserInputCorrect = false;
+
+            while (!isUserInputCorrect)
             {
-                WriteErrorMessage();
-                ReadInputCoordsAndVerificate(); break;
+                userInput = _view.ReadLine(welcomeMessage);
+                isUserInputCorrect = ValidateUserInput(dataType, userInput);
             }
+
             return userInput;
         }
 
-        private double ReadInputDoubleAndVerificate()
+        private bool ValidateUserInput(DataType dataType, string userInput)
         {
-            var userInput = Console.ReadLine();
-            double numericInput;
-            while (!VerificateInputData.VerifyInputDataCoordsVector(userInput))
-            {
-                WriteErrorMessage();
-                ReadInputDoubleAndVerificate();
-            }
-            double.TryParse(userInput.Replace(",", "."), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out numericInput);
-            return numericInput;
+            var isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
+            if (!isUserInputCorrect) _view.WriteErrorMessage();
+
+            return isUserInputCorrect;
         }
     }
 }

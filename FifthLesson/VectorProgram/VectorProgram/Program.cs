@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using VectorProgram.View;
 
 namespace VectorProgram
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-           new ProgramRun().Run();
+            new ProgramRun(new ConsoleView()).Run();
         }
     }
 }

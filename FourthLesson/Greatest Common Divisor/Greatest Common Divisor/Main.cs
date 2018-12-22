@@ -5,51 +5,46 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Greatest_Common_Divisor.Controller;
 using Greatest_Common_Divisor.Model;
-using GreatestCommonDivisor.Model;
-using GreatestCommonDivisorProgram.Model;
-using GreatestCommonDivisorProgram.View;
+using Greatest_Common_Divisor.View;
 
-namespace GreatestCommonDivisorProgram
+namespace Greatest_Common_Divisor
 {
     public partial class Form1 : Form
     {
-        BarChartView chart = new BarChartView();
-        GcdResult gcdResult = new GcdResult();
-        private string _result = "";
+        private readonly BarChartView _chart = new BarChartView();
+        private GcdResult _result = new GcdResult();
+        private string _formattedResult = "";
         
         public Form1()
         {
             InitializeComponent();
 
-            comboPalette.Items.AddRange(chart.GetPalette());
+            comboPalette.Items.AddRange(_chart.GetPalette());
             comboPalette.SelectedIndex = 11;
 
-            comboTypeChart.Items.AddRange(chart.GetSeriesChartType());
+            comboTypeChart.Items.AddRange(_chart.GetSeriesChartType());
             comboTypeChart.SelectedIndex = 10;
 
-            groupResults.Click += new System.EventHandler(this.groupResults_Click);
+            groupResults.Click += GroupResultsOnClick;
         }
 
-        public string PrintResult()
-        {
-            return _result;
-        }
+        public string PrintResult() => _formattedResult;
 
         public void ShowWarningMessage()
         {
-            MessageBox.Show("Числа должны быть целыми и отделяться пробелами. Введите числа заново.");
+            MessageBox.Show(@"Numbers must be integers and separated by spaces. Enter the numbers again.");
         }
 
         public void ReadUserInputAndWriteResult(string userInput, GcdAlgorithmType algorithmType)
         {
             if (ValidateUserInt(userInput))
             {
-                gcdResult.ClearCalculationHistory();
+                _result.ClearCalculationHistory();
                 var arrNumbers = ParseUserInput(userInput);
 
                 EnableCreatingChart(arrNumbers.Length);
-                RunAlgoritmGcd(algorithmType, arrNumbers);
-                GetFormatedResult(arrNumbers);
+                RunAlgorithm(algorithmType, arrNumbers);
+                GetFormattedResult(arrNumbers);
             }
             else
             {
@@ -57,39 +52,39 @@ namespace GreatestCommonDivisorProgram
             }
         }
 
-        private void RunAlgoritmGcd(GcdAlgorithmType algorithmType, int[] arrNumbers)
+        private void RunAlgorithm(GcdAlgorithmType algorithmType, int[] arrNumbers)
         {
-            if (algorithmType == GcdAlgorithmType.Euclidian)
+            if (algorithmType == GcdAlgorithmType.Euclidean)
             {
-                RunGCDEuclidean(arrNumbers);
+                RunAlgorithmEuclidean(arrNumbers);
             }
             else
             {
-                RunGCDStain(arrNumbers);
+                RunAlgorithmStain(arrNumbers);
             }
         }
 
-        private void groupResults_Click(object sender, EventArgs e)
+        private void GroupResultsOnClick(object sender, EventArgs e)
         {
-            lblresult.Text = String.Empty;
+            lblresult.Text = string.Empty;
         }
 
         private void CreateBarCharOnClick(object sender, EventArgs e)
         {
             var colorPalette = (ChartColorPalette)Enum.Parse(typeof(ChartColorPalette), comboPalette.Text);
             var typeChart = (SeriesChartType)Enum.Parse(typeof(SeriesChartType), comboTypeChart.Text);
-            var barChart = new BarChart(gcdResult.GetCalculationHistory(), colorPalette, typeChart);
-            chart.Initialize(chart1, barChart);
+            var barChart = new BarChart(_result.GetCalculationHistory(), colorPalette, typeChart);
+            _chart.Initialize(chart1, barChart);
             createBarChar.Enabled = false;
         }
         
         private static bool ValidateUserInt(string userInput)
         {
             var regex = new Regex(@"^[-+]?[0-9]{1,3} [-+]?[0-9]{1,3}( [-+]?[0-9]{1,3})?( [-+]?[0-9]{1,3})?( [-+]?[0-9]{1,3})?$");
-            return (regex.IsMatch(userInput));
+            return regex.IsMatch(userInput);
         }
 
-        private int[] ParseUserInput(string userInput)
+        private static int[] ParseUserInput(string userInput)
         {
             var arr = userInput.Split(' ');
             var arrResult = new int[arr.Length];
@@ -102,7 +97,7 @@ namespace GreatestCommonDivisorProgram
             return arrResult;
         }
 
-        private void GetFormatedResult(int[] numbers)
+        private void GetFormattedResult(int[] numbers)
         {
             var s = new StringBuilder();
             s.AppendFormat("{0}", "НОД( ");
@@ -110,36 +105,36 @@ namespace GreatestCommonDivisorProgram
             {
                 s.AppendFormat("{0} ", item.ToString());
             }
-            s.Append($") = {gcdResult.Gcd}");
-            s.Append((gcdResult.IterationsCount == 0) ? "\n" : $" и кол-во итераций = {gcdResult.IterationsCount}\n");
-            _result = s.ToString();
+            s.Append($") = {_result.Gcd}");
+            s.Append(_result.IterationsCount == 0 ? "\n" : $" and number of iterations = {_result.IterationsCount}\n");
+            _formattedResult = s.ToString();
         }
 
-        private void GCDEuclideOnClick(object sender, EventArgs e)
+        private void AlgorithmEuclideanOnClick(object sender, EventArgs e)
         {
-            ReadUserInputAndWriteResult(numbersForGCD.Text, GcdAlgorithmType.Euclidian);
+            ReadUserInputAndWriteResult(numbersForGCD.Text, GcdAlgorithmType.Euclidean);
             lblresult.Text += PrintResult();
         }
 
-        private void GCDStain_Click(object sender, EventArgs e)
+        private void AlgorithmStainOnClick(object sender, EventArgs e)
         {
             ReadUserInputAndWriteResult(numbersForGCD.Text, GcdAlgorithmType.Stain);
             lblresult.Text += PrintResult();
         }
 
-        private void RunGCDEuclidean(int[] userNumbers)
+        private void RunAlgorithmEuclidean(int[] userNumbers)
         {
-            gcdResult = new EuclideanGcdAlgorithm().Calculate(userNumbers);
+            _result = new EuclideanGcdAlgorithm().Calculate(userNumbers);
         }
 
-        private void RunGCDStain(int[] userNumbers)
+        private void RunAlgorithmStain(int[] userNumbers)
         {
-            gcdResult = new StainGcdAlgorithm().Calculate(userNumbers);
+            _result = new StainGcdAlgorithm().Calculate(userNumbers);
         }
 
         private void EnableCreatingChart(int countNumbers)
         {
-            createBarChar.Enabled = (countNumbers == 2) ? true : false;
+            createBarChar.Enabled = countNumbers == 2;
         }
     }
 }

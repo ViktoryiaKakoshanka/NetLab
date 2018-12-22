@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NewtonsMethod.View;
-using NewtonsMethod.Model;
-using NewtonsMethod.Controller;
+﻿using NewtonsMethod.View;
 
 namespace NewtonsMethod
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            IRadicalSign radicalSign = null;
-            var view = new Startup();
-
-            view.InitializeDataByUser(radicalSign);
-            view.CompareMethodsNewtonAndPow(radicalSign);
+            var start = new Startup(new ProgramView());
+            start.RunProgram();
         }
     }
 }

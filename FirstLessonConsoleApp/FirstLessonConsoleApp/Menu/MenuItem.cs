@@ -4,7 +4,7 @@ namespace FirstLessonConsoleApp.Menu
 {
     public abstract class MenuItem
     {
-        private IView _view;
+        private readonly IView _view;
         public int OrderNumber { get; }
         public string Text { get; }
 

@@ -1,9 +1,9 @@
 ﻿namespace NewtonsMethod.Model
 {
-    public enum InputedParams
+    public enum DataType
     {
         Power,
         Numerical,
-        Аccurancy
+        Accuracy
     }
 }

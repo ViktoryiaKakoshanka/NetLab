@@ -1,82 +1,91 @@
 ﻿using System;
 using TriangleLib.Controller;
-using TriangleLib.Model;
 using TriangleLib.View;
+using TriangleLib.Model;
 
 namespace TriangleLib
 {
     class WorkWithATriangle
     {
-        private IConsoleView _view;
+        private readonly IConsoleView _consoleView;
+        private readonly ITriangleView _triangleView;
 
-        public void RunProgram(IConsoleView view)
+        public WorkWithATriangle(ConsoleView view)
         {
-            var firstSide = 0.0;
-            var secondSide = 0.0;
-            var thirdSide = 0.0;
+            _consoleView = view;
+            _triangleView = view;
+        }
 
-            Triangle triangle;
-            _view = view;
-
-            _view.Clear();
-
-            EnterInputData(ref firstSide, '1');
-            EnterInputData(ref secondSide, '2');
-            EnterInputData(ref thirdSide, '3');
+        public void RunProgram()
+        {
+            var triangle = CreateTriangle();
             
+            ShowDetails(triangle);
 
-            triangle = TryCreateTriangle( firstSide, secondSide, thirdSide);
-            ShowDetails(triangle, view);
             FinishedRun();
+        }
+
+        private Triangle CreateTriangle()
+        {
+            var firstSide = RequestUserInput('1');
+            var secondSide = RequestUserInput('2');
+            var thirdSide = RequestUserInput('3');
+
+            _consoleView.Clear();
+
+            return TryCreateTriangle(firstSide, secondSide, thirdSide);
         }
 
         private static Triangle TryCreateTriangle(double firstSide, double secondSide, double thirdSide)
         {
-            Triangle triangle = null;
-            if (ValidatingTriangleHelper.ValidateTriangle(firstSide, secondSide, thirdSide))
-            {
-                triangle = new Triangle(firstSide, secondSide, thirdSide);
-            }
-            return triangle;
+            var isValidatingTriangle = Validator.ValidateTriangle(firstSide, secondSide, thirdSide);
+
+            return isValidatingTriangle ? new Triangle(firstSide, secondSide, thirdSide) : null;
         }
 
-        private static void ShowDetails(Triangle triangle, IConsoleView view)
+        private void ShowDetails(Triangle triangle)
         {
             if(triangle != null)
             {
-                view.PrintDetailsTriangle(triangle);
+                var perimeter = TriangleCalculations.CalculateThePerimeter(triangle);
+                var area = TriangleCalculations.CalculateTheArea(triangle);
+                _triangleView.ShowDetailsTriangle(triangle.ToString(), perimeter, area);
             }
             else
             {
-                view.ShowWarningMessageTriangleNotExist();
+                _triangleView.ShowWarningMessageTriangleNotExist();
             }
         }
 
-        private void EnterInputData(ref double side, char sideNumber)
+        private double RequestUserInput(char sideNumber)
         {
+            var side = 0.0;
             while (side <= 0)
             {
-                VerifySideUser(ref side, sideNumber);
+                side = VerifySideUser(sideNumber);
             }
+            return side;
         }
 
-        private void VerifySideUser(ref double side, char sideNumber)
+        private double VerifySideUser(char sideNumber)
         {
-            _view.WriteLine($"Enter the value of {sideNumber} side");
-            side = ValidatingTriangleHelper.TryParseInputtingSide(_view.ReadLine());
-            if (side == 0.0) _view.ShowWarningMessage();
+            _consoleView.WriteLine($"Enter the value of {sideNumber} side");
+            var side = Validator.TryParseSide(_consoleView.ReadLine());
+            if (side <= 0)
+            {
+                _consoleView.WriteLine("You entered an incorrect value for the side of the triangle.\nThe value must be greater than 0. ");
+            }
+            return side;
         }
-
-
-
+        
         private void FinishedRun()
         {
-            _view.WriteLine("Would you like to start over? (yes - press Enter, no - any keyboard key)");
+            _consoleView.WriteLine("Would you like to start over? (yes - press Enter, no - any keyboard key)");
 
-            var keyInfo = _view.ReadKey();
-            if(keyInfo.Key == ConsoleKey.Enter)
+            var keyInfo = _consoleView.ReadKey();
+            if(keyInfo.Key == _consoleView.KeyEnter)
             {
-                RunProgram(_view);
+                RunProgram();
             }
             else
             {
