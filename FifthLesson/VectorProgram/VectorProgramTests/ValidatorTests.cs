@@ -1,7 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Collections.Generic;
-using PolynomialProgram.Controller;
+using PolynomialProgram;
+using PolynomialProgram.Helpers;
 using PolynomialProgram.Model;
 
 namespace VectorProgramTests

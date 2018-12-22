@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PolynomialProgram.Controller
+namespace PolynomialProgram.Helpers
 {
     public static class PolynomialHelper
     {
@@ -41,13 +41,13 @@ namespace PolynomialProgram.Controller
             }
 
             resultMonomials = resultMonomials.OrderBy(pair => pair.Key).ToDictionary(pair => pair.Key, pair => pair.Value);
-            return new Polynomial(resultMaxPower, resultMonomials).ImprovePolynomial();
+            return new Polynomial(resultMaxPower, resultMonomials);
         }
 
         public static Polynomial MultiplyByConstant(Polynomial polynomial, double number)
         {
             var monomials = polynomial.Monomials.ToDictionary(pair => pair.Key, pair => pair.Value * number);
-            return new Polynomial(polynomial.Power, monomials).ImprovePolynomial();
+            return new Polynomial(polynomial.Power, monomials);
         }
         
         private static double GetCoefficient(Polynomial first, int i)
@@ -60,7 +60,7 @@ namespace PolynomialProgram.Controller
             var maxPower = Math.Max(first.Power, second.Power);
             var monomials = Enumerable.Range(0, maxPower + 1).ToDictionary(x => x, x => sum(GetCoefficient(first, x), GetCoefficient(second, x)));
             
-            return new Polynomial(maxPower, monomials).ImprovePolynomial();
+            return new Polynomial(maxPower, monomials).CorrectPolynomial();
         }
     }
 }

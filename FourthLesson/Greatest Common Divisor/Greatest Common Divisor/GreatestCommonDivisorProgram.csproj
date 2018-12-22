@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\EuclideanAlgorithm.cs" />
-    <Compile Include="Controller\IAlgorithmGcd.cs" />
-    <Compile Include="Controller\StainGcdAlgorithm.cs" />
+    <Compile Include="Algorithms\AlgorithmFactory.cs" />
+    <Compile Include="Algorithms\EuclideanAlgorithm.cs" />
+    <Compile Include="Algorithms\IAlgorithmGcd.cs" />
+    <Compile Include="Algorithms\StainGcdAlgorithm.cs" />
+    <Compile Include="Driver.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

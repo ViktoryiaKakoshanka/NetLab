@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VectorProgram.Model;
 using System.Diagnostics;
-using VectorProgram;
+using VectorProgram.Helpers;
 
 namespace VectorProgramTests
 {
@@ -19,7 +19,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void SumOfVectors_returnNewVector_Test()
+        public void SumOfVectors_ReturnNewVector_Test()
         {
             var expected = new Vector(8, 10, 12);
             var actual = _firstVector + _secondVector;
@@ -29,7 +29,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void DifferenceOfVectors_returnNewVector_Test()
+        public void DifferenceOfVectors_ReturnNewVector_Test()
         {
             var expected = new Vector(-6, -6, -6);
             var actual = _firstVector - _secondVector;
@@ -39,7 +39,7 @@ namespace VectorProgramTests
         }
         
         [TestMethod]
-        public void MultiplicationVectorsByNumber_returnNewVector_Test()
+        public void MultiplicationVectorsByNumber_ReturnNewVector_Test()
         {
             var expected = new Vector(-3, -6, -9);
             var actual = _firstVector * -3;
@@ -50,7 +50,7 @@ namespace VectorProgramTests
         }
 
         [TestMethod]
-        public void ScalarMultiplicationOfVectors_returnNumber_Test()
+        public void ScalarMultiplicationOfVectors_ReturnNumber_Test()
         {
             const int expected = 50;
             var actual = VectorHelper.CalculateScalarProduct(_firstVector, _secondVector);

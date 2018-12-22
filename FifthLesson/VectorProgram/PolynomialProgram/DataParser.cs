@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Linq;
 
-namespace PolynomialProgram.Controller
+namespace PolynomialProgram
 {
     public class DataParser
     {

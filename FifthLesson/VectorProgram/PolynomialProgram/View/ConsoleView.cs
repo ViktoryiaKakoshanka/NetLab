@@ -11,7 +11,7 @@ namespace PolynomialProgram.View
             Console.ReadKey(true);
         }
 
-        public string ReadLine(string message)
+        public string RequestInput(string message)
         {
             Console.WriteLine(message);
             return Console.ReadLine();
@@ -30,17 +30,20 @@ namespace PolynomialProgram.View
             Polynomial first,
             Polynomial second,
             Polynomial sumResult,
-            Polynomial differenceResult,
-            Polynomial multiplicationResult)
+            Polynomial differenceResult)
         {
             Console.WriteLine($"{first} + {second} = {sumResult}");
             Console.WriteLine($"{first} - {second} = {differenceResult}");
-            Console.WriteLine($"{first} * {second} = {multiplicationResult}");
         }
 
         public void ShowMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, Polynomial result)
         {
             Console.WriteLine($"{polynomial} * {multiplier} = {result}");
+        }
+
+        public void ShowResultOfPolynomialsMultiplication(Polynomial first, Polynomial second, Polynomial result)
+        {
+            Console.WriteLine($"{first} * {second} = {result}");
         }
     }
 }

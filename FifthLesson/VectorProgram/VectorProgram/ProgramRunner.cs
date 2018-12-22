@@ -1,28 +1,29 @@
-﻿using PolynomialProgram.Controller;
+﻿using PolynomialProgram;
 using PolynomialProgram.Model;
+using VectorProgram.Helpers;
 using VectorProgram.Model;
 using VectorProgram.View;
 
 namespace VectorProgram
 {
-    internal class ProgramRun
+    internal class ProgramRunner
     {
         private readonly IView _view;
 
-        internal ProgramRun(IView view)
+        internal ProgramRunner(IView view)
         {
             _view = view;
         }
 
         public void Run()
         {
-            var vectorFirst = RequestVector("first");
-            var vectorSecond = RequestVector("second");
+            var firstVector = RequestVector("first");
+            var secondVector = RequestVector("second");
 
-            _view.ShowVectors(vectorFirst, vectorSecond);
+            _view.ShowVectors(firstVector, secondVector);
 
             var multiplier = RequestMultiplier();
-            ProgramRunnerHelper.PerformActionsWithVectors(vectorFirst, vectorSecond, multiplier, _view);
+            ProgramRunnerHelper.PerformActionsWithVectors(firstVector, secondVector, multiplier, _view);
 
             _view.Exit();
         }
@@ -51,7 +52,7 @@ namespace VectorProgram
 
             do
             {
-                userInput = _view.ReadInput(welcomeMessage);
+                userInput = _view.RequestInput(welcomeMessage);
             } while (ValidateUserInput(dataType, userInput));
 
             return userInput;

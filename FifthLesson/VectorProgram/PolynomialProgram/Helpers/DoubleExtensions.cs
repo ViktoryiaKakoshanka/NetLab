@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PolynomialProgram.Controller
+namespace PolynomialProgram.Helpers
 {
     public static class DoubleExtensions
     {

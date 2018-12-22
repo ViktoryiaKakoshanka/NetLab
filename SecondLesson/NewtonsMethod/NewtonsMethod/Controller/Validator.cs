@@ -15,7 +15,7 @@ namespace NewtonsMethod.Controller
 
         public static bool ValidateInput(string input, DataType param)
         {
-            Regex regex = new Regex(ValidationRules[param]);
+            var regex = new Regex(ValidationRules[param]);
             return regex.IsMatch(input);
         }
     }

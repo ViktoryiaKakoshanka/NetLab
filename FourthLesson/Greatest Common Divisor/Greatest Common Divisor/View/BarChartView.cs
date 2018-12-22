@@ -11,7 +11,7 @@ namespace Greatest_Common_Divisor.View
         public void Initialize(Chart chart, BarChart barChart)
         {
             SetInitialParameters(chart, barChart.Color, barChart.ChartType);
-            FillTheChartWithHistory(chart, barChart.CalculationHistory);            
+            FillChartWithHistory(chart, barChart.CalculationHistory);            
         }
 
         public object[] GetPalette()
@@ -36,7 +36,7 @@ namespace Greatest_Common_Divisor.View
             chart.Series["Number В"].ChartType = chartType;
         }
 
-        private static void FillTheChartWithHistory(Chart chart, IDictionary<int, int[]> data)
+        private static void FillChartWithHistory(Chart chart, IDictionary<int, int[]> data)
         {
             foreach (var item in data)
             {

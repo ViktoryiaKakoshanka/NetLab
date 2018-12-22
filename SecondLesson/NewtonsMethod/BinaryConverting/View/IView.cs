@@ -2,11 +2,11 @@
 
 namespace BinaryConverting.View
 {
-    public interface IConvertingView
+    public interface IView
     {
+        string RequestInput(string message);
         void ShowResultByConversion(INumbers number);
-        void ShowWarningMessageForRepeat(string messEx = null);
+        void ShowWarningMessage(string messEx = null);
         void ShowMessageFormatException();
-        void ShowMessageArgumentNullException();
     }
 }

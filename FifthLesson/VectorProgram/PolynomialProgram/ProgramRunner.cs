@@ -2,7 +2,7 @@
 using PolynomialProgram.Model;
 using System.Collections.Generic;
 using PolynomialProgram.View;
-using PolynomialProgram.Controller;
+using PolynomialProgram.Helpers;
 
 namespace PolynomialProgram
 {
@@ -23,6 +23,7 @@ namespace PolynomialProgram
             _view.ShowPolynomials(firstPolynomial, secondPolynomial);
 
             ProgramRunnerHelper.PerformSimpleActionsWithPolynomials(firstPolynomial, secondPolynomial, _view);
+            ProgramRunnerHelper.ExecutePolynomialsMultiplication(firstPolynomial, secondPolynomial, _view);
             var multiplier = RequestMultiplier();
             ProgramRunnerHelper.MultiplyPolynomialByConstant(firstPolynomial, multiplier, _view);
 
@@ -68,7 +69,7 @@ namespace PolynomialProgram
 
             do
             {
-                userInput = _view.ReadLine(welcomeMessage);
+                userInput = _view.RequestInput(welcomeMessage);
             } while (!ValidateUserInput(dataType, userInput));
             
             return userInput;

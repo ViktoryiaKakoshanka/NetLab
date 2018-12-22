@@ -2,11 +2,11 @@
 
 namespace TriangleLib
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            var run = new WorkWithATriangle(new ConsoleView());
+            var run = new ProgramRunner(new ConsoleView());
             run.RunProgram();
         }
     }

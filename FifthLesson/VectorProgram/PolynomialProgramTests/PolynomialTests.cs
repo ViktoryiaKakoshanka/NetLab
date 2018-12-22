@@ -2,6 +2,7 @@
 using PolynomialProgram.Model;
 using System.Collections.Generic;
 using System.Diagnostics;
+using PolynomialProgram.Helpers;
 
 namespace PolynomialProgramTests
 {
@@ -51,7 +52,7 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void Subtract_returnNewPolynomial_Test()
+        public void Subtract_ReturnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>
             {
@@ -67,7 +68,7 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void Multiply_returnNewPolynomial_Test()
+        public void Multiply_ReturnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
@@ -85,7 +86,7 @@ namespace PolynomialProgramTests
         }
 
         [TestMethod]
-        public void MultiplyByConstant_returnNewPolynomial_Test()
+        public void MultiplyByConstant_ReturnNewPolynomial_Test()
         {
             var expectMonomials = new Dictionary<int, double>()
             {
@@ -130,7 +131,7 @@ namespace PolynomialProgramTests
                 {2, -3}
             });
 
-            Assert.AreEqual(expected, polynomial.ImprovePolynomial());
+            Assert.AreEqual(expected, polynomial.CorrectPolynomial());
         }
     }
 }

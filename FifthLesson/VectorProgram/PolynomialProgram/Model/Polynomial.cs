@@ -1,4 +1,4 @@
-﻿using PolynomialProgram.Controller;
+﻿using PolynomialProgram.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,7 +8,7 @@ namespace PolynomialProgram.Model
 {
     public class Polynomial : IEquatable<Polynomial>
     {
-        public int Power { get; private set; }
+        public int Power { get; set; }
         public IDictionary<int, double> Monomials { get; }
 
         public Polynomial(int power, IDictionary<int, double> monomials)
@@ -64,20 +64,6 @@ namespace PolynomialProgram.Model
 
         public static Polynomial operator *(double number, Polynomial polynomial) => polynomial * number;
 
-        public Polynomial ImprovePolynomial()
-        {
-            foreach (var keyValuePair in Monomials.OrderByDescending(x => x.Key))
-            {
-                if (!keyValuePair.Value.IsEqual(0))
-                {
-                    break;
-                }
-                Monomials.Remove(keyValuePair);
-                Power--;
-            }
-
-            return this;
-        }
 
         private static string GetMonomial(KeyValuePair<int, double> pair)
         {
