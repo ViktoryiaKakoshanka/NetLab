@@ -5,11 +5,12 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quadrangles", "Quadrangles\Quadrangles.csproj", "{A82BEBFB-CA87-47D6-9081-75D730DCFB11}"
 EndProject
-<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadranglesTests", "QuadranglesTests\QuadranglesTests.csproj", "{17059FBA-0883-42A9-B511-A7688277F2DC}"
 EndProject
-=======
->>>>>>> RefactoringInLab
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{290080F8-B487-40E3-8C7F-821F2AEB4F9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPhone", "WpfPhone\WpfPhone.csproj", "{A7910A41-AE89-46CC-93A7-5E8B144BFA8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,13 +21,18 @@ Global
 		{A82BEBFB-CA87-47D6-9081-75D730DCFB11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A82BEBFB-CA87-47D6-9081-75D730DCFB11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A82BEBFB-CA87-47D6-9081-75D730DCFB11}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
 		{17059FBA-0883-42A9-B511-A7688277F2DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{17059FBA-0883-42A9-B511-A7688277F2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17059FBA-0883-42A9-B511-A7688277F2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17059FBA-0883-42A9-B511-A7688277F2DC}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
->>>>>>> RefactoringInLab
+		{290080F8-B487-40E3-8C7F-821F2AEB4F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290080F8-B487-40E3-8C7F-821F2AEB4F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290080F8-B487-40E3-8C7F-821F2AEB4F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290080F8-B487-40E3-8C7F-821F2AEB4F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7910A41-AE89-46CC-93A7-5E8B144BFA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7910A41-AE89-46CC-93A7-5E8B144BFA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7910A41-AE89-46CC-93A7-5E8B144BFA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7910A41-AE89-46CC-93A7-5E8B144BFA8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
