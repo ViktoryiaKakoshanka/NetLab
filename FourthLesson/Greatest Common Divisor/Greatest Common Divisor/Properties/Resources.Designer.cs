@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GreatestCommonDivisorProgram.Properties
+namespace Greatest_Common_Divisor.Properties
 {
 
 

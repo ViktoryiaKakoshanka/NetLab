@@ -1,18 +1,13 @@
 ﻿using System;
+using PolynomialProgram.Controller;
 
 namespace VectorProgram.Model
 {
     public class Vector : IEquatable<Vector>
     {
-        private int digits = 3;
-
         public double FirstCoordinate { get; private set; }
         public double SecondCoordinate { get; private set; }
         public double ThirdCoordinate { get; private set; }
-        public double Length
-        {
-            get => Math.Round(Math.Sqrt(Math.Pow(FirstCoordinate, 2) + Math.Pow(SecondCoordinate, 2) + Math.Pow(ThirdCoordinate, 2)), digits);
-        }
 
         public Vector() { }
 
@@ -44,15 +39,22 @@ namespace VectorProgram.Model
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return (this.GetType() != obj.GetType()) ? false : this.Equals((Vector)obj);
+            return GetType() == obj.GetType() && Equals((Vector)obj);
         }
   
         public bool Equals(Vector other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            var ValueСomparison = FirstCoordinate == other.FirstCoordinate && SecondCoordinate == other.SecondCoordinate && ThirdCoordinate == other.ThirdCoordinate;
-            return ValueСomparison;
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            var valueComparison = FirstCoordinate.IsEquals(other.FirstCoordinate) && SecondCoordinate.IsEquals(other.SecondCoordinate) && ThirdCoordinate.IsEquals(other.ThirdCoordinate);
+            return valueComparison;
         }
         
         public static Vector operator +(Vector first, Vector second)
@@ -90,8 +92,8 @@ namespace VectorProgram.Model
             return number * vector;
         }
         
-        public static bool operator ==(Vector first, Vector second) => first.Equals(second);
+        public static bool operator ==(Vector first, Vector second) => first != null && first.Equals(second);
 
-        public static bool operator !=(Vector first, Vector second) => !first.Equals(second);
+        public static bool operator !=(Vector first, Vector second) => first != null && !first.Equals(second);
     }
 }

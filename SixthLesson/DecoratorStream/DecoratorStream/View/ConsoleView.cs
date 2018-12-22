@@ -2,28 +2,16 @@
 
 namespace DecoratorStream.View
 {
-    public class ConsoleView : IConsoleView
+    public class ConsoleView : IView
     {
-        public void WaitForAnyKeyPress()
+        public void Exit()
         {
             WriteLine("Press any key to exit.");
             Console.ReadKey(true);
         }
 
-        public string ReadLine(string message)
-        {
-            WriteLine(message);
-            return Console.ReadLine();
-        }
-
-        public void WriteLine(string text) => Console.WriteLine(text);
-
         public void ShowMessageErrorPassword() => WriteLine("You entered the wrong password!");
-
-        public void SetCursorPosition(int left, int top) => Console.SetCursorPosition(left, top);
-
-        public void ShowReadText(string text) => WriteLine($"Text from file:\n {text}");
-
+        
         public string RequestPassword() => ReadLine("Enter the password to read the file.");
 
         public void ShowCurrentStatusRead(string percents, int numberLineToPrint)
@@ -32,18 +20,25 @@ namespace DecoratorStream.View
             WriteLine(percents + "%  ");
         }
 
-        public void ShowVerticalLine(int nextPositionVerticalLine, int numberLineToPrint)
+        public void ShowSymbol(int nextPositionVerticalLine, int numberLineToPrint, char symbol)
         {
             SetCursorPosition(nextPositionVerticalLine, numberLineToPrint);
-            WriteLine("|");
+            WriteLine(symbol.ToString());
         }
 
-        public void ShowLastPercents(int numberLineToPrint)
+        public void FinishRead()
         {
-            SetCursorPosition(0, numberLineToPrint);
-            WriteLine("100% ");
+            SetCursorPosition(0, Console.CursorTop + 2);
         }
 
-        public void GoToLastLine(int numberLastLine) => SetCursorPosition(0, numberLastLine);
+        private static void SetCursorPosition(int left, int top) => Console.SetCursorPosition(left, top);
+
+        private static string ReadLine(string message)
+        {
+            WriteLine(message);
+            return Console.ReadLine();
+        }
+
+        private static void WriteLine(string text) => Console.WriteLine(text);
     }
 }

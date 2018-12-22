@@ -15,9 +15,15 @@ namespace TriangleLib.Controller
             var semiperimeterWithoutSecondSide = semiperimeter - triangle.SecondSide;
             var semiperimeterWithoutThirdSide = semiperimeter - triangle.ThirdSide;
 
+<<<<<<< HEAD:ThirdLesson/Triangle/Triangle/Controller/TriangleCalculations.cs
+            var multiplicationOfAllParts = semiperimeter * semiperimeterWithoutFirstSide * semiperimeterWithoutSecondSide * semiperimeterWithoutThirdSide;
+            
+            return Math.Sqrt(multiplicationOfAllParts);
+=======
             var multiplicationAllParts = semiperimeter * semiperimeterWithoutFirstSide * semiperimeterWithoutSecondSide * semiperimeterWithoutThirdSide;
 
             return Math.Sqrt(multiplicationAllParts);
+>>>>>>> master:ThirdLesson/Triangle/Triangle/Controller/TriangleHelper.cs
         }
 
         public static Triangle TryCreateTriangle(double firstSideLength, double secondSideLength, double thirdSideLength)

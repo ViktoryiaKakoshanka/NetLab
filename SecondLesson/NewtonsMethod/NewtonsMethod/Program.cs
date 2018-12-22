@@ -4,7 +4,7 @@ namespace NewtonsMethod
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var start = new Startup(new ProgramView());
             start.RunProgram();

@@ -8,12 +8,20 @@ namespace TriangleTests
     [TestClass]
     public class TriangleHelperTests
     {
+<<<<<<< HEAD:ThirdLesson/Triangle/TriangleTests/TriangleCalculations.cs
+        TriangleLib triangle;
+=======
         Triangle _triangle;
+>>>>>>> master:ThirdLesson/Triangle/TriangleTests/TriangleHelperTests.cs
 
         [TestInitialize]
         public void TestInitialize()
         {
+<<<<<<< HEAD:ThirdLesson/Triangle/TriangleTests/TriangleCalculations.cs
+            triangle = new TriangleLib(1, 2, 2);
+=======
             _triangle = new Triangle(1, 2, 2);
+>>>>>>> master:ThirdLesson/Triangle/TriangleTests/TriangleHelperTests.cs
         }
 
         [TestMethod]

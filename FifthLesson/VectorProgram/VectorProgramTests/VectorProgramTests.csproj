@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PolynomialProgram\PolynomialProgram.csproj">
+      <Project>{fe4902d0-6a60-4435-800d-792a2b90954e}</Project>
+      <Name>PolynomialProgram</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VectorProgram\VectorProgram.csproj">
       <Project>{C58AF970-46C7-45EC-BFA9-C2FE2A8BFCA0}</Project>
       <Name>VectorProgram</Name>

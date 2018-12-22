@@ -1,13 +1,14 @@
-﻿using VectorProgram.View;
+﻿using PolynomialProgram.View;
+using ConsoleView = PolynomialProgram.View.ConsoleView;
 
 namespace PolynomialProgram
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            IConsoleView consoleView = new View.ConsoleView();
-            new ProgramRun().Run(consoleView);
+            IView view = new ConsoleView();
+            new ProgramRun(view).Run();
         }
     }
 }

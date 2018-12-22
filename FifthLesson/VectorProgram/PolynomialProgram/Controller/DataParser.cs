@@ -1,7 +1,6 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace VectorProgram.Controller
+namespace PolynomialProgram.Controller
 {
     public class DataParser
     {
@@ -21,11 +20,6 @@ namespace VectorProgram.Controller
         public static double ParseDouble(string inputData)
         {
             return double.Parse(inputData.Replace(",", "."), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"));
-        }
-
-        public static int ParseInt(string inputData)
-        {
-            return int.Parse(inputData);
         }
     }
 }

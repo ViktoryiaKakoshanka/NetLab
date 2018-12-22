@@ -1,79 +1,51 @@
-﻿using PolynomialProgram.Model;
+﻿using System;
+using PolynomialProgram.Model;
 using System.Collections.Generic;
-using VectorProgram.Controller;
-using VectorProgram.Model;
-using VectorProgram.View;
-using VectorProgram.UserInput;
-using ViewFormattedOutput = PolynomialProgram.View.FormattedOutput;
+using PolynomialProgram.View;
+using PolynomialProgram.Controller;
 
 namespace PolynomialProgram
 {
     public class ProgramRun
     {
-        private IConsoleView _view;
-        private IUserInputProcessor _userInput;
-        private ViewFormattedOutput _formattedOutput;
-        private IList<Polynomial> _polynomials = new List<Polynomial>();
+        private readonly IView _view;
+        private readonly IList<Polynomial> _polynomials = new List<Polynomial>();
 
-        public void Run(IConsoleView view)
+        public ProgramRun(IView view)
         {
             _view = view;
-            _userInput = new UserInputProcessor(_view);
-            _formattedOutput = new ViewFormattedOutput(_view);
-
-            InitializeDefaultPolinomials();
-            _formattedOutput.ShowPolynomials(_polynomials);
-
-            //CallPolynomials();
-            var multiplier = RequestMultiplier();
-            CallSimpleActionsWithPolynomials(multiplier);
-
-            _view.WaitForAnyKeyPress();
         }
 
-        private void InitializeDefaultPolinomials()
+        public void Run()
         {
-            var monomialsFirst = new Dictionary<int, double>()
-            {
-                {0, -5},
-                {1, 0},
-                {2, 3},
-            };
+            CallPolynomials();
+            CallSimpleActionsWithPolynomials();
+            var multiplier = RequestMultiplier();
+            CallMultiplicationNumberByPolynomial(multiplier);
 
-            var monomialsSecond = new Dictionary<int, double>()
-            {
-                {0, 4},
-                {1, 0},
-                {2, -3},
-                {3, 0},
-                {4, 0},
-                {5, -0.5},
-            };
-
-            _polynomials.Add(new Polynomial(2, monomialsFirst));
-            _polynomials.Add(new Polynomial(2, monomialsSecond));
+            _view.Exit();
         }
-
+        
         private void CallPolynomials()
         {
             CreatePolynomials();
-            _formattedOutput.ShowPolynomials(_polynomials);
+            _view.ShowPolynomials(_polynomials);
         }
 
-        private void CallSimpleActionsWithPolynomials(double multiplier)
+        private void CallSimpleActionsWithPolynomials()
         {
             var sumResult = GetSumPolynomials();
             var differenceResult = GetDifferencePolynomials();
             var multiplicationPolynomialsResult = GetMultiplicationPolynomials();
-            
-            _formattedOutput.ShowSimpleActionsWithPolynomialsResults(_polynomials[0], _polynomials[1], sumResult, differenceResult, multiplicationPolynomialsResult);
+
+            _view.ShowSimpleActionsWithPolynomialsResults(_polynomials[0], _polynomials[1], sumResult, differenceResult, multiplicationPolynomialsResult);
         }
 
         private void CallMultiplicationNumberByPolynomial(double multiplier)
         {
             var result = _polynomials[0] * multiplier;
 
-            _formattedOutput.ShowMultiplicationNumberByPolynomial(_polynomials[0], multiplier, result);
+            _view.ShowMultiplicationNumberByPolynomial(_polynomials[0], multiplier, result);
         }
 
         private void CreatePolynomials()
@@ -91,38 +63,64 @@ namespace PolynomialProgram
         private Polynomial RequestPolynomial()
         {
             var power = RequestPower();
-            var monomials = (power != 0) ? RequestMonomials(power) : null;
+            var monomial = power != 0 ? RequestMonomials(power) : null;
 
-            return new Polynomial(power, monomials);
+            return new Polynomial(power, monomial);
         }
 
         private int RequestPower()
         {
-            var userInput = _userInput.RequestInput(DataType.Power, "Enter power:");
-            return DataParser.ParseInt(userInput);
+            var userInput = RequestInput(DataType.Power, "Enter power:");
+            return Convert.ToInt32(userInput);
         }
 
         private int RequestMultiplier()
         {
-            var userInput = _userInput.RequestInput(DataType.Multiplier, "Enter multiplier:");
-            return DataParser.ParseInt(userInput);
+            var userInput = RequestInput(DataType.Multiplier, "Enter multiplier:");
+            return Convert.ToInt32(userInput);
         }
         
         private IDictionary<int, double> RequestMonomials(int power)
         {
             IDictionary<int, double> resultMonomials = new Dictionary<int, double>();
-            string userInput;
-            double currentMonomial;
 
-            for (int i = power; i >= 1; i--)
+            for (var i = power; i >= 1; i--)
             {
-                userInput = _userInput.RequestInput(DataType.Monomial, $"Enter monomial in {i} power:");
-                currentMonomial = DataParser.ParseDouble(userInput);
-                resultMonomials.Add(i, currentMonomial);
+                var userInput = RequestInput(DataType.Monomial, $"Enter monomial in {i} power:");
+                var currentMonomial = DataParser.ParseDouble(userInput);
+                
+                if (Convert.ToInt32(currentMonomial) != 0)
+                {
+                    resultMonomials.Add(i, currentMonomial);
+                }
             }
 
             return resultMonomials;
         }
 
+        private string RequestInput(DataType dataType, string welcomeMessage)
+        {
+            var userInput = string.Empty;
+            var isUserInputCorrect = false;
+
+            while (!isUserInputCorrect)
+            {
+                userInput = _view.ReadLine(welcomeMessage);
+                isUserInputCorrect = ValidateUserInput(dataType, userInput);
+            }
+
+            return userInput;
+        }
+
+        private bool ValidateUserInput(DataType dataType, string userInput)
+        {
+            var isUserInputCorrect = Validator.ValidateInput(dataType, userInput);
+            if (!isUserInputCorrect)
+            {
+                _view.WriteErrorMessage();
+            }
+
+            return isUserInputCorrect;
+        }
     }
 }

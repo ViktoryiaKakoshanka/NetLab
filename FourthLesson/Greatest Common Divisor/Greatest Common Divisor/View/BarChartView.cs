@@ -1,11 +1,11 @@
-﻿using GreatestCommonDivisorProgram.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
+using Greatest_Common_Divisor.Model;
 
-namespace GreatestCommonDivisorProgram.View
+namespace Greatest_Common_Divisor.View
 {
-    class BarChartView
+    internal class BarChartView
     {
         public void Initialize(Chart chart, BarChart barChart)
         {
@@ -23,7 +23,7 @@ namespace GreatestCommonDivisorProgram.View
             return Enum.GetNames(typeof(SeriesChartType));
         }
 
-        private void SetInitialParameters(Chart chart, ChartColorPalette colorPalette, SeriesChartType chartType)
+        private static void SetInitialParameters(Chart chart, ChartColorPalette colorPalette, SeriesChartType chartType)
         {
             chart.Series.Clear();
             chart.Palette = colorPalette;
@@ -35,7 +35,7 @@ namespace GreatestCommonDivisorProgram.View
             chart.Series["Number В"].ChartType = chartType;
         }
 
-        private void FillTheChartWithHistory(Chart chart, IDictionary<int, int[]> data)
+        private static void FillTheChartWithHistory(Chart chart, IDictionary<int, int[]> data)
         {
             foreach (var item in data)
             {

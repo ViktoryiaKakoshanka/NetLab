@@ -1,18 +1,17 @@
-﻿using DecoratorStream.Model;
+﻿using System.IO;
 using DecoratorStream.View;
-using System.IO;
 
-namespace DecoratorStream
+namespace DecoratorStream.Decorators
 {
-    public abstract class BaseDecoratorStream : Stream
+    public abstract class StreamBaseDecorator : Stream
     {
-        protected Stream Stream { get; private set; }
-        protected IConsoleView ConsoleView { get; private set; }
+        protected Stream Stream { get; }
+        protected IView View { get; }
 
-        public BaseDecoratorStream(Stream stream, IConsoleView view) : base()
+        protected StreamBaseDecorator(Stream stream, IView view)
         {
             Stream = stream;
-            ConsoleView = view;
+            View = view;
         }
 
         public override bool CanRead => Stream.CanRead;
