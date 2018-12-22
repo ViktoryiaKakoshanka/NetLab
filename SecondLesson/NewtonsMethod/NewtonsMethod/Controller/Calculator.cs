@@ -1,8 +1,8 @@
 ﻿using System;
-using NewtonsMethod.Model;
 
 namespace NewtonsMethod.Controller
 {
+<<<<<<< HEAD
     public class Calculator
     {
         public static double CalculateRadicalSign(IRadicalSign radicalSign)
@@ -27,10 +27,29 @@ namespace NewtonsMethod.Controller
                 previousRadical = currentRadical;
 
             } while (currentAccuracy > radicalSign.Accuracy);
+=======
+    public class Calculator : ICalculator
+    {
+        public double CalculateMathPow(double @base, int power) => Math.Pow(@base, power);
 
-            return currentRadical;
+        public double CalculateRoot(int degree, double radicand, double accuracy)
+        {
+            var previousRoot = 1.0;
+            var currentRoot = 1.0;
+            var currentAccuracy = 0.0;
+
+            do
+            {
+                currentRoot = CalculateRootByNewtonMethod(degree, radicand, previousRoot);
+                currentAccuracy = Math.Abs(previousRoot - currentRoot);
+                previousRoot = currentRoot;
+            } while (currentAccuracy > accuracy);
+>>>>>>> master
+
+            return currentRoot;
         }
 
+<<<<<<< HEAD
         private static double CalculateCurrentRadical(IRadicalSign radicalSign, double previousRadical)
         {
             var previousPower = ErectInDegree(previousRadical, radicalSign.Power - 1);
@@ -48,6 +67,20 @@ namespace NewtonsMethod.Controller
             }
 
             return number * ErectInDegree(number, --power);
+=======
+        public bool ValidateRoot(double root, int power, double radicant, double accuracy)
+        {
+            return Math.Abs(Math.Pow(root, power) - radicant) <= accuracy;
+        }
+
+        private double CalculateRootByNewtonMethod(int degree, double radicand, double previousRoot)
+        {
+            var rootInPower = CalculatorHelper.RaiseToPower(previousRoot, degree - 1);
+
+            var numerator = (degree - 1.0) * previousRoot + radicand / rootInPower;
+
+            return numerator / degree;
+>>>>>>> master
         }
     }
 }

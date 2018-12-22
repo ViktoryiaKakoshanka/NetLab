@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,17 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoordinatesFromFileHelper.cs" />
     <Compile Include="View\ConsoleView.cs" />
     <Compile Include="Model\Coordinate.cs" />
-    <Compile Include="Model\CoordinatesHelper.cs" />
+    <Compile Include="CoordinateHelper.cs" />
     <Compile Include="CoordinatesReaderProgram.cs" />
     <Compile Include="Menu\ExitMenuItem.cs" />
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="View\IView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Menu\ReadCoordinatesFromConsoleMenuItem.cs" />
-    <Compile Include="Menu\ReadCoordinatesFromFileMenuItem.cs" />
+    <Compile Include="Menu\CoordinatesFromConsoleMenuItem.cs" />
+    <Compile Include="Menu\CoordinatesFromFileMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

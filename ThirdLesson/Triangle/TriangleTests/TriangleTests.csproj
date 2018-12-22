@@ -49,8 +49,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Compile Include="TriangleHelperTests.cs" />
+    <Compile Include="ValidatorTests.cs" />
+=======
     <Compile Include="TriangleCalculationsTests.cs" />
     <Compile Include="ValidateTriangleHelperTests.cs" />
+>>>>>>> RefactoringInLab
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
