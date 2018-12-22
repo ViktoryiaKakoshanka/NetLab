@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Compile Include="Controller\CalculatorHelper.cs" />
+    <Compile Include="Controller\ICalculator.cs" />
+    <Compile Include="Controller\DataParser.cs" />
+>>>>>>> master
     <Compile Include="Controller\Validator.cs" />
     <Compile Include="Controller\Calculator.cs" />
     <Compile Include="Model\IRadicalSign.cs" />

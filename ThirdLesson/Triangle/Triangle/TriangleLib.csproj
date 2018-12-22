@@ -42,15 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\TriangleCalculations.cs" />
-    <Compile Include="Controller\Validaor.cs" />
+    <Compile Include="Controller\TriangleHelper.cs" />
+    <Compile Include="Controller\Validator.cs" />
     <Compile Include="Model\Triangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleView.cs" />
     <Compile Include="View\IConsoleView.cs" />
+<<<<<<< HEAD
     <Compile Include="View\ITriangleView.cs" />
     <Compile Include="WorkWithATriangle.cs" />
+=======
+    <Compile Include="ProgramRunner.cs" />
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
