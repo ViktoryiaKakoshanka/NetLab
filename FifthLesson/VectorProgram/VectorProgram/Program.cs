@@ -6,7 +6,7 @@ namespace VectorProgram
     {
         private static void Main()
         {
-            new ProgramRun(new ConsoleView()).Run();
+            new ProgramRunner(new ConsoleView()).Run();
         }
     }
 }

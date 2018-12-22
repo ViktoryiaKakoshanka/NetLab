@@ -1,5 +1,4 @@
 ﻿using DecoratorStream.Decorators;
-using DecoratorStream.Model;
 using DecoratorStream.View;
 using System.Configuration;
 using System.IO;
@@ -27,7 +26,7 @@ namespace DecoratorStream
         {
             using (var fileStream = CreateStream(_filePath, _view))
             {
-                var buffer = new byte[fileStream.Length + FileData.CountBytesToRead];
+                var buffer = new byte[fileStream.Length];
                 fileStream.Read(buffer, 0, (int)fileStream.Length);
             }
         }
@@ -35,7 +34,7 @@ namespace DecoratorStream
         private static Stream CreateStream(string filePath, IView view)
         {
             Stream stream = File.OpenRead(filePath);
-            stream = new StreamProgressReaderDecorator(stream, view);
+            stream = new StreamProgressReportingDecorator(stream, view);
 
             return new StreamRequestPasswordDecorator(stream, view);
         }

@@ -14,12 +14,6 @@
         public double Result { get; set; }
 >>>>>>> master
 
-        /// <summary>
-        /// Number constructor under the power root
-        /// </summary>
-        /// <param name="numericalRoot">Number under the root</param>
-        /// <param name="power">Root degree</param>
-        /// <param name="accuracy">Calculation accuracy</param>
         public RadicalSign(double numericalRoot, int power, double accuracy)
         {
             Number = numericalRoot;
@@ -36,6 +30,5 @@
         {
             return $"The root of the {Power} degree from {Number} with accuracy {Accuracy}";
         }
-        
     }
 }

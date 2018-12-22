@@ -1,5 +1,10 @@
 ﻿using System;
+<<<<<<< HEAD
 using BinaryConverting.Controller;
+=======
+using BinaryConverting.Helpers;
+using BinaryConverting.Model;
+>>>>>>> RefactoringInLab
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BinaryConvertingTests
@@ -13,9 +18,8 @@ namespace BinaryConvertingTests
 <<<<<<< HEAD
             var numberMock = Mock.Of<INumbers>(x=> x.DecimalNumber == 51);
             const string expected = "110011";
-            var conversionNumeric = new ConversionNumber();
-            conversionNumeric.ConvertDecimalToBinary(numberMock);
 
+<<<<<<< HEAD
             Assert.AreSame(string.Intern(expected), string.Intern(numberMock.BinaryNumber));
 =======
             var number = 51;
@@ -25,17 +29,23 @@ namespace BinaryConvertingTests
 
             Assert.AreSame(string.Intern(externed), string.Intern(actual));
 >>>>>>> master
+=======
+            Assert.AreSame(string.Intern(expected), string.Intern(numberMock.ConvertDecimalToBinary().BinaryNumber));
+>>>>>>> RefactoringInLab
         }
 
         [TestMethod]
         public void NumberDecimalToBinary_rand_10_30_Test()
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             var conversionNumeric = new ConversionNumber();
 =======
             var conversionNumeric = new NumberConverter();
 >>>>>>> master
 
+=======
+>>>>>>> RefactoringInLab
             for (var i = 10; i < 30; i++)
             {
 <<<<<<< HEAD
@@ -45,6 +55,7 @@ namespace BinaryConvertingTests
                 var externed = Convert.ToString(i, 2);
 >>>>>>> master
                 
+<<<<<<< HEAD
                 var actual = conversionNumeric.ConvertDecimalToBinary(i);
                 
 <<<<<<< HEAD
@@ -52,6 +63,9 @@ namespace BinaryConvertingTests
 =======
                 Assert.AreSame(string.Intern(externed), string.Intern(actual), "Conversion from decimal number {0} to binary number system {1}", externed, actual);
 >>>>>>> master
+=======
+                Assert.AreSame(string.Intern(expected), string.Intern(numberMock.ConvertDecimalToBinary().BinaryNumber), "Conversion from decimal number {0} to binary number system {1}", expected, numberMock.BinaryNumber);
+>>>>>>> RefactoringInLab
             }
         }
     }

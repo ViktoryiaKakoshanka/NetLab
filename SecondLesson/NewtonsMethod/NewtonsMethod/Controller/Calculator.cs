@@ -5,11 +5,6 @@ namespace NewtonsMethod.Controller
 <<<<<<< HEAD
     public class Calculator
     {
-        /// <summary>
-        /// Calculation of the nth root of a number by the Newton method with a given accuracy
-        /// </summary>
-        /// <param name="radicalSign"></param>
-        /// <returns></returns>
         public static double CalculateRadicalSign(IRadicalSign radicalSign)
         {
             var root = CalculateRadicalWithAccuracy(radicalSign);
@@ -63,13 +58,7 @@ namespace NewtonsMethod.Controller
 
             return firstPartCalculation * secondPartCalculation;
         }
-
-        /// <summary>
-        /// Raising a number to a power
-        /// </summary>
-        /// <param name="number">number</param>
-        /// <param name="power">power</param>
-        /// <returns>number {value} in degree {power}</returns>
+        
         private static double ErectInDegree(double number, int power)
         {
             if (power <= 1)
@@ -93,6 +82,5 @@ namespace NewtonsMethod.Controller
             return numerator / degree;
 >>>>>>> master
         }
-
     }
 }

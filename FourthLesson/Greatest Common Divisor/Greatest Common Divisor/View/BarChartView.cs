@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 using Greatest_Common_Divisor.Model;
 
@@ -10,17 +11,17 @@ namespace Greatest_Common_Divisor.View
         public void Initialize(Chart chart, BarChart barChart)
         {
             SetInitialParameters(chart, barChart.Color, barChart.ChartType);
-            FillTheChartWithHistory(chart, barChart.CalculationHistory);            
+            FillChartWithHistory(chart, barChart.CalculationHistory);            
         }
 
-        public string[] GetPalette()
+        public object[] GetPalette()
         {
-            return Enum.GetNames(typeof(ChartColorPalette));
+            return Enum.GetNames(typeof(ChartColorPalette)).ToArray<object>();
         }
 
-        public string[] GetSeriesChartType()
+        public object[] GetSeriesChartType()
         {
-            return Enum.GetNames(typeof(SeriesChartType));
+            return Enum.GetNames(typeof(SeriesChartType)).ToArray<object>();
         }
 
         private static void SetInitialParameters(Chart chart, ChartColorPalette colorPalette, SeriesChartType chartType)
@@ -35,7 +36,7 @@ namespace Greatest_Common_Divisor.View
             chart.Series["Number В"].ChartType = chartType;
         }
 
-        private static void FillTheChartWithHistory(Chart chart, IDictionary<int, int[]> data)
+        private static void FillChartWithHistory(Chart chart, IDictionary<int, int[]> data)
         {
             foreach (var item in data)
             {
@@ -43,7 +44,5 @@ namespace Greatest_Common_Divisor.View
                 chart.Series["Number В"].Points.AddY(item.Value[1]);
             }
         }
-
-
     }
 }

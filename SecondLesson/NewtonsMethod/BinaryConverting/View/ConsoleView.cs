@@ -3,30 +3,35 @@ using System;
 
 namespace BinaryConverting.View
 {
-    public class ConsoleView : IConsoleView, IConvertingView
+    public class ConsoleView : IView
     {
-        public string ReadLine(string message)
+        public string RequestInput(string message)
         {
-            WriteLine(message);
+            Console.WriteLine(message);
             return Console.ReadLine();
         }
         
         public void ShowResultByConversion(INumbers number)
         {
-            WriteLine("Result:");
-            WriteLine($"Decimal number:{number.DecimalNumber}");
-            WriteLine($"Binary number:{number.BinaryNumber}");
+            Console.WriteLine("Result:");
+            Console.WriteLine($"Decimal number: {number.DecimalNumber}");
+            Console.WriteLine($"Binary number: {number.BinaryNumber}");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             WaitForAnyKeyPress();
+=======
+            Console.ReadKey(true);
+>>>>>>> RefactoringInLab
         }
 
-        public void ShowWarningMessageForRepeat(string messEx = null)
+        public void ShowWarningMessage(string messEx = null)
         {
-            Clear();
-            WriteLine($"{messEx} You must repeat the value entry. ");
+            Console.Clear();
+            Console.WriteLine($"{messEx} You must repeat the value entry. ");
         }
 
+<<<<<<< HEAD
         public void ShowMessageFormatException() => WriteLine("Invalid format entered.");
 
         public void ShowMessageArgumentNullException() => WriteLine("The value entered is empty.");
@@ -64,5 +69,8 @@ namespace BinaryConverting.View
 
         public void ShowMessageArgumentNullException() => WriteLine("Entered value is empty.");
 >>>>>>> master
+=======
+        public void ShowMessageFormatException() => Console.WriteLine("Invalid format entered.");
+>>>>>>> RefactoringInLab
     }
 }
