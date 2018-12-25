@@ -2,12 +2,12 @@
 
 namespace DecoratorStream
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            IConsoleView consoleView = new ConsoleView();
-            new ProgramRun().Run(consoleView);
+            IView view = new ConsoleView();
+            new ProgramRunner(view).Run();
         }
     }
 }

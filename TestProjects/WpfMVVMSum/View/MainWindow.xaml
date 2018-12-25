@@ -1,0 +1,17 @@
+﻿<Window x:Class="WpfMVVMSum.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMVVMSum"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="194.492" Width="281.356">
+    <Grid>
+        <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="40"
+            Text="{Binding Clicks}"></TextBlock>
+        
+    </Grid>
+</Window>

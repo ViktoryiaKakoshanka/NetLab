@@ -3,6 +3,7 @@ using FirstLessonConsoleApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace FirstLessonConsoleApp.View
 {
@@ -23,11 +24,13 @@ namespace FirstLessonConsoleApp.View
 
         public void PrintCoordinates(ICollection<Coordinate> coordinates)
         {
-            PrintMessage("Formatted coordinate output");
-            foreach(var coordinate in coordinates)
+            if(coordinates == null || !coordinates.Any())
             {
-                Console.WriteLine(coordinate);
+                return;
             }
+
+            PrintMessage("Formatted coordinate output");
+            coordinates.ToList().ForEach(Console.WriteLine);
         }
 
         public void PrintMessage(string message)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace GreatestCommonDivisorProgram
+namespace Greatest_Common_Divisor
 {
     static class Program
     {

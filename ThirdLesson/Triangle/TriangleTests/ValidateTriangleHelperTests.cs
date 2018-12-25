@@ -1,5 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TriangleLib.Controller;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TriangleLib.Helpers;
 
 namespace TriangleTests
 {
@@ -7,33 +9,27 @@ namespace TriangleTests
     public class ValidateTriangleHelperTests
     {
         [TestMethod]
-        public void ValidateTriangleTest_returned_true()
+        public void ValidateTriangle_CorrectTriangle_Test()
         {
-            var a = 1.0;
-            var b = 2.0;
-            var c = new double[] { 1.0, 2.0, 3.0, 4.0 };
-            var expected = new bool[] { true, true, true, false };
-            bool actual;
+            const double firstEdge = 1.0;
+            const double secondEdge = 2.0;
+            var thirdEdge = new List<double> { 1.0, 2.0, 3.0 };
 
-            for (var i = 0; i < c.Length; i++)
-            {
-                actual = ValidatingTriangleHelper.ValidateTriangle(a, b, c[i]);
+            var actual = thirdEdge.All(x => Validator.ValidateTriangle(firstEdge, secondEdge, x));
 
-                Assert.AreEqual(expected[i], actual, $"Validate Triangle: expected={expected[i].ToString()}, actual={actual.ToString()}");
-            }
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
-        public void TryParseInputtingSideTest_returned_double()
+        public void ValidateTriangle_WrongTriangle_Test()
         {
-            var diferentVariants = new string[] { "3.0", "3,0", "kj", " " };
-            var expectedVariants = new double[] { 3.0, 3.0, 0.0, 0.0 };
+            const double firstSide = 1.0;
+            const double secondSide = 2.0;
+            const double thirdSide = 4.0;
 
-            for (var i = 0; i<diferentVariants.Length; i++)
-            {
-                var actual = ValidatingTriangleHelper.TryParseInputtingSide(diferentVariants[i]);
-                Assert.AreEqual(expectedVariants[i], actual, $"expected={expectedVariants[i].ToString()}, actual={actual.ToString()}");
-            }
+            var actual = Validator.ValidateTriangle(firstSide, secondSide, thirdSide);
+
+            Assert.IsFalse(actual);
         }
     }
 }

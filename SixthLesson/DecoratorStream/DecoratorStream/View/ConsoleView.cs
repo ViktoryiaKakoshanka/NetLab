@@ -2,25 +2,48 @@
 
 namespace DecoratorStream.View
 {
-    public class ConsoleView : IConsoleView
+    public class ConsoleView : IView
     {
-        public void WaitForAnyKeyPress()
+        private int _currentProgress;
+
+        public void Exit()
         {
-            WriteLine("Press any key to exit.");
+            Console.WriteLine("Press any key to exit.");
             Console.ReadKey(true);
         }
 
-        public string ReadLine(string message)
+        public void NotifyWrongPassword() => Console.WriteLine("You entered the wrong password!");
+        
+        public string RequestPassword() => ReadLine("Enter the password to read the file.");
+
+        public void ShowCurrentStatusInPercent(int percents, int numberLineToPrint)
         {
-            WriteLine(message);
-            return Console.ReadLine();
+            SetCursorPosition(0, numberLineToPrint);
+            Console.WriteLine($"{percents}%  ");
+        }
+        
+        public void FinishRead()
+        {
+            SetCursorPosition(0, Console.CursorTop + 2);
         }
 
-        public void WriteLine(string text) => Console.WriteLine(text);
-
-        public void ShowMessageErrorPassword()
+        public void UpdateProgressBar(int newProgress)
         {
-            WriteLine("You entered the wrong password");
+            for (var position = _currentProgress; position < newProgress; position++)
+            {
+                SetCursorPosition(position, 3);
+                Console.WriteLine('|');
+            }
+
+            _currentProgress = newProgress;
+        }
+
+        private static void SetCursorPosition(int left, int top) => Console.SetCursorPosition(left, top);
+
+        private static string ReadLine(string message)
+        {
+            Console.WriteLine(message);
+            return Console.ReadLine();
         }
     }
 }

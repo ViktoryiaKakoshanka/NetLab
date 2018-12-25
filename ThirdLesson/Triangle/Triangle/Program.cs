@@ -2,13 +2,20 @@
 
 namespace TriangleLib
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            IConsoleView view = new ConsoleView();
-            var run = new WorkWithATriangle();
-            run.RunProgram(view);
+<<<<<<< HEAD
+<<<<<<< HEAD
+            var run = new WorkWithATriangle(new ConsoleView());
+=======
+            var run = new ProgramRunner(new ConsoleView());
+>>>>>>> master
+=======
+            var run = new ProgramRunner(new ConsoleView());
+>>>>>>> RefactoringInLab
+            run.RunProgram();
         }
     }
 }

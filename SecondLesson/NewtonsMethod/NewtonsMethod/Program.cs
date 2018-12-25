@@ -2,12 +2,12 @@
 
 namespace NewtonsMethod
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            var start = new Startup();
-            start.RunProgram(new PorogramView());
+            var runner = new ProgramRunner(new ConsoleView());
+            runner.RunProgram();
         }
     }
 }

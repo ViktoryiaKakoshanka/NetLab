@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,17 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\FileData.cs" />
+    <Compile Include="Decorators\StreamProgressReportingDecorator.cs" />
+    <Compile Include="Decorators\StreamRequestPasswordDecorator.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ProgramRun.cs" />
+    <Compile Include="ProgramRunner.cs" />
+    <Compile Include="ProgressReporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserInputProcessor.cs" />
     <Compile Include="View\ConsoleView.cs" />
-    <Compile Include="View\IConsoleView.cs" />
-    <Compile Include="WorkWithText.cs" />
+    <Compile Include="View\IView.cs" />
+    <Compile Include="Decorators\StreamBaseDecorator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

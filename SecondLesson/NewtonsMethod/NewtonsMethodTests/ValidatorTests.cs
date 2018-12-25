@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewtonsMethod.Controller;
 using NewtonsMethod.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NewtonsMethodTests
 {
@@ -8,58 +10,63 @@ namespace NewtonsMethodTests
     public class ValidatorTests
     {
         [TestMethod]
-        public void ValidateInput_CorrectValues()
+        public void ValidateInput_CorrectPowerFormat_Test()
         {
-            bool actual;
-            var inputPower = new[] { "1", "56565"};
-            var inputNumerical = new[] { "1", "56565", "1.0", "1,54" };
-            var inputАccurancy = new[] { "0,005", "0.549", "0,00000000001" };
+            var inputPower = new List<string> { "1", "56565"};
 
-            foreach(var item in inputPower)
-            {
-                actual = Validator.ValidateInput(item, InputedParams.Power);
-                Assert.AreEqual(true, actual);
-            }
+            var actual = inputPower.All(x => Validator.ValidateInput(x, DataType.Power));
             
-            foreach (var item in inputNumerical)
-            {
-                actual = Validator.ValidateInput(item, InputedParams.Numerical);
-                Assert.AreEqual(true, actual);
-            }
-            
-            foreach (var item in inputАccurancy)
-            {
-                actual = Validator.ValidateInput(item, InputedParams.Аccurancy);
-                Assert.AreEqual(true, actual);
-            }
+            Assert.IsTrue(actual);
         }
-        
+
         [TestMethod]
-        public void ValidateInput_WrongValues()
+        public void ValidateInput_CorrectNumericalFormat_Test()
         {
-            bool actual;
+            var inputNumerical = new List<string> { "1", "56565", "1.0", "1,54" };
 
-            var inputPower = new[] { "1.0", "0,56565", string.Empty, "asf" };
-            var inputNumerical = new[] { string.Empty, "asf" };
-            var inputАccurancy = new[] { "15", "54", "1.65", string.Empty, "asf" };
+            var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Numerical));
 
-            foreach (var item in inputPower)
-            {
-                actual = Validator.ValidateInput(item, InputedParams.Power);
-                Assert.AreEqual(false, actual);
-            }
+            Assert.IsTrue(actual);
+        }
 
-            foreach (var item in inputNumerical)
-            {
-                actual = Validator.ValidateInput(item, InputedParams.Numerical);
-                Assert.AreEqual(false, actual);
-            }
+        [TestMethod]
+        public void ValidateInput_CorrectAccuracyFormat_Test()
+        {
+            var inputAccuracy = new List<string> { "0,005", "0.549", "0,00000000001" };
+            
+            var actual = inputAccuracy.All(x => Validator.ValidateInput(x, DataType.Accuracy));
 
-            foreach (var item in inputАccurancy)
-            {
-                actual = Validator.ValidateInput(item, InputedParams.Аccurancy);
-                Assert.AreEqual(false, actual);
-            }
+            Assert.IsTrue(actual);
+        }
+
+        [TestMethod]
+        public void ValidateInput_WrongPowerFormat_Test()
+        {
+            var inputPower = new List<string> { "1.0", "0,56565", string.Empty, "asf" };
+
+            var actual = inputPower.All(x => Validator.ValidateInput(x, DataType.Power));
+
+            Assert.IsFalse(actual);
+        }
+
+        [TestMethod]
+        public void ValidateInput_WrongNumericalFormat_Test()
+        {
+            var inputNumerical = new List<string> { string.Empty, "asf" };
+
+            var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Numerical));
+
+            Assert.IsFalse(actual);
+        }
+
+        [TestMethod]
+        public void ValidateInput_WrongAccuracyFormat_Test()
+        {
+            var inputAccuracy = new List<string> { "15", "54", "1.65", string.Empty, "asf" };
+
+            var actual = inputAccuracy.All(x => Validator.ValidateInput(x, DataType.Accuracy));
+
+            Assert.IsFalse(actual);
         }
     }
 }
