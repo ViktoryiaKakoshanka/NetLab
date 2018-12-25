@@ -7,8 +7,8 @@ namespace FirstLessonConsoleApp
 {
     public class CoordinatesReaderProgram
     {
-        private IView _view;
-        private ICollection<MenuItem> _menuItems = new List<MenuItem>();
+        private readonly IView _view;
+        private readonly ICollection<MenuItem> _menuItems = new List<MenuItem>();
 
         public CoordinatesReaderProgram(IView view, string coordinatesFilePath)
         {
@@ -52,6 +52,25 @@ namespace FirstLessonConsoleApp
 
         private MenuItem TryGetMenuItem(string userInput)
         {
+<<<<<<< HEAD
+            return !int.TryParse(userInput, out var index) ? null : FindMenuItemByIndex(index);
+        }
+
+        private MenuItem FindMenuItemByIndex(int index)
+        {
+            MenuItem selectedItem = null;
+
+            foreach (var item in _menuItems)
+            {
+                if (item.OrderNumber == index)
+                {
+                    selectedItem = item;
+                    break;
+                }
+            }
+
+            return selectedItem;
+=======
             var index = 0;
 
             if (!int.TryParse(userInput, out index))
@@ -60,6 +79,7 @@ namespace FirstLessonConsoleApp
             }
 
             return _menuItems.FirstOrDefault(x => x.OrderNumber == index);
+>>>>>>> master
         }
     }
 }

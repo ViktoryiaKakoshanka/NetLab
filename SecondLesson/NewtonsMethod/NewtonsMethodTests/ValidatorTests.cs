@@ -30,11 +30,11 @@ namespace NewtonsMethodTests
         }
 
         [TestMethod]
-        public void ValidateInput_CorrectАccurancyFormat_Test()
+        public void ValidateInput_CorrectAccuracyFormat_Test()
         {
-            var inputАccurancy = new List<string> { "0,005", "0.549", "0,00000000001" };
+            var inputAccuracy = new List<string> { "0,005", "0.549", "0,00000000001" };
             
-            var actual = inputАccurancy.All(x => Validator.ValidateInput(x, DataType.Аccurancy));
+            var actual = inputAccuracy.All(x => Validator.ValidateInput(x, DataType.Accuracy));
 
             Assert.IsTrue(actual);
         }
@@ -60,11 +60,11 @@ namespace NewtonsMethodTests
         }
 
         [TestMethod]
-        public void ValidateInput_WrongАccurancyFormat_Test()
+        public void ValidateInput_WrongAccuracyFormat_Test()
         {
-            var inputАccurancy = new List<string> { "15", "54", "1.65", string.Empty, "asf" };
+            var inputAccuracy = new List<string> { "15", "54", "1.65", string.Empty, "asf" };
 
-            var actual = inputАccurancy.All(x => Validator.ValidateInput(x, DataType.Аccurancy));
+            var actual = inputAccuracy.All(x => Validator.ValidateInput(x, DataType.Accuracy));
 
             Assert.IsFalse(actual);
         }

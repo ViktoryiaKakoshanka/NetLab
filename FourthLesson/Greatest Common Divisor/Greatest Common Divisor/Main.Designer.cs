@@ -1,4 +1,4 @@
-﻿namespace GreatestCommonDivisorProgram
+﻿namespace Greatest_Common_Divisor
 {
     partial class Form1
     {
@@ -35,12 +35,12 @@
             this.groupOfNumbers = new System.Windows.Forms.GroupBox();
             this.numbersForGCD = new System.Windows.Forms.TextBox();
             this.GCDStain = new System.Windows.Forms.Button();
-            this.GCDEuclide = new System.Windows.Forms.Button();
+            this.AlgorithmEuclide = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupResults = new System.Windows.Forms.GroupBox();
             this.lblresult = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.createBarChar = new System.Windows.Forms.Button();
             this.comboPalette = new System.Windows.Forms.ComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -49,14 +49,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.groupOfNumbers.SuspendLayout();
             this.groupResults.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
             // groupOfNumbers
             // 
             this.groupOfNumbers.Controls.Add(this.numbersForGCD);
             this.groupOfNumbers.Controls.Add(this.GCDStain);
-            this.groupOfNumbers.Controls.Add(this.GCDEuclide);
+            this.groupOfNumbers.Controls.Add(this.AlgorithmEuclide);
             this.groupOfNumbers.Controls.Add(this.label1);
             this.groupOfNumbers.Location = new System.Drawing.Point(12, 12);
             this.groupOfNumbers.Name = "groupOfNumbers";
@@ -80,17 +80,17 @@
             this.GCDStain.Text = "Calculate the gcd using the stein method";
             this.toolTip1.SetToolTip(this.GCDStain, "The method calculates the gcd for the first two numbers only.");
             this.GCDStain.UseVisualStyleBackColor = true;
-            this.GCDStain.Click += new System.EventHandler(this.GCDStain_Click);
+            this.GCDStain.Click += new System.EventHandler(this.AlgorithmStainOnClick);
             // 
-            // GCDEuclide
+            // AlgorithmEuclide
             // 
-            this.GCDEuclide.Location = new System.Drawing.Point(6, 69);
-            this.GCDEuclide.Name = "GCDEuclide";
-            this.GCDEuclide.Size = new System.Drawing.Size(301, 23);
-            this.GCDEuclide.TabIndex = 2;
-            this.GCDEuclide.Text = "Calculate the GCD by the Euclidean method";
-            this.GCDEuclide.UseVisualStyleBackColor = true;
-            this.GCDEuclide.Click += new System.EventHandler(this.GCDEuclideOnClick);
+            this.AlgorithmEuclide.Location = new System.Drawing.Point(6, 69);
+            this.AlgorithmEuclide.Name = "AlgorithmEuclide";
+            this.AlgorithmEuclide.Size = new System.Drawing.Size(301, 23);
+            this.AlgorithmEuclide.TabIndex = 2;
+            this.AlgorithmEuclide.Text = "Calculate the GCD by the Euclidean method";
+            this.AlgorithmEuclide.UseVisualStyleBackColor = true;
+            this.AlgorithmEuclide.Click += new System.EventHandler(this.AlgorithmEuclideanOnClick);
             // 
             // label1
             // 
@@ -125,22 +125,22 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Подсказка";
             // 
-            // chart1
+            // chart
             // 
             chartArea1.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal;
             chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(352, 55);
-            this.chart1.Name = "chart1";
+            this.chart.Legends.Add(legend1);
+            this.chart.Location = new System.Drawing.Point(352, 55);
+            this.chart.Name = "chart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(425, 274);
-            this.chart1.TabIndex = 3;
-            this.chart1.Text = "chart";
+            this.chart.Series.Add(series1);
+            this.chart.Size = new System.Drawing.Size(425, 274);
+            this.chart.TabIndex = 3;
+            this.chart.Text = "chart";
             // 
             // createBarChar
             // 
@@ -199,16 +199,16 @@
             this.Controls.Add(this.comboTypeChart);
             this.Controls.Add(this.comboPalette);
             this.Controls.Add(this.createBarChar);
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.chart);
             this.Controls.Add(this.groupResults);
             this.Controls.Add(this.groupOfNumbers);
             this.Name = "Form1";
-            this.Text = "Вычисление НОД";
+            this.Text = "NOD calculation";
             this.groupOfNumbers.ResumeLayout(false);
             this.groupOfNumbers.PerformLayout();
             this.groupResults.ResumeLayout(false);
             this.groupResults.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,13 +217,13 @@
         #endregion
         private System.Windows.Forms.GroupBox groupOfNumbers;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button GCDEuclide;
+        private System.Windows.Forms.Button AlgorithmEuclide;
         private System.Windows.Forms.GroupBox groupResults;
         private System.Windows.Forms.TextBox numbersForGCD;
         private System.Windows.Forms.Label lblresult;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button GCDStain;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private System.Windows.Forms.Button createBarChar;
         private System.Windows.Forms.ComboBox comboPalette;
         private System.Windows.Forms.ColorDialog colorDialog1;
