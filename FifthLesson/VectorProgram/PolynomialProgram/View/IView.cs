@@ -1,21 +1,20 @@
 ﻿using PolynomialProgram.Model;
-using System.Collections.Generic;
 
 namespace PolynomialProgram.View
 {
     public interface IView
     {
-        string ReadLine(string message);
+        string RequestInput(string message);
         void Exit();
-        void WriteErrorMessage();
-        void ShowPolynomials(IList<Polynomial> initialPolynomials);
+        void ShowErrorMessage();
+        void ShowResultOfPolynomialsMultiplication(Polynomial first, Polynomial second, Polynomial result);
         void ShowSimpleActionsWithPolynomialsResults(
             Polynomial first,
             Polynomial second,
-            Polynomial sumPolynomials,
-            Polynomial differencePolynomials,
-            Polynomial multiplicationPolynomials);
+            Polynomial sumResult,
+            Polynomial differenceResult);
 
         void ShowMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, Polynomial result);
+        void ShowPolynomials(Polynomial first, Polynomial second);
     }
 }
