@@ -2,9 +2,9 @@
 {
     public class Triangle
     {
-        public double FirstSide { get; private set; }
-        public double SecondSide { get; private set; }
-        public double ThirdSide { get; private set; }
+        public double FirstSide { get; }
+        public double SecondSide { get; }
+        public double ThirdSide { get; }
         
         public Triangle(double firstSide, double secondSide, double thirdSide)
         {

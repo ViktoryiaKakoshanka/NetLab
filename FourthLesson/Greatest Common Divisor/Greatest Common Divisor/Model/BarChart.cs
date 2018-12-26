@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace GreatestCommonDivisorProgram.Model
+namespace Greatest_Common_Divisor.Model
 {
     public class BarChart
     {

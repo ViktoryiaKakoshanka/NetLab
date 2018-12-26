@@ -1,54 +1,42 @@
-﻿using DecoratorStream.Model;
+﻿using DecoratorStream.Decorators;
 using DecoratorStream.View;
-using DecoratorStream.Decorators;
-using System.IO;
 using System.Configuration;
+using System.IO;
 
 namespace DecoratorStream
 {
     public class ProgramRunner
     {
-        private IConsoleView _consoleView;
-
-        public ProgramRunner(IConsoleView consoleView)
+        private readonly IView _view;
+        private readonly string _filePath;
+        
+        public ProgramRunner(IView view)
         {
-            _consoleView = consoleView;
+            _view = view;
+            _filePath = ConfigurationManager.AppSettings["filePath"];
         }
 
         public void Run()
         {
-            ShowFileReadStatus();
-
-            ReadFileWithPassword();
-
-            _consoleView.WaitForAnyKeyPress();
+            ReadFile();
+            _view.Exit();
         }
 
-        private void ShowFileReadStatus()
+        private void ReadFile()
         {
-            using (var fileStream = new ProgressReadDecorator(File.OpenRead(ConfigurationManager.AppSettings["filePath"]), _consoleView))
+            using (var fileStream = CreateStream(_filePath, _view))
             {
-                var buffer = new byte[fileStream.Length + FileData.COUNTBYTESTOREAD];
+                var buffer = new byte[fileStream.Length];
                 fileStream.Read(buffer, 0, (int)fileStream.Length);
             }
         }
 
-        private void ReadFileWithPassword()
+        private static Stream CreateStream(string filePath, IView view)
         {
-            using (var fileStream = new RequestPasswordDecorator(File.OpenRead(ConfigurationManager.AppSettings["filePath"]), _consoleView))
-            {
-                var buffer = new byte[fileStream.Length];
+            Stream stream = File.OpenRead(filePath);
+            stream = new StreamProgressReportingDecorator(stream, view);
 
-                var readResult = fileStream.Read(buffer, 0, buffer.Length);
-
-                if (readResult == 0)
-                {
-                    return;
-                }
-
-                var textFromFile = System.Text.Encoding.Default.GetString(buffer);
-                _consoleView.ShowReadText(textFromFile);
-            }
+            return new StreamRequestPasswordDecorator(stream, view);
         }
     }
 }
