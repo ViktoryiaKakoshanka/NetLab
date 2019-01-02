@@ -7,6 +7,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="361.441">
     <Grid>
-        
+        <Button Content="Open data" 
+                HorizontalAlignment="Left" 
+                Margin="41,34,0,0" 
+                VerticalAlignment="Top" 
+                Width="75"
+                Command="{Binding OpenCommand}"/>
+        <Button Content="Save data" 
+                HorizontalAlignment="Left" 
+                Margin="145,34,0,0" 
+                VerticalAlignment="Top" 
+                Width="75"
+                Command="{Binding SaveAs}"/>
+
     </Grid>
 </Window>
