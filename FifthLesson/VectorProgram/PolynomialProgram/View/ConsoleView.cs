@@ -26,7 +26,7 @@ namespace PolynomialProgram.View
             Console.WriteLine(second.ToString());
         }
 
-        public void ShowSimpleActionsWithPolynomialsResults(
+        public void ShowResultsOfPolynomialSum(
             Polynomial first,
             Polynomial second,
             Polynomial sumResult,
@@ -36,12 +36,12 @@ namespace PolynomialProgram.View
             Console.WriteLine($"{first} - {second} = {differenceResult}");
         }
 
-        public void ShowMultiplicationNumberByPolynomial(Polynomial polynomial, double multiplier, Polynomial result)
+        public void ShowResultOfProductPolynomialByConstant(Polynomial polynomial, double multiplier, Polynomial result)
         {
             Console.WriteLine($"{polynomial} * {multiplier} = {result}");
         }
 
-        public void ShowResultOfPolynomialsMultiplication(Polynomial first, Polynomial second, Polynomial result)
+        public void ShowResultOfPolynomialsProduct(Polynomial first, Polynomial second, Polynomial result)
         {
             Console.WriteLine($"{first} * {second} = {result}");
         }
