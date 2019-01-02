@@ -48,16 +48,15 @@
   <ItemGroup>
     <Compile Include="Algorithms\AlgorithmFactory.cs" />
     <Compile Include="Algorithms\EuclideanAlgorithm.cs" />
-    <Compile Include="Algorithms\IAlgorithmGcd.cs" />
-    <Compile Include="Algorithms\StainGcdAlgorithm.cs" />
-    <Compile Include="Driver.cs" />
+    <Compile Include="Algorithms\IAlgorithm.cs" />
+    <Compile Include="Algorithms\StainAlgorithm.cs" />
+    <Compile Include="Algorithms\AlgorithmHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\BarChart.cs" />
     <Compile Include="Model\AlgorithmType.cs" />
     <Compile Include="Model\GcdResult.cs" />
     <Compile Include="Program.cs" />

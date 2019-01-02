@@ -4,13 +4,13 @@ namespace Greatest_Common_Divisor.Algorithms
 {
     public class AlgorithmFactory
     {
-        public IAlgorithmGcd Algorithm(AlgorithmType type)
+        public IAlgorithm CreateAlgorithm(AlgorithmType type)
         {
             if (type == AlgorithmType.Euclidean)
             {
                 return new EuclideanAlgorithm();
             }
-            return new StainGcdAlgorithm();
+            return new StainAlgorithm();
         }
     }
 }

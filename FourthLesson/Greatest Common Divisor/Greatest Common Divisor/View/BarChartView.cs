@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
-using Greatest_Common_Divisor.Model;
 
 namespace Greatest_Common_Divisor.View
 {
     internal class BarChartView
     {
-        public void Initialize(Chart chart, BarChart barChart)
+        private const string FirstNumber = "Number А";
+        private const string SecondNumber = "Number B";
+
+        public void Initialize(Chart chart, ChartColorPalette colorPalette, SeriesChartType chartType, IDictionary<int, int[]> data)
         {
-            SetInitialParameters(chart, barChart.Color, barChart.ChartType);
-            FillChartWithHistory(chart, barChart.CalculationHistory);            
+            SetInitialParameters(chart, colorPalette, chartType);
+            FillChartWithHistory(chart, data);            
         }
 
         public object[] GetPalette()
@@ -29,19 +31,19 @@ namespace Greatest_Common_Divisor.View
             chart.Series.Clear();
             chart.Palette = colorPalette;
 
-            chart.Series.Add("Number А");
-            chart.Series.Add("Number В");
+            chart.Series.Add(FirstNumber);
+            chart.Series.Add(SecondNumber);
 
-            chart.Series["Number А"].ChartType = chartType;
-            chart.Series["Number В"].ChartType = chartType;
+            chart.Series[FirstNumber].ChartType = chartType;
+            chart.Series[SecondNumber].ChartType = chartType;
         }
 
         private static void FillChartWithHistory(Chart chart, IDictionary<int, int[]> data)
         {
             foreach (var item in data)
             {
-                chart.Series["Number А"].Points.AddY(item.Value[0]);
-                chart.Series["Number В"].Points.AddY(item.Value[1]);
+                chart.Series[FirstNumber].Points.AddY(item.Value[0]);
+                chart.Series[SecondNumber].Points.AddY(item.Value[1]);
             }
         }
     }

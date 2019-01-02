@@ -1,5 +1,4 @@
-﻿using System;
-using Greatest_Common_Divisor.Algorithms;
+﻿using Greatest_Common_Divisor.Algorithms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GreatestCommonDivisorTests
@@ -47,11 +46,11 @@ namespace GreatestCommonDivisorTests
                 new[] {-5, 45 }
             };
 
-            var expected = new int[] { 6, 18, 1, 5 };
+            var expected = new[] { 6, 18, 1, 5 };
 
             for (var i = 0; i < numbers.Length; i++)
             {
-                var actual = new StainGcdAlgorithm().Calculate(numbers[i]).GreatestCommonDivisor;
+                var actual = new StainAlgorithm().Calculate(numbers[i]).GreatestCommonDivisor;
                 Assert.AreEqual(expected[i], actual);
             }
         }
