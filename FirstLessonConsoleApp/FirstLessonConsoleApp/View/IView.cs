@@ -10,8 +10,8 @@ namespace FirstLessonConsoleApp.View
         void PrintCoordinates(ICollection<Coordinate> coordinates);
         void PrintMessage(string message);
         string PromptInput(string promptText);
-        string ReadLine();
-        void PressAnyKeyToContinue();
+        string RequestInput();
+        void RestartToContinue();
         void ClearScreen();
     }
 }

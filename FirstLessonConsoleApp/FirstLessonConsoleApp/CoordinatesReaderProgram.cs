@@ -1,6 +1,7 @@
 ﻿using FirstLessonConsoleApp.Menu;
 using FirstLessonConsoleApp.View;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FirstLessonConsoleApp
 {
@@ -39,7 +40,7 @@ namespace FirstLessonConsoleApp
 
             _view.ClearScreen();
             menuItem.Execute();
-            _view.PressAnyKeyToContinue();
+            _view.RestartToContinue();
         }
 
         private void InitializeMenuItems(string coordinatesFilePath)
@@ -56,18 +57,7 @@ namespace FirstLessonConsoleApp
 
         private MenuItem FindMenuItemByIndex(int index)
         {
-            MenuItem selectedItem = null;
-
-            foreach (var item in _menuItems)
-            {
-                if (item.OrderNumber == index)
-                {
-                    selectedItem = item;
-                    break;
-                }
-            }
-
-            return selectedItem;
+            return _menuItems.FirstOrDefault(item => item.OrderNumber == index);
         }
     }
 }

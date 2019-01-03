@@ -18,7 +18,7 @@ namespace FirstLessonConsoleApp.Menu
 
             while (coordinate != null)
             {
-                var userInput = GetView().ReadLine();
+                var userInput = GetView().RequestInput();
                 coordinate = CoordinatesHelper.ParseUserInputToCoordinate(userInput);
                 if (coordinate != null)
                 {

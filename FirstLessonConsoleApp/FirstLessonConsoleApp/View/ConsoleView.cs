@@ -41,12 +41,12 @@ namespace FirstLessonConsoleApp.View
             return Console.ReadLine();
         }
 
-        public string ReadLine()
+        public string RequestInput()
         {
             return Console.ReadLine();
         }
 
-        public void PressAnyKeyToContinue()
+        public void RestartToContinue()
         {
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
