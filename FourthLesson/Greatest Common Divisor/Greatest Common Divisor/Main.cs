@@ -80,7 +80,7 @@ namespace Greatest_Common_Divisor
 
         private static bool ValidateUserInput(string userInput)
         {
-            var regex = new Regex(@"^[-+]?[0-9]{1,3} [-+]?[0-9]{1,3}( [-+]?[0-9]{1,3})?( [-+]?[0-9]{1,3})?( [-+]?[0-9]{1,3})?$");
+            var regex = new Regex(@"^[-+]?[1-9]{1,3} [-+]?[1-9]{1,3}( [-+]?[1-9]{1,3})?( [-+]?[1-9]{1,3})?( [-+]?[1-9]{1,3})?$");
             return regex.IsMatch(userInput);
         }
 
@@ -101,7 +101,7 @@ namespace Greatest_Common_Divisor
             s.Append("GCD( ")
                 .Append(string.Concat(numbers.Select(x => $"{x.ToString()} ")))
                 .Append($") = {result.GreatestCommonDivisor}")
-                .Append(result.NumberOfIterations == 0 ? "\n" : $" and number of iterations = {result.NumberOfIterations}\n");
+                .Append(result.IterationsCount == 0 ? "\n" : $" and number of iterations = {result.IterationsCount}\n");
 
             return s.ToString();
         }
