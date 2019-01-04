@@ -1,5 +1,4 @@
-﻿using System;
-using Greatest_Common_Divisor.Model;
+﻿using Greatest_Common_Divisor.Model;
 
 namespace Greatest_Common_Divisor.Algorithms
 {
