@@ -2,9 +2,9 @@
 
 namespace FirstLessonWPFApplication.Controller
 {
-    class Format
+    internal static class Format
     {
-        public string FormatСoordinates(string userInput)
+        public static string FormatСoordinates(string userInput)
         {
             var coordinate = CoordinatesHelper.ParseUserInputToCoordinate(userInput);
             return coordinate != null ? coordinate.ToString() : string.Empty;

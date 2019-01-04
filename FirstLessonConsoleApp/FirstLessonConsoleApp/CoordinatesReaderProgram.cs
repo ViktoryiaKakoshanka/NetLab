@@ -45,41 +45,19 @@ namespace FirstLessonConsoleApp
 
         private void InitializeMenuItems(string coordinatesFilePath)
         {
-            _menuItems.Add(new CoordinatesFromConsoleMenuItem(1, "input coordinates from the keyboard", _view));
-            _menuItems.Add(new CoordinatesFromFileMenuItem(2, "input coordinates from file", _view, coordinatesFilePath));
+            _menuItems.Add(new ReadCoordinatesFromConsoleMenuItem(1, "input coordinates from the keyboard", _view));
+            _menuItems.Add(new ReadCoordinatesFromFileMenuItem(2, "input coordinates from file", _view, coordinatesFilePath));
             _menuItems.Add(new ExitMenuItem(3, "exit", _view));
         }
 
         private MenuItem TryGetMenuItem(string userInput)
         {
-<<<<<<< HEAD
             return !int.TryParse(userInput, out var index) ? null : FindMenuItemByIndex(index);
         }
 
         private MenuItem FindMenuItemByIndex(int index)
         {
-            MenuItem selectedItem = null;
-
-            foreach (var item in _menuItems)
-            {
-                if (item.OrderNumber == index)
-                {
-                    selectedItem = item;
-                    break;
-                }
-            }
-
-            return selectedItem;
-=======
-            var index = 0;
-
-            if (!int.TryParse(userInput, out index))
-            {
-                return null;
-            }
-
-            return _menuItems.FirstOrDefault(x => x.OrderNumber == index);
->>>>>>> master
+            return _menuItems.FirstOrDefault(item => item.OrderNumber == index);
         }
     }
 }
