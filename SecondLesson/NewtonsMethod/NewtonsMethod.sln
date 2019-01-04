@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonsMethod", "NewtonsMethod\NewtonsMethod.csproj", "{BF032AA0-0E30-47F8-AEF9-8632B708B322}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryConverter", "BinaryConverting\BinaryConverter.csproj", "{ECB87152-D588-4AF3-8921-E7B0C8B12FBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryConverting", "BinaryConverting\BinaryConverting.csproj", "{ECB87152-D588-4AF3-8921-E7B0C8B12FBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonsMethodTests", "NewtonsMethodTests\NewtonsMethodTests.csproj", "{E7FE3AAF-92E3-4996-910C-90FF2E837C57}"
 EndProject
