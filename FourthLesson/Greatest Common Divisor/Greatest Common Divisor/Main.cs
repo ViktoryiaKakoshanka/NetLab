@@ -29,13 +29,13 @@ namespace Greatest_Common_Divisor
             groupResults.Click += GroupResultsOnClick;
         }
         
-        private void CreateBarCharOnClick(object sender, EventArgs e)
+        private void CreateBarChartOnClick(object sender, EventArgs e)
         {
             var colorPalette = (ChartColorPalette)Enum.Parse(typeof(ChartColorPalette), comboPalette.Text);
             var typeChart = (SeriesChartType)Enum.Parse(typeof(SeriesChartType), comboTypeChart.Text);
 
             _chartView.Initialize(chart, colorPalette, typeChart, _result.CalculationHistory);
-            createBarChar.Enabled = false;
+            createBarChart.Enabled = false;
         }
 
         private string GetUserInput()
@@ -70,7 +70,7 @@ namespace Greatest_Common_Divisor
 
         private void EnableCreatingChart(int countNumbers)
         {
-            createBarChar.Enabled = countNumbers == 2;
+            createBarChart.Enabled = countNumbers == 2;
         }
 
         private void GroupResultsOnClick(object sender, EventArgs e)

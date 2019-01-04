@@ -24,24 +24,24 @@ namespace Greatest_Common_Divisor.Algorithms
             return numbers.Length == 2 ? RunAlgorithmEuclidean(numbers[0], numbers[1]) : new GcdResult();
         }
 
-        private static GcdResult RunAlgorithmEuclidean(int first, int second, GcdResult result = null)
+        private static GcdResult RunAlgorithmEuclidean(int first, int second, GcdResult intermediateResult = null)
         {
-            if (result == null)
+            if (intermediateResult == null)
             {
-                result = new GcdResult();
+                intermediateResult = new GcdResult();
             }
 
             while (second != 0)
             {
-                result.IterationsCount++;
-                result.AddCalculationHistory(first, second, result.IterationsCount);
+                intermediateResult.IterationsCount++;
+                intermediateResult.AddCalculationHistory(first, second, intermediateResult.IterationsCount);
                 second = first % (first = second);
             }
 
-            result.AddCalculationHistory(first, first, ++result.IterationsCount);
-            result.GreatestCommonDivisor = first;
+            intermediateResult.AddCalculationHistory(first, first, ++intermediateResult.IterationsCount);
+            intermediateResult.GreatestCommonDivisor = first;
 
-            return result;
+            return intermediateResult;
         }
 
         private static GcdResult RunAlgorithmEuclidean(int first, int second, int thirdNumber)

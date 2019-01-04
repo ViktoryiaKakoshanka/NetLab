@@ -7,41 +7,41 @@ namespace Greatest_Common_Divisor.Algorithms
     {
         public GcdResult Calculate(int[] numbers)
         {
-            return AlgorithmStain(numbers[0], numbers[1]);
+            return RunAlgorithmStain(numbers[0], numbers[1]);
         }
 
-        private static GcdResult AlgorithmStain(int firstNumber, int secondNumber, int count = 0, GcdResult result = null)
+        private static GcdResult RunAlgorithmStain(int firstNumber, int secondNumber, int step = 0, GcdResult intermediateResult = null)
         {
-            if (result == null)
+            if (intermediateResult == null)
             {
-                result = new GcdResult();
+                intermediateResult = new GcdResult();
             }
 
             while (true)
             {
-                count++;
-                result.AddCalculationHistory(firstNumber, secondNumber, count);
+                step++;
+                intermediateResult.AddCalculationHistory(firstNumber, secondNumber, step);
 
                 if (firstNumber == secondNumber)
                 {
-                    result.GreatestCommonDivisor = firstNumber;
-                    result.IterationsCount = count;
-                    return result;
+                    intermediateResult.GreatestCommonDivisor = firstNumber;
+                    intermediateResult.IterationsCount = step;
+                    return intermediateResult;
                 }
 
                 if (firstNumber == 1 || secondNumber == 1)
                 {
-                    result.GreatestCommonDivisor = 1;
-                    result.IterationsCount = count;
-                    return result;
+                    intermediateResult.GreatestCommonDivisor = 1;
+                    intermediateResult.IterationsCount = step;
+                    return intermediateResult;
                 }
 
                 if (firstNumber % 2 == 0 && secondNumber % 2 == 0)
                 {
-                    result = AlgorithmStain(firstNumber / 2, secondNumber / 2, count);
-                    result.IterationsCount = count;
-                    result.GreatestCommonDivisor *= 2;
-                    return result;
+                    intermediateResult = RunAlgorithmStain(firstNumber / 2, secondNumber / 2, step);
+                    intermediateResult.IterationsCount = step;
+                    intermediateResult.GreatestCommonDivisor *= 2;
+                    return intermediateResult;
                 }
 
                 if (firstNumber % 2 == 0)
