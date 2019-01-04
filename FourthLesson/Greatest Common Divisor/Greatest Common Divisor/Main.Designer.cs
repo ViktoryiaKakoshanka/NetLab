@@ -41,7 +41,7 @@
             this.lblresult = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.createBarChar = new System.Windows.Forms.Button();
+            this.createBarChart = new System.Windows.Forms.Button();
             this.comboPalette = new System.Windows.Forms.ComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.comboTypeChart = new System.Windows.Forms.ComboBox();
@@ -123,7 +123,7 @@
             // toolTip1
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTip1.ToolTipTitle = "Подсказка";
+            this.toolTip1.ToolTipTitle = "Help";
             // 
             // chart
             // 
@@ -142,16 +142,16 @@
             this.chart.TabIndex = 3;
             this.chart.Text = "chart";
             // 
-            // createBarChar
+            // createBarChart
             // 
-            this.createBarChar.Enabled = false;
-            this.createBarChar.Location = new System.Drawing.Point(629, 18);
-            this.createBarChar.Name = "createBarChar";
-            this.createBarChar.Size = new System.Drawing.Size(148, 23);
-            this.createBarChar.TabIndex = 2;
-            this.createBarChar.Text = "Build Bar Graph";
-            this.createBarChar.UseVisualStyleBackColor = true;
-            this.createBarChar.Click += new System.EventHandler(this.CreateBarCharOnClick);
+            this.createBarChart.Enabled = false;
+            this.createBarChart.Location = new System.Drawing.Point(629, 18);
+            this.createBarChart.Name = "createBarChart";
+            this.createBarChart.Size = new System.Drawing.Size(148, 23);
+            this.createBarChart.TabIndex = 2;
+            this.createBarChart.Text = "Build chart";
+            this.createBarChart.UseVisualStyleBackColor = true;
+            this.createBarChart.Click += new System.EventHandler(this.CreateBarChartOnClick);
             // 
             // comboPalette
             // 
@@ -198,7 +198,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboTypeChart);
             this.Controls.Add(this.comboPalette);
-            this.Controls.Add(this.createBarChar);
+            this.Controls.Add(this.createBarChart);
             this.Controls.Add(this.chart);
             this.Controls.Add(this.groupResults);
             this.Controls.Add(this.groupOfNumbers);
@@ -224,7 +224,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button GCDStain;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
-        private System.Windows.Forms.Button createBarChar;
+        private System.Windows.Forms.Button createBarChart;
         private System.Windows.Forms.ComboBox comboPalette;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ComboBox comboTypeChart;

@@ -32,7 +32,7 @@ namespace VectorProgram.Helpers
         public static void ExecuteMultiplyVectorByConstant(Vector first, Vector second, double multiplier, IView view)
         {
             var result = first * multiplier;
-            view.ShowResultOfProductVectorsByConstant(first, result, multiplier);
+            view.ShowResultOfProductVectorByConstant(first, result, multiplier);
         }
 
         public static void ExecuteScalarProduct(Vector first, Vector second, IView view)

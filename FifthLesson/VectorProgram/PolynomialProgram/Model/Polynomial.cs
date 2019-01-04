@@ -47,7 +47,7 @@ namespace PolynomialProgram.Model
 
         public override string ToString()
         {
-            return String.Concat(Monomials.Select(GetMonomial).Reverse().ToList());
+            return string.Concat(Monomials.Select(GetMonomial).Reverse().ToList());
         }
 
         public static bool operator ==(Polynomial first, Polynomial second) => first != null && first.Equals(second);
@@ -67,14 +67,14 @@ namespace PolynomialProgram.Model
 
         private static string GetMonomial(KeyValuePair<int, double> pair)
         {
-            return !pair.Value.IsEqual(0) ? FormatCoefficientForOutput(pair.Value) + FormatPowerForOutput(pair.Key) : String.Empty;
+            return !pair.Value.IsEqual(0) ? FormatCoefficientForOutput(pair.Value) + FormatPowerForOutput(pair.Key) : string.Empty;
         }
 
         private static string FormatCoefficientForOutput(double coefficient)
         {
             if (coefficient.IsEqual(1))
             {
-                return String.Empty;
+                return string.Empty;
             }
             return coefficient < 0 ? coefficient.ToString(CultureInfo.CurrentCulture) : $"+{coefficient}";
         }
@@ -83,7 +83,7 @@ namespace PolynomialProgram.Model
         {
             if (power == 0)
             {
-                return String.Empty;
+                return string.Empty;
             }
             return power != 1 ? $"x^{power}" : "x";
         }

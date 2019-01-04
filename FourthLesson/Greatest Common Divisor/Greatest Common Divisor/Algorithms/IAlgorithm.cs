@@ -2,7 +2,7 @@
 
 namespace Greatest_Common_Divisor.Algorithms
 {
-    public interface IAlgorithmGcd
+    public interface IAlgorithm
     {
         GcdResult Calculate(int[] numbers);
     }

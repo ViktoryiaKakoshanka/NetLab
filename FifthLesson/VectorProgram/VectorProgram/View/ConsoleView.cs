@@ -43,7 +43,7 @@ namespace VectorProgram.View
             Console.WriteLine($"Vector product: {first} x {second} = {result}\n");
         }
 
-        public void ShowResultOfProductVectorsByConstant(Vector first, Vector result, double multiplier)
+        public void ShowResultOfProductVectorByConstant(Vector first, Vector result, double multiplier)
         {
             Console.WriteLine("Multiplication of vectors by number:");
 
