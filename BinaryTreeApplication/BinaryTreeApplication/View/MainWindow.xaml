@@ -1,0 +1,24 @@
+﻿<Window x:Class="BinaryTreeApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BinaryTreeApplication"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="361.441">
+    <Grid>
+        <Button Content="Open data" 
+                HorizontalAlignment="Left" 
+                Margin="41,34,0,0" 
+                VerticalAlignment="Top" 
+                Width="75"
+                Command="{Binding OpenCommand}"/>
+        <Button Content="Save data" 
+                HorizontalAlignment="Left" 
+                Margin="145,34,0,0" 
+                VerticalAlignment="Top" 
+                Width="75"
+                Command="{Binding SaveAs}"/>
+
+    </Grid>
+</Window>

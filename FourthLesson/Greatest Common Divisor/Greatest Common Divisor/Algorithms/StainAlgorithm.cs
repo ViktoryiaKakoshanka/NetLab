@@ -36,23 +36,23 @@ namespace Greatest_Common_Divisor.Algorithms
                     return intermediateResult;
                 }
 
-                if (firstNumber % 2 == 0 && secondNumber % 2 == 0)
+                if ((firstNumber & 1) == 0 && (secondNumber & 1) == 0)
                 {
-                    intermediateResult = RunAlgorithmStain(firstNumber / 2, secondNumber / 2, step);
+                    intermediateResult = RunAlgorithmStain(firstNumber >> 1, secondNumber >> 1, step);
                     intermediateResult.IterationsCount = step;
-                    intermediateResult.GreatestCommonDivisor *= 2;
+                    intermediateResult.GreatestCommonDivisor <<= 1;
                     return intermediateResult;
                 }
 
-                if (firstNumber % 2 == 0)
+                if ((firstNumber & 1) == 0)
                 {
-                    firstNumber = firstNumber / 2;
+                    firstNumber = firstNumber >> 1;
                     continue;
                 }
 
-                if (secondNumber % 2 == 0)
+                if ((secondNumber & 1) == 0)
                 {
-                    secondNumber = secondNumber / 2;
+                    secondNumber = secondNumber >> 1;
                     continue;
                 }
 
