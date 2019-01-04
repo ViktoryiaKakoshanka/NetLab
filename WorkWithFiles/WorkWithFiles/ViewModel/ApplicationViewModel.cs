@@ -8,7 +8,6 @@ namespace WorkWithFiles.ViewModel
 {
     internal class ApplicationViewModel : INotifyPropertyChanged
     {
-
         private string _text;
         private readonly DialogService _dialogService;
         private readonly FileService _fileService;
@@ -31,7 +30,6 @@ namespace WorkWithFiles.ViewModel
                 OnPropertyChanged();
             }
         }
-
 
         public ApplicationViewModel(DialogService dialogService, FileService fileService)
         {
