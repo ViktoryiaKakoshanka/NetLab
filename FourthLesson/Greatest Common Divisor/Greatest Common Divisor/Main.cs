@@ -80,7 +80,7 @@ namespace Greatest_Common_Divisor
 
         private static bool ValidateUserInput(string userInput)
         {
-            var regex = new Regex(@"^[-+]?[1-9]{1,3} [-+]?[1-9]{1,3}( [-+]?[1-9]{1,3})?( [-+]?[1-9]{1,3})?( [-+]?[1-9]{1,3})?$");
+            var regex = new Regex(@"^[+]?[1-9][0-9]{0,3} [+]?[1-9][0-9]{0,3}( [+]?[1-9][0-9]{0,3})?( [+]?[1-9][0-9]{0,3})?( [+]?[1-9][0-9]{0,3})?$");
             return regex.IsMatch(userInput);
         }
 
