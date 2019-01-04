@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NewtonsMethod.Model;
 
 namespace NewtonsMethod.View
@@ -6,14 +10,14 @@ namespace NewtonsMethod.View
     public class ConsoleView : IView
     {
         private const int Digits = 5;
-        
+
         public string RequestInput(string message)
         {
             Console.WriteLine(message);
             return Console.ReadLine();
         }
 
-        public void WriteLine(string text) =>  Console.WriteLine(text);
+        public void WriteLine(string text) => Console.WriteLine(text);
 
         public void ShowErrorMessageUserInput() => Console.WriteLine("You entered incorrect data");
 

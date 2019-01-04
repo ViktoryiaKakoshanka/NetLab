@@ -2,7 +2,7 @@
 
 namespace BinaryConverting.Helpers
 {
-    public static class NumberConverter
+    public static class NumberExtensions
     {
         public static INumbers ConvertDecimalToBinary(this INumbers number)
         {
