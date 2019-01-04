@@ -47,10 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\AlgorithmFactory.cs" />
+    <Compile Include="Algorithms\AlgorithmHelper.cs" />
     <Compile Include="Algorithms\EuclideanAlgorithm.cs" />
     <Compile Include="Algorithms\IAlgorithm.cs" />
     <Compile Include="Algorithms\StainAlgorithm.cs" />
-    <Compile Include="Algorithms\AlgorithmHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

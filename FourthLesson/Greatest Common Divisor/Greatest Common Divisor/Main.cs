@@ -34,7 +34,7 @@ namespace Greatest_Common_Divisor
             var colorPalette = (ChartColorPalette)Enum.Parse(typeof(ChartColorPalette), comboPalette.Text);
             var typeChart = (SeriesChartType)Enum.Parse(typeof(SeriesChartType), comboTypeChart.Text);
 
-            _chartView.Initialize(chart, colorPalette, typeChart, _result.GetCalculationHistory());
+            _chartView.Initialize(chart, colorPalette, typeChart, _result.CalculationHistory);
             createBarChar.Enabled = false;
         }
 
@@ -101,7 +101,7 @@ namespace Greatest_Common_Divisor
             s.Append("GCD( ")
                 .Append(string.Concat(numbers.Select(x => $"{x.ToString()} ")))
                 .Append($") = {result.GreatestCommonDivisor}")
-                .Append(result.NumberOfIterations == 0 ? "\n" : $" and number of iterations = {result.NumberOfIterations}\n");
+                .Append(result.IterationsCount == 0 ? "\n" : $" and number of iterations = {result.IterationsCount}\n");
 
             return s.ToString();
         }

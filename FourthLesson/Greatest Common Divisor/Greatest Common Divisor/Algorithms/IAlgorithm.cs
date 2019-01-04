@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Greatest_Common_Divisor.Model;
 
 namespace Greatest_Common_Divisor.Algorithms
 {
-    interface IAlgorithm
+    public interface IAlgorithm
     {
+        GcdResult Calculate(int[] numbers);
     }
 }

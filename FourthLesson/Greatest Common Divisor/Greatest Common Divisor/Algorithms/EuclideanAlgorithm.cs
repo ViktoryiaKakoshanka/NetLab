@@ -5,83 +5,62 @@ namespace Greatest_Common_Divisor.Algorithms
 {
     public class EuclideanAlgorithm : IAlgorithm
     {
-        private readonly GcdResult _result = new GcdResult();
-
         public GcdResult Calculate(int[] numbers)
         {
-            var iterationsCount = 0;
             if (numbers.Length == 5)
             {
-                _result.GreatestCommonDivisor = RunAlgorithmEuclidean(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], out iterationsCount);
-                
-            }
-            else if (numbers.Length == 4)
-            {
-                _result.GreatestCommonDivisor = RunAlgorithmEuclidean(numbers[0], numbers[1], numbers[2], numbers[3], out iterationsCount);
-            }
-            else if (numbers.Length == 3)
-            {
-                _result.GreatestCommonDivisor = RunAlgorithmEuclidean(numbers[0], numbers[1], numbers[2], out iterationsCount);
-            }
-            else if (numbers.Length == 2)
-            {
-                _result.GreatestCommonDivisor = RunAlgorithmEuclidean(numbers[0], numbers[1], out iterationsCount);
+                return RunAlgorithmEuclidean(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
             }
 
-            _result.NumberOfIterations = iterationsCount;
-            return _result;
+            if (numbers.Length == 4)
+            {
+                return RunAlgorithmEuclidean(numbers[0], numbers[1], numbers[2], numbers[3]);
+            }
+
+            if (numbers.Length == 3)
+            {
+                return RunAlgorithmEuclidean(numbers[0], numbers[1], numbers[2]);
+            }
+
+            return numbers.Length == 2 ? RunAlgorithmEuclidean(numbers[0], numbers[1]) : new GcdResult();
         }
 
-        private int RunAlgorithmEuclidean(int first, int second, out int pass, int count = 0)
+        private static GcdResult RunAlgorithmEuclidean(int first, int second, GcdResult result = null)
         {
-            pass = count;
-            if (first == 0 && second != 0)
+            if (result == null)
             {
-                return second;
-            }
-
-            if (second == 0 && first != 0)
-            {
-                return first;
-            }
-
-            if (first == 0 && second == 0)
-            {
-                return 1;
+                result = new GcdResult();
             }
 
             while (second != 0)
             {
-                pass++;
-                _result.AddCalculationHistory(first, second, pass);
+                result.IterationsCount++;
+                result.AddCalculationHistory(first, second, result.IterationsCount);
                 second = first % (first = second);
             }
-            _result.AddCalculationHistory(first, first, ++pass);
-            return Math.Abs(first);
-        }
 
-        private int RunAlgorithmEuclidean(int first, int second, int thirdNumber, out int pass)
-        {
-            var topTwo = RunAlgorithmEuclidean(first, second, out var step);
-            var result = RunAlgorithmEuclidean(topTwo, thirdNumber, out var step1, step);
-            pass = step1;
+            result.AddCalculationHistory(first, first, ++result.IterationsCount);
+            result.GreatestCommonDivisor = first;
+
             return result;
         }
 
-        private int RunAlgorithmEuclidean(int first, int second, int thirdNumber, int fourthNumber, out int pass)
+        private static GcdResult RunAlgorithmEuclidean(int first, int second, int thirdNumber)
         {
-            var topThree = RunAlgorithmEuclidean(first, second, thirdNumber, out var step);
-            var result = RunAlgorithmEuclidean(topThree, fourthNumber, out var step1, step);
-            pass = step1;
-            return result;
+            var topTwo = RunAlgorithmEuclidean(first, second);
+            return RunAlgorithmEuclidean(topTwo.GreatestCommonDivisor, thirdNumber, topTwo);
         }
 
-        private int RunAlgorithmEuclidean(int first, int second, int thirdNumber, int fourthNumber, int fifthNumber, out int pass)
+        private static GcdResult RunAlgorithmEuclidean(int first, int second, int thirdNumber, int fourthNumber)
         {
-            var topFour = RunAlgorithmEuclidean(first, second, thirdNumber, fourthNumber, out var step);
-            var result = RunAlgorithmEuclidean(topFour, fifthNumber, out var step1, step);
-            pass = step1;
-            return result;
+            var topThree = RunAlgorithmEuclidean(first, second, thirdNumber);
+            return RunAlgorithmEuclidean(topThree.GreatestCommonDivisor, fourthNumber, topThree);
+        }
+
+        private static GcdResult RunAlgorithmEuclidean(int first, int second, int thirdNumber, int fourthNumber, int fifthNumber)
+        {
+            var topFour = RunAlgorithmEuclidean(first, second, thirdNumber, fourthNumber);
+            return RunAlgorithmEuclidean(topFour.GreatestCommonDivisor, fifthNumber, topFour);
         }
     }
 }
