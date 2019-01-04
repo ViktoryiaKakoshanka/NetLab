@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using WorkWithFiles.Properties;
 
 namespace WorkWithFiles.ViewModel
 {
@@ -38,30 +39,27 @@ namespace WorkWithFiles.ViewModel
 
         public RelayCommand OpenCommand
         {
-            get
+            get { return _openCommand ?? (_openCommand = new RelayCommand(obj =>
             {
-                return _openCommand ?? (_openCommand = new RelayCommand(obj =>
+                try
                 {
-                    try
+                    if (_dialogService.OpenFileDialog() != true)
                     {
-                        if (_dialogService.OpenFileDialog() != true)
-                        {
-                            return;
-                        }
+                        return;
+                    }
 
-                        Text = _fileService.Open(_dialogService.FilePath);
-                        _dialogService.ShowMessage("File open.");
-                    }
-                    catch (IOException e)
-                    {
-                        _dialogService.ShowMessage($"{e.Message}\nChoose another file");
-                    }
-                    catch (Exception)
-                    {
-                        _dialogService.ShowMessage("File is closed.");
-                    }
-                }));
-            }
+                    Text = _fileService.Open(_dialogService.FilePath);
+                    _dialogService.ShowMessage("File open.");
+                }
+                catch (IOException e)
+                {
+                    _dialogService.ShowMessage($"{e.Message}\nChoose another file");
+                }
+                catch(Exception)
+                {
+                    _dialogService.ShowMessage("File is closed.");
+                }
+            })); }
         }
 
         public RelayCommand SaveAs
@@ -107,7 +105,7 @@ namespace WorkWithFiles.ViewModel
                     {
                         _dialogService.ShowMessage("The file has not been opened.");
                     }
-                    catch (Exception e)
+                    catch(Exception e)
                     {
                         _dialogService.ShowMessage($"File is closed.\n{e.Message}");
                     }
