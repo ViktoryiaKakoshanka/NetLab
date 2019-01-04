@@ -7,18 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="361.441">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="172*" />
+            <ColumnDefinition Width="181*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         <Button Content="Open data" 
                 HorizontalAlignment="Left" 
                 Margin="41,34,0,0" 
                 VerticalAlignment="Top" 
                 Width="75"
-                Command="{Binding OpenCommand}"/>
+                Command="{Binding OpenCommand}" Height="20"/>
         <Button Content="Save data" 
                 HorizontalAlignment="Left" 
-                Margin="145,34,0,0" 
+                Margin="35,34,0,0" 
                 VerticalAlignment="Top" 
                 Width="75"
-                Command="{Binding SaveAs}"/>
+                Command="{Binding SaveAs}" Height="20" Grid.Column="1"/>
 
     </Grid>
 </Window>
