@@ -8,7 +8,7 @@ namespace FirstLessonConsoleApp.Menu
         public int OrderNumber { get; }
         public string Text { get; }
 
-        public MenuItem(int orderNumber, string text, IView view)
+        protected MenuItem(int orderNumber, string text, IView view)
         {
             OrderNumber = orderNumber;
             Text = text;

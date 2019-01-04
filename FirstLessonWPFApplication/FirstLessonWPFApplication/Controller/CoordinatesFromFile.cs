@@ -5,25 +5,25 @@ using System.Text;
 
 namespace FirstLessonWPFApplication.Controller
 {
-    class CoordinatesFromFile
+    internal class CoordinatesFromFile
     {
-        private List<string> listCoordinatesFromFile = new List<string>();
+        private readonly List<string> _listCoordinatesFromFile = new List<string>();
 
         public void ReadFileInListbox(string pathFile)
         {
-            using (StreamReader instanceStreamReader = new StreamReader(pathFile, Encoding.Default))
+            using (var instanceStreamReader = new StreamReader(pathFile, Encoding.Default))
             {
                 string coordinatePair;
                 while ((coordinatePair = instanceStreamReader.ReadLine()) != null)
                 {
-                    listCoordinatesFromFile.Add(coordinatePair);
+                    _listCoordinatesFromFile.Add(coordinatePair);
                 }
             }
         }
 
         public List<string> GetListCoordinatesFromFile()
         {
-            return listCoordinatesFromFile;
+            return _listCoordinatesFromFile;
         }
     }
 }
