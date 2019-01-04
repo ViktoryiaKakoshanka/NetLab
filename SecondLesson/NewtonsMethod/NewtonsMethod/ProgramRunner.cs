@@ -1,7 +1,7 @@
-﻿using NewtonsMethod.Controller;
+﻿using System;
+using NewtonsMethod.Controller;
 using NewtonsMethod.Model;
 using NewtonsMethod.View;
-using System;
 
 namespace NewtonsMethod
 {
@@ -20,7 +20,7 @@ namespace NewtonsMethod
 
             var radicalSignMethodNewton = Calculator.CalculateRadicalSign(radicalSign);
             var radicalSignMathPow = Calculator.CalculateRootNumber(radicalSign);
-            
+
             _view.PrintCompareResult(radicalSign, radicalSignMethodNewton, radicalSignMathPow);
         }
 
@@ -32,7 +32,7 @@ namespace NewtonsMethod
 
             return new RadicalSign(Convert.ToDouble(numericalRoot), Convert.ToInt32(power), Convert.ToDouble(accuracy));
         }
-        
+
         private string RequestUserInput(DataType dataType, string welcomeMessage)
         {
             string userInput;
@@ -41,7 +41,7 @@ namespace NewtonsMethod
             {
                 userInput = _view.RequestInput(welcomeMessage);
             } while (!ValidateUserInput(dataType, userInput));
-            
+
             return userInput;
         }
 
