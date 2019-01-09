@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="Controller\Validator.cs" />
     <Compile Include="Controller\Calculator.cs" />
-    <Compile Include="Model\IRadicalSign.cs" />
     <Compile Include="Model\RadicalSign.cs" />
     <Compile Include="Model\DataType.cs" />
     <Compile Include="Program.cs" />

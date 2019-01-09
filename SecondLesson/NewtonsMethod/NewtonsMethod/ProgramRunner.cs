@@ -24,7 +24,7 @@ namespace NewtonsMethod
             _view.PrintCompareResult(radicalSign, radicalSignMethodNewton, radicalSignMathPow);
         }
 
-        private IRadicalSign CreateRadicalSign()
+        private RadicalSign CreateRadicalSign()
         {
             var numericalRoot = RequestUserInput(DataType.Numerical, "Enter the number under the root");
             var power = RequestUserInput(DataType.Power, "Enter the root stem");

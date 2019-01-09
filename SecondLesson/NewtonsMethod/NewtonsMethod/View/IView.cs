@@ -6,6 +6,6 @@ namespace NewtonsMethod.View
     {
         string RequestInput(string message);
         void ShowErrorMessageUserInput();
-        void PrintCompareResult(IRadicalSign radicalSign, double radicalSignMethodNewton, double radicalSignMathPow);
+        void PrintCompareResult(RadicalSign radicalSign, double radicalSignMethodNewton, double radicalSignMathPow);
     }
 }
