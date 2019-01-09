@@ -1,6 +1,6 @@
 ﻿namespace NewtonsMethod.Model
 {
-    public class RadicalSign: IRadicalSign
+    public class RadicalSign
     {
         public int Power { get; }
         public double Number { get; }

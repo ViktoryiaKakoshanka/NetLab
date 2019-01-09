@@ -5,16 +5,16 @@ namespace NewtonsMethod.Controller
 {
     public class Calculator
     {
-        public static double CalculateRadicalSign(IRadicalSign radicalSign)
+        public static double CalculateRadicalSign(RadicalSign radicalSign)
         {
             var root = CalculateRadicalWithAccuracy(radicalSign);
             radicalSign.SetRoot(root);
             return root;
         }
         
-        public static double CalculateRootNumber(IRadicalSign radicalSign) => Math.Pow(radicalSign.Root, radicalSign.Power);
+        public static double CalculateRootNumber(RadicalSign radicalSign) => Math.Pow(radicalSign.Root, radicalSign.Power);
 
-        private static double CalculateRadicalWithAccuracy(IRadicalSign radicalSign)
+        private static double CalculateRadicalWithAccuracy(RadicalSign radicalSign)
         {
             double currentAccuracy;
             var previousRadical = 1.0;
@@ -31,7 +31,7 @@ namespace NewtonsMethod.Controller
             return currentRadical;
         }
 
-        private static double CalculateCurrentRadical(IRadicalSign radicalSign, double previousRadical)
+        private static double CalculateCurrentRadical(RadicalSign radicalSign, double previousRadical)
         {
             var previousPower = ErectInDegree(previousRadical, radicalSign.Power - 1);
             var firstPartCalculation = 1.0 / radicalSign.Power;
