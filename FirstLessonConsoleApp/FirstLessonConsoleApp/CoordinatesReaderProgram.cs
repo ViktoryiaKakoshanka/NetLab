@@ -20,7 +20,7 @@ namespace FirstLessonConsoleApp
         {
             while (true)
             {
-                _view.ClearScreen();
+                _view.Clear();
                 _view.PrintMenuItems(_menuItems);
 
                 var userInput = _view.PromptInput("Enter the menu item number");
@@ -38,9 +38,9 @@ namespace FirstLessonConsoleApp
                 return;
             }
 
-            _view.ClearScreen();
+            _view.Clear();
             menuItem.Execute();
-            _view.PressAnyKeyToContinue();
+            _view.ContinueProgram();
         }
 
         private void InitializeMenuItems(string coordinatesFilePath)

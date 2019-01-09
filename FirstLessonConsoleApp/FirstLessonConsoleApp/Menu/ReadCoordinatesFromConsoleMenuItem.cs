@@ -6,7 +6,10 @@ namespace FirstLessonConsoleApp.Menu
 {
     public class ReadCoordinatesFromConsoleMenuItem : MenuItem
     {
-        public ReadCoordinatesFromConsoleMenuItem(int orderNumber, string text, IView view) : base(orderNumber, text, view) { }
+        public ReadCoordinatesFromConsoleMenuItem(int orderNumber, string text, IView view) : 
+            base(orderNumber, text, view)
+        {
+        }
 
         public override void Execute()
         {
@@ -18,7 +21,7 @@ namespace FirstLessonConsoleApp.Menu
 
             while (coordinate != null)
             {
-                var userInput = GetView().ReadLine();
+                var userInput = GetView().RequestInput();
                 coordinate = CoordinatesHelper.ParseUserInputToCoordinate(userInput);
                 if (coordinate != null)
                 {
