@@ -2,7 +2,7 @@
 
 namespace Greatest_Common_Divisor.Algorithms
 {
-    public class AlgorithmHelper
+    public class GreatestCommonDivisorCalculator
     {
         public static GcdResult Calculate(int[] numbers, AlgorithmType algorithmType)
         {
