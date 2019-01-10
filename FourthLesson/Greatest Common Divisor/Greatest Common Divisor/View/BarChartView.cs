@@ -16,12 +16,12 @@ namespace Greatest_Common_Divisor.View
             FillChartWithHistory(chart, data);            
         }
 
-        public object[] GetPalette()
+        public object[] GetPalettes()
         {
             return Enum.GetNames(typeof(ChartColorPalette)).ToArray<object>();
         }
 
-        public object[] GetSeriesChartType()
+        public object[] GetSeriesChartTypes()
         {
             return Enum.GetNames(typeof(SeriesChartType)).ToArray<object>();
         }

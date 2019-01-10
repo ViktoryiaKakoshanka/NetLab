@@ -20,10 +20,10 @@ namespace Greatest_Common_Divisor
         {
             InitializeComponent();
 
-            comboPalette.Items.AddRange(_chartView.GetPalette());
+            comboPalette.Items.AddRange(_chartView.GetPalettes());
             comboPalette.SelectedIndex = 11;
 
-            comboTypeChart.Items.AddRange(_chartView.GetSeriesChartType());
+            comboTypeChart.Items.AddRange(_chartView.GetSeriesChartTypes());
             comboTypeChart.SelectedIndex = 10;
 
             groupResults.Click += GroupResultsOnClick;
@@ -62,7 +62,7 @@ namespace Greatest_Common_Divisor
             }
 
             var numbers = ParseUserInput(GetUserInput());
-            _result = AlgorithmHelper.Calculate(numbers, algorithmType);
+            _result = GreatestCommonDivisorCalculator.Calculate(numbers, algorithmType);
 
             EnableCreatingChart(numbers.Length);
             lblresult.Text += FormatResult(numbers, _result);

@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\AlgorithmFactory.cs" />
-    <Compile Include="Algorithms\AlgorithmHelper.cs" />
+    <Compile Include="Algorithms\GreatestCommonDivisorCalculator.cs" />
     <Compile Include="Algorithms\EuclideanAlgorithm.cs" />
     <Compile Include="Algorithms\IAlgorithm.cs" />
     <Compile Include="Algorithms\StainAlgorithm.cs" />

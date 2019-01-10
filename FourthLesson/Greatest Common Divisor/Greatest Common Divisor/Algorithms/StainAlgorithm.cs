@@ -21,45 +21,48 @@ namespace Greatest_Common_Divisor.Algorithms
             {
                 step++;
                 intermediateResult.AddCalculationHistory(firstNumber, secondNumber, step);
+                intermediateResult.IterationsCount = step;
 
                 if (firstNumber == secondNumber)
                 {
                     intermediateResult.GreatestCommonDivisor = firstNumber;
-                    intermediateResult.IterationsCount = step;
                     return intermediateResult;
                 }
 
                 if (firstNumber == 1 || secondNumber == 1)
                 {
                     intermediateResult.GreatestCommonDivisor = 1;
-                    intermediateResult.IterationsCount = step;
                     return intermediateResult;
                 }
 
-                if ((firstNumber & 1) == 0 && (secondNumber & 1) == 0)
+                if (IsEven(firstNumber) && IsEven(secondNumber))
                 {
-                    intermediateResult = RunAlgorithmStain(firstNumber >> 1, secondNumber >> 1, step);
-                    intermediateResult.IterationsCount = step;
+                    intermediateResult = RunAlgorithmStain(firstNumber >> 1, secondNumber >> 1, step, intermediateResult);
                     intermediateResult.GreatestCommonDivisor <<= 1;
                     return intermediateResult;
                 }
 
-                if ((firstNumber & 1) == 0)
+                if (IsEven(firstNumber))
                 {
                     firstNumber = firstNumber >> 1;
                     continue;
                 }
 
-                if ((secondNumber & 1) == 0)
+                if (IsEven(secondNumber))
                 {
                     secondNumber = secondNumber >> 1;
                     continue;
                 }
 
-                var firstNumber1 = firstNumber;
+                var previousFirstNumber = firstNumber;
                 firstNumber = secondNumber;
-                secondNumber = Math.Abs(firstNumber1 - secondNumber);
+                secondNumber = Math.Abs(previousFirstNumber - secondNumber);
             }
+        }
+
+        private static bool IsEven(int number)
+        {
+            return (number & 1) == 0;
         }
     }
 }
