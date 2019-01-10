@@ -2,17 +2,17 @@
 {
     public class Triangle
     {
-        public double FirstSide { get; }
-        public double SecondSide { get; }
-        public double ThirdSide { get; }
+        public double FirstEdge { get; }
+        public double SecondEdge { get; }
+        public double ThirdEdge { get; }
         
-        public Triangle(double firstSide, double secondSide, double thirdSide)
+        public Triangle(double firstEdge, double secondEdge, double thirdEdge)
         {
-            FirstSide = firstSide;
-            SecondSide = secondSide;
-            ThirdSide = thirdSide;
+            FirstEdge = firstEdge;
+            SecondEdge = secondEdge;
+            ThirdEdge = thirdEdge;
         }
         
-        public override string ToString() => FirstSide + ", " + SecondSide + ", " + ThirdSide;
+        public override string ToString() => FirstEdge + ", " + SecondEdge + ", " + ThirdEdge;
     }
 }

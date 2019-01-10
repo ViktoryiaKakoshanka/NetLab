@@ -5,15 +5,15 @@ namespace TriangleLib.Helpers
 {
     public class TriangleHelper
     {
-        public static double CalculatePerimeter(Triangle triangle) => triangle.FirstSide + triangle.SecondSide + triangle.ThirdSide;
+        public static double CalculatePerimeter(Triangle triangle) => triangle.FirstEdge + triangle.SecondEdge + triangle.ThirdEdge;
 
         public static double CalculateArea(Triangle triangle)
         {
             var semiperimeter = CalculatePerimeter(triangle) / 2;
 
-            var area = semiperimeter * (semiperimeter - triangle.FirstSide) * 
-                                       (semiperimeter - triangle.SecondSide) * 
-                                       (semiperimeter - triangle.ThirdSide);
+            var area = semiperimeter * (semiperimeter - triangle.FirstEdge) * 
+                                       (semiperimeter - triangle.SecondEdge) * 
+                                       (semiperimeter - triangle.ThirdEdge);
 
             return Math.Sqrt(area);
         }

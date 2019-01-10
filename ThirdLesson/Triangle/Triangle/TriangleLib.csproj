@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\TriangleHelper.cs" />
-    <Compile Include="Helpers\Validaor.cs" />
+    <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Model\Triangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

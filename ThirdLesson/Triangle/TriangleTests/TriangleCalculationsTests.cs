@@ -23,7 +23,7 @@ namespace TriangleTests
 
             var actual = TriangleHelper.CalculatePerimeter(_triangle);
 
-            Assert.AreEqual(expected, actual, $"Perimeter: expected={expected}, actual={actual}");
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace TriangleTests
 
             var actual = TriangleHelper.CalculateArea(_triangle);
 
-            Assert.AreEqual(expected, Math.Round(actual, 6), $"Area: expected={expected}, actual={Math.Round(actual, 6)}");
+            Assert.AreEqual(expected, Math.Round(actual, 6));
         }
     }
 }
