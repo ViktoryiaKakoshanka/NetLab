@@ -42,10 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\NumberExtensions.cs" />
+    <Compile Include="Helpers\IntExtensions.cs" />
     <Compile Include="ProgramRunner.cs" />
-    <Compile Include="Model\INumbers.cs" />
-    <Compile Include="Model\Numbers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleView.cs" />

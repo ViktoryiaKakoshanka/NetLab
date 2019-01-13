@@ -1,5 +1,4 @@
-﻿using BinaryConverting.Model;
-using System;
+﻿using System;
 
 namespace BinaryConverting.View
 {
@@ -11,11 +10,11 @@ namespace BinaryConverting.View
             return Console.ReadLine();
         }
         
-        public void ShowResultByConversion(INumbers number)
+        public void ShowResultByConversion(int decimalNumber, string binaryNumber)
         {
             Console.WriteLine("Result:");
-            Console.WriteLine($"Decimal number: {number.DecimalNumber}");
-            Console.WriteLine($"Binary number: {number.BinaryNumber}");
+            Console.WriteLine($"Decimal number: {decimalNumber}");
+            Console.WriteLine($"Binary number: {binaryNumber}");
 
             Console.ReadKey(true);
         }
@@ -25,7 +24,5 @@ namespace BinaryConverting.View
             Console.Clear();
             Console.WriteLine($"{messEx} You must repeat the value entry. ");
         }
-
-        public void ShowMessageFormatException() => Console.WriteLine("Invalid format entered.");
     }
 }

@@ -1,12 +1,9 @@
-﻿using BinaryConverting.Model;
-
-namespace BinaryConverting.View
+﻿namespace BinaryConverting.View
 {
     public interface IView
     {
         string RequestInput(string message);
-        void ShowResultByConversion(INumbers number);
+        void ShowResultByConversion(int decimalNumber, string binaryNumber);
         void ShowWarningMessage(string messEx = null);
-        void ShowMessageFormatException();
     }
 }

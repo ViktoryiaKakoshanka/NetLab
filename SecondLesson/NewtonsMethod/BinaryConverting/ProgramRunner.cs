@@ -1,6 +1,4 @@
-﻿using BinaryConverting.Model;
-using BinaryConverting.View;
-using System;
+﻿using BinaryConverting.View;
 using BinaryConverting.Helpers;
 
 namespace BinaryConverting
@@ -16,36 +14,22 @@ namespace BinaryConverting
 
         public void RunProgram()
         {
-            INumbers number = new Numbers();
-            number.DecimalNumber = RequestDecimalNumber();
-            _view.ShowResultByConversion(number.ConvertDecimalToBinary());
+            var number = RequestDecimalNumber();
+            _view.ShowResultByConversion(number, number.ByConvert());
         }
 
         private int RequestDecimalNumber()
         {
             while (true)
             {
-                try
-                {
-                    var decimalNumber = ConvertUserInput();
+                var input = _view.RequestInput("Enter a non-negative decimal integer.");
 
-                    if (decimalNumber > 0)
-                    {
-                        return decimalNumber;
-                    }
-                    _view.ShowWarningMessage("Number is <= 0.");
-                }
-                catch (FormatException)
+                if ( int.TryParse(input, out var decimalNumber) && decimalNumber > 0)
                 {
-                    _view.ShowMessageFormatException();
+                    return decimalNumber;
                 }
+                _view.ShowWarningMessage("Number is <= 0.");
             }
-        }
-
-        private int ConvertUserInput()
-        {
-            var input = _view.RequestInput("Enter a non-negative decimal integer.");
-            return Convert.ToInt32(input);
         }
     }
 }
