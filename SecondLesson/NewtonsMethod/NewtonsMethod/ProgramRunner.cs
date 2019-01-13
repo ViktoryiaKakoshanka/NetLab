@@ -1,5 +1,4 @@
-﻿using System;
-using NewtonsMethod.Controller;
+﻿using NewtonsMethod.Controller;
 using NewtonsMethod.Model;
 using NewtonsMethod.View;
 
@@ -16,21 +15,14 @@ namespace NewtonsMethod
 
         public void RunProgram()
         {
-            var radicalSign = CreateRadicalSign();
+            var number = double.Parse(RequestUserInput(DataType.Number, "Enter the number under the root"));
+            var power = int.Parse(RequestUserInput(DataType.Power, "Enter the root stem"));
+            var accuracy = double.Parse(RequestUserInput(DataType.Accuracy, "Enter a calculation accuracy from 0 to 1"));
+            
+            var compareResult = Calculator.Compare(number, power, accuracy, out var delta);
 
-            var radicalSignMethodNewton = Calculator.CalculateRadicalSign(radicalSign);
-            var radicalSignMathPow = Calculator.CalculateRootNumber(radicalSign);
-
-            _view.PrintCompareResult(radicalSign, radicalSignMethodNewton, radicalSignMathPow);
-        }
-
-        private RadicalSign CreateRadicalSign()
-        {
-            var numericalRoot = RequestUserInput(DataType.Numerical, "Enter the number under the root");
-            var power = RequestUserInput(DataType.Power, "Enter the root stem");
-            var accuracy = RequestUserInput(DataType.Accuracy, "Enter a calculation accuracy from 0 to 1");
-
-            return new RadicalSign(Convert.ToDouble(numericalRoot), Convert.ToInt32(power), Convert.ToDouble(accuracy));
+            _view.PrintNumberRoot(number, power, Calculator.CalculateRootNumberByNewtons(number, power, accuracy));
+            _view.PrintCompareResult(compareResult, delta);
         }
 
         private string RequestUserInput(DataType dataType, string welcomeMessage)

@@ -8,7 +8,7 @@ namespace NewtonsMethod.Controller
     {
         private static readonly IDictionary<DataType, string> ValidationRules = new Dictionary<DataType, string>
         {
-            {DataType.Numerical, @"\d+\[.,]\d+|\d+" },
+            {DataType.Number, @"\d+\[.,]\d+|\d+" },
             {DataType.Power, @"\d+$" },
             {DataType.Accuracy, @"^0[.,]\d+|1$" }
         };

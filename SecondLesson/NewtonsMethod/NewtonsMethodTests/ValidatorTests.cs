@@ -24,7 +24,7 @@ namespace NewtonsMethodTests
         {
             var inputNumerical = new List<string> { "1", "56565", "1.0", "1,54" };
 
-            var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Numerical));
+            var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Number));
 
             Assert.IsTrue(actual);
         }
@@ -54,7 +54,7 @@ namespace NewtonsMethodTests
         {
             var inputNumerical = new List<string> { string.Empty, "asf" };
 
-            var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Numerical));
+            var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Number));
 
             Assert.IsFalse(actual);
         }

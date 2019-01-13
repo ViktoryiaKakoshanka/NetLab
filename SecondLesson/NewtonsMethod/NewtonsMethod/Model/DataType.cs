@@ -3,7 +3,7 @@
     public enum DataType
     {
         Power,
-        Numerical,
+        Number,
         Accuracy
     }
 }

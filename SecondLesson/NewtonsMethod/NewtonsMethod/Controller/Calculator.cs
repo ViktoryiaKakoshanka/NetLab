@@ -1,20 +1,30 @@
 ﻿using System;
-using NewtonsMethod.Model;
 
 namespace NewtonsMethod.Controller
 {
     public class Calculator
     {
-        public static double CalculateRadicalSign(RadicalSign radicalSign)
+        public static int Compare(double number, int power, double accuracy, out double delta)
         {
-            var root = CalculateRadicalWithAccuracy(radicalSign);
-            radicalSign.SetRoot(root);
-            return root;
-        }
-        
-        public static double CalculateRootNumber(RadicalSign radicalSign) => Math.Pow(radicalSign.Root, radicalSign.Power);
+            var rootNewton = CalculateRootNumberByNewtons(number, power, accuracy);
+            var rootMath = CalculateRootNumberByMath(number, power);
 
-        private static double CalculateRadicalWithAccuracy(RadicalSign radicalSign)
+            delta = Math.Abs(rootNewton - rootMath);
+            if (rootNewton > rootMath)
+            {
+                return 1;
+            }
+
+            return (rootNewton < rootMath) ? -1 : 0;
+        }
+
+
+        public static double CalculateRootNumberByMath(double number, int power)
+        {
+            return Math.Pow(number, (int)(1/power));
+        }
+
+        public static double CalculateRootNumberByNewtons(double number, int power, double accuracy)
         {
             double currentAccuracy;
             var previousRadical = 1.0;
@@ -22,32 +32,19 @@ namespace NewtonsMethod.Controller
 
             do
             {
-                currentRadical = CalculateCurrentRadical(radicalSign, previousRadical);
+                currentRadical = CalculateCurrentRadical(number, power, previousRadical);
                 currentAccuracy = Math.Abs(previousRadical - currentRadical);
                 previousRadical = currentRadical;
 
-            } while (currentAccuracy > radicalSign.Accuracy);
+            } while (currentAccuracy > accuracy);
 
             return currentRadical;
         }
 
-        private static double CalculateCurrentRadical(RadicalSign radicalSign, double previousRadical)
+        private static double CalculateCurrentRadical(double number, int power, double previousRadical)
         {
-            var previousPower = ErectInDegree(previousRadical, radicalSign.Power - 1);
-            var firstPartCalculation = 1.0 / radicalSign.Power;
-            var secondPartCalculation = (radicalSign.Power - 1.0) * previousRadical + radicalSign.Number / previousPower;
-
-            return firstPartCalculation * secondPartCalculation;
-        }
-        
-        private static double ErectInDegree(double number, int power)
-        {
-            if (power <= 1)
-            {
-                return number;
-            }
-
-            return number * ErectInDegree(number, --power);
+            var previousPower = Math.Pow(previousRadical, power - 1);
+            return 1.0 / power * ((power - 1.0) * previousRadical + number / previousPower);
         }
     }
 }
