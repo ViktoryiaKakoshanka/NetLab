@@ -34,7 +34,7 @@ namespace TriangleLib
 
         private static Triangle CreateTriangle(double firstEdge, double secondEdge, double thirdEdge)
         {
-            return Validator.ValidateTriangle(firstEdge, secondEdge, thirdEdge) ? new Triangle(firstEdge, secondEdge, thirdEdge) : null;
+            return TriangleValidator.Validate(firstEdge, secondEdge, thirdEdge) ? new Triangle(firstEdge, secondEdge, thirdEdge) : null;
         }
 
         private void ShowDetails(Triangle triangle)
@@ -60,7 +60,7 @@ namespace TriangleLib
             {
                 userInput = _view.RequestInput($"Enter the value of {edgeNumber} edge");
                 
-            } while (!double.TryParse(userInput, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out edge) && edge <= 0);
+            } while (!double.TryParse(userInput, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out edge) || edge <= 0);
 
             return edge;
         }

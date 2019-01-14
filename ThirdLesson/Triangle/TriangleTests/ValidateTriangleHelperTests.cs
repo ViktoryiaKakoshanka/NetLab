@@ -15,7 +15,7 @@ namespace TriangleTests
             const double secondEdge = 2.0;
             var setOfThirdEdges = new List<double> { 1.0, 2.0, 3.0 };
 
-            var actual = setOfThirdEdges.All(x => Validator.ValidateTriangle(firstEdge, secondEdge, x));
+            var actual = setOfThirdEdges.All(x => TriangleValidator.Validate(firstEdge, secondEdge, x));
 
             Assert.IsTrue(actual);
         }
@@ -27,7 +27,7 @@ namespace TriangleTests
             const double secondSide = 2.0;
             const double thirdSide = 4.0;
 
-            var actual = Validator.ValidateTriangle(firstSide, secondSide, thirdSide);
+            var actual = TriangleValidator.Validate(firstSide, secondSide, thirdSide);
 
             Assert.IsFalse(actual);
         }
