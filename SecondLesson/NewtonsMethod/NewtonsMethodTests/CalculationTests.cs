@@ -15,7 +15,7 @@ namespace NewtonsMethodTests
             const double accuracy = 0.000001;
             const double expected = 3.0;
             
-            var root =  Calculator.CalculateRootNumberByNewtons(number, power, accuracy);
+            var root =  Calculator.CalculateRootByMethodNewtons(number, power, accuracy);
 
             var actual = Math.Round(root, 5);
 

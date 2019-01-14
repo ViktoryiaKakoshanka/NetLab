@@ -22,7 +22,7 @@ namespace NewtonsMethodTests
         [TestMethod]
         public void ValidateInput_CorrectNumericalFormat_Test()
         {
-            var inputNumerical = new List<string> { "1", "56565", "1.0", "1,54" };
+            var inputNumerical = new List<string> { "1", "56565", "1.0" };
 
             var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Number));
 
@@ -32,7 +32,7 @@ namespace NewtonsMethodTests
         [TestMethod]
         public void ValidateInput_CorrectAccuracyFormat_Test()
         {
-            var inputAccuracy = new List<string> { "0,005", "0.549", "0,00000000001" };
+            var inputAccuracy = new List<string> { "0,005", "0.549" };
             
             var actual = inputAccuracy.All(x => Validator.ValidateInput(x, DataType.Accuracy));
 
@@ -42,7 +42,7 @@ namespace NewtonsMethodTests
         [TestMethod]
         public void ValidateInput_WrongPowerFormat_Test()
         {
-            var inputPower = new List<string> { "1.0", "0,56565", string.Empty, "asf" };
+            var inputPower = new List<string> { "1.0", string.Empty, "asf" };
 
             var actual = inputPower.All(x => Validator.ValidateInput(x, DataType.Power));
 

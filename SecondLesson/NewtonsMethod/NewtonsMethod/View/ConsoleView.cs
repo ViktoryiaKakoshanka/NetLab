@@ -35,7 +35,7 @@ namespace NewtonsMethod.View
                 return;
             }
 
-            if (compareResult < 0)
+            if (compareResult == 0)
             {
                 Console.WriteLine("The result calculated by Newton's method is equal to the result calculated by the built-in Math function.");
             }

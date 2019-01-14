@@ -16,13 +16,13 @@ namespace NewtonsMethod
         public void RunProgram()
         {
             var number = double.Parse(RequestUserInput(DataType.Number, "Enter the number under the root"));
-            var power = int.Parse(RequestUserInput(DataType.Power, "Enter the root stem"));
+            var power = int.Parse(RequestUserInput(DataType.Power, "Enter the power"));
             var accuracy = double.Parse(RequestUserInput(DataType.Accuracy, "Enter a calculation accuracy from 0 to 1"));
             
             var compareResult = Calculator.Compare(number, power, accuracy, out var delta);
 
-            _view.PrintNumberRoot(number, power, Calculator.CalculateRootNumberByNewtons(number, power, accuracy));
             _view.PrintCompareResult(compareResult, delta);
+            _view.PrintNumberRoot(number, power, Calculator.CalculateRootByMethodNewtons(number, power, accuracy));
         }
 
         private string RequestUserInput(DataType dataType, string welcomeMessage)
