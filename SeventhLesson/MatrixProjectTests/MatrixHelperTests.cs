@@ -66,7 +66,7 @@ namespace MatrixProjectTests
         [ExpectedException(typeof(InvalidOperationException))]
         public void SubtractMatrices_InvalidOperationException_Test()
         {
-            var actual = _first.SubtractMatrix(_second);
+            _first.SubtractMatrix(_second);
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace MatrixProjectTests
                 { 11D }
             };
 
-            var actual = _first.MultiplyByMatrix(second);
+            _first.MultiplyByMatrix(second);
         }
 
         private static bool IsEqualsArrays(double[,] firstArray, double[,] secondArray)

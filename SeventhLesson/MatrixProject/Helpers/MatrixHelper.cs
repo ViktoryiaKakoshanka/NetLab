@@ -2,7 +2,7 @@
 
 namespace MatrixProject.Helpers
 {
-    public static class DoubleMatrixExtensions
+    public static class MatrixHelper
     {
         public static double[,] AddMatrix(this double[,] first, double[,] second)
         {
