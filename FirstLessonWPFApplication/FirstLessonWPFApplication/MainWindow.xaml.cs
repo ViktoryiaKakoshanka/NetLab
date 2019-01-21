@@ -24,9 +24,9 @@ namespace FirstLessonWPFApplication
             
             if (openFile.ShowDialog() == true)
             {
-                readLines = CoordinatesFromFile.ReadFileInListbox(openFile.FileName);
+                readLines = FileHelper.ReadFile(openFile.FileName);
             }
-            FormattedCoordinatesOutputFromFile(readLines);
+            FillCoordinatesFromFile(readLines);
         }
         
         private void FormattedCoordinatesOutputOnClick(object sender, RoutedEventArgs e)
@@ -34,7 +34,7 @@ namespace FirstLessonWPFApplication
             var userInput = tbInputCoordinates.Text;
             if(userInput != string.Empty)
             {
-                listbxOutputCoordinates.Items.Add(Format.СoordinatesFormat(userInput));
+                listboxOutputCoordinates.Items.Add(Formatter.FormatCoordinates(userInput));
             }
             else
             {
@@ -45,11 +45,11 @@ namespace FirstLessonWPFApplication
         /// <summary>
         /// Call formatting on the coordinate line read from the file
         /// </summary>
-        public void FormattedCoordinatesOutputFromFile(List<string> lines)
+        public void FillCoordinatesFromFile(List<string> lines)
         {
             foreach (var field in lines)
             {
-                listbxOutputCoordinates.Items.Add(Format.СoordinatesFormat(field));
+                listboxOutputCoordinates.Items.Add(Formatter.FormatCoordinates(field));
             }
         }
     }

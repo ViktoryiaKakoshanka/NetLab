@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace FirstLessonWPFApplication
 {
-    internal static class CoordinatesFromFile
+    internal static class FileHelper
     {
-        public static List<string> ReadFileInListbox(string pathFile)
+        public static List<string> ReadFile(string pathFile)
         {
             var readLines = File.ReadAllLines(pathFile);
             return readLines.ToList();

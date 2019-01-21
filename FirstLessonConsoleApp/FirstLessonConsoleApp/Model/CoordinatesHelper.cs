@@ -2,7 +2,7 @@
 
 namespace FirstLessonConsoleApp.Model
 {
-    public class CoordinatesHelper
+    public static class CoordinatesHelper
     {
         public static Coordinate ParseUserInputToCoordinate(string input)
         {
