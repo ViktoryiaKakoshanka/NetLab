@@ -11,7 +11,10 @@ namespace WorkWithFiles
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ApplicationViewModel(new DialogService(), new FileService());
+
+            IDialogService dialogService = new DialogService();
+            IFileService fileService = new FileService();
+            DataContext = new ApplicationViewModel(dialogService, fileService);
         }
     }
 }

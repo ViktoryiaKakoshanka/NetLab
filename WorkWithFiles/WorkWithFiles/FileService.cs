@@ -3,7 +3,7 @@ using System.Text;
 
 namespace WorkWithFiles
 {
-    public class FileService
+    public class FileService : IFileService
     {
         public string Open(string filePath)
         {

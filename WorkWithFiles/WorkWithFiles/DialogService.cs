@@ -3,11 +3,11 @@ using Microsoft.Win32;
 
 namespace WorkWithFiles
 {
-    public class DialogService
+    public class DialogService : IDialogService
     {
         public string FilePath { get; set; }
 
-        public bool OpenFileDialog()
+        public bool ShowOpenFileDialog()
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() != true)
@@ -19,7 +19,7 @@ namespace WorkWithFiles
             return true;
         }
 
-        public bool SaveFileDialog()
+        public bool ShowSaveFileDialog()
         {
             var saveFileDialog = new SaveFileDialog();
             if (saveFileDialog.ShowDialog() != true)
@@ -37,4 +37,3 @@ namespace WorkWithFiles
         }
     }
 }
-

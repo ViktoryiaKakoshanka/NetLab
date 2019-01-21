@@ -65,6 +65,8 @@
     </Compile>
     <Compile Include="DialogService.cs" />
     <Compile Include="FileService.cs" />
+    <Compile Include="IDialogService.cs" />
+    <Compile Include="IFileService.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
