@@ -5,7 +5,7 @@ namespace BinaryConverting.Helpers
 {
     public static class IntExtensions
     {
-        public static string ByBinary(this int number)
+        public static string ToBinary(this int number)
         {
             var binary = new StringBuilder();
 

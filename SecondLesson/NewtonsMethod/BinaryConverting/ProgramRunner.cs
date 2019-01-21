@@ -15,7 +15,7 @@ namespace BinaryConverting
         public void RunProgram()
         {
             var number = RequestDecimalNumber();
-            _view.ShowResultByConversion(number, number.ByBinary());
+            _view.ShowResultByConversion(number, number.ToBinary());
         }
 
         private int RequestDecimalNumber()
