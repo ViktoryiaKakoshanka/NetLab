@@ -2,29 +2,14 @@
 
 namespace NewtonsMethod.Controller
 {
-    public class Calculator
+    public static class Calculator
     {
-        public static int Compare(double number, int power, double accuracy, out double delta)
+        public static double CalculateRootNumberByMath(double number, int rootPower)
         {
-            var rootNewton = CalculateRootByMethodNewtons(number, power, accuracy);
-            var rootMath = CalculateRootNumberByMath(number, power);
-
-            delta = Math.Abs(rootNewton - rootMath);
-            if (rootNewton > rootMath)
-            {
-                return 1;
-            }
-
-            return (rootNewton < rootMath) ? -1 : 0;
+            return Math.Pow(number, 1.0 / rootPower);
         }
 
-
-        public static double CalculateRootNumberByMath(double number, int power)
-        {
-            return Math.Pow(number, 1.0 / power);
-        }
-
-        public static double CalculateRootByMethodNewtons(double number, int power, double accuracy)
+        public static double CalculateRootByMethodNewtons(double number, int rootPower, double accuracy)
         {
             double currentAccuracy;
             var previousRoot = 1.0;
@@ -32,7 +17,7 @@ namespace NewtonsMethod.Controller
 
             do
             {
-                result = CalculateCurrentRadical(number, power, previousRoot);
+                result = CalculateCurrentRadical(number, rootPower, previousRoot);
                 currentAccuracy = Math.Abs(previousRoot - result);
                 previousRoot = result;
 
@@ -41,10 +26,10 @@ namespace NewtonsMethod.Controller
             return result;
         }
 
-        private static double CalculateCurrentRadical(double number, int power, double previousRoot)
+        private static double CalculateCurrentRadical(double number, int rootPower, double previousRoot)
         {
-            var previousPower = Math.Pow(previousRoot, power - 1);
-            return 1.0 / power * ((power - 1.0) * previousRoot + number / previousPower);
+            var previousPower = Math.Pow(previousRoot, rootPower - 1);
+            return 1.0 / rootPower * ((rootPower - 1.0) * previousRoot + number / previousPower);
         }
     }
 }

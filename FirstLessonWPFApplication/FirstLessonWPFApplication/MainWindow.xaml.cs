@@ -1,4 +1,4 @@
-﻿using FirstLessonWPFApplication.Controller;
+﻿using System.Collections.Generic;
 using Microsoft.Win32;
 using System.Windows;
 
@@ -9,8 +9,6 @@ namespace FirstLessonWPFApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly CoordinatesFromFile _file = new CoordinatesFromFile();
-
         /// <summary>
         /// Point of entry
         /// </summary>
@@ -22,12 +20,13 @@ namespace FirstLessonWPFApplication
         private void FormattedCoordinatesFileOnClick(object sender, RoutedEventArgs e)
         {
             var openFile = new OpenFileDialog();
+            var readLines = new List<string>();
             
             if (openFile.ShowDialog() == true)
             {
-                _file.ReadFileInListbox(openFile.FileName);
+                readLines = CoordinatesFromFile.ReadFileInListbox(openFile.FileName);
             }
-            FormattedCoordinatesOutputFromFile();
+            FormattedCoordinatesOutputFromFile(readLines);
         }
         
         private void FormattedCoordinatesOutputOnClick(object sender, RoutedEventArgs e)
@@ -35,7 +34,7 @@ namespace FirstLessonWPFApplication
             var userInput = tbInputCoordinates.Text;
             if(userInput != string.Empty)
             {
-                listbxOutputCoordinates.Items.Add(Format.FormatСoordinates(userInput));
+                listbxOutputCoordinates.Items.Add(Format.СoordinatesFormat(userInput));
             }
             else
             {
@@ -46,11 +45,11 @@ namespace FirstLessonWPFApplication
         /// <summary>
         /// Call formatting on the coordinate line read from the file
         /// </summary>
-        public void FormattedCoordinatesOutputFromFile()
+        public void FormattedCoordinatesOutputFromFile(List<string> lines)
         {
-            foreach (var field in _file.GetListCoordinatesFromFile())
+            foreach (var field in lines)
             {
-                listbxOutputCoordinates.Items.Add(Format.FormatСoordinates(field));
+                listbxOutputCoordinates.Items.Add(Format.СoordinatesFormat(field));
             }
         }
     }

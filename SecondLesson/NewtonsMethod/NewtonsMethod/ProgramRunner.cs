@@ -15,17 +15,17 @@ namespace NewtonsMethod
 
         public void RunProgram()
         {
-            var number = double.Parse(RequestUserInput(DataType.Number, "Enter the number under the root"));
-            var power = int.Parse(RequestUserInput(DataType.Power, "Enter the power"));
-            var accuracy = double.Parse(RequestUserInput(DataType.Accuracy, "Enter a calculation accuracy from 0 to 1"));
-            
-            var compareResult = Calculator.Compare(number, power, accuracy, out var delta);
+            var number = double.Parse(RequestUserInput(ValidationType.Number, "Enter the number under the root"));
+            var rootPower = int.Parse(RequestUserInput(ValidationType.RootPower, "Enter the power"));
+            var accuracy = double.Parse(RequestUserInput(ValidationType.Accuracy, "Enter a calculation accuracy from 0 to 1"));
 
-            _view.PrintCompareResult(compareResult, delta);
-            _view.PrintNumberRoot(number, power, Calculator.CalculateRootByMethodNewtons(number, power, accuracy));
+            var rootNewton = Calculator.CalculateRootByMethodNewtons(number, rootPower, accuracy);
+            var rootMath = Calculator.CalculateRootNumberByMath(number, rootPower);
+
+            _view.PrintCompareResult(number, rootPower, rootNewton, rootMath);
         }
 
-        private string RequestUserInput(DataType dataType, string welcomeMessage)
+        private string RequestUserInput(ValidationType dataType, string welcomeMessage)
         {
             string userInput;
 
@@ -37,7 +37,7 @@ namespace NewtonsMethod
             return userInput;
         }
 
-        private bool ValidateUserInput(DataType param, string userInput)
+        private bool ValidateUserInput(ValidationType param, string userInput)
         {
             var correctInput = Validator.ValidateInput(userInput, param);
             if (!correctInput)

@@ -40,7 +40,7 @@ namespace FirstLessonConsoleApp
 
             _view.Clear();
             menuItem.Execute();
-            _view.ContinueProgram();
+            _view.ReturnToProgram();
         }
 
         private void InitializeMenuItems(string coordinatesFilePath)

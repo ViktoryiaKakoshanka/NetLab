@@ -12,7 +12,7 @@ namespace NewtonsMethodTests
         {
             const double number = 27.0;
             const int power = 3;
-            const double accuracy = 0.000001;
+            const double accuracy = 1e-6;
             const double expected = 3.0;
             
             var root =  Calculator.CalculateRootByMethodNewtons(number, power, accuracy);

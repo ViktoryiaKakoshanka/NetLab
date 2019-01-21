@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Controller\Validator.cs" />
     <Compile Include="Controller\Calculator.cs" />
-    <Compile Include="Model\DataType.cs" />
+    <Compile Include="Model\ValidationType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProgramRunner.cs" />

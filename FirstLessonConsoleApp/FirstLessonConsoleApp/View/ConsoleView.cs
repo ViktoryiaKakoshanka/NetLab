@@ -46,7 +46,7 @@ namespace FirstLessonConsoleApp.View
             return Console.ReadLine();
         }
 
-        public void ContinueProgram()
+        public void ReturnToProgram()
         {
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);

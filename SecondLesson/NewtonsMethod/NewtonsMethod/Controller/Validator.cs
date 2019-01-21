@@ -6,14 +6,14 @@ namespace NewtonsMethod.Controller
 {
     public static class Validator
     {
-        private static readonly IDictionary<DataType, string> ValidationRules = new Dictionary<DataType, string>
+        private static readonly IDictionary<ValidationType, string> ValidationRules = new Dictionary<ValidationType, string>
         {
-            {DataType.Number, @"\d+\[.,]\d+|\d+" },
-            {DataType.Power, @"\d+$" },
-            {DataType.Accuracy, @"^0[.,]\d+|1$" }
+            {ValidationType.Number, @"\d+\[.,]\d+|\d+" },
+            {ValidationType.RootPower, @"\d+$" },
+            {ValidationType.Accuracy, @"^0[.,]\d+|1$" }
         };
 
-        public static bool ValidateInput(string input, DataType param)
+        public static bool ValidateInput(string input, ValidationType param)
         {
             var regex = new Regex(ValidationRules[param]);
             return regex.IsMatch(input);

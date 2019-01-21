@@ -14,7 +14,7 @@ namespace NewtonsMethodTests
         {
             var inputPower = new List<string> { "1", "56565"};
 
-            var actual = inputPower.All(x => Validator.ValidateInput(x, DataType.Power));
+            var actual = inputPower.All(x => Validator.ValidateInput(x, ValidationType.RootPower));
             
             Assert.IsTrue(actual);
         }
@@ -24,7 +24,7 @@ namespace NewtonsMethodTests
         {
             var inputNumerical = new List<string> { "1", "56565", "1.0" };
 
-            var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Number));
+            var actual = inputNumerical.All(x => Validator.ValidateInput(x, ValidationType.Number));
 
             Assert.IsTrue(actual);
         }
@@ -34,7 +34,7 @@ namespace NewtonsMethodTests
         {
             var inputAccuracy = new List<string> { "0,005", "0.549" };
             
-            var actual = inputAccuracy.All(x => Validator.ValidateInput(x, DataType.Accuracy));
+            var actual = inputAccuracy.All(x => Validator.ValidateInput(x, ValidationType.Accuracy));
 
             Assert.IsTrue(actual);
         }
@@ -44,7 +44,7 @@ namespace NewtonsMethodTests
         {
             var inputPower = new List<string> { "1.0", string.Empty, "asf" };
 
-            var actual = inputPower.All(x => Validator.ValidateInput(x, DataType.Power));
+            var actual = inputPower.All(x => Validator.ValidateInput(x, ValidationType.RootPower));
 
             Assert.IsFalse(actual);
         }
@@ -54,7 +54,7 @@ namespace NewtonsMethodTests
         {
             var inputNumerical = new List<string> { string.Empty, "asf" };
 
-            var actual = inputNumerical.All(x => Validator.ValidateInput(x, DataType.Number));
+            var actual = inputNumerical.All(x => Validator.ValidateInput(x, ValidationType.Number));
 
             Assert.IsFalse(actual);
         }
@@ -64,7 +64,7 @@ namespace NewtonsMethodTests
         {
             var inputAccuracy = new List<string> { "15", "54", "1.65", string.Empty, "asf" };
 
-            var actual = inputAccuracy.All(x => Validator.ValidateInput(x, DataType.Accuracy));
+            var actual = inputAccuracy.All(x => Validator.ValidateInput(x, ValidationType.Accuracy));
 
             Assert.IsFalse(actual);
         }

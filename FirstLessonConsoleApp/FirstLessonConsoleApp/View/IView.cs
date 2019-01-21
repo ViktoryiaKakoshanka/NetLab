@@ -11,7 +11,7 @@ namespace FirstLessonConsoleApp.View
         void PrintMessage(string message);
         string PromptInput(string promptText);
         string RequestInput();
-        void ContinueProgram();
+        void ReturnToProgram();
         void Clear();
     }
 }
