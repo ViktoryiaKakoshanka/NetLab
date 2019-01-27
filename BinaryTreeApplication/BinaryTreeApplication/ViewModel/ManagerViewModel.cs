@@ -100,9 +100,43 @@ namespace BinaryTreeApplication.ViewModel
         
         public string nameStudent { get; set; }
 
+        class TestStudent
+        {
+            public string Name { get; set; }
+            public int Group { get; set; }
+            public int Mark { get; set; }
 
+            public TestStudent(string name, int @group, int mark)
+            {
+                Name = name;
+                Group = group;
+                Mark = mark;
+            }
+        }
 
+        public void TestStudents()
+        {
+            var students12 = new List<TestStudent>()
+            {
+                new TestStudent("St1", 1, 2),
+                new TestStudent("St1", 2, 9),
+                new TestStudent("St1", 1, 2),
+                new TestStudent("St1", 3, 9),
+                new TestStudent("St1", 2, 5),
+                new TestStudent("St1", 1, 7),
+                new TestStudent("St1", 3, 5),
+                new TestStudent("St1", 1, 2),
+                new TestStudent("St1", 2, 3),
+                new TestStudent("St1", 1, 1),
+                new TestStudent("St1", 1, 2),
+            };
 
+            var a = students12.GroupBy(s => s.Group).Select(g => new
+            {
+                Group = g.Key,
+                AverageMark = g.Average(s => s.Mark)
+            });
+        }
 
 
         public void Qwe()

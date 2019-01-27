@@ -2,7 +2,7 @@
 {
     public interface IDialogService
     {
-        string FilePath { get; set; }
+        string FilePath { get; }
 
         bool ShowOpenFileDialog();
         bool ShowSaveFileDialog();

@@ -7,9 +7,9 @@
         xmlns:viewModel="clr-namespace:TimerApplication.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="173.162" Width="447.246">
-    <!--<Window.DataContext>
+    <Window.DataContext>
         <viewModel:TimerViewModel></viewModel:TimerViewModel>
-    </Window.DataContext>-->
+    </Window.DataContext>
     <Grid>
         <TextBlock 
             HorizontalAlignment="Center" 

@@ -47,7 +47,11 @@ namespace WorkWithFiles.ViewModel
         }
         
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
+        public ApplicationViewModel() : this(new DialogService(), new FileService())
+        {
+        }
+
         public ApplicationViewModel(IDialogService dialogService, IFileService fileService)
         {
             _dialogService = dialogService;

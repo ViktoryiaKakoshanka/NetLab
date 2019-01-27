@@ -5,7 +5,7 @@ namespace WorkWithFiles
 {
     public class DialogService : IDialogService
     {
-        public string FilePath { get; set; }
+        public string FilePath { get; private set; }
 
         public bool ShowOpenFileDialog()
         {
