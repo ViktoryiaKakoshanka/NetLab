@@ -2,14 +2,14 @@
 
 namespace TimerApplication.Followers
 {
-    public static class Follower1
+    public class Follower1
     {
-        public static void ShowMessage()
+        public Follower1(EndTimer timer)
         {
-            MessageBox.Show("class Follower1");
+            timer.EndTimerEventHandler += ShowNewMessage;
         }
 
-        public static void ShowNewMessage(object sender, EndTimerEventAgs e)
+        public void ShowNewMessage(object sender, EndTimerEventAgs e)
         {
             MessageBox.Show($"class Follower1 : ShowNewMessage(object sender, EndTimerEventAgs e) = {e.UserCount}");
         }

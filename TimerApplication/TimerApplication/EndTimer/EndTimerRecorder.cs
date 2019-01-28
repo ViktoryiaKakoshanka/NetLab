@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TimerApplication.Followers;
-using TimerApplication.ViewModel;
+﻿using TimerApplication.Followers;
 
 namespace TimerApplication
 {

@@ -63,7 +63,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EndTimerEventAgs.cs" />
+    <Compile Include="EndTimer\EndTimer.cs" />
+    <Compile Include="EndTimer\EndTimerEventAgs.cs" />
+    <Compile Include="EndTimer\EndTimerRecorder.cs" />
     <Compile Include="Followers\Follower1.cs" />
     <Compile Include="Followers\Follower2.cs" />
     <Compile Include="Followers\Follower3.cs" />

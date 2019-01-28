@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,10 +10,8 @@ namespace TimerApplication.ViewModel
     {
         private int _userCount = 10;
         private int _currentCount;
-
-        public event Action EndTimer;
-        public event EventHandler<EndTimerEventAgs> EndTimerEventHandler;
-
+        private readonly EndTimerRecorder _endTimerRecorder;
+      
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int CurrentCount
@@ -41,7 +38,12 @@ namespace TimerApplication.ViewModel
         {
             get { return new RelayCommand(obj => RunTimer());}
         }
-        
+
+        public TimerViewModel()
+        {
+            _endTimerRecorder = new EndTimerRecorder();
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -63,8 +65,7 @@ namespace TimerApplication.ViewModel
                         continue;
                     }
 
-                    EndTimer?.Invoke();
-                    EndTimerEventHandler?.Invoke(this, eventAgs);
+                    _endTimerRecorder.EndTimer.OnEndTimer(this, eventAgs);
                 }
             });
         }
