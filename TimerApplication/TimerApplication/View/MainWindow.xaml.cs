@@ -10,10 +10,10 @@ namespace TimerApplication
         {
             InitializeComponent();
 
-            /*var timerViewModel = new TimerViewModel();
-
+            var timerViewModel = new TimerViewModel();
+            
             timerViewModel.EndTimer += Follower1.ShowMessage;
-            timerViewModel.EndTimer += Follower2.ShowMessage;
+            /*timerViewModel.EndTimer += Follower2.ShowMessage;
             timerViewModel.EndTimer += Follower3.ShowMessage;
 
             timerViewModel.EndTimerEventHandler += Follower1.ShowNewMessage;

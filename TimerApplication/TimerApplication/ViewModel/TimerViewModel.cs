@@ -11,10 +11,8 @@ namespace TimerApplication.ViewModel
     {
         private int _userCount = 10;
         private int _currentCount;
-        
-        public delegate void SomeMethod();
 
-        public event SomeMethod EndTimer = () => {};
+        public event Action EndTimer;
         public event EventHandler<EndTimerEventAgs> EndTimerEventHandler;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -65,7 +63,7 @@ namespace TimerApplication.ViewModel
                         continue;
                     }
 
-                    EndTimer();
+                    EndTimer?.Invoke();
                     EndTimerEventHandler?.Invoke(this, eventAgs);
                 }
             });
