@@ -1,17 +1,18 @@
 ﻿using System.Windows;
+using TimerApplication.Timer;
 
 namespace TimerApplication.Followers
 {
     public class Follower1
     {
-        public Follower1(EndTimer timer)
+        public Follower1(MyTimer timer)
         {
             timer.EndTimerEventHandler += ShowNewMessage;
         }
 
-        public void ShowNewMessage(object sender, EndTimerEventAgs e)
+        public void ShowNewMessage(object sender, TimerEventAgs e)
         {
-            MessageBox.Show($"class Follower1 : ShowNewMessage(object sender, EndTimerEventAgs e) = {e.UserCount}");
+            MessageBox.Show($"User set {e.UserCount} seconds.", "Follower1");
         }
     }
 }

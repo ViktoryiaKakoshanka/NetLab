@@ -7,36 +7,31 @@ namespace TimerApplication.Timer
     public class MyTimer
     {
         private readonly ITimerUpdate _timerUpdate;
+        
+        public event EventHandler<TimerEventAgs> EndTimerEventHandler;
 
         public MyTimer(ITimerUpdate timerUpdate = null)
         {
             _timerUpdate = timerUpdate;
         }
 
-        public event EventHandler<EndTimerEventAgs> EndTimerEventHandler;
-
-        public void OnEndTimer(object sender, EndTimerEventAgs e)
+        public void OnEndTimer(object sender, TimerEventAgs e)
         {
             EndTimerEventHandler?.Invoke(sender, e);
         }
 
         public void RunTimer(int numberOfSeconds, int durationInMilliseconds = 1000)
         {
-            var eventAgs = new EndTimerEventAgs(numberOfSeconds);
+            var eventAgs = new TimerEventAgs(numberOfSeconds);
 
             Task.Factory.StartNew(() =>
             {
-                for (var i = numberOfSeconds; i >= 0; i--)
+                for (var seconds = numberOfSeconds; seconds >= 0; seconds--)
                 {
-                    _timerUpdate?.Update(i);
+                    _timerUpdate?.Update(seconds);
                     Thread.Sleep(durationInMilliseconds);
-                    if (i != 0)
-                    {
-                        continue;
-                    }
-
-                    OnEndTimer(this, eventAgs);
                 }
+                OnEndTimer(this, eventAgs);
             });
         }
     }

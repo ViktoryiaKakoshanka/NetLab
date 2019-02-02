@@ -1,73 +1,58 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using TimerApplication.Annotations;
+using TimerApplication.Timer;
 
 namespace TimerApplication.ViewModel
 {
-    public class TimerViewModel : INotifyPropertyChanged
+    public class TimerViewModel : INotifyPropertyChanged, ITimerUpdate
     {
-        private int _userCount = 10;
-        private int _currentCount;
-        private readonly EndTimerRecorder _endTimerRecorder;
-      
+        private int _numberOfSeconds = 10;
+        private int _currentNumberOfSeconds;
+
+        public MyTimer Timer { get; }
+
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public int CurrentCount
+        
+        public int CurrentNumberOfSeconds
         {
-            get => _currentCount;
+            get => _currentNumberOfSeconds;
             set
             {
-                _currentCount = value;
+                _currentNumberOfSeconds = value;
                 OnPropertyChanged();
             }
         }
 
-        public int UserCount
+        public int NumberOfSeconds
         {
-            get => _userCount;
+            get => _numberOfSeconds;
             set
             {
-                _userCount = value;
+                _numberOfSeconds = value;
                 OnPropertyChanged();
             }
-        }
-
-        public RelayCommand StartTimer
-        {
-            get { return new RelayCommand(obj => RunTimer());}
         }
 
         public TimerViewModel()
         {
-            _endTimerRecorder = new EndTimerRecorder();
+            Timer = new MyTimer(this);
         }
 
+        public RelayCommand StartTimer
+        {
+            get { return new RelayCommand(obj => Timer.RunTimer(_numberOfSeconds));}
+        }
+        
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        private void RunTimer()
+        
+        public void Update(int restOfSeconds)
         {
-            var eventAgs = new EndTimerEventAgs(UserCount);
-
-            Task.Factory.StartNew(() =>
-            {
-                for (var i = UserCount; i >= 0; i--)
-                {
-                    CurrentCount = i;
-                    Thread.Sleep(1000);
-                    if (i != 0)
-                    {
-                        continue;
-                    }
-
-                    _endTimerRecorder.EndTimer.OnEndTimer(this, eventAgs);
-                }
-            });
+            CurrentNumberOfSeconds = restOfSeconds;
         }
     }
 }

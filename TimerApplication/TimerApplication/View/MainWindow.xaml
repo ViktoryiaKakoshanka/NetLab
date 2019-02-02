@@ -14,13 +14,13 @@
         <TextBlock 
             HorizontalAlignment="Center" 
             TextWrapping="Wrap" 
-            Text="{Binding CurrentCount}" 
+            Text="{Binding CurrentNumberOfSeconds}" 
             VerticalAlignment="Bottom" 
             FontSize="40"/>
         <TextBox 
             HorizontalAlignment="Left" 
             Height="23" Margin="65,34,0,0" 
-            Text="{Binding UserCount}" 
+            Text="{Binding NumberOfSeconds}" 
             VerticalAlignment="Top" 
             Width="120"/>
         <Button 

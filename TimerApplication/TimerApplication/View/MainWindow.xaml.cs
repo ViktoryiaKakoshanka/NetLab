@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using TimerApplication.Followers;
+using TimerApplication.ViewModel;
 
 namespace TimerApplication
 {
@@ -7,6 +9,13 @@ namespace TimerApplication
         public MainWindow()
         {
             InitializeComponent();
+            
+            var timerViewModel = new TimerViewModel();
+            new Follower1(timerViewModel.Timer);
+            new Follower2(timerViewModel.Timer);
+            new Follower3(timerViewModel.Timer);
+
+            DataContext = timerViewModel;
         }
     }
 }
