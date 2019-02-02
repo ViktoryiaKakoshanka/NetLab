@@ -5,7 +5,7 @@ namespace WorkWithFiles
 {
     public class FileService : IFileService
     {
-        public string Open(string filePath)
+        public string ReadFile(string filePath)
         {
             byte[] text;
             using (var fileStream = new FileStream(filePath, FileMode.Open))

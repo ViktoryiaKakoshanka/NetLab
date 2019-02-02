@@ -9,31 +9,28 @@ namespace WorkWithFiles
 
         public bool ShowOpenFileDialog()
         {
-            var openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() != true)
-            {
-                return false;
-            }
-
-            FilePath = openFileDialog.FileName;
-            return true;
+            return ShowFileDialog(new OpenFileDialog());
         }
 
         public bool ShowSaveFileDialog()
         {
-            var saveFileDialog = new SaveFileDialog();
-            if (saveFileDialog.ShowDialog() != true)
-            {
-                return false;
-            }
-
-            FilePath = saveFileDialog.FileName;
-            return true;
+            return ShowFileDialog(new SaveFileDialog());
         }
 
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
+        }
+
+        private bool ShowFileDialog(FileDialog fileDialog)
+        {
+            if (fileDialog.ShowDialog() != true)
+            {
+                return false;
+            }
+
+            FilePath = fileDialog.FileName;
+            return true;
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IFileService
     {
-        string Open(string filePath);
+        string ReadFile(string filePath);
         void Save(string filePath, string text);
     }
 }

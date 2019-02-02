@@ -48,7 +48,7 @@ namespace WorkWithFiles.ViewModel
         
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ApplicationViewModel() : this(new DialogService(), new FileService())
+        public ApplicationViewModel() : this (new DialogService(), new FileService())
         {
         }
 
@@ -66,14 +66,14 @@ namespace WorkWithFiles.ViewModel
 
         private void OpenFile()
         {
+            if (_dialogService.ShowOpenFileDialog() != true)
+            {
+                return;
+            }
+
             try
             {
-                if (_dialogService.ShowOpenFileDialog() != true)
-                {
-                    return;
-                }
-
-                Text = _fileService.Open(_dialogService.FilePath);
+                Text = _fileService.ReadFile(_dialogService.FilePath);
                 _dialogService.ShowMessage("File open.");
             }
             catch (IOException e)
@@ -88,15 +88,15 @@ namespace WorkWithFiles.ViewModel
 
         private void SaveFileAs()
         {
+            if (_dialogService.ShowSaveFileDialog() != true)
+            {
+                return;
+            }
+
             try
             {
-                if (_dialogService.ShowSaveFileDialog() != true)
-                {
-                    return;
-                }
-
                 _fileService.Save(_dialogService.FilePath, _text);
-                _dialogService.ShowMessage("File save.");
+                _dialogService.ShowMessage("File is saved.");
             }
             catch (ArgumentNullException)
             {
@@ -113,7 +113,7 @@ namespace WorkWithFiles.ViewModel
             try
             {
                 _fileService.Save(_dialogService.FilePath, _text);
-                _dialogService.ShowMessage("File save.");
+                _dialogService.ShowMessage("File is saved.");
             }
             catch (ArgumentNullException)
             {
