@@ -1,10 +1,10 @@
 ﻿namespace ConsoleFactory.Product
 {
-    class ProductB2 : IProductB
+    class PopArtTable : ITable
     {
         public string GetInfo()
         {
-            return "this -> ProductB2";
+            return "this -> PopArtTable";
         }
     }
 }

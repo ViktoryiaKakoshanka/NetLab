@@ -1,6 +1,6 @@
 ﻿namespace ConsoleFactory.Product
 {
-    public interface IProductA
+    public interface IChair
     {
         string GetInfo();
     }

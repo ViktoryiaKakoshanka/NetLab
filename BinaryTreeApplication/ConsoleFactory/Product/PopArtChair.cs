@@ -1,10 +1,10 @@
 ﻿namespace ConsoleFactory.Product
 {
-    class ProductA2 : IProductA
+    class PopArtChair : IChair
     {
         public string GetInfo()
         {
-            return "this -> ProductA2";
+            return "this -> PopArtChair";
         }
     }
 }

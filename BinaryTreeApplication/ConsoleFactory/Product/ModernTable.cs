@@ -1,10 +1,10 @@
 ﻿namespace ConsoleFactory.Product
 {
-    class ProductB1 : IProductB
+    class ModernTable : ITable
     {
         public string GetInfo()
         {
-            return "this -> ProductB1";
+            return "this -> ModernTable";
         }
     }
 }

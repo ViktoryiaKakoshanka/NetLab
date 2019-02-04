@@ -1,6 +1,6 @@
 ﻿namespace ConsoleFactory.Product
 {
-    public interface IProductB 
+    public interface ITable 
     {
         string GetInfo();
     }

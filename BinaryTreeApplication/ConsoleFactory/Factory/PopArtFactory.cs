@@ -1,6 +1,6 @@
 ﻿using ConsoleFactory.Product;
 
-namespace ConsoleFactory
+namespace ConsoleFactory.Factory
 {
     class PopArtFactory : IFactory
     {

@@ -5,7 +5,7 @@ namespace ConsoleFactory
 {
     public static class ProgramRunner
     {
-        public static void Main()
+        public static void Run()
         {
             var client = new Client(new ModernFactory());
             PrintInfo(client);
