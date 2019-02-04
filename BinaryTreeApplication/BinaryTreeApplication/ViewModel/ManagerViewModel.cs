@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using BinaryTreeApplication.Annotations;
 using BinaryTreeApplication.Model;
 
