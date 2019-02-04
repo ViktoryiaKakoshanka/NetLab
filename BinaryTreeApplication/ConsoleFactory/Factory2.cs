@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleFactory
+﻿namespace ConsoleFactory
 {
-    class Factory2
+    class Factory2 : IFactory
     {
+        public IFactory CreateProduct(TypeProduct product)
+        {
+            if (product == TypeProduct.ProductA)
+            {
+                return new ProductA2();
+            }
+
+            if (product == TypeProduct.ProductB)
+            {
+                return new ProductB2();
+            }
+
+            return null;
+        }
     }
 }
