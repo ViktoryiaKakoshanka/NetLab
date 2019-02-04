@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BinaryTreeApplication.Model
 {
     [Serializable]
-    public class BinaryTree<TValue> //where TValue : IComparer<TValue>
+    public class BinaryTree<TValue> where TValue : IComparer<TValue>
     {
         public int Key { get; set; }
         public TValue Value { get; set; }
@@ -62,7 +63,7 @@ namespace BinaryTreeApplication.Model
 
             if (key == Key)
             {
-                throw new Exception("This key already exists");
+                throw new Exception("This key already exists.");
             }
 
             return new BinaryTree<TValue>(this);

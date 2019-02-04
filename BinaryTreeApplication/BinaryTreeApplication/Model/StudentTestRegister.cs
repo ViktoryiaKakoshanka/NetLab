@@ -6,14 +6,14 @@ namespace BinaryTreeApplication.Model
     [Serializable]
     public class StudentTestRegister : IComparer<StudentTestRegister>
     {
-        public Test TestPassed { get; }
-        public Student Student { get; }
+        public string TestName { get; }
+        public string Student { get; }
         public DateTime Date { get; }
         public int Mark { get; }
 
-        public StudentTestRegister(Test testPassed, Student student, DateTime date, int mark)
+        public StudentTestRegister(string testName, string student, DateTime date, int mark)
         {
-            TestPassed = testPassed;
+            TestName = testName;
             Student = student;
             Date = date;
             Mark = mark;

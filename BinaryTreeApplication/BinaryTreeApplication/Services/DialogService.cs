@@ -1,39 +1,36 @@
 ﻿using System.Windows;
 using Microsoft.Win32;
 
-namespace BinaryTreeApplication
+namespace BinaryTreeApplication.Services
 {
-    public class DialogService
+    public class DialogService : IDialogService
     {
-        public string FilePath { get; set; }
+        public string FilePath { get; private set; }
 
-        public bool OpenFileDialog()
+        public bool ShowOpenFileDialog()
         {
-            var openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() != true)
-            {
-                return false;
-            }
-
-            FilePath = openFileDialog.FileName;
-            return true;
+            return ShowFileDialog(new OpenFileDialog());
         }
 
-        public bool SaveFileDialog()
+        public bool ShowSaveFileDialog()
         {
-            var saveFileDialog = new SaveFileDialog();
-            if (saveFileDialog.ShowDialog() != true)
-            {
-                return false;
-            }
-
-            FilePath = saveFileDialog.FileName;
-            return true;
+            return ShowFileDialog(new SaveFileDialog());
         }
 
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
+        }
+
+        private bool ShowFileDialog(FileDialog dialog)
+        {
+            if (dialog.ShowDialog() != true)
+            {
+                return false;
+            }
+
+            FilePath = dialog.FileName;
+            return true;
         }
     }
 }

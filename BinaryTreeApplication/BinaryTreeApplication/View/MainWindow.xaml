@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BinaryTreeApplication"
+        xmlns:viewModel="clr-namespace:BinaryTreeApplication.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="361.441">
+    <Window.DataContext>
+        <viewModel:ManagerViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="172*" />
@@ -15,12 +19,12 @@
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Content="Open data" 
+        <Button Content="Read data" 
                 HorizontalAlignment="Left" 
                 Margin="41,34,0,0" 
                 VerticalAlignment="Top" 
                 Width="75"
-                Command="{Binding OpenCommand}" Height="20"/>
+                Command="{Binding ReadCommand}" Height="20"/>
         <Button Content="Save data" 
                 HorizontalAlignment="Left" 
                 Margin="35,34,0,0" 
@@ -30,3 +34,4 @@
 
     </Grid>
 </Window>
+
