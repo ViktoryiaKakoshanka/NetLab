@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleFactory
+﻿namespace ConsoleFactory
 {
-    class ProductA1
+    class ProductA1 : IProductA, IFactory
     {
+        public IFactory CreateProduct(TypeProduct product)
+        {
+            return new ProductA1();
+        }
     }
 }
