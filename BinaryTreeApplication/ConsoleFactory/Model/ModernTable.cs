@@ -4,7 +4,7 @@
     {
         public string GetInfo()
         {
-            return "this -> ModernTable";
+            return nameof(ModernTable);
         }
     }
 }

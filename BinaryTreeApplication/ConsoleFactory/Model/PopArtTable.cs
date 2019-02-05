@@ -4,7 +4,7 @@
     {
         public string GetInfo()
         {
-            return "this -> PopArtTable";
+            return nameof(PopArtTable);
         }
     }
 }
