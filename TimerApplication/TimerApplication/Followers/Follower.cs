@@ -3,15 +3,18 @@ using TimerApplication.Timer;
 
 namespace TimerApplication.Followers
 {
-    public class Follower1
+    public class Follower
     {
         private readonly string _name;
 
-        public Follower1(string followerName, MyTimer timer)
+        public Follower(string followerName, ITimer timer)
         {
             _name = followerName;
-            timer.EndTimerEventHandler += (sender, e) => 
-                { MessageBox.Show($"User set {e.UserCount} seconds.", _name); };
+            timer.EndTimerEventHandler += (sender, e) =>
+            {
+                var userNumberSeconds = ((ITimer) sender).InitialNumberSeconds;
+                MessageBox.Show($"User set {userNumberSeconds} seconds.", _name); 
+            };
         }
     }
 }

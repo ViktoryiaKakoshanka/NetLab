@@ -12,11 +12,9 @@ namespace TimerApplication
             InitializeComponent();
 
             var timer = new MyTimer();
-            var timerModel = new TimerModel(timer);
-            var timerViewModel = new TimerViewModel(timerModel);
-            new Follower1(timer);
-            new Follower2(timer);
-            new Follower3(timer);
+            var timerViewModel = new TimerViewModel(timer);
+            new Follower("First follower", timer);
+            new Follower("Second follower", timer);
 
             DataContext = timerViewModel;
         }

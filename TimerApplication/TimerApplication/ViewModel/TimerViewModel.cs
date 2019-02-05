@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using TimerApplication.Annotations;
 using TimerApplication.Timer;
@@ -7,33 +8,42 @@ namespace TimerApplication.ViewModel
 {
     public class TimerViewModel : INotifyPropertyChanged
     {
-        private TimerModel _timerModel;
+        private ITimer _myTimer;
+        private int _currentNumberOfSeconds;
         
         public event PropertyChangedEventHandler PropertyChanged;
         
-        public TimerModel TimerModel
+        public int NumberOfSeconds { get; set; }
+        public int CurrentNumberOfSeconds
         {
-            get => _timerModel;
+            get { return _currentNumberOfSeconds; }
             set
             {
-                _timerModel = value;
+                _currentNumberOfSeconds = value;
                 OnPropertyChanged();
             }
         }
         
-        public TimerViewModel()
+        public TimerViewModel() : this(new MyTimer())
         {
-            TimerModel = new TimerModel(new MyTimer());
         }
 
-        public TimerViewModel(TimerModel timerModel)
+        public TimerViewModel(ITimer timer)
         {
-            TimerModel = timerModel;
+            _myTimer = timer;
+            _myTimer.UpdateRestTimeEventHandler += (sender, e) =>
+            {
+                CurrentNumberOfSeconds = ((ITimer) sender).RestNumberSeconds;
+            };
         }
 
         public RelayCommand StartTimer
         {
-            get { return new RelayCommand(obj => TimerModel.MyTimer.RunTimer(TimerModel.NumberOfSeconds)); }
+            get { return new RelayCommand(obj =>
+            {
+                _myTimer.InitialNumberSeconds = NumberOfSeconds;
+                _myTimer.RunTimer();
+            }); }
         }
         
         [NotifyPropertyChangedInvocator]

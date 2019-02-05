@@ -4,33 +4,36 @@ using System.Threading.Tasks;
 
 namespace TimerApplication.Timer
 {
-    public class MyTimer
+    public class MyTimer : ITimer
     {
-        public event EventHandler<TimerEventAgs> EndTimerEventHandler;
-        public event EventHandler<int> UpdateTimeEventHandler;
-        
-        public void OnEndTimer(object sender, TimerEventAgs e)
+        public event EventHandler EndTimerEventHandler;
+        public event EventHandler UpdateRestTimeEventHandler;
+
+        public int InitialNumberSeconds { get; set; }
+        public int RestNumberSeconds { get; private set; }
+
+        public void OnEndTimer(object sender)
         {
-            EndTimerEventHandler?.Invoke(sender, e);
+            EndTimerEventHandler?.Invoke(sender, EventArgs.Empty);
         }
 
-        public void OnUpdateTime(object sender, int time)
+        public void OnUpdateRestTime(object sender)
         {
-            UpdateTimeEventHandler?.Invoke(sender, time);
+            UpdateRestTimeEventHandler?.Invoke(sender, EventArgs.Empty);
         }
 
-        public void RunTimer(int numberOfSeconds, int durationInMilliseconds = 1000)
+        public void RunTimer(int durationInMilliseconds = 1000)
         {
-            var eventAgs = new TimerEventAgs(numberOfSeconds);
-
             Task.Factory.StartNew(() =>
             {
-                for (var seconds = numberOfSeconds; seconds >= 0; seconds--)
+                for (var restSeconds = InitialNumberSeconds; restSeconds >= 0; restSeconds--)
                 {
-                    OnUpdateTime(this, seconds);
+                    RestNumberSeconds = restSeconds;
+                    OnUpdateRestTime(this);
+
                     Thread.Sleep(durationInMilliseconds);
                 }
-                OnEndTimer(this, eventAgs);
+                OnEndTimer(this);
             });
         }
     }
