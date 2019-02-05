@@ -21,7 +21,7 @@ namespace WorkWithFiles.ViewModel
             get => _text;
             set
             {
-                if (Equals(value, _text))
+                if (value == _text)
                 {
                     return;
                 }
@@ -78,11 +78,11 @@ namespace WorkWithFiles.ViewModel
             }
             catch (IOException e)
             {
-                _dialogService.ShowMessage($"{e.Message}\nChoose another file");
+                _dialogService.ShowMessage($"{e.Message}\nChoose another file.");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                _dialogService.ShowMessage("File is closed.");
+                _dialogService.ShowMessage($"An error has occurred.\n{e.Message}");
             }
         }
 
@@ -100,11 +100,11 @@ namespace WorkWithFiles.ViewModel
             }
             catch (ArgumentNullException)
             {
-                _dialogService.ShowMessage("No text to write.");
+                _dialogService.ShowMessage("File was not selected");
             }
-            catch
+            catch (Exception e)
             {
-                _dialogService.ShowMessage("File is closed.");
+                _dialogService.ShowMessage($"An error has occurred.\n{e.Message}");
             }
         }
 
@@ -117,11 +117,11 @@ namespace WorkWithFiles.ViewModel
             }
             catch (ArgumentNullException)
             {
-                _dialogService.ShowMessage("The file has not been opened.");
+                _dialogService.ShowMessage("File was not selected.");
             }
             catch (Exception e)
             {
-                _dialogService.ShowMessage($"File is closed.\n{e.Message}");
+                _dialogService.ShowMessage($"An error has occurred.\n{e.Message}");
             }
         }
     }
