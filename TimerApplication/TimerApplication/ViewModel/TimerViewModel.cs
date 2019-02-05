@@ -5,12 +5,12 @@ using TimerApplication.Timer;
 
 namespace TimerApplication.ViewModel
 {
-    public class TimerViewModel : INotifyPropertyChanged, ITimerUpdate
+    public class TimerViewModel : INotifyPropertyChanged
     {
         private int _numberOfSeconds = 10;
         private int _currentNumberOfSeconds;
 
-        public MyTimer Timer { get; }
+        private readonly MyTimer _timer;
 
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -33,15 +33,20 @@ namespace TimerApplication.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        
         public TimerViewModel()
         {
-            Timer = new MyTimer(this);
+        }
+
+        public TimerViewModel(MyTimer timer)
+        {
+            _timer = timer;
+            _timer.UpdateTimeEventHandler += Update;
         }
 
         public RelayCommand StartTimer
         {
-            get { return new RelayCommand(obj => Timer.RunTimer(_numberOfSeconds));}
+            get { return new RelayCommand(obj => _timer.RunTimer(_numberOfSeconds));}
         }
         
         [NotifyPropertyChangedInvocator]
@@ -50,7 +55,7 @@ namespace TimerApplication.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
-        public void Update(int restOfSeconds)
+        public void Update(object sender ,int restOfSeconds)
         {
             CurrentNumberOfSeconds = restOfSeconds;
         }

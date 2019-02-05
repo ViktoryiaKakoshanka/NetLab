@@ -6,18 +6,17 @@ namespace TimerApplication.Timer
 {
     public class MyTimer
     {
-        private readonly ITimerUpdate _timerUpdate;
-        
         public event EventHandler<TimerEventAgs> EndTimerEventHandler;
-
-        public MyTimer(ITimerUpdate timerUpdate = null)
-        {
-            _timerUpdate = timerUpdate;
-        }
-
+        public event EventHandler<int> UpdateTimeEventHandler;
+        
         public void OnEndTimer(object sender, TimerEventAgs e)
         {
             EndTimerEventHandler?.Invoke(sender, e);
+        }
+
+        public void OnUpdateTime(object sender, int time)
+        {
+            UpdateTimeEventHandler?.Invoke(sender, time);
         }
 
         public void RunTimer(int numberOfSeconds, int durationInMilliseconds = 1000)
@@ -28,7 +27,7 @@ namespace TimerApplication.Timer
             {
                 for (var seconds = numberOfSeconds; seconds >= 0; seconds--)
                 {
-                    _timerUpdate?.Update(seconds);
+                    OnUpdateTime(this, seconds);
                     Thread.Sleep(durationInMilliseconds);
                 }
                 OnEndTimer(this, eventAgs);

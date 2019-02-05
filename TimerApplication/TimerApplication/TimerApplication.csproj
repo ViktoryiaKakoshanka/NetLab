@@ -67,7 +67,6 @@
     <Compile Include="Followers\Follower1.cs" />
     <Compile Include="Followers\Follower2.cs" />
     <Compile Include="Followers\Follower3.cs" />
-    <Compile Include="Timer\ITimerUpdate.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Timer\MyTimer.cs" />
