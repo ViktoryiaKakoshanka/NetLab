@@ -2,7 +2,7 @@
 
 namespace ConsoleFactory.Factory
 {
-    internal class ModernFactory : IFactory
+    internal class ModernFactory : IFurnitureFactory
     {
         public IChair CreateChair()
         {

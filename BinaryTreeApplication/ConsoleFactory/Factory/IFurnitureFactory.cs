@@ -2,7 +2,7 @@
 
 namespace ConsoleFactory.Factory
 {
-    public interface IFactory
+    public interface IFurnitureFactory
     {
         IChair CreateChair();
         ITable CreateTable();

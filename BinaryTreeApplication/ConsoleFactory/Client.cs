@@ -8,7 +8,7 @@ namespace ConsoleFactory
         public IChair Chair { get; private set; }
         public ITable Table { get; private set; }
 
-        public Client(IFactory factory)
+        public Client(IFurnitureFactory factory)
         {
             Chair = factory.CreateChair();
             Table = factory.CreateTable();
