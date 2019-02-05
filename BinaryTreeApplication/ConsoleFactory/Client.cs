@@ -3,7 +3,7 @@ using ConsoleFactory.Product;
 
 namespace ConsoleFactory
 {
-    class Client
+    internal class Client
     {
         public IChair Chair { get; private set; }
         public ITable Table { get; private set; }

@@ -1,6 +1,6 @@
 ﻿namespace ConsoleFactory.Product
 {
-    class PopArtChair : IChair
+    internal class PopArtChair : IChair
     {
         public string GetInfo()
         {

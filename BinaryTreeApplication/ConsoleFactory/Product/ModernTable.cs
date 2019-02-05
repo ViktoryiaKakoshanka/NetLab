@@ -1,6 +1,6 @@
 ﻿namespace ConsoleFactory.Product
 {
-    class ModernTable : ITable
+    internal class ModernTable : ITable
     {
         public string GetInfo()
         {

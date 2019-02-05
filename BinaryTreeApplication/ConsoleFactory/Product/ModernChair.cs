@@ -1,6 +1,6 @@
 ﻿namespace ConsoleFactory.Product
 {
-    class ModernChair : IChair
+    internal class ModernChair : IChair
     {
         public string GetInfo()
         {

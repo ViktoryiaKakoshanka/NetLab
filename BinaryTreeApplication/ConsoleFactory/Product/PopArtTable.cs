@@ -1,6 +1,6 @@
 ﻿namespace ConsoleFactory.Product
 {
-    class PopArtTable : ITable
+    internal class PopArtTable : ITable
     {
         public string GetInfo()
         {
