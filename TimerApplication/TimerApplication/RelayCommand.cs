@@ -27,6 +27,5 @@ namespace TimerApplication
         {
             _execute(parameter);
         }
-
     }
 }

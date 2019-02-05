@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TimerModel.cs" />
     <Compile Include="Timer\TimerEventAgs.cs" />
     <Compile Include="Followers\Follower1.cs" />
     <Compile Include="Followers\Follower2.cs" />

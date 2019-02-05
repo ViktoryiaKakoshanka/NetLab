@@ -7,57 +7,39 @@ namespace TimerApplication.ViewModel
 {
     public class TimerViewModel : INotifyPropertyChanged
     {
-        private int _numberOfSeconds = 10;
-        private int _currentNumberOfSeconds;
-
-        private readonly MyTimer _timer;
-
+        private TimerModel _timerModel;
+        
         public event PropertyChangedEventHandler PropertyChanged;
         
-        public int CurrentNumberOfSeconds
+        public TimerModel TimerModel
         {
-            get => _currentNumberOfSeconds;
+            get => _timerModel;
             set
             {
-                _currentNumberOfSeconds = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int NumberOfSeconds
-        {
-            get => _numberOfSeconds;
-            set
-            {
-                _numberOfSeconds = value;
+                _timerModel = value;
                 OnPropertyChanged();
             }
         }
         
         public TimerViewModel()
         {
+            TimerModel = new TimerModel(new MyTimer());
         }
 
-        public TimerViewModel(MyTimer timer)
+        public TimerViewModel(TimerModel timerModel)
         {
-            _timer = timer;
-            _timer.UpdateTimeEventHandler += Update;
+            TimerModel = timerModel;
         }
 
         public RelayCommand StartTimer
         {
-            get { return new RelayCommand(obj => _timer.RunTimer(_numberOfSeconds));}
+            get { return new RelayCommand(obj => TimerModel.MyTimer.RunTimer(TimerModel.NumberOfSeconds)); }
         }
         
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        
-        public void Update(object sender ,int restOfSeconds)
-        {
-            CurrentNumberOfSeconds = restOfSeconds;
         }
     }
 }
