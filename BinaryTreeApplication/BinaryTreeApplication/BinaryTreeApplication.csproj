@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\BinaryTreeExtensions.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\BinaryFileService.cs" />
     <Compile Include="Model\BinaryTree.cs" />

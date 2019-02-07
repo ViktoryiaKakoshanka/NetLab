@@ -5,14 +5,14 @@ using System.Linq;
 namespace BinaryTreeApplication.Model
 {
     [Serializable]
-    public class StudentTestRegister : IComparer<StudentTestRegister>
+    public class StudentTestRegister : IComparer<StudentTestRegister>, IEquatable<StudentTestRegister>
     {
         public string TestName { get; }
         public string Student { get; }
         public DateTime Date { get; }
         public int Mark { get; }
 
-        private readonly List<string> _namesStudents = new List<string>
+        private static List<string> _namesStudents = new List<string>
         {
             "Tom",
             "Billy",
@@ -20,13 +20,15 @@ namespace BinaryTreeApplication.Model
             "Mila"
         };
 
-        private readonly List<string> _namesTests = new List<string>
+        private static List<string> _namesTests = new List<string>
         {
             "Physics",
             "English",
             "Literature",
             "Maths" 
         };
+
+        private static Random random = new Random();
 
         public StudentTestRegister(string testName, string student, DateTime date, int mark)
         {
@@ -42,24 +44,55 @@ namespace BinaryTreeApplication.Model
             {
                 throw new NullReferenceException();
             }
-            return DateTime.Compare(x.Date, y.Date);
+
+            if (x.Mark > y.Mark)
+            {
+                return 1;
+            }
+
+            if (x.Mark < y.Mark)
+            {
+                return -1;
+            }
+
+            return 0;
         }
 
-        public StudentTestRegister CreateStudentTestRegisterRundom()
+        public static StudentTestRegister GenerateNewRegister()
         {
-            var randomMark = new Random();
-            return new StudentTestRegister(CreateTestRandom(), CreateStudentRandom(), DateTime.Now, randomMark.Next(0, 10));
+            return new StudentTestRegister(CreateTestRandom(), CreateStudentRandom(), DateTime.Now, random.Next(1, 11));
         }
 
-        private string CreateStudentRandom()
+        public override int GetHashCode()
         {
-            var random = new Random();
+            return unchecked(Mark ^ Date.GetHashCode() ^ Student.GetHashCode() * 397) ^ TestName.GetHashCode();
+        }
+
+        public bool Equals(StudentTestRegister other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Mark == other.Mark &&
+                   Date == other.Date &&
+                   Student == other.Student &&
+                   TestName == other.TestName;
+        }
+        
+        private static string CreateStudentRandom()
+        {
             return _namesStudents.ElementAt(random.Next(0, _namesStudents.Count));
         }
 
-        private string CreateTestRandom()
+        private static string CreateTestRandom()
         {
-            var random = new Random();
             return _namesTests.ElementAt(random.Next(0, _namesTests.Count));
         }
     }

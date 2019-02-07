@@ -1,27 +1,26 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 
 namespace BinaryTreeApplication.Model
 {
     [Serializable]
-    public class BinaryTree<TValue> where TValue : IComparer<TValue>
+    public class BinaryTree<TValue> : IEquatable<BinaryTree<TValue>>
+        where TValue : IComparer<TValue>, IEquatable<TValue>
     {
-        public int Key { get; set; }
         public TValue Value { get; set; }
         public BinaryTree<TValue> RightNode { get; set; }
         public BinaryTree<TValue> LeftNode { get; set; }
 
-        public BinaryTree()
+        private List<TValue> _list;
+
+        public BinaryTree(TValue value) : this(value, null, null)
         {
         }
 
-        public BinaryTree(int key, TValue value) : this(key, value, null, null)
+        public BinaryTree(TValue value, BinaryTree<TValue> rightNode, BinaryTree<TValue> leftNode)
         {
-        }
-
-        public BinaryTree(int key, TValue value, BinaryTree<TValue> rightNode, BinaryTree<TValue> leftNode)
-        {
-            Key = key;
             Value = value;
             RightNode = rightNode;
             LeftNode = leftNode;
@@ -29,126 +28,174 @@ namespace BinaryTreeApplication.Model
 
         public BinaryTree(BinaryTree<TValue> binaryTree)
         {
-            Key = binaryTree.Key;
             Value = binaryTree.Value;
             RightNode = binaryTree.RightNode;
             LeftNode = binaryTree.LeftNode;
         }
 
-        public BinaryTree<TValue> Insert(int key, TValue value)
+        public BinaryTree<TValue> Insert(TValue value)
         {
-            if (key > Key)
+            if (value.Compare(value, Value) >= 0)
             {
                 if (RightNode == null)
                 {
-                    RightNode = new BinaryTree<TValue>(key, value);
+                    RightNode = new BinaryTree<TValue>(value);
+                    return this;
                 }
-                else
+
+                if (value.Compare(value, Value) == 0)
                 {
-                    RightNode.Insert(key, value);
+                    var temp = new BinaryTree<TValue>(value)
+                    {
+                        RightNode = RightNode
+                    };
+                    RightNode = temp;
+                    return this;
                 }
+
+                RightNode.Insert(value);
             }
 
-            if (key < Key)
+            if (value.Compare(value, Value) < 0)
             {
                 if (LeftNode == null)
                 {
-                    LeftNode = new BinaryTree<TValue>(key, value);
+                    LeftNode = new BinaryTree<TValue>(value);
+                    return this;
                 }
-                else
-                {
-                    LeftNode.Insert(key, value);
-                }
+
+                LeftNode.Insert(value);
             }
 
-            if (key == Key)
-            {
-                throw new Exception("This key already exists.");
-            }
-
-            return new BinaryTree<TValue>(this);
+            return this;
         }
 
-        public BinaryTree<TValue> Remove(int key)
+        public BinaryTree<TValue> FindFirstNode(TValue value)
         {
-            var result = new BinaryTree<TValue>(this);
-
-            if (key > result.Key)
-            {
-                result.RightNode = result.RightNode?.Remove(key);
-            }
-
-            if (key < result.Key)
-            {
-                result.LeftNode = result.LeftNode?.Remove(key);
-            }
-
-            if (key != result.Key)
-            {
-                return new BinaryTree<TValue>(result);
-            }
-
-            if (result.RightNode == null && result.LeftNode == null)
-            {
-                return null;
-            }
-
-            if (result.RightNode != null && result.LeftNode == null)
-            {
-                return new BinaryTree<TValue>(result.RightNode);
-            }
-
-            if (result.RightNode == null && result.LeftNode != null)
-            {
-                return new BinaryTree<TValue>(result.LeftNode);
-            }
-
-            ReplaceItem(result);
-
-            return new BinaryTree<TValue>(result);
-        }
-
-        public BinaryTree<TValue> Find(int key)
-        {
-            if (key == Key)
+            if (value.Equals(Value))
             {
                 return this;
             }
 
-            if (key > Key && RightNode != null)
+            if (value.Compare(value, Value) >= 0 && RightNode != null)
             {
-
-                return RightNode.Find(key);
+                return RightNode.FindFirstNode(value);
             }
 
-            if (key < Key && LeftNode != null)
+            if (value.Compare(value, Value) < 0 && LeftNode != null)
             {
-                return LeftNode.Find(key);
+                return LeftNode.FindFirstNode(value);
             }
 
-            throw new Exception("Key not found.");
+            throw new Exception("Value not found.");
+        }
+        
+        public BinaryTree<TValue> Remove(TValue value)
+        {
+            var currentTree = new BinaryTree<TValue>(this);
+
+            if (value.Compare(value, currentTree.Value) >= 0)
+            {
+                if (value.Equals(currentTree.Value))
+                {
+                   return ReplaceItem(currentTree);
+                }
+                currentTree.RightNode = currentTree.RightNode?.Remove(value);
+            }
+
+            if (value.Compare(value, currentTree.Value) < 0)
+            {
+                currentTree.LeftNode = currentTree.LeftNode?.Remove(value);
+            }
+
+            return new BinaryTree<TValue>(currentTree);
         }
 
-        private static void ReplaceItem(BinaryTree<TValue> result)
+        public bool Equals(BinaryTree<TValue> other)
         {
-            if (result.RightNode.LeftNode == null)
-            {
-                result.Key = result.RightNode.Key;
-                result.Value = result.RightNode.Value;
-                result.RightNode = result.RightNode.RightNode;
-            }
-            else
-            {
-                var temp = result.RightNode;
-                while (temp?.LeftNode != null)
-                {
-                    temp = temp.LeftNode;
-                }
+            return Value.Equals(other.Value) && RightNode.Equals(other.RightNode) && LeftNode.Equals(other.LeftNode);
+        }
 
-                result.Value = temp.Value;
-                result.Key = temp.Key;
-                result.RightNode = result.RightNode?.Remove(temp.Key);
+        public override int GetHashCode()
+        {
+            var rightCode = (RightNode == null) ? 0 : RightNode.Value.GetHashCode();
+            var leftCode = (LeftNode == null) ? 0 : LeftNode.Value.GetHashCode();
+
+            return checked(Value.GetHashCode() ^ rightCode * 397 * leftCode);
+        }
+
+        public List<TValue> ToList()
+        {
+            var tree = new BinaryTree<TValue>(this);
+            _list = new List<TValue>();
+
+            TreeTraversal(tree);
+
+            var temp = _list;
+            _list = null;
+            return temp;
+        }
+
+        private void TreeTraversal(BinaryTree<TValue> tree)
+        {
+            if (tree == null)
+            {
+                return;
             }
+            _list.Add(tree.Value);
+            TreeTraversal(tree.LeftNode);
+            TreeTraversal(tree.RightNode);
+        }
+
+        private static BinaryTree<TValue> ReplaceItem(BinaryTree<TValue> tree)
+        {
+            if (tree.LeftNode == null || tree.RightNode == null)
+            {
+                return RemoveItemWithSimpleDependency(tree);
+            }
+
+            return RemoveItemWithFullDependency(tree);
+        }
+
+        private static BinaryTree<TValue> RemoveItemWithSimpleDependency(BinaryTree<TValue> tree)
+        {
+            if (tree.RightNode == null && tree.LeftNode == null)
+            {
+                return null;
+            }
+
+            if (tree.RightNode != null && tree.LeftNode == null)
+            {
+                return new BinaryTree<TValue>(tree.RightNode);
+            }
+
+            if (tree.RightNode == null && tree.LeftNode != null)
+            {
+                return new BinaryTree<TValue>(tree.LeftNode);
+            }
+
+            return new BinaryTree<TValue>(tree);
+        }
+
+        private static BinaryTree<TValue> RemoveItemWithFullDependency(BinaryTree<TValue> tree)
+        {
+            if (tree.RightNode.LeftNode == null)
+            {
+                tree.Value = tree.RightNode.Value;
+                tree.RightNode = tree.RightNode.RightNode;
+                return new BinaryTree<TValue>(tree);
+            }
+            
+            var temp = tree.RightNode;
+            while (temp?.LeftNode != null)
+            {
+                temp = temp.LeftNode;
+            }
+
+            tree.Value = temp.Value;
+            tree.RightNode = tree.RightNode?.Remove(temp.Value);
+
+            return new BinaryTree<TValue>(tree);
         }
     }
 }

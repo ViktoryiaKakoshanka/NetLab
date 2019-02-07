@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using BinaryTreeApplication.Model;
 
 namespace BinaryTreeApplication.Services
 {
-    public class FileService<T> : IFileService<T>  where T: IComparer<T>
+    public class FileService<T> : IFileService<T>  where T: IComparer<T>, IEquatable<T>
     {
         public BinaryTree<T> Read(string filePath)
         {
