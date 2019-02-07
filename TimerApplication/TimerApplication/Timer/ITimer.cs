@@ -5,13 +5,10 @@ namespace TimerApplication.Timer
     public interface ITimer
     {
         int InitialNumberSeconds { get; set; }
-        int RestNumberSeconds { get; }
+        int RemainNumberSeconds { get; }
 
-        event EventHandler EndTimerEventHandler;
-        event EventHandler UpdateRestTimeEventHandler;
-
-        void OnEndTimer(object sender);
-        void OnUpdateRestTime(object sender);
+        event EventHandler TimerFinished;
+        event EventHandler UpdateRemainingTime;
 
         void RunTimer(int durationInMilliseconds = 1000);
     }

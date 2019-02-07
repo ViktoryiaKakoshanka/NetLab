@@ -6,35 +6,35 @@ namespace TimerApplication.Timer
 {
     public class MyTimer : ITimer
     {
-        public event EventHandler EndTimerEventHandler;
-        public event EventHandler UpdateRestTimeEventHandler;
+        public event EventHandler TimerFinished;
+        public event EventHandler UpdateRemainingTime;
 
         public int InitialNumberSeconds { get; set; }
-        public int RestNumberSeconds { get; private set; }
-
-        public void OnEndTimer(object sender)
-        {
-            EndTimerEventHandler?.Invoke(sender, EventArgs.Empty);
-        }
-
-        public void OnUpdateRestTime(object sender)
-        {
-            UpdateRestTimeEventHandler?.Invoke(sender, EventArgs.Empty);
-        }
-
+        public int RemainNumberSeconds { get; private set; }
+        
         public void RunTimer(int durationInMilliseconds = 1000)
         {
             Task.Factory.StartNew(() =>
             {
-                for (var restSeconds = InitialNumberSeconds; restSeconds >= 0; restSeconds--)
+                for (var restOfSeconds = InitialNumberSeconds; restOfSeconds >= 0; restOfSeconds--)
                 {
-                    RestNumberSeconds = restSeconds;
-                    OnUpdateRestTime(this);
+                    RemainNumberSeconds = restOfSeconds;
+                    MyTimerOnUpdateRemainingTime(this);
 
                     Thread.Sleep(durationInMilliseconds);
                 }
-                OnEndTimer(this);
+                MyTimerOnTimerFinished(this);
             });
+        }
+        
+        private void MyTimerOnTimerFinished(object sender)
+        {
+            TimerFinished?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void MyTimerOnUpdateRemainingTime(object sender)
+        {
+            UpdateRemainingTime?.Invoke(sender, EventArgs.Empty);
         }
     }
 }

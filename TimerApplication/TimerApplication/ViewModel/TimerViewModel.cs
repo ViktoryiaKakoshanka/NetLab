@@ -31,9 +31,9 @@ namespace TimerApplication.ViewModel
         public TimerViewModel(ITimer timer)
         {
             _myTimer = timer;
-            _myTimer.UpdateRestTimeEventHandler += (sender, e) =>
+            _myTimer.UpdateRemainingTime += (sender, e) =>
             {
-                CurrentNumberOfSeconds = ((ITimer) sender).RestNumberSeconds;
+                CurrentNumberOfSeconds = ((ITimer) sender).RemainNumberSeconds;
             };
         }
 

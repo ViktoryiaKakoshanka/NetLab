@@ -10,7 +10,7 @@ namespace TimerApplication.Followers
         public Follower(string followerName, ITimer timer)
         {
             _name = followerName;
-            timer.EndTimerEventHandler += (sender, e) =>
+            timer.TimerFinished += (sender, e) =>
             {
                 var userNumberSeconds = ((ITimer) sender).InitialNumberSeconds;
                 MessageBox.Show($"User set {userNumberSeconds} seconds.", _name); 
