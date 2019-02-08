@@ -1,4 +1,5 @@
-﻿using ConsoleFactory.Product;
+﻿using ConsoleFactory.Model;
+using ConsoleFactory.Model;
 
 namespace ConsoleFactory.Factory
 {

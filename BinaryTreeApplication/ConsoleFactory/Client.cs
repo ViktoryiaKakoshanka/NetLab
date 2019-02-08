@@ -1,12 +1,12 @@
 ﻿using ConsoleFactory.Factory;
-using ConsoleFactory.Product;
+using ConsoleFactory.Model;
 
 namespace ConsoleFactory
 {
     internal class Client
     {
-        public IChair Chair { get; private set; }
-        public ITable Table { get; private set; }
+        public IChair Chair { get; }
+        public ITable Table { get; }
 
         public Client(IFurnitureFactory factory)
         {

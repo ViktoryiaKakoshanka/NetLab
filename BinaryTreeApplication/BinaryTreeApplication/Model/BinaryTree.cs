@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 
 namespace BinaryTreeApplication.Model
 {
@@ -56,16 +54,13 @@ namespace BinaryTreeApplication.Model
                 RightNode.Insert(value);
             }
 
-            if (value.Compare(value, Value) < 0)
+            if (LeftNode == null)
             {
-                if (LeftNode == null)
-                {
-                    LeftNode = new BinaryTree<TValue>(value);
-                    return this;
-                }
-
-                LeftNode.Insert(value);
+                LeftNode = new BinaryTree<TValue>(value);
+                return this;
             }
+
+            LeftNode.Insert(value);
 
             return this;
         }
@@ -113,7 +108,7 @@ namespace BinaryTreeApplication.Model
 
         public bool Equals(BinaryTree<TValue> other)
         {
-            return Value.Equals(other.Value) && RightNode.Equals(other.RightNode) && LeftNode.Equals(other.LeftNode);
+            return other != null && (Value.Equals(other.Value) && RightNode.Equals(other.RightNode) && LeftNode.Equals(other.LeftNode));
         }
 
         public override int GetHashCode()
@@ -138,13 +133,17 @@ namespace BinaryTreeApplication.Model
 
         private void TreeTraversal(BinaryTree<TValue> tree)
         {
-            if (tree == null)
+            while (true)
             {
-                return;
+                if (tree == null)
+                {
+                    return;
+                }
+
+                _list.Add(tree.Value);
+                TreeTraversal(tree.LeftNode);
+                tree = tree.RightNode;
             }
-            _list.Add(tree.Value);
-            TreeTraversal(tree.LeftNode);
-            TreeTraversal(tree.RightNode);
         }
 
         private static BinaryTree<TValue> ReplaceItem(BinaryTree<TValue> tree)

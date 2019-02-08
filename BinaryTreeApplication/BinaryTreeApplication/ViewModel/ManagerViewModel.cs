@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using BinaryTreeApplication.Annotations;
 using BinaryTreeApplication.Model;
@@ -20,7 +19,7 @@ namespace BinaryTreeApplication.ViewModel
 
         public List<StudentTestRegister> DataDisplayed
         {
-            get { return _dataDisplayed; }
+            get => _dataDisplayed;
             set
             {
                 _dataDisplayed = value;
@@ -47,7 +46,7 @@ namespace BinaryTreeApplication.ViewModel
         {
             _dialogService = dialogService;
             _fileService = fileService;
-            //GenerateDataTree();
+            GenerateDataTree();
             GenerateNamesOfFields();
         }
 
@@ -143,12 +142,13 @@ namespace BinaryTreeApplication.ViewModel
 
         private void GenerateNamesOfFields()
         {
-            ColumnHeaders = new List<string>();
-            var a = StudentTestRegister.GenerateNewRegister();
-            ColumnHeaders.Add(nameof(a.TestName));
-            ColumnHeaders.Add(nameof(a.Student));
-            ColumnHeaders.Add(nameof(a.Date));
-            ColumnHeaders.Add(nameof(a.Mark));
+            ColumnHeaders = new List<string>
+            {
+                nameof(StudentTestRegister.TestName),
+                nameof(StudentTestRegister.Student),
+                nameof(StudentTestRegister.Date),
+                nameof(StudentTestRegister.Mark)
+            };
         }
     }
 }

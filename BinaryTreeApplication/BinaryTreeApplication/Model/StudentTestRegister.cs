@@ -12,7 +12,7 @@ namespace BinaryTreeApplication.Model
         public DateTime Date { get; }
         public int Mark { get; }
 
-        private static List<string> _namesStudents = new List<string>
+        private static readonly List<string> NamesStudents = new List<string>
         {
             "Tom",
             "Billy",
@@ -20,7 +20,7 @@ namespace BinaryTreeApplication.Model
             "Mila"
         };
 
-        private static List<string> _namesTests = new List<string>
+        private static readonly List<string> NamesTests = new List<string>
         {
             "Physics",
             "English",
@@ -28,7 +28,7 @@ namespace BinaryTreeApplication.Model
             "Maths" 
         };
 
-        private static Random random = new Random();
+        private static readonly Random Random = new Random();
 
         public StudentTestRegister(string testName, string student, DateTime date, int mark)
         {
@@ -60,7 +60,7 @@ namespace BinaryTreeApplication.Model
 
         public static StudentTestRegister GenerateNewRegister()
         {
-            return new StudentTestRegister(CreateTestRandom(), CreateStudentRandom(), DateTime.Now, random.Next(1, 11));
+            return new StudentTestRegister(CreateTestRandom(), CreateStudentRandom(), DateTime.Now, Random.Next(1, 11));
         }
 
         public override int GetHashCode()
@@ -88,12 +88,12 @@ namespace BinaryTreeApplication.Model
         
         private static string CreateStudentRandom()
         {
-            return _namesStudents.ElementAt(random.Next(0, _namesStudents.Count));
+            return NamesStudents.ElementAt(Random.Next(0, NamesStudents.Count));
         }
 
         private static string CreateTestRandom()
         {
-            return _namesTests.ElementAt(random.Next(0, _namesTests.Count));
+            return NamesTests.ElementAt(Random.Next(0, NamesTests.Count));
         }
     }
 }

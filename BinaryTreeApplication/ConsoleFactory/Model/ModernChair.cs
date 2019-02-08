@@ -1,4 +1,4 @@
-﻿namespace ConsoleFactory.Product
+﻿namespace ConsoleFactory.Model
 {
     internal class ModernChair : IChair
     {
