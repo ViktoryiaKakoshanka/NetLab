@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using TimerApplication.Annotations;
 using TimerApplication.Timer;
@@ -8,7 +7,7 @@ namespace TimerApplication.ViewModel
 {
     public class TimerViewModel : INotifyPropertyChanged
     {
-        private ITimer _myTimer;
+        private readonly ITimer _myTimer;
         private int _currentNumberOfSeconds;
         
         public event PropertyChangedEventHandler PropertyChanged;
@@ -16,7 +15,7 @@ namespace TimerApplication.ViewModel
         public int NumberOfSeconds { get; set; }
         public int CurrentNumberOfSeconds
         {
-            get { return _currentNumberOfSeconds; }
+            get => _currentNumberOfSeconds;
             set
             {
                 _currentNumberOfSeconds = value;
