@@ -74,7 +74,6 @@ namespace WorkWithFiles.ViewModel
             try
             {
                 Text = _fileService.ReadFile(_dialogService.FilePath);
-                _dialogService.ShowMessage("File open.");
             }
             catch (IOException e)
             {
@@ -96,7 +95,6 @@ namespace WorkWithFiles.ViewModel
             try
             {
                 _fileService.Save(_dialogService.FilePath, _text);
-                _dialogService.ShowMessage("File is saved.");
             }
             catch (ArgumentNullException)
             {
@@ -113,7 +111,6 @@ namespace WorkWithFiles.ViewModel
             try
             {
                 _fileService.Save(_dialogService.FilePath, _text);
-                _dialogService.ShowMessage("File is saved.");
             }
             catch (ArgumentNullException)
             {
