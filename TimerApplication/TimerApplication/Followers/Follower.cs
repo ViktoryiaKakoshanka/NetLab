@@ -5,12 +5,11 @@ namespace TimerApplication.Followers
 {
     public class Follower
     {
-        public Follower(string followerName, ITimer timer)
+        public Follower(string followerName, MyTimer timer)
         {
-            timer.TimerFinished += (sender, e) =>
+            timer.TimerFinished += (sender, initialNumberSeconds) =>
             {
-                var userNumberSeconds = ((ITimer) sender).InitialNumberSeconds;
-                MessageBox.Show($"User set {userNumberSeconds} seconds.", followerName); 
+                MessageBox.Show($"User set {initialNumberSeconds} seconds.", followerName); 
             };
         }
     }

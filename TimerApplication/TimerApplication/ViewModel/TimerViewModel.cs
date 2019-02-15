@@ -7,7 +7,7 @@ namespace TimerApplication.ViewModel
 {
     public class TimerViewModel : INotifyPropertyChanged
     {
-        private readonly ITimer _myTimer;
+        private readonly MyTimer _myTimer;
         private int _currentNumberOfSeconds;
         
         public event PropertyChangedEventHandler PropertyChanged;
@@ -27,12 +27,12 @@ namespace TimerApplication.ViewModel
         {
         }
 
-        public TimerViewModel(ITimer timer)
+        public TimerViewModel(MyTimer timer)
         {
             _myTimer = timer;
-            _myTimer.UpdateRemainingTime += (sender, e) =>
+            _myTimer.UpdateRemainedTime += (sender, remaindNumberSeconds) =>
             {
-                CurrentNumberOfSeconds = ((ITimer) sender).RemainNumberSeconds;
+                CurrentNumberOfSeconds = remaindNumberSeconds;
             };
         }
 

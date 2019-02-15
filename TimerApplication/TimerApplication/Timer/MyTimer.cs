@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 
 namespace TimerApplication.Timer
 {
-    public class MyTimer : ITimer
+    public class MyTimer
     {
-        public event EventHandler TimerFinished;
-        public event EventHandler UpdateRemainingTime;
-
         public int InitialNumberSeconds { get; set; }
-        public int RemainNumberSeconds { get; private set; }
+
+        public event EventHandler<int> TimerFinished;
+        public event EventHandler<int> UpdateRemainedTime;
+
+        private int _remainedNumberSeconds;
         
         public void RunTimer(int durationInMilliseconds = 1000)
         {
@@ -18,23 +19,23 @@ namespace TimerApplication.Timer
             {
                 for (var restOfSeconds = InitialNumberSeconds; restOfSeconds >= 0; restOfSeconds--)
                 {
-                    RemainNumberSeconds = restOfSeconds;
-                    MyTimerOnUpdateRemainingTime(this);
+                    _remainedNumberSeconds = restOfSeconds;
+                    MyTimerOnUpdateRemainingTime();
 
                     Thread.Sleep(durationInMilliseconds);
                 }
-                MyTimerOnTimerFinished(this);
+                MyTimerOnTimerFinished();
             });
         }
         
-        private void MyTimerOnTimerFinished(object sender)
+        private void MyTimerOnTimerFinished()
         {
-            TimerFinished?.Invoke(sender, EventArgs.Empty);
+            TimerFinished?.Invoke(this, InitialNumberSeconds);
         }
 
-        private void MyTimerOnUpdateRemainingTime(object sender)
+        private void MyTimerOnUpdateRemainingTime()
         {
-            UpdateRemainingTime?.Invoke(sender, EventArgs.Empty);
+            UpdateRemainedTime?.Invoke(this, _remainedNumberSeconds);
         }
     }
 }
