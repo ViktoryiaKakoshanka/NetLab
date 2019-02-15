@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using BinaryTreeApplication.Annotations;
 using BinaryTreeApplication.Model;
@@ -37,6 +38,7 @@ namespace BinaryTreeApplication.ViewModel
         private RelayCommand _readCommand;
         private RelayCommand _saveAsCommand;
         private RelayCommand _findMarkCommand;
+        private RelayCommand _showAllPointsCommand;
 
         public ManagerViewModel() : this (new DialogService(), new FileService<StudentTestRegister>())
         {
@@ -58,6 +60,14 @@ namespace BinaryTreeApplication.ViewModel
                 {
                     ReadFile();
                 }));
+            }
+        }
+
+        public RelayCommand ShowAllPointsCommand
+        {
+            get
+            {
+                return _showAllPointsCommand ?? (_showAllPointsCommand = new RelayCommand(obj => ShowAllPoints()));
             }
         }
 
@@ -84,7 +94,7 @@ namespace BinaryTreeApplication.ViewModel
 
         private void SortByColumns()
         {
-            
+           DataDisplayed = _readData?.OrderBy(s => s.Mark).ToList();
         }
 
         private void ReadFile()
@@ -130,7 +140,12 @@ namespace BinaryTreeApplication.ViewModel
                 _dialogService.ShowMessage("File is closed.");
             }
         }
-        
+
+        private void ShowAllPoints()
+        {
+            DataDisplayed = _readData;
+        }
+
         private void GenerateDataTree()
         {
             _tree = new BinaryTree<StudentTestRegister>(StudentTestRegister.GenerateNewRegister());
