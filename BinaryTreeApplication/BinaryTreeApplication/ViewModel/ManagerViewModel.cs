@@ -94,7 +94,7 @@ namespace BinaryTreeApplication.ViewModel
 
         private void SortByColumns()
         {
-           DataDisplayed = _readData?.OrderBy(s => s.Mark).ToList();
+           DataDisplayed = _readData?.OrderBy(s => s.Student).ToList();
         }
 
         private void ReadFile()
@@ -114,9 +114,9 @@ namespace BinaryTreeApplication.ViewModel
             {
                 _dialogService.ShowMessage($"{e.Message}\nChoose another file");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                _dialogService.ShowMessage("File is closed.");
+                _dialogService.ShowMessage($"An error has occurred.\n{e.Message}");
             }
         }
 
@@ -133,11 +133,11 @@ namespace BinaryTreeApplication.ViewModel
             }
             catch (ArgumentNullException)
             {
-                _dialogService.ShowMessage("No text to write.");
+                _dialogService.ShowMessage("File was not selected");
             }
-            catch
+            catch (Exception e)
             {
-                _dialogService.ShowMessage("File is closed.");
+                _dialogService.ShowMessage($"An error has occurred.\n{e.Message}");
             }
         }
 
