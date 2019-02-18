@@ -6,10 +6,13 @@ namespace BinaryTreeApplication.Helpers
 {
     public static class ListExtensions
     {
-        public static BinaryTree<StudentTestRegister> ToTree(this List<StudentTestRegister> registers)
+        public static BinaryTree<Register> ToTree(this List<Register> registers)
         {
-            var tree = new BinaryTree<StudentTestRegister>(registers.First());
-            registers.Skip(1).Select(register => tree.Insert(register));
+            var tree = new BinaryTree<Register>(registers.First());
+            foreach (var register in registers.Skip(1))
+            {
+                tree.Insert(register);
+            }
             return tree;
         }
     }

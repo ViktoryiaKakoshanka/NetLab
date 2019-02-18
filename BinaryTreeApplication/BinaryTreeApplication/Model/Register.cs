@@ -5,7 +5,7 @@ using System.Linq;
 namespace BinaryTreeApplication.Model
 {
     [Serializable]
-    public class StudentTestRegister : IEquatable<StudentTestRegister>, IMyComparable<StudentTestRegister>
+    public class Register : IEquatable<Register>, IMyComparable<Register>
     {
         public string TestName { get; }
         public string Student { get; }
@@ -35,7 +35,7 @@ namespace BinaryTreeApplication.Model
 
         private static readonly Random Random = new Random();
 
-        public StudentTestRegister(string testName, string student, DateTime date, int mark)
+        public Register(string testName, string student, DateTime date, int mark)
         {
             TestName = testName;
             Student = student;
@@ -43,12 +43,12 @@ namespace BinaryTreeApplication.Model
             Mark = mark;
         }
         
-        public static StudentTestRegister GenerateNewRegister()
+        public static Register GenerateNewRegister()
         {
-            return new StudentTestRegister(CreateTestRandom(), CreateStudentRandom(), DateTime.Now, Random.Next(1, 11));
+            return new Register(CreateTestRandom(), CreateStudentRandom(), DateTime.Now, Random.Next(1, 11));
         }
 
-        public bool Equals(StudentTestRegister other)
+        public bool Equals(Register other)
         {
             if (other == null)
             {
@@ -76,7 +76,7 @@ namespace BinaryTreeApplication.Model
             return $"{TestName} - {Student} - {Mark} - {Date.ToShortDateString()}";
         }
 
-        public int CompareTo(StudentTestRegister other)
+        public int CompareTo(Register other)
         {
             if (other == null)
             {

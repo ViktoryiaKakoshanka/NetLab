@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace BinaryTreeApplication.Model
 {
     [Serializable]
-    public class BinaryTree<TValue> where TValue : IComparer<TValue>, IEquatable<TValue>
+    public class BinaryTree<TValue> where TValue : IMyComparable<TValue>, IEquatable<TValue>
     {
         public TValue Value { get; set; }
         public BinaryTree<TValue> RightNode { get; set; }
@@ -32,7 +32,7 @@ namespace BinaryTreeApplication.Model
 
         public BinaryTree<TValue> Insert(TValue value)
         {
-            if (value.Compare(value, Value) >= 0)
+            if (value.CompareTo(Value) >= 0)
             {
                 if (RightNode == null)
                 {
@@ -40,7 +40,7 @@ namespace BinaryTreeApplication.Model
                     return this;
                 }
 
-                if (value.Compare(value, Value) == 0)
+                if (value.CompareTo(Value) == 0)
                 {
                     var temp = new BinaryTree<TValue>(value)
                     {
@@ -51,6 +51,7 @@ namespace BinaryTreeApplication.Model
                 }
 
                 RightNode.Insert(value);
+                return this;
             }
 
             if (LeftNode == null)

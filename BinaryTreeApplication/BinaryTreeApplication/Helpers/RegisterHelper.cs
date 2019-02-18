@@ -1,49 +1,27 @@
 ﻿using BinaryTreeApplication.Model;
-using System;
-using System.Collections.Generic;
 
 namespace BinaryTreeApplication.Helpers
 {
-    public class StudentTestRegisterHelper //: IProperty<int>, IProperty<DateTime>, IProperty<string>
+    public static class RegisterHelper
     {
-        object GetProperty(StudentTestRegister register, string nameProperty)
+        public static object GetProperty(Register register, string nameProperty)
         {
-            if (nameProperty == nameof(StudentTestRegister.Student))
+            if (nameProperty == nameof(Register.Student))
             {
                 return register.Student;
             }
 
-            if (nameProperty == nameof(StudentTestRegister.TestName))
+            if (nameProperty == nameof(Register.TestName))
             {
                 return register.TestName;
             }
 
-            if (nameProperty == nameof(StudentTestRegister.Date))
+            if (nameProperty == nameof(Register.Date))
             {
                 return register.Date;
             }
 
             return register.Mark;
         }
-        /*
-        DateTime IProperty<DateTime>.GetProperty(StudentTestRegister register, string nameProperty)
-        {
-            return register.Date;
-        }
-
-        int IProperty<int>.GetProperty(StudentTestRegister register, string nameProperty)
-        {
-            return register.Mark;
-        }
-
-        string IProperty<string>.GetProperty(StudentTestRegister register, string nameProperty)
-        {
-            if (nameProperty == nameof(StudentTestRegister.Student))
-            {
-                return register.Student;
-            }
-
-            return register.TestName;
-        }*/
     }
 }

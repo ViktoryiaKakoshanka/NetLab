@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using BinaryTreeApplication.Annotations;
+using BinaryTreeApplication.Helpers;
 using BinaryTreeApplication.Model;
 using BinaryTreeApplication.Services;
 
@@ -12,89 +14,130 @@ namespace BinaryTreeApplication.ViewModel
 {
     public class ManagerViewModel : INotifyPropertyChanged
     {
-        private BinaryTree<StudentTestRegister> _tree;
-        private List<StudentTestRegister> _readData;
-        private List<StudentTestRegister> _dataDisplayed;
+        private readonly IDialogService _dialogService;
+        private readonly IFileService<Register> _fileService;
 
-        public int MarkForSearch { private get; set; }
+        private RelayCommand _readTreeCommand;
+        private RelayCommand _saveAsTreeCommand;
+        private RelayCommand _findMarkCommand;
+        private RelayCommand _showAllPointsCommand;
+        private RelayCommand _showRecordsDependingOnNumberCommand;
+        private RelayCommand _generateRegistersCommand;
 
-        public List<StudentTestRegister> DataDisplayed
+        private List<Register> _registers;
+        private List<Register> _displayedRegisters;
+
+        public List<Register> DisplayedRegisters
         {
-            get => _dataDisplayed;
+            get => _displayedRegisters;
             set
             {
-                _dataDisplayed = value;
+                _displayedRegisters = value;
                 OnPropertyChanged();
             }
         }
 
-        public List<string> ColumnHeaders { get; private set; }
+        public int MarkForSearch { private get; set; }
+        public int NumberOfRecords { get; set; }
+
+        public int SelectedColumnHeader { get; set; }
+        public ObservableCollection<string> ColumnHeaders { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        
 
-        private readonly IDialogService _dialogService;
-        private readonly IFileService<StudentTestRegister> _fileService;
-
-        private RelayCommand _readCommand;
-        private RelayCommand _saveAsCommand;
-        private RelayCommand _findMarkCommand;
-        private RelayCommand _showAllPointsCommand;
-
-        public ManagerViewModel() : this (new DialogService(), new FileService<StudentTestRegister>())
+        public ManagerViewModel() : this (new DialogService(), new FileService<Register>())
         {
         }
 
-        public ManagerViewModel(IDialogService dialogService, IFileService<StudentTestRegister> fileService)
+        public ManagerViewModel(IDialogService dialogService, IFileService<Register> fileService)
         {
             _dialogService = dialogService;
             _fileService = fileService;
-            GenerateDataTree();
-            GenerateNamesOfFields();
+            ColumnHeaders = ManagerViewModelHelper.GenerateNamesOfFields();
         }
 
         public RelayCommand ReadCommand
         {
-            get
-            {
-                return _readCommand ?? (_readCommand = new RelayCommand(obj =>
-                {
-                    ReadFile();
-                }));
-            }
+            get { return _readTreeCommand ?? (_readTreeCommand = new RelayCommand(obj => { ReadFile(); })); }
+        }
+
+        public RelayCommand SaveAsCommand
+        {
+            get { return _saveAsTreeCommand ?? (_saveAsTreeCommand = new RelayCommand(obj => SaveAs())); }
+        }
+
+        public RelayCommand FindMarkCommand
+        {
+            get { return _findMarkCommand ?? (_findMarkCommand = new RelayCommand(obj => FindMark())); }
         }
 
         public RelayCommand ShowAllPointsCommand
         {
-            get
-            {
-                return _showAllPointsCommand ?? (_showAllPointsCommand = new RelayCommand(obj => ShowAllPoints()));
-            }
+            get { return _showAllPointsCommand ?? (_showAllPointsCommand = new RelayCommand(obj => ShowAllRecords())); }
         }
 
-        public RelayCommand SaveAsCommand { get { return _saveAsCommand ?? (_saveAsCommand = new RelayCommand(obj => SaveAs())); } }
-
-        public RelayCommand FindMarkCommand
+        public RelayCommand ShowRecordsDependingOnNumberCommand
         {
             get
             {
-                return _findMarkCommand ?? (_findMarkCommand = new RelayCommand(obj => FindMark()));
+                return _showRecordsDependingOnNumberCommand ?? (_showRecordsDependingOnNumberCommand =
+                           new RelayCommand(obg => ShowRecordsDependingOnNumber()));
             }
+        }
+
+        public RelayCommand GenerateRegistersCommand
+        {
+            get
+            {
+                return _generateRegistersCommand ?? (_generateRegistersCommand = new RelayCommand(obj =>
+                           {
+                               FillDataDisplayed(ManagerViewModelHelper.GenerateDataTree());
+                           }));
+            }
+        }
+
+        public RelayCommand MoveUpFieldCommand
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedColumnHeader == 0)
+                    {
+                        return;
+                    }
+
+                    ColumnHeaders.Move(SelectedColumnHeader, SelectedColumnHeader - 1);
+                });
+            }
+        }
+
+        public RelayCommand MoveDownFieldCommand
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    if (ColumnHeaders.Count == SelectedColumnHeader + 1)
+                    {
+                        return;
+                    }
+
+                    ColumnHeaders.Move(SelectedColumnHeader, SelectedColumnHeader + 1);
+                });
+            }
+        }
+
+        public RelayCommand SortByColumnsCommand
+        {
+            get { return new RelayCommand(obj => SortByColumns()); }
         }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void FindMark()
-        {
-            DataDisplayed = _readData?.FindAll(s => s.Mark == MarkForSearch);
-        }
-
-        private void SortByColumns()
-        {
-           DataDisplayed = _readData?.OrderBy(s => s.Student).ToList();
         }
 
         private void ReadFile()
@@ -106,9 +149,7 @@ namespace BinaryTreeApplication.ViewModel
 
             try
             {
-                _tree = _fileService.Read(_dialogService.FilePath);
-                _readData = _tree.ToList();
-                DataDisplayed = _readData;
+                FillDataDisplayed(_fileService.Read(_dialogService.FilePath));
             }
             catch (IOException e)
             {
@@ -129,7 +170,7 @@ namespace BinaryTreeApplication.ViewModel
 
             try
             {
-                _fileService.Save(_dialogService.FilePath, _tree);
+                _fileService.Save(_dialogService.FilePath, _registers.ToTree());
             }
             catch (ArgumentNullException)
             {
@@ -141,29 +182,43 @@ namespace BinaryTreeApplication.ViewModel
             }
         }
 
-        private void ShowAllPoints()
+        private void FindMark()
         {
-            DataDisplayed = _readData;
+            DisplayedRegisters = DisplayedRegisters.FindAll(s => s.Mark == MarkForSearch);
         }
 
-        private void GenerateDataTree()
+        private void ShowAllRecords()
         {
-            _tree = new BinaryTree<StudentTestRegister>(StudentTestRegister.GenerateNewRegister());
-            for (var i = 0; i < 15; i++)
+            DisplayedRegisters = _registers;
+        }
+
+        private void ShowRecordsDependingOnNumber()
+        {
+            if (NumberOfRecords > 0)
             {
-                _tree.Insert(StudentTestRegister.GenerateNewRegister());
+                DisplayedRegisters = _registers.Take(NumberOfRecords).ToList();
+                return;
             }
+
+            ShowAllRecords();
         }
 
-        private void GenerateNamesOfFields()
+        private void SortByColumns()
         {
-            ColumnHeaders = new List<string>
-            {
-                nameof(StudentTestRegister.TestName),
-                nameof(StudentTestRegister.Student),
-                nameof(StudentTestRegister.Date),
-                nameof(StudentTestRegister.Mark)
-            };
+           var orderedRegisters = DisplayedRegisters.OrderBy(register => RegisterHelper.GetProperty(register, ColumnHeaders[0]));
+           
+           foreach (var nameProperty in ColumnHeaders.Skip(1))
+           {
+               orderedRegisters.ThenBy(s => RegisterHelper.GetProperty(s, nameProperty));
+           }
+
+           DisplayedRegisters = orderedRegisters.ToList();
+        }
+        
+        private void FillDataDisplayed(BinaryTree<Register> tree)
+        {
+            _registers = tree.ToList();
+            DisplayedRegisters = _registers;
         }
     }
 }

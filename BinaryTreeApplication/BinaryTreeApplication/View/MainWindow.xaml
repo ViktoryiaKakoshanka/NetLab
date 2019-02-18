@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BinaryTreeApplication"
         xmlns:viewModel="clr-namespace:BinaryTreeApplication.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="361.441"
+        Title="MainWindow" Height="484.459" Width="361.441"
         xmlns:col="clr-namespace:System.Collections;assembly=mscorlib">
     <Window.DataContext>
         <viewModel:ManagerViewModel />
@@ -18,42 +18,69 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="58"></RowDefinition>
-            <RowDefinition Height="101*"/>
-            <RowDefinition Height="260*"/>
+            <RowDefinition Height="143*"/>
+            <RowDefinition Height="210*"/>
+            <RowDefinition Height="43*"/>
         </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="10,8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="157"/>
+
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="61" Margin="10,48,0,0" Grid.Row="1" VerticalAlignment="Top" Width="157"/>
+
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="129" Margin="10,7,0,0" Grid.Row="1" VerticalAlignment="Top" Width="152">
+            <Button Content="Sort ascending" HorizontalAlignment="Left" Height="23" Margin="7,99,0,0" VerticalAlignment="Top" Width="134"
+                    Command="{Binding SortByColumnsCommand}"/>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="38" Margin="10,10,0,0" VerticalAlignment="Top" Width="329"/>
         <Button Content="Read data" 
                 HorizontalAlignment="Left" 
-                Margin="41,19,0,0" 
+                Margin="19,19,0,0" 
                 VerticalAlignment="Top" 
                 Width="75"
                 Command="{Binding ReadCommand}" Height="20"/>
         <Button Content="Save data" 
                 HorizontalAlignment="Left" 
-                Margin="34,19,0,0" 
+                Margin="83,19,0,0" 
                 VerticalAlignment="Top" 
                 Width="75"
                 Command="{Binding SaveAsCommand}" Height="20" Grid.Column="1"/>
         <ListBox x:Name="ListBoxSortOfColumns" 
-                 HorizontalAlignment="Left" Height="81" 
-                 Margin="26,10,0,0" VerticalAlignment="Top" 
-                 Width="90" Grid.Row="1" ItemsSource="{Binding ColumnHeaders}"/>
+                 HorizontalAlignment="Left" Height="87" 
+                 Margin="64,16,0,0" VerticalAlignment="Top" 
+                 Width="90" Grid.Row="1" 
+                 ItemsSource="{Binding ColumnHeaders}"
+                 SelectedIndex="{Binding SelectedColumnHeader}"/>
         <TextBox x:Name="TextBoxMarkSearch" 
                  Grid.Column="1" HorizontalAlignment="Left" Height="21" 
-                 Margin="47,28,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" 
-                 Width="72" Text="{Binding MarkForSearch}"/>
+                 Margin="56,16,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" 
+                 Width="54" Text="{Binding MarkForSearch}"/>
         <Label Content="Mark" Grid.Column="1" HorizontalAlignment="Left" 
-               Margin="10,23,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+               Margin="14,11,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="37"/>
         <Button x:Name="ButtonSearch" Content="Search" Grid.Column="1" 
-                HorizontalAlignment="Left" Margin="124,29,0,0" Grid.Row="1" VerticalAlignment="Top" Width="47"
-                Command="{Binding FindMarkCommand}"/>
-        <Grid Background="Lavender" Margin="10" Grid.ColumnSpan="2" Grid.Row="2">
-            <DataGrid x:Name="ListData" ItemsSource="{Binding DataDisplayed}" Margin="5,10,10,10"
-                      AlternatingRowBackground="AliceBlue" IsReadOnly="True" CanUserDeleteRows="False" CanUserResizeColumns="False">
-            </DataGrid>
+                HorizontalAlignment="Left" Margin="115,17,0,0" Grid.Row="1" VerticalAlignment="Top" Width="47"
+                Command="{Binding FindMarkCommand}" Height="20"/>
+        <Grid Background="Lavender" Margin="10,10,14,10" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="61*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="ListData" 
+                      ItemsSource="{Binding DisplayedRegisters}" Margin="5,10,10,10"
+                      AlternatingRowBackground="AliceBlue" IsReadOnly="True" CanUserDeleteRows="False" CanUserResizeColumns="False" Grid.ColumnSpan="2"/>
         </Grid>
         <Button Content="Show all points" Grid.Column="1" HorizontalAlignment="Left" 
-                Margin="10,62,0,0" Grid.Row="1" VerticalAlignment="Top" Width="161"
-                Command="{Binding ShowAllPointsCommand}"/>
+                Margin="10,114,0,0" Grid.Row="1" VerticalAlignment="Top" Width="157"
+                Command="{Binding ShowAllPointsCommand}" Height="20"/>
+        <Button Content="Show" Grid.Column="1" HorizontalAlignment="Right" Margin="0,82,20,0" Grid.Row="1" 
+                VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.395,-0.147"
+                Command="{Binding ShowRecordsDependingOnNumberCommand}" Height="20"/>
+        <Label Content="Number of records" HorizontalAlignment="Left" Margin="12,48,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.416,0.275" Height="26" Width="110" Grid.Column="1"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="18,79,0,0" 
+                 Grid.Row="1" TextWrapping="Wrap" Text="{Binding NumberOfRecords}" VerticalAlignment="Top" Width="57" Grid.Column="1"/>
+        <Button Grid.ColumnSpan="2" Content="Generate new data" HorizontalAlignment="Left" Margin="109,19,0,0" VerticalAlignment="Top" Width="133"
+                Command="{Binding GenerateRegistersCommand}" Height="20"/>
+        <Button Content="Up" Command="{Binding MoveUpFieldCommand}" HorizontalAlignment="Left" Height="38" Margin="18,16,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41"/>
+        <Button Content="Down" Command="{Binding MoveDownFieldCommand}" HorizontalAlignment="Left" Height="38" Margin="17,64,0,0" Grid.Row="1" VerticalAlignment="Top" Width="42"/>
 
     </Grid>
 </Window>

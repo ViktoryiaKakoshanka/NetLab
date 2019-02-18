@@ -6,7 +6,7 @@ using BinaryTreeApplication.Model;
 
 namespace BinaryTreeApplication.Services
 {
-    public class FileService<T> : IFileService<T>  where T: IComparer<T>, IEquatable<T>
+    public class FileService<T> : IFileService<T>  where T: IMyComparable<T>, IEquatable<T>
     {
         public BinaryTree<T> Read(string filePath)
         {
