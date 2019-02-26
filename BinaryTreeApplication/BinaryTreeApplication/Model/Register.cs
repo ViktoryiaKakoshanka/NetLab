@@ -5,7 +5,7 @@ using System.Linq;
 namespace BinaryTreeApplication.Model
 {
     [Serializable]
-    public class Register : IEquatable<Register>, IMyComparable<Register>
+    public class Register : IMyComparable<Register>
     {
         public string TestName { get; }
         public string Student { get; }
@@ -47,30 +47,7 @@ namespace BinaryTreeApplication.Model
         {
             return new Register(CreateTestRandom(), CreateStudentRandom(), DateTime.Now, Random.Next(1, 11));
         }
-
-        public bool Equals(Register other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            return Mark == other.Mark &&
-                   Date == other.Date &&
-                   Student == other.Student &&
-                   TestName == other.TestName;
-        }
-
-        public override int GetHashCode()
-        {
-            return unchecked(Mark ^ Date.GetHashCode() ^ Student.GetHashCode() * 397) ^ TestName.GetHashCode();
-        }
-
+        
         public override string ToString()
         {
             return $"{TestName} - {Student} - {Mark} - {Date.ToShortDateString()}";

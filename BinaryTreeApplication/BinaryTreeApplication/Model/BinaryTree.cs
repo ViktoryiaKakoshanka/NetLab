@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace BinaryTreeApplication.Model
 {
     [Serializable]
-    public class BinaryTree<TValue> where TValue : IMyComparable<TValue>, IEquatable<TValue>
+    public class BinaryTree<TValue> where TValue : IMyComparable<TValue>//, IEquatable<TValue>
     {
         public TValue Value { get; set; }
         public BinaryTree<TValue> RightNode { get; set; }
