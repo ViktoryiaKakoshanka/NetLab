@@ -1,5 +1,4 @@
-﻿using System;
-using BinaryTreeApplication.Model;
+﻿using BinaryTreeApplication.Model;
 
 namespace BinaryTreeApplication.Services
 {
