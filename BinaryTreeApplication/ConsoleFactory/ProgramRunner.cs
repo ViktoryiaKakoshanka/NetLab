@@ -10,8 +10,8 @@ namespace ConsoleFactory
             var client = new Client(new ModernFactory());
             PrintInfo(client);
 
-            var client = new Client(new PopArtFactory());
-            PrintInfo(client);
+            var newClient = new Client(new PopArtFactory());
+            PrintInfo(newClient);
         }
 
         private static void PrintInfo(Client client)
